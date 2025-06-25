@@ -227,19 +227,6 @@ export function PublishingWorkflow() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <StepInstructions
-        title="Publishing & Approval"
-        description="Review and finalize enriched business terms before publishing to the business glossary. Select terms for publication and ensure all definitions meet quality standards."
-        tips={[
-          "Review all flagged terms before publishing",
-          "Use batch selection for efficient approval workflows",
-          "Mark important terms as 'Preferred' for organizational standards",
-          "Export approved terms for external review if needed"
-        ]}
-        helpContent="This final step allows you to review all extracted and enriched terms before they are published to your business glossary. You can approve terms, mark preferred definitions, and ensure quality before making them available to your organization."
-        variant="blue"
-      />
-
       <div className="grid grid-cols-5 gap-6 h-[calc(100vh-300px)]">
         {/* Left Panel (60%) - Terms Pending Approval */}
         <div className="col-span-3">
@@ -567,20 +554,6 @@ export function PublishingWorkflow() {
         </div>
       </div>
 
-      {/* Footer Controls */}
-      <div className="mt-6 flex items-center justify-between">
-        <Button
-          variant="ghost"
-          icon={ArrowLeft}
-          className="flex items-center space-x-2"
-        >
-          Previous
-        </Button>
-
-        <div className="text-sm text-gray-500">
-          Step 4 of 4 • Publishing & Approval
-        </div>
-      </div>
     </div>
   );
 }

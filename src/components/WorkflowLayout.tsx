@@ -118,16 +118,18 @@ export function WorkflowLayout({
             <span className="text-sm text-gray-500">
               {currentStepIndex + 1} of {steps.length}
             </span>
-            <Button
-              variant="primary"
-              icon={ChevronRight}
-              iconPosition="right"
-              onClick={onNext}
-              disabled={nextDisabled}
-              className="flex items-center space-x-2"
-            >
-              {nextLabel}
-            </Button>
+            {currentStepIndex < steps.length - 1 && (
+              <Button
+                variant="primary"
+                icon={ChevronRight}
+                iconPosition="right"
+                onClick={onNext}
+                disabled={nextDisabled}
+                className="flex items-center space-x-2"
+              >
+                {nextLabel}
+              </Button>
+            )}
           </div>
         </div>
       </footer>

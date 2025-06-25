@@ -51,7 +51,7 @@ export function ContextPanel({
         };
       case 'review':
         return {
-          title: 'Expert Review',
+          title: 'Publishing & Approval',
           description: 'Human validation and approval of extracted terms before they are added to the business glossary.',
           tips: [
             'Use bulk actions for efficient review',

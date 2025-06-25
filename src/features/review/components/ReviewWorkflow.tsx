@@ -5,7 +5,7 @@ export function ReviewWorkflow() {
   return (
     <div className="max-w-7xl mx-auto">
       <StepInstructions
-        title="Expert Review & Validation"
+        title="Publishing & Approval & Validation"
         description="Human-in-the-loop review and approval for extracted terms and relationships. Validate definitions, approve terms, and ensure quality before publishing to the business glossary."
         tips={[
           "Use bulk actions to efficiently review multiple terms",

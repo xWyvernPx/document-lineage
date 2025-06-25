@@ -124,7 +124,11 @@ const mockTerms: ExtractedTerm[] = [
   }
 ];
 
-export function TermEnrichmentMappingInterface() {
+interface TermEnrichmentMappingInterfaceProps {
+  onEnrichmentComplete?: (data: any) => void;
+}
+
+export function TermEnrichmentMappingInterface({ onEnrichmentComplete }: TermEnrichmentMappingInterfaceProps) {
   const [terms, setTerms] = useState<ExtractedTerm[]>(mockTerms);
   const [selectedTerm, setSelectedTerm] = useState<ExtractedTerm | null>(terms[0]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -137,6 +141,9 @@ export function TermEnrichmentMappingInterface() {
     ));
     if (selectedTerm?.id === termId) {
       setSelectedTerm(prev => prev ? { ...prev, ...updates } : null);
+    }
+    if (onEnrichmentComplete) {
+      onEnrichmentComplete({ terms });
     }
   };
 

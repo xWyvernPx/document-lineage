@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { WorkflowLayout } from '../../../components/WorkflowLayout';
 import { DocumentUploadStep } from './DocumentUploadStep';
 import { ClassificationStep } from './ClassificationStep';
-import { EnrichmentStep } from './EnrichmentStep';
-import { ReviewStep } from './ReviewStep';
+import { EnrichmentWorkflow as EnrichmentStep } from '../../enrichment/components/EnrichmentWorkflow';
+import { PublishingWorkflow as ReviewStep } from '../../publishing/components/PublishingWorkflow';
 import { StepInstructions } from '../../../components/StepInstructions';
 
 const workflowSteps = [
@@ -30,7 +30,7 @@ const workflowSteps = [
   },
   {
     id: 'review',
-    name: 'Expert Review',
+    name: 'Publishing & Approval',
     description: 'Human validation and approval',
     completed: false,
     current: false,
@@ -133,16 +133,16 @@ export function ExtractionWorkflow() {
       case 'review':
         return (
           <StepInstructions
-            title="Expert Review & Validation"
-            description="Human validation and approval of extracted terms before they are added to the business glossary. Use bulk actions for efficient review."
+            title="Publishing & Approval"
+            description="Review and finalize enriched business terms before publishing to the business glossary. Select terms for publication and ensure all definitions meet quality standards."
             tips={[
-              "Use bulk actions for efficient review of multiple terms",
-              "Flag terms that need further discussion or clarification",
-              "Add review notes to provide context for future users",
-              "Approve high-confidence terms quickly"
+              "Review all flagged terms before publishing",
+              "Use batch selection for efficient approval workflows",
+              "Mark important terms as 'Preferred' for organizational standards",
+              "Export approved terms for external review if needed"
             ]}
-            helpContent="The review step ensures quality and accuracy of your business glossary. Subject matter experts can validate definitions, approve terms, and provide additional context before terms are published to the organization."
-            variant="default"
+            helpContent="This final step allows you to review all extracted and enriched terms before they are published to your business glossary. You can approve terms, mark preferred definitions, and ensure quality before making them available to your organization."
+            variant="blue"
           />
         );
       default:
@@ -169,20 +169,11 @@ export function ExtractionWorkflow() {
         );
       case 'enrichment':
         return (
-          <EnrichmentStep
-            documentData={documentData}
-            classificationData={classificationData}
-            onEnrichmentComplete={setEnrichmentData}
-            enrichmentData={enrichmentData}
-          />
+          <EnrichmentStep onEnrichmentComplete={setEnrichmentData} />
         );
       case 'review':
         return (
-          <ReviewStep
-            documentData={documentData}
-            classificationData={classificationData}
-            enrichmentData={enrichmentData}
-          />
+          <ReviewStep />
         );
       default:
         return null;
