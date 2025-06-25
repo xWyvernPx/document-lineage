@@ -1,0 +1,220 @@
+import React, { useState } from 'react';
+import { WorkflowLayout } from '../../../components/WorkflowLayout';
+import { DocumentUploadStep } from './DocumentUploadStep';
+import { ClassificationStep } from './ClassificationStep';
+import { EnrichmentStep } from './EnrichmentStep';
+import { ReviewStep } from './ReviewStep';
+import { StepInstructions } from '../../../components/StepInstructions';
+
+const workflowSteps = [
+  {
+    id: 'upload',
+    name: 'Document Upload',
+    description: 'Upload and process business documents',
+    completed: false,
+    current: true,
+  },
+  {
+    id: 'classification',
+    name: 'Smart Classification',
+    description: 'Auto-detect document type and sections',
+    completed: false,
+    current: false,
+  },
+  {
+    id: 'enrichment',
+    name: 'Term Enrichment',
+    description: 'Extract and map business terms',
+    completed: false,
+    current: false,
+  },
+  {
+    id: 'review',
+    name: 'Expert Review',
+    description: 'Human validation and approval',
+    completed: false,
+    current: false,
+  },
+];
+
+export function ExtractionWorkflow() {
+  const [currentStep, setCurrentStep] = useState('upload');
+  const [steps, setSteps] = useState(workflowSteps);
+  const [documentData, setDocumentData] = useState<any>(null);
+  const [classificationData, setClassificationData] = useState<any>(null);
+  const [enrichmentData, setEnrichmentData] = useState<any>(null);
+
+  const updateStepCompletion = (stepId: string, completed: boolean) => {
+    setSteps(prev => prev.map(step => ({
+      ...step,
+      completed: step.id === stepId ? completed : step.completed,
+      current: step.id === stepId ? !completed : false
+    })));
+  };
+
+  const handleNext = () => {
+    const currentIndex = steps.findIndex(step => step.id === currentStep);
+    if (currentIndex < steps.length - 1) {
+      const nextStepId = steps[currentIndex + 1].id;
+      updateStepCompletion(currentStep, true);
+      setCurrentStep(nextStepId);
+      setSteps(prev => prev.map(step => ({
+        ...step,
+        current: step.id === nextStepId
+      })));
+    }
+  };
+
+  const handlePrevious = () => {
+    const currentIndex = steps.findIndex(step => step.id === currentStep);
+    if (currentIndex > 0) {
+      const prevStepId = steps[currentIndex - 1].id;
+      setCurrentStep(prevStepId);
+      setSteps(prev => prev.map(step => ({
+        ...step,
+        current: step.id === prevStepId
+      })));
+    }
+  };
+
+  const handleStepChange = (stepId: string) => {
+    setCurrentStep(stepId);
+    setSteps(prev => prev.map(step => ({
+      ...step,
+      current: step.id === stepId
+    })));
+  };
+
+  const getStepInstructions = () => {
+    switch (currentStep) {
+      case 'upload':
+        return (
+          <StepInstructions
+            title="Upload Your Document"
+            description="Start by uploading a business document to extract terms and definitions. We support PDF, DOCX, and image files."
+            tips={[
+              "Ensure document quality is good for better text extraction",
+              "Maximum file size is 50MB",
+              "Scanned documents will be processed with OCR"
+            ]}
+            helpContent="This step processes your document and extracts text content using advanced OCR and text parsing technologies. The extracted content will be used in subsequent steps for classification and term extraction."
+            variant="blue"
+          />
+        );
+      case 'classification':
+        return (
+          <StepInstructions
+            title="Smart Document Classification"
+            description="Our AI automatically analyzes your document to identify its type, business domain, and key sections. Review and edit the classifications as needed."
+            tips={[
+              "Review auto-detected classifications for accuracy",
+              "Edit classifications if the AI missed something",
+              "Higher confidence scores indicate better accuracy"
+            ]}
+            helpContent="Document classification helps organize and categorize your content for better term extraction. The AI analyzes document structure, content patterns, and business terminology to make intelligent classifications."
+            variant="green"
+          />
+        );
+      case 'enrichment':
+        return (
+          <StepInstructions
+            title="Term Extraction & Enrichment"
+            description="Review extracted business terms, validate definitions, and establish relationships with existing data schemas and related concepts."
+            tips={[
+              "Review extracted terms for relevance and accuracy",
+              "Check schema mappings for data lineage",
+              "Explore term relationships and dependencies",
+              "Use bulk actions for efficient processing"
+            ]}
+            helpContent="Term enrichment creates a comprehensive business glossary by extracting key terms, establishing relationships, and mapping to your data schemas. This enables better data governance and lineage tracking."
+            variant="amber"
+          />
+        );
+      case 'review':
+        return (
+          <StepInstructions
+            title="Expert Review & Validation"
+            description="Human validation and approval of extracted terms before they are added to the business glossary. Use bulk actions for efficient review."
+            tips={[
+              "Use bulk actions for efficient review of multiple terms",
+              "Flag terms that need further discussion or clarification",
+              "Add review notes to provide context for future users",
+              "Approve high-confidence terms quickly"
+            ]}
+            helpContent="The review step ensures quality and accuracy of your business glossary. Subject matter experts can validate definitions, approve terms, and provide additional context before terms are published to the organization."
+            variant="default"
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderStepContent = () => {
+    switch (currentStep) {
+      case 'upload':
+        return (
+          <DocumentUploadStep
+            onDocumentProcessed={setDocumentData}
+            documentData={documentData}
+          />
+        );
+      case 'classification':
+        return (
+          <ClassificationStep
+            documentData={documentData}
+            onClassificationComplete={setClassificationData}
+            classificationData={classificationData}
+          />
+        );
+      case 'enrichment':
+        return (
+          <EnrichmentStep
+            documentData={documentData}
+            classificationData={classificationData}
+            onEnrichmentComplete={setEnrichmentData}
+            enrichmentData={enrichmentData}
+          />
+        );
+      case 'review':
+        return (
+          <ReviewStep
+            documentData={documentData}
+            classificationData={classificationData}
+            enrichmentData={enrichmentData}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const getNextDisabled = () => {
+    switch (currentStep) {
+      case 'upload':
+        return !documentData;
+      case 'classification':
+        return !classificationData;
+      case 'enrichment':
+        return !enrichmentData;
+      default:
+        return false;
+    }
+  };
+
+  return (
+    <WorkflowLayout
+      currentStep={currentStep}
+      steps={steps}
+      onStepChange={handleStepChange}
+      onNext={handleNext}
+      onPrevious={handlePrevious}
+      nextDisabled={getNextDisabled()}
+    >
+      <div className="max-w-7xl mx-auto">
+        {getStepInstructions()}
+        {renderStepContent()}
+      </div>
+    </WorkflowLayout>
+  );
+}
