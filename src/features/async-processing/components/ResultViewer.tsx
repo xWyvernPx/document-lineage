@@ -108,9 +108,10 @@ interface ResultViewerProps {
   job: ProcessingJob;
   onBack: () => void;
   onPublishComplete?: (job: ProcessingJob) => void;
+  onTermDictionary?: () => void;
 }
 
-export function ResultViewer({ job, onBack, onPublishComplete }: ResultViewerProps) {
+export function ResultViewer({ job, onBack, onPublishComplete, onTermDictionary }: ResultViewerProps) {
   const [terms, setTerms] = useState<ExtractedTerm[]>(mockTerms);
   const [selectedTerm, setSelectedTerm] = useState<ExtractedTerm | null>(terms[0]);
   const [editingTerm, setEditingTerm] = useState<string | null>(null);
@@ -119,7 +120,7 @@ export function ResultViewer({ job, onBack, onPublishComplete }: ResultViewerPro
   const [statusFilter, setStatusFilter] = useState('all');
   const [isPublishing, setIsPublishing] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
-  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Cleanup timeout when component unmounts
   useEffect(() => {
@@ -233,7 +234,7 @@ export function ResultViewer({ job, onBack, onPublishComplete }: ResultViewerPro
                 <p className="text-sm text-gray-600 mb-2">
                   Terms from {job.documentName} have been published to the Term Dictionary.
                 </p>
-                <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                <button className="text-sm text-blue-600 hover:text-blue-700 font-medium" onClick={onTermDictionary}>
                   View in Term Dictionary →
                 </button>
               </div>

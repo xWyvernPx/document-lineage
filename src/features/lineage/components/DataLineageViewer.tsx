@@ -421,28 +421,10 @@ export function DataLineageViewer() {
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Data Lineage for {lineageData.focusNode}
-            </h1>
-            <p className="text-sm text-gray-600 mt-1">
-              Explore data flow and dependencies across your data ecosystem
-            </p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" icon={ExternalLink}>
-              {lineageData.focusNode}
-            </Button>
-            <Button variant="ghost" size="sm" icon={X}>
-              Close
-            </Button>
-          </div>
-        </div>
+      {/* <div className="bg-white border-b border-gray-200 p-4">
 
         {/* Controls */}
-        <div className="flex items-center justify-between mt-4">
+        {/* <div className="flex items-center justify-between mt-4">
           <div className="flex items-center space-x-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -473,7 +455,7 @@ export function DataLineageViewer() {
             <Button variant="ghost" size="sm" icon={RotateCcw} onClick={handleResetView} />
             <Button variant="ghost" size="sm" icon={Maximize2} />
           </div>
-        </div>
+        </div> */}
 
         {/* Filters Panel */}
         {showFilters && (
@@ -525,7 +507,7 @@ export function DataLineageViewer() {
             </div>
           </div>
         )}
-      </div>
+      {/* </div> */} 
 
       {/* Main Content */}
       <div className="flex-1 flex">

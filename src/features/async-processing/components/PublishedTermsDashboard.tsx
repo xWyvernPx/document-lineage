@@ -380,12 +380,12 @@ export function TermDictionary() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between px-6">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Term Dictionary</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Term Dictionary</h1>
             <p className="text-gray-600 mt-1">
               Browse and manage business terms with their definitions and relationships
             </p>
@@ -401,10 +401,7 @@ export function TermDictionary() {
             </Button>
           </div>
         </div>
-      </div>
-
-      {/* Search & Filters */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="border-b border-gray-200 px-6 py-4">
         <div className="space-y-4">
           {/* Search Bar */}
           <div className="relative">
@@ -480,6 +477,9 @@ export function TermDictionary() {
           </div>
         </div>
       </div>
+      </div>
+      {/* Search & Filters */}
+     
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto p-6">
