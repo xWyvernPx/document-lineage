@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Search, 
   Filter, 
@@ -118,10 +118,11 @@ export function ProcessingDocument({
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Simulate real-time updates
+  // Simulate real-time updates with proper cleanup
   useEffect(() => {
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setJobs(prev => prev.map(job => {
         if (job.status === 'processing' && job.progress < 100) {
           const newProgress = Math.min(job.progress + Math.random() * 10, 100);
@@ -141,7 +142,13 @@ export function ProcessingDocument({
       }));
     }, 2000);
 
-    return () => clearInterval(interval);
+    // Cleanup function to clear interval when component unmounts
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, []);
 
   const filteredJobs = jobs.filter(job => {

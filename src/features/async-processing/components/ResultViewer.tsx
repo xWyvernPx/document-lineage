@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   ArrowLeft, 
   Edit3, 
@@ -119,6 +119,17 @@ export function ResultViewer({ job, onBack, onPublishComplete }: ResultViewerPro
   const [statusFilter, setStatusFilter] = useState('all');
   const [isPublishing, setIsPublishing] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Cleanup timeout when component unmounts
+  useEffect(() => {
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+        toastTimeoutRef.current = null;
+      }
+    };
+  }, []);
 
   const filteredTerms = terms.filter(term => {
     const matchesSearch = term.term.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -170,9 +181,15 @@ export function ResultViewer({ job, onBack, onPublishComplete }: ResultViewerPro
     setIsPublishing(false);
     setShowSuccessToast(true);
     
-    // Auto-hide toast after 5 seconds
-    setTimeout(() => {
+    // Clear any existing timeout before setting a new one
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current);
+    }
+    
+    // Auto-hide toast after 3 seconds with proper cleanup
+    toastTimeoutRef.current = setTimeout(() => {
       setShowSuccessToast(false);
+      toastTimeoutRef.current = null;
       // Redirect to dashboard
       if (onPublishComplete) {
         onPublishComplete(updatedJob);
