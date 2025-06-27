@@ -1,10 +1,9 @@
 import React from 'react';
-import { DivideIcon as LucideIcon } from 'lucide-react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
-  icon?: LucideIcon;
+  icon?: React.ComponentType<any>;
   iconPosition?: 'left' | 'right';
   loading?: boolean;
 }
@@ -51,7 +50,7 @@ export function Button({
       {loading ? (
         <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
       ) : (
-        <>
+        <span className="inline-flex items-center">
           {Icon && iconPosition === 'left' && (
             <Icon className={`${iconSizes[size]} ${children ? 'mr-2' : ''}`} />
           )}
@@ -59,7 +58,7 @@ export function Button({
           {Icon && iconPosition === 'right' && (
             <Icon className={`${iconSizes[size]} ${children ? 'ml-2' : ''}`} />
           )}
-        </>
+        </span>
       )}
     </button>
   );
