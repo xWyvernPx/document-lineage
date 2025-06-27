@@ -214,7 +214,7 @@ export function ResultViewer({ job, onBack, onPublishComplete }: ResultViewerPro
                   Terms Published Successfully!
                 </h4>
                 <p className="text-sm text-gray-600 mb-2">
-                  Terms from {job.documentName} have been published to the business glossary.
+                  Terms from {job.documentName} have been published to the Term Dictionary.
                 </p>
                 <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
                   View in Term Dictionary →
@@ -270,7 +270,7 @@ export function ResultViewer({ job, onBack, onPublishComplete }: ResultViewerPro
                 loading={isPublishing}
                 disabled={isPublishing}
               >
-                {isPublishing ? 'Publishing...' : 'Publish Terms'}
+                {isPublishing ? 'Publishing...' : 'Publish to Dictionary'}
               </Button>
             ) : (
               <Button 

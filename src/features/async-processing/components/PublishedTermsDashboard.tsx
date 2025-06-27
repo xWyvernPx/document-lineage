@@ -144,7 +144,7 @@ const mockPublishedTerms: PublishedTerm[] = [
   }
 ];
 
-export function PublishedTermsDashboard() {
+export function TermDictionary() {
   const [terms] = useState<PublishedTerm[]>(mockPublishedTerms);
   const [selectedTerm, setSelectedTerm] = useState<PublishedTerm | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -213,7 +213,7 @@ export function PublishedTermsDashboard() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'published-terms.csv';
+    a.download = 'business-terms-dictionary.csv';
     a.click();
     window.URL.revokeObjectURL(url);
   };
@@ -234,9 +234,9 @@ export function PublishedTermsDashboard() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Published Terms Dashboard</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Term Dictionary</h1>
           <p className="text-gray-600">
-            Browse and manage all published business terms from processed documents
+            Browse, search, and manage business terms with their definitions, relationships, and data lineage
           </p>
         </div>
 
@@ -244,7 +244,7 @@ export function PublishedTermsDashboard() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <Card padding="sm" className="text-center">
             <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
-            <div className="text-sm text-gray-600">Published Terms</div>
+            <div className="text-sm text-gray-600">Business Terms</div>
           </Card>
           <Card padding="sm" className="text-center">
             <div className="text-2xl font-bold text-blue-600">{stats.documents}</div>
@@ -343,7 +343,7 @@ export function PublishedTermsDashboard() {
                       onClick={() => setViewMode('grouped')}
                       className="flex-1"
                     >
-                      Grouped
+                      By Document
                     </Button>
                     <Button
                       variant={viewMode === 'list' ? 'primary' : 'ghost'}
@@ -351,7 +351,7 @@ export function PublishedTermsDashboard() {
                       onClick={() => setViewMode('list')}
                       className="flex-1"
                     >
-                      List
+                      All Terms
                     </Button>
                   </div>
                 </div>
@@ -365,7 +365,7 @@ export function PublishedTermsDashboard() {
                     onClick={handleExportTerms}
                     className="w-full"
                   >
-                    Export Terms ({filteredTerms.length})
+                    Export Dictionary ({filteredTerms.length})
                   </Button>
                 </div>
               </div>
@@ -378,11 +378,16 @@ export function PublishedTermsDashboard() {
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-lg font-semibold text-gray-900">
-                    Published Terms ({filteredTerms.length})
+                    Business Terms ({filteredTerms.length})
                   </h2>
-                  <Button variant="ghost" size="sm" icon={ExternalLink}>
-                    View in Term Dictionary
-                  </Button>
+                  <div className="flex items-center space-x-2">
+                    <Button variant="ghost" size="sm" icon={GitBranch}>
+                      View Lineage
+                    </Button>
+                    <Button variant="ghost" size="sm" icon={ExternalLink}>
+                      Advanced Search
+                    </Button>
+                  </div>
                 </div>
 
                 {viewMode === 'grouped' ? (
@@ -535,6 +540,58 @@ export function PublishedTermsDashboard() {
                             <span>{formatDate(term.publishedAt)}</span>
                           </div>
                         </div>
+
+                        {/* Expanded Details for List View */}
+                        {selectedTerm?.id === term.id && (
+                          <div className="mt-4 pt-4 border-t border-gray-200 space-y-4">
+                            {/* Schema Mapping */}
+                            {term.schemaMapping && (
+                              <div>
+                                <h5 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                  <Database className="w-4 h-4 mr-1" />
+                                  Schema Mapping
+                                </h5>
+                                <code className="text-sm bg-gray-100 px-2 py-1 rounded">
+                                  {term.schemaMapping.schemaName}.{term.schemaMapping.tableName}.{term.schemaMapping.columnName}
+                                </code>
+                              </div>
+                            )}
+
+                            {/* Related Terms */}
+                            {term.relatedTerms.length > 0 && (
+                              <div>
+                                <h5 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                  <GitBranch className="w-4 h-4 mr-1" />
+                                  Related Terms
+                                </h5>
+                                <div className="flex flex-wrap gap-1">
+                                  {term.relatedTerms.map(relatedTerm => (
+                                    <Badge key={relatedTerm} variant="default" size="sm">
+                                      {relatedTerm}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Tags */}
+                            {term.tags.length > 0 && (
+                              <div>
+                                <h5 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                  <Tag className="w-4 h-4 mr-1" />
+                                  Tags
+                                </h5>
+                                <div className="flex flex-wrap gap-1">
+                                  {term.tags.map(tag => (
+                                    <Badge key={tag} variant="default" size="sm">
+                                      {tag}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -543,12 +600,15 @@ export function PublishedTermsDashboard() {
                 {filteredTerms.length === 0 && (
                   <div className="text-center py-12">
                     <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">No Published Terms Found</h3>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">No Terms Found</h3>
                     <p className="text-gray-500 mb-4">
                       {searchQuery || documentFilter !== 'all' || categoryFilter !== 'all' || domainFilter !== 'all'
                         ? 'Try adjusting your search criteria or filters.'
-                        : 'No terms have been published yet.'}
+                        : 'No terms have been published to the dictionary yet.'}
                     </p>
+                    <Button variant="primary">
+                      Process Documents
+                    </Button>
                   </div>
                 )}
               </div>

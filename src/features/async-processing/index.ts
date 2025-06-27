@@ -4,5 +4,5 @@ export { ProcessingDashboard } from './components/ProcessingDashboard';
 export { ClassificationStage } from './components/ClassificationStage';
 export { EnrichmentStage } from './components/EnrichmentStage';
 export { ResultViewer } from './components/ResultViewer';
-export { PublishedTermsDashboard } from './components/PublishedTermsDashboard';
+export { TermDictionary } from './components/PublishedTermsDashboard';
 export { NotificationSystem } from './components/NotificationSystem';

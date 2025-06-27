@@ -4,7 +4,7 @@ import { ProcessingDashboard } from './ProcessingDashboard';
 import { ClassificationStage } from './ClassificationStage';
 import { EnrichmentStage } from './EnrichmentStage';
 import { ResultViewer } from './ResultViewer';
-import { PublishedTermsDashboard } from './PublishedTermsDashboard';
+import { TermDictionary } from './PublishedTermsDashboard';
 import { NotificationSystem } from './NotificationSystem';
 
 interface ProcessingJob {
@@ -22,7 +22,7 @@ interface ProcessingJob {
   size: number;
 }
 
-type AppView = 'upload' | 'dashboard' | 'classification' | 'enrichment' | 'results' | 'published-terms';
+type AppView = 'upload' | 'dashboard' | 'classification' | 'enrichment' | 'results' | 'term-dictionary';
 
 export function AsyncProcessingApp() {
   const [currentView, setCurrentView] = useState<AppView>('upload');
@@ -102,8 +102,8 @@ export function AsyncProcessingApp() {
             onPublishComplete={handlePublishComplete}
           />
         ) : null;
-      case 'published-terms':
-        return <PublishedTermsDashboard />;
+      case 'term-dictionary':
+        return <TermDictionary />;
       default:
         return <DocumentUploadPage onUploadComplete={handleUploadComplete} />;
     }
@@ -145,14 +145,14 @@ export function AsyncProcessingApp() {
                   Dashboard
                 </button>
                 <button
-                  onClick={() => setCurrentView('published-terms')}
+                  onClick={() => setCurrentView('term-dictionary')}
                   className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    currentView === 'published-terms'
+                    currentView === 'term-dictionary'
                       ? 'bg-blue-100 text-blue-700'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                   }`}
                 >
-                  Published Terms
+                  Term Dictionary
                 </button>
               </div>
             </div>
