@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { DocumentUploadPage } from './DocumentUploadPage';
 import { ProcessingDashboard } from './ProcessingDashboard';
+import { ClassificationStage } from './ClassificationStage';
+import { EnrichmentStage } from './EnrichmentStage';
 import { ResultViewer } from './ResultViewer';
 import { NotificationSystem } from './NotificationSystem';
 
@@ -19,7 +21,7 @@ interface ProcessingJob {
   size: number;
 }
 
-type AppView = 'upload' | 'dashboard' | 'results';
+type AppView = 'upload' | 'dashboard' | 'classification' | 'enrichment' | 'results';
 
 export function AsyncProcessingApp() {
   const [currentView, setCurrentView] = useState<AppView>('upload');
@@ -34,9 +36,27 @@ export function AsyncProcessingApp() {
     setCurrentView('results');
   };
 
+  const handleViewClassification = (job: ProcessingJob) => {
+    setSelectedJob(job);
+    setCurrentView('classification');
+  };
+
+  const handleViewEnrichment = (job: ProcessingJob) => {
+    setSelectedJob(job);
+    setCurrentView('enrichment');
+  };
+
   const handleBackToDashboard = () => {
     setSelectedJob(null);
     setCurrentView('dashboard');
+  };
+
+  const handleClassificationToEnrichment = () => {
+    setCurrentView('enrichment');
+  };
+
+  const handleEnrichmentToResults = () => {
+    setCurrentView('results');
   };
 
   const renderContent = () => {
@@ -44,7 +64,29 @@ export function AsyncProcessingApp() {
       case 'upload':
         return <DocumentUploadPage onUploadComplete={handleUploadComplete} />;
       case 'dashboard':
-        return <ProcessingDashboard onViewResults={handleViewResults} />;
+        return (
+          <ProcessingDashboard 
+            onViewResults={handleViewResults}
+            onViewClassification={handleViewClassification}
+            onViewEnrichment={handleViewEnrichment}
+          />
+        );
+      case 'classification':
+        return selectedJob ? (
+          <ClassificationStage 
+            job={selectedJob} 
+            onBack={handleBackToDashboard}
+            onNext={handleClassificationToEnrichment}
+          />
+        ) : null;
+      case 'enrichment':
+        return selectedJob ? (
+          <EnrichmentStage 
+            job={selectedJob} 
+            onBack={() => setCurrentView('classification')}
+            onNext={handleEnrichmentToResults}
+          />
+        ) : null;
       case 'results':
         return selectedJob ? (
           <ResultViewer job={selectedJob} onBack={handleBackToDashboard} />

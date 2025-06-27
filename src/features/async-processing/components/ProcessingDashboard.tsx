@@ -15,7 +15,10 @@ import {
   User,
   Play,
   Pause,
-  RotateCcw
+  RotateCcw,
+  Brain,
+  Database,
+  Settings
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
@@ -35,6 +38,7 @@ interface ProcessingJob {
   extractedTerms?: number;
   error?: string;
   size: number;
+  currentStage?: 'upload' | 'classification' | 'enrichment' | 'review' | 'completed';
 }
 
 const mockJobs: ProcessingJob[] = [
@@ -49,6 +53,7 @@ const mockJobs: ProcessingJob[] = [
     completedAt: '2024-01-16T10:45:00Z',
     extractedTerms: 47,
     size: 2457600,
+    currentStage: 'completed',
   },
   {
     id: '2',
@@ -60,6 +65,7 @@ const mockJobs: ProcessingJob[] = [
     submittedBy: 'Michael Chen',
     estimatedCompletion: '2024-01-16T11:35:00Z',
     size: 1048576,
+    currentStage: 'enrichment',
   },
   {
     id: '3',
@@ -71,16 +77,18 @@ const mockJobs: ProcessingJob[] = [
     submittedBy: 'Emily Rodriguez',
     error: 'Document format not supported',
     size: 3145728,
+    currentStage: 'upload',
   },
   {
     id: '4',
     documentName: 'Risk Assessment Model.pdf',
     type: 'pdf',
-    status: 'queued',
-    progress: 0,
+    status: 'processing',
+    progress: 35,
     submittedAt: '2024-01-16T11:30:00Z',
     submittedBy: 'David Kim',
     size: 1876543,
+    currentStage: 'classification',
   },
   {
     id: '5',
@@ -91,14 +99,21 @@ const mockJobs: ProcessingJob[] = [
     submittedAt: '2024-01-16T10:00:00Z',
     submittedBy: 'Lisa Wang',
     size: 987654,
+    currentStage: 'classification',
   },
 ];
 
 interface ProcessingDashboardProps {
   onViewResults: (job: ProcessingJob) => void;
+  onViewClassification?: (job: ProcessingJob) => void;
+  onViewEnrichment?: (job: ProcessingJob) => void;
 }
 
-export function ProcessingDashboard({ onViewResults }: ProcessingDashboardProps) {
+export function ProcessingDashboard({ 
+  onViewResults, 
+  onViewClassification, 
+  onViewEnrichment 
+}: ProcessingDashboardProps) {
   const [jobs, setJobs] = useState<ProcessingJob[]>(mockJobs);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -117,6 +132,7 @@ export function ProcessingDashboard({ onViewResults }: ProcessingDashboardProps)
               progress: 100,
               completedAt: new Date().toISOString(),
               extractedTerms: Math.floor(Math.random() * 50) + 10,
+              currentStage: 'completed',
             };
           }
           return { ...job, progress: newProgress };
@@ -165,6 +181,36 @@ export function ProcessingDashboard({ onViewResults }: ProcessingDashboardProps)
     }
   };
 
+  const getStageIcon = (stage?: ProcessingJob['currentStage']) => {
+    switch (stage) {
+      case 'classification':
+        return <Brain className="w-4 h-4 text-blue-500" />;
+      case 'enrichment':
+        return <Database className="w-4 h-4 text-purple-500" />;
+      case 'review':
+        return <Eye className="w-4 h-4 text-amber-500" />;
+      case 'completed':
+        return <CheckCircle className="w-4 h-4 text-emerald-500" />;
+      default:
+        return <FileText className="w-4 h-4 text-gray-400" />;
+    }
+  };
+
+  const getStageBadge = (stage?: ProcessingJob['currentStage']) => {
+    switch (stage) {
+      case 'classification':
+        return <Badge variant="info">Classification</Badge>;
+      case 'enrichment':
+        return <Badge variant="warning">Enrichment</Badge>;
+      case 'review':
+        return <Badge variant="default">Review</Badge>;
+      case 'completed':
+        return <Badge variant="success">Completed</Badge>;
+      default:
+        return <Badge variant="default">Upload</Badge>;
+    }
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       month: 'short',
@@ -189,7 +235,7 @@ export function ProcessingDashboard({ onViewResults }: ProcessingDashboardProps)
   const handleRetry = (jobId: string) => {
     setJobs(prev => prev.map(job => 
       job.id === jobId 
-        ? { ...job, status: 'queued', progress: 0, error: undefined }
+        ? { ...job, status: 'queued', progress: 0, error: undefined, currentStage: 'upload' }
         : job
     ));
   };
@@ -308,6 +354,7 @@ export function ProcessingDashboard({ onViewResults }: ProcessingDashboardProps)
                 <tr className="border-b border-gray-200">
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Document</th>
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Status</th>
+                  <th className="text-left py-4 px-6 font-medium text-gray-900">Stage</th>
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Progress</th>
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Submitted</th>
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Results</th>
@@ -339,6 +386,13 @@ export function ProcessingDashboard({ onViewResults }: ProcessingDashboardProps)
                       {job.error && (
                         <div className="text-xs text-red-600 mt-1">{job.error}</div>
                       )}
+                    </td>
+
+                    <td className="py-4 px-6">
+                      <div className="flex items-center space-x-2">
+                        {getStageIcon(job.currentStage)}
+                        {getStageBadge(job.currentStage)}
+                      </div>
                     </td>
                     
                     <td className="py-4 px-6">
@@ -393,6 +447,28 @@ export function ProcessingDashboard({ onViewResults }: ProcessingDashboardProps)
                             View
                           </Button>
                         )}
+
+                        {job.currentStage === 'classification' && onViewClassification && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            icon={Brain}
+                            onClick={() => onViewClassification(job)}
+                          >
+                            Classify
+                          </Button>
+                        )}
+
+                        {job.currentStage === 'enrichment' && onViewEnrichment && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            icon={Database}
+                            onClick={() => onViewEnrichment(job)}
+                          >
+                            Enrich
+                          </Button>
+                        )}
                         
                         {job.status === 'failed' && (
                           <Button
@@ -433,12 +509,15 @@ export function ProcessingDashboard({ onViewResults }: ProcessingDashboardProps)
             <div className="text-center py-12">
               <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">No documents found</h3>
-              <p className="text-gray-500">
+              <p className="text-gray-500 mb-4">
                 {searchQuery || statusFilter !== 'all' 
-                  ? 'Try adjusting your search or filters'
+                  ? 'Try adjusting your search criteria or filters.'
                   : 'Upload documents to start processing'
                 }
               </p>
+              <Button variant="primary">
+                Upload Document
+              </Button>
             </div>
           )}
         </Card>
