@@ -10,14 +10,17 @@ import { DocumentUpload } from './features/documents/components/DocumentUpload';
 import { TermDictionary } from './features/terms/components/TermDictionary';
 import { DataLineageViewer } from './features/lineage/components/DataLineageViewer';
 import { SchemaIngestionPage } from './features/schema/components/SchemaIngestionPage';
+import { AsyncProcessingApp } from './features/async-processing';
 import { useAlert } from './hooks/useAlert';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('documents');
+  const [currentPage, setCurrentPage] = useState('async-processing');
   const { AlertModal } = useAlert();
 
   const renderContent = () => {
     switch (currentPage) {
+      case 'async-processing':
+        return <AsyncProcessingApp />;
       case 'extraction':
         return <ExtractionWorkflow />;
       case 'classification':
@@ -99,6 +102,16 @@ function App() {
         return <TermDictionary />;
     }
   };
+
+  // If we're showing the async processing app, render it without the layout
+  if (currentPage === 'async-processing') {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        {renderContent()}
+        <AlertModal />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

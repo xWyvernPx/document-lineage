@@ -8,7 +8,8 @@ import {
   GitBranch,
   FolderOpen,
   BookOpen,
-  Database
+  Database,
+  Zap
 } from 'lucide-react';
 import { Button } from './Button';
 
@@ -19,6 +20,13 @@ interface LayoutProps {
 }
 
 const navigation = [
+  {
+    id: 'async-processing',
+    name: 'Async Processing',
+    icon: Zap,
+    description: 'Modern async document processing dashboard',
+    pages: ['async-processing']
+  },
   {
     id: 'pipeline',
     name: 'Document Pipeline',
@@ -60,6 +68,9 @@ export function Layout({ children, currentPage, onNavigate }: LayoutProps) {
 
   const getPageTitle = () => {
     const currentSection = getCurrentSection();
+    if (currentSection.id === 'async-processing') {
+      return 'Async Document Processing';
+    }
     if (currentSection.id === 'pipeline') {
       switch (currentPage) {
         case 'extraction': return 'Document Extraction';
@@ -135,7 +146,9 @@ export function Layout({ children, currentPage, onNavigate }: LayoutProps) {
               <div key={item.id} className="group">
                 <button
                   onClick={() => {
-                    if (item.id === 'pipeline') {
+                    if (item.id === 'async-processing') {
+                      onNavigate('async-processing');
+                    } else if (item.id === 'pipeline') {
                       onNavigate('extraction');
                     } else if (item.id === 'documents') {
                       onNavigate('documents');
