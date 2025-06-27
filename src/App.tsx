@@ -8,6 +8,7 @@ import { ConsumptionWorkflow } from './features/consumption/components/Consumpti
 import { DocumentLibrary } from './features/documents/components/DocumentLibrary';
 import { DocumentUpload } from './features/documents/components/DocumentUpload';
 import { TermDictionary } from './features/terms/components/TermDictionary';
+import { PublishedTermsDashboard } from './features/publishing/components/PublishedTermsDashboard';
 import { DataLineageViewer } from './features/lineage/components/DataLineageViewer';
 import { SchemaIngestionPage } from './features/schema/components/SchemaIngestionPage';
 import { AsyncProcessingApp } from './features/async-processing';
@@ -28,7 +29,14 @@ function App() {
       case 'enrichment':
         return <EnrichmentWorkflow />;
       case 'review':
-        return <PublishingWorkflow />;
+        return (
+          <PublishingWorkflow 
+            onPublishComplete={(documentName) => {
+              console.log(`Published terms from ${documentName}`);
+            }}
+            onNavigateToTermDictionary={() => setCurrentPage('terms')}
+          />
+        );
       case 'consumption':
         return <ConsumptionWorkflow />;
       case 'documents':
@@ -76,6 +84,12 @@ function App() {
                 setCurrentPage('lineage');
               }}
             />
+          </div>
+        );
+      case 'published-terms':
+        return (
+          <div>
+            <PublishedTermsDashboard />
           </div>
         );
       case 'lineage':
