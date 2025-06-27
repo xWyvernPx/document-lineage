@@ -4,13 +4,14 @@ import { ProcessingDashboard } from './ProcessingDashboard';
 import { ClassificationStage } from './ClassificationStage';
 import { EnrichmentStage } from './EnrichmentStage';
 import { ResultViewer } from './ResultViewer';
+import { PublishedTermsDashboard } from './PublishedTermsDashboard';
 import { NotificationSystem } from './NotificationSystem';
 
 interface ProcessingJob {
   id: string;
   documentName: string;
   type: 'pdf' | 'docx' | 'image';
-  status: 'queued' | 'processing' | 'completed' | 'failed' | 'paused';
+  status: 'queued' | 'processing' | 'completed' | 'failed' | 'paused' | 'published';
   progress: number;
   submittedAt: string;
   submittedBy: string;
@@ -21,7 +22,7 @@ interface ProcessingJob {
   size: number;
 }
 
-type AppView = 'upload' | 'dashboard' | 'classification' | 'enrichment' | 'results';
+type AppView = 'upload' | 'dashboard' | 'classification' | 'enrichment' | 'results' | 'published-terms';
 
 export function AsyncProcessingApp() {
   const [currentView, setCurrentView] = useState<AppView>('upload');
@@ -59,6 +60,12 @@ export function AsyncProcessingApp() {
     setCurrentView('results');
   };
 
+  const handlePublishComplete = (job: ProcessingJob) => {
+    // Update job status and redirect to dashboard
+    setSelectedJob(null);
+    setCurrentView('dashboard');
+  };
+
   const renderContent = () => {
     switch (currentView) {
       case 'upload':
@@ -89,8 +96,14 @@ export function AsyncProcessingApp() {
         ) : null;
       case 'results':
         return selectedJob ? (
-          <ResultViewer job={selectedJob} onBack={handleBackToDashboard} />
+          <ResultViewer 
+            job={selectedJob} 
+            onBack={handleBackToDashboard}
+            onPublishComplete={handlePublishComplete}
+          />
         ) : null;
+      case 'published-terms':
+        return <PublishedTermsDashboard />;
       default:
         return <DocumentUploadPage onUploadComplete={handleUploadComplete} />;
     }
@@ -130,6 +143,16 @@ export function AsyncProcessingApp() {
                   }`}
                 >
                   Dashboard
+                </button>
+                <button
+                  onClick={() => setCurrentView('published-terms')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    currentView === 'published-terms'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  }`}
+                >
+                  Published Terms
                 </button>
               </div>
             </div>

@@ -4,8 +4,6 @@ import {
   Edit3, 
   Save, 
   X, 
-  Check, 
-  Flag, 
   Star, 
   Download, 
   Share2,
@@ -16,7 +14,9 @@ import {
   MessageSquare,
   Clock,
   User,
-  Calendar
+  Calendar,
+  CheckCircle,
+  Upload
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
@@ -29,7 +29,7 @@ interface ExtractedTerm {
   definition: string;
   category: string;
   confidence: number;
-  status: 'pending' | 'approved' | 'rejected' | 'flagged';
+  status: 'pending' | 'published';
   sourceSection: string;
   context: string;
   isEdited: boolean;
@@ -46,7 +46,7 @@ interface ProcessingJob {
   id: string;
   documentName: string;
   type: 'pdf' | 'docx' | 'image';
-  status: 'completed';
+  status: 'completed' | 'published';
   submittedAt: string;
   submittedBy: string;
   completedAt: string;
@@ -78,7 +78,7 @@ const mockTerms: ExtractedTerm[] = [
     definition: 'A numerical expression of creditworthiness based on credit history analysis.',
     category: 'Risk Assessment',
     confidence: 0.89,
-    status: 'approved',
+    status: 'pending',
     sourceSection: 'Underwriting Criteria',
     context: 'Minimum credit score requirements vary by loan product and risk tolerance.',
     isEdited: false,
@@ -96,7 +96,7 @@ const mockTerms: ExtractedTerm[] = [
     definition: 'The outstanding amount of money owed on a loan, excluding interest.',
     category: 'Financial',
     confidence: 0.87,
-    status: 'flagged',
+    status: 'pending',
     sourceSection: 'Loan Servicing',
     context: 'Principal balance decreases with each payment according to the amortization schedule.',
     isEdited: false,
@@ -107,16 +107,18 @@ const mockTerms: ExtractedTerm[] = [
 interface ResultViewerProps {
   job: ProcessingJob;
   onBack: () => void;
+  onPublishComplete?: (job: ProcessingJob) => void;
 }
 
-export function ResultViewer({ job, onBack }: ResultViewerProps) {
+export function ResultViewer({ job, onBack, onPublishComplete }: ResultViewerProps) {
   const [terms, setTerms] = useState<ExtractedTerm[]>(mockTerms);
   const [selectedTerm, setSelectedTerm] = useState<ExtractedTerm | null>(terms[0]);
   const [editingTerm, setEditingTerm] = useState<string | null>(null);
   const [editedDefinition, setEditedDefinition] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [reviewNote, setReviewNote] = useState('');
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   const filteredTerms = terms.filter(term => {
     const matchesSearch = term.term.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -153,40 +155,31 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
     setEditedDefinition('');
   };
 
-  const handleStatusChange = (termId: string, status: ExtractedTerm['status']) => {
-    setTerms(prev => prev.map(term => 
-      term.id === termId ? { ...term, status } : term
-    ));
+  const handlePublishTerms = async () => {
+    setIsPublishing(true);
     
-    if (selectedTerm?.id === termId) {
-      setSelectedTerm(prev => prev ? { ...prev, status } : null);
-    }
-  };
-
-  const getStatusIcon = (status: ExtractedTerm['status']) => {
-    switch (status) {
-      case 'approved':
-        return <Check className="w-4 h-4 text-emerald-500" />;
-      case 'rejected':
-        return <X className="w-4 h-4 text-red-500" />;
-      case 'flagged':
-        return <Flag className="w-4 h-4 text-amber-500" />;
-      default:
-        return <Clock className="w-4 h-4 text-gray-400" />;
-    }
-  };
-
-  const getStatusBadge = (status: ExtractedTerm['status']) => {
-    switch (status) {
-      case 'approved':
-        return <Badge variant="success">Approved</Badge>;
-      case 'rejected':
-        return <Badge variant="error">Rejected</Badge>;
-      case 'flagged':
-        return <Badge variant="warning">Flagged</Badge>;
-      default:
-        return <Badge variant="default">Pending</Badge>;
-    }
+    // Simulate publishing process
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Update all terms to published status
+    setTerms(prev => prev.map(term => ({ ...term, status: 'published' as const })));
+    
+    // Update job status
+    const updatedJob = { ...job, status: 'published' as const };
+    
+    setIsPublishing(false);
+    setShowSuccessToast(true);
+    
+    // Auto-hide toast after 5 seconds
+    setTimeout(() => {
+      setShowSuccessToast(false);
+      // Redirect to dashboard
+      if (onPublishComplete) {
+        onPublishComplete(updatedJob);
+      } else {
+        onBack();
+      }
+    }, 3000);
   };
 
   const getConfidenceColor = (confidence: number) => {
@@ -199,19 +192,39 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
   const getStats = () => {
     return {
       total: terms.length,
-      approved: terms.filter(t => t.status === 'approved').length,
+      published: terms.filter(t => t.status === 'published').length,
       pending: terms.filter(t => t.status === 'pending').length,
-      flagged: terms.filter(t => t.status === 'flagged').length,
-      rejected: terms.filter(t => t.status === 'rejected').length,
       edited: terms.filter(t => t.isEdited).length,
     };
   };
 
   const stats = getStats();
-  const reviewProgress = (stats.approved + stats.rejected) / stats.total * 100;
+  const allPublished = stats.published === stats.total;
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Success Toast */}
+      {showSuccessToast && (
+        <div className="fixed top-4 right-4 z-50">
+          <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4 max-w-sm transform transition-all duration-300 ease-in-out">
+            <div className="flex items-start space-x-3">
+              <CheckCircle className="w-6 h-6 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                <h4 className="font-medium text-gray-900 text-sm mb-1">
+                  Terms Published Successfully!
+                </h4>
+                <p className="text-sm text-gray-600 mb-2">
+                  Terms from {job.documentName} have been published to the business glossary.
+                </p>
+                <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                  View in Term Dictionary →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center justify-between">
@@ -234,6 +247,9 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
                   <Calendar className="w-4 h-4" />
                   <span>Completed {new Date(job.completedAt).toLocaleDateString()}</span>
                 </div>
+                {allPublished && (
+                  <Badge variant="success">Published</Badge>
+                )}
               </div>
             </div>
           </div>
@@ -245,39 +261,49 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
             <Button variant="ghost" size="sm" icon={Share2}>
               Share
             </Button>
-            <Button variant="primary" size="sm">
-              Publish Terms
-            </Button>
+            {!allPublished ? (
+              <Button 
+                variant="primary" 
+                size="sm" 
+                icon={Upload}
+                onClick={handlePublishTerms}
+                loading={isPublishing}
+                disabled={isPublishing}
+              >
+                {isPublishing ? 'Publishing...' : 'Publish Terms'}
+              </Button>
+            ) : (
+              <Button 
+                variant="success" 
+                size="sm" 
+                icon={CheckCircle}
+                disabled
+              >
+                Published
+              </Button>
+            )}
           </div>
         </div>
       </div>
 
       {/* Stats Bar */}
       <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
             <div className="text-sm text-gray-600">Total Terms</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-emerald-600">{stats.approved}</div>
-            <div className="text-sm text-gray-600">Approved</div>
+            <div className="text-2xl font-bold text-emerald-600">{stats.published}</div>
+            <div className="text-sm text-gray-600">Published</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-amber-600">{stats.flagged}</div>
-            <div className="text-sm text-gray-600">Flagged</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-red-600">{stats.rejected}</div>
-            <div className="text-sm text-gray-600">Rejected</div>
+            <div className="text-2xl font-bold text-amber-600">{stats.pending}</div>
+            <div className="text-sm text-gray-600">Pending</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-blue-600">{stats.edited}</div>
             <div className="text-sm text-gray-600">Edited</div>
-          </div>
-          <div className="text-center">
-            <div className="text-lg font-bold text-gray-900">{Math.round(reviewProgress)}%</div>
-            <div className="text-sm text-gray-600">Reviewed</div>
           </div>
         </div>
       </div>
@@ -303,9 +329,7 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
               >
                 <option value="all">All Status</option>
                 <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="flagged">Flagged</option>
-                <option value="rejected">Rejected</option>
+                <option value="published">Published</option>
               </select>
             </div>
           </div>
@@ -324,7 +348,11 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center space-x-2">
-                      {getStatusIcon(term.status)}
+                      {term.status === 'published' ? (
+                        <CheckCircle className="w-4 h-4 text-emerald-500" />
+                      ) : (
+                        <Clock className="w-4 h-4 text-gray-400" />
+                      )}
                       <h3 className="font-medium text-gray-900 text-sm">{term.term}</h3>
                       {term.isEdited && (
                         <div className="w-2 h-2 bg-blue-500 rounded-full" title="Edited" />
@@ -334,7 +362,9 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
                   
                   <div className="flex items-center justify-between mb-2">
                     <Badge variant="info" size="sm">{term.category}</Badge>
-                    {getStatusBadge(term.status)}
+                    <Badge variant={term.status === 'published' ? 'success' : 'default'}>
+                      {term.status === 'published' ? 'Published' : 'Pending'}
+                    </Badge>
                   </div>
                   
                   <div className="flex items-center justify-between text-xs text-gray-500">
@@ -361,12 +391,14 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
                     {selectedTerm.isEdited && (
                       <Badge variant="info" size="sm">Edited</Badge>
                     )}
+                    {selectedTerm.status === 'published' && (
+                      <Badge variant="success" size="sm">Published</Badge>
+                    )}
                   </div>
                   <div className="flex items-center space-x-2">
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${getConfidenceColor(selectedTerm.confidence)}`}>
                       {Math.round(selectedTerm.confidence * 100)}% confidence
                     </span>
-                    {getStatusBadge(selectedTerm.status)}
                   </div>
                 </div>
                 
@@ -383,7 +415,7 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-lg font-medium text-gray-900">Definition</h3>
-                    {editingTerm !== selectedTerm.id && (
+                    {editingTerm !== selectedTerm.id && selectedTerm.status !== 'published' && (
                       <Button
                         variant="ghost"
                         size="sm"
@@ -473,61 +505,27 @@ export function ResultViewer({ job, onBack }: ResultViewerProps) {
                     ))}
                   </div>
                 </div>
-
-                {/* Review Notes */}
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-3">Review Notes</h3>
-                  <textarea
-                    value={reviewNote}
-                    onChange={(e) => setReviewNote(e.target.value)}
-                    placeholder="Add notes about this term..."
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                    rows={3}
-                  />
-                </div>
               </div>
 
               {/* Action Panel */}
-              <div className="p-6 border-t border-gray-200 bg-gray-50">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <Button variant="ghost" size="sm" icon={Eye}>
-                      View in Document
-                    </Button>
-                    <Button variant="ghost" size="sm" icon={Star}>
-                      Mark as Preferred
-                    </Button>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      icon={Flag}
-                      onClick={() => handleStatusChange(selectedTerm.id, 'flagged')}
-                      className="text-amber-600 hover:text-amber-700"
-                    >
-                      Flag
-                    </Button>
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      icon={X}
-                      onClick={() => handleStatusChange(selectedTerm.id, 'rejected')}
-                    >
-                      Reject
-                    </Button>
-                    <Button
-                      variant="success"
-                      size="sm"
-                      icon={Check}
-                      onClick={() => handleStatusChange(selectedTerm.id, 'approved')}
-                    >
-                      Approve
-                    </Button>
+              {selectedTerm.status !== 'published' && (
+                <div className="p-6 border-t border-gray-200 bg-gray-50">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <Button variant="ghost" size="sm" icon={Eye}>
+                        View in Document
+                      </Button>
+                      <Button variant="ghost" size="sm" icon={Star}>
+                        Mark as Preferred
+                      </Button>
+                    </div>
+                    
+                    <div className="text-sm text-gray-600">
+                      Ready for publishing
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center bg-white">
