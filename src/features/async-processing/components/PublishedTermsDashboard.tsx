@@ -13,11 +13,14 @@ import {
   BookOpen,
   GitBranch,
   Star,
-  Tag
+  Tag,
+  Network,
+  X
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
+import { DataLineageViewer } from '../../lineage/components/DataLineageViewer';
 
 interface PublishedTerm {
   id: string;
@@ -152,6 +155,8 @@ export function TermDictionary() {
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [domainFilter, setDomainFilter] = useState('all');
   const [viewMode, setViewMode] = useState<'list' | 'grouped'>('grouped');
+  const [showLineageViewer, setShowLineageViewer] = useState(false);
+  const [lineageTerm, setLineageTerm] = useState<PublishedTerm | null>(null);
 
   const documents = Array.from(new Set(terms.map(term => term.documentName)));
   const categories = Array.from(new Set(terms.map(term => term.category)));
@@ -218,6 +223,16 @@ export function TermDictionary() {
     window.URL.revokeObjectURL(url);
   };
 
+  const handleViewLineage = (term: PublishedTerm) => {
+    setLineageTerm(term);
+    setShowLineageViewer(true);
+  };
+
+  const handleCloseLineage = () => {
+    setShowLineageViewer(false);
+    setLineageTerm(null);
+  };
+
   const getStats = () => {
     return {
       total: terms.length,
@@ -228,6 +243,40 @@ export function TermDictionary() {
   };
 
   const stats = getStats();
+
+  // Show lineage viewer if requested
+  if (showLineageViewer && lineageTerm) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        {/* Header with close button */}
+        <div className="bg-white border-b border-gray-200 px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900">
+                Data Lineage for "{lineageTerm.term}"
+              </h1>
+              <p className="text-gray-600 mt-1">
+                Explore data flow and dependencies for this business term
+              </p>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              icon={X}
+              onClick={handleCloseLineage}
+            >
+              Back to Dictionary
+            </Button>
+          </div>
+        </div>
+        
+        {/* Lineage Viewer */}
+        <div className="flex-1">
+          <DataLineageViewer />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -438,12 +487,25 @@ export function TermDictionary() {
                                     <span>{formatDate(term.publishedAt)}</span>
                                   </div>
                                 </div>
-                                {term.schemaMapping && (
-                                  <div className="flex items-center space-x-1">
-                                    <Database className="w-3 h-3" />
-                                    <span>Schema Mapped</span>
-                                  </div>
-                                )}
+                                <div className="flex items-center space-x-2">
+                                  {term.schemaMapping && (
+                                    <div className="flex items-center space-x-1">
+                                      <Database className="w-3 h-3" />
+                                      <span>Schema Mapped</span>
+                                    </div>
+                                  )}
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    icon={Network}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleViewLineage(term);
+                                    }}
+                                    className="text-blue-600 hover:text-blue-700"
+                                    title="View Data Lineage"
+                                  />
+                                </div>
                               </div>
 
                               {/* Expanded Details */}
@@ -535,9 +597,22 @@ export function TermDictionary() {
                             <span>Document: {term.documentName}</span>
                             <span>Section: {term.sourceSection}</span>
                           </div>
-                          <div className="flex items-center space-x-1">
-                            <Calendar className="w-3 h-3" />
-                            <span>{formatDate(term.publishedAt)}</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="flex items-center space-x-1">
+                              <Calendar className="w-3 h-3" />
+                              <span>{formatDate(term.publishedAt)}</span>
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              icon={Network}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleViewLineage(term);
+                              }}
+                              className="text-blue-600 hover:text-blue-700"
+                              title="View Data Lineage"
+                            />
                           </div>
                         </div>
 

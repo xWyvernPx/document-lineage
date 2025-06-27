@@ -103,17 +103,17 @@ const mockJobs: ProcessingJob[] = [
   },
 ];
 
-interface ProcessingDashboardProps {
+interface ProcessingDocumentProps {
   onViewResults: (job: ProcessingJob) => void;
   onViewClassification?: (job: ProcessingJob) => void;
   onViewEnrichment?: (job: ProcessingJob) => void;
 }
 
-export function ProcessingDashboard({ 
+export function ProcessingDocument({ 
   onViewResults, 
   onViewClassification, 
   onViewEnrichment 
-}: ProcessingDashboardProps) {
+}: ProcessingDocumentProps) {
   const [jobs, setJobs] = useState<ProcessingJob[]>(mockJobs);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -270,7 +270,7 @@ export function ProcessingDashboard({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Processing Dashboard</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Document Processing</h1>
           <p className="text-gray-600">
             Monitor document processing jobs and view extraction results
           </p>

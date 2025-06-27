@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DocumentUploadPage } from './DocumentUploadPage';
-import { ProcessingDashboard } from './ProcessingDashboard';
+import { ProcessingDocument } from './ProcessingDashboard';
 import { ClassificationStage } from './ClassificationStage';
 import { EnrichmentStage } from './EnrichmentStage';
 import { ResultViewer } from './ResultViewer';
@@ -22,14 +22,14 @@ interface ProcessingJob {
   size: number;
 }
 
-type AppView = 'upload' | 'dashboard' | 'classification' | 'enrichment' | 'results' | 'term-dictionary';
+type AppView = 'upload' | 'document' | 'classification' | 'enrichment' | 'results' | 'term-dictionary';
 
 export function AsyncProcessingApp() {
   const [currentView, setCurrentView] = useState<AppView>('upload');
   const [selectedJob, setSelectedJob] = useState<ProcessingJob | null>(null);
 
   const handleUploadComplete = () => {
-    setCurrentView('dashboard');
+    setCurrentView('document');
   };
 
   const handleViewResults = (job: ProcessingJob) => {
@@ -47,9 +47,9 @@ export function AsyncProcessingApp() {
     setCurrentView('enrichment');
   };
 
-  const handleBackToDashboard = () => {
+  const handleBackToDocument = () => {
     setSelectedJob(null);
-    setCurrentView('dashboard');
+    setCurrentView('document');
   };
 
   const handleClassificationToEnrichment = () => {
@@ -61,18 +61,18 @@ export function AsyncProcessingApp() {
   };
 
   const handlePublishComplete = (job: ProcessingJob) => {
-    // Update job status and redirect to dashboard
+    // Update job status and redirect to document view
     setSelectedJob(null);
-    setCurrentView('dashboard');
+    setCurrentView('document');
   };
 
   const renderContent = () => {
     switch (currentView) {
       case 'upload':
         return <DocumentUploadPage onUploadComplete={handleUploadComplete} />;
-      case 'dashboard':
+      case 'document':
         return (
-          <ProcessingDashboard 
+          <ProcessingDocument 
             onViewResults={handleViewResults}
             onViewClassification={handleViewClassification}
             onViewEnrichment={handleViewEnrichment}
@@ -82,7 +82,7 @@ export function AsyncProcessingApp() {
         return selectedJob ? (
           <ClassificationStage 
             job={selectedJob} 
-            onBack={handleBackToDashboard}
+            onBack={handleBackToDocument}
             onNext={handleClassificationToEnrichment}
           />
         ) : null;
@@ -98,7 +98,7 @@ export function AsyncProcessingApp() {
         return selectedJob ? (
           <ResultViewer 
             job={selectedJob} 
-            onBack={handleBackToDashboard}
+            onBack={handleBackToDocument}
             onPublishComplete={handlePublishComplete}
           />
         ) : null;
@@ -135,14 +135,14 @@ export function AsyncProcessingApp() {
                   Upload
                 </button>
                 <button
-                  onClick={() => setCurrentView('dashboard')}
+                  onClick={() => setCurrentView('document')}
                   className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    currentView === 'dashboard'
+                    currentView === 'document'
                       ? 'bg-blue-100 text-blue-700'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                   }`}
                 >
-                  Dashboard
+                  Document
                 </button>
                 <button
                   onClick={() => setCurrentView('term-dictionary')}
