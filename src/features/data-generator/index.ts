@@ -1,1 +1,0 @@
-export { ACHNapasDataGenerator } from './components/ACHNapasDataGenerator';
