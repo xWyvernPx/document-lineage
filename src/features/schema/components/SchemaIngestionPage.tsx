@@ -21,11 +21,7 @@ import {
   Key,
   FileText,
   Calendar,
-  User,
-  Save,
-  X,
-  AlertCircle,
-  Info
+  User
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
@@ -58,10 +54,6 @@ interface SchemaTable {
   lastUpdated: string;
   isIngested: boolean;
   mappedTerms: number;
-  owner?: string;
-  tags?: string[];
-  businessPurpose?: string;
-  dataClassification?: 'public' | 'internal' | 'confidential' | 'restricted';
 }
 
 interface SchemaColumn {
@@ -128,14 +120,10 @@ const mockTables: SchemaTable[] = [
     tableType: 'table',
     columnCount: 12,
     rowCount: 45678,
-    description: 'Customer master data table containing all customer information',
+    description: 'Customer master data table',
     lastUpdated: '2024-01-16T08:30:00Z',
     isIngested: true,
-    mappedTerms: 8,
-    owner: 'Sales Team',
-    tags: ['customer', 'master-data', 'pii'],
-    businessPurpose: 'Store and manage customer information for sales and marketing activities',
-    dataClassification: 'confidential'
+    mappedTerms: 8
   },
   {
     id: '2',
@@ -145,14 +133,10 @@ const mockTables: SchemaTable[] = [
     tableType: 'table',
     columnCount: 15,
     rowCount: 234567,
-    description: 'Order transaction records with payment and shipping details',
+    description: 'Order transaction records',
     lastUpdated: '2024-01-16T09:15:00Z',
     isIngested: true,
-    mappedTerms: 12,
-    owner: 'Sales Team',
-    tags: ['orders', 'transactions', 'revenue'],
-    businessPurpose: 'Track all customer orders and transaction history',
-    dataClassification: 'internal'
+    mappedTerms: 12
   },
   {
     id: '3',
@@ -161,14 +145,10 @@ const mockTables: SchemaTable[] = [
     tableName: 'customer_metrics',
     tableType: 'view',
     columnCount: 8,
-    description: 'Customer analytics and metrics view for reporting',
+    description: 'Customer analytics and metrics view',
     lastUpdated: '2024-01-16T07:45:00Z',
     isIngested: false,
-    mappedTerms: 0,
-    owner: 'Analytics Team',
-    tags: ['analytics', 'metrics', 'reporting'],
-    businessPurpose: 'Provide aggregated customer metrics for business intelligence',
-    dataClassification: 'internal'
+    mappedTerms: 0
   }
 ];
 
@@ -180,8 +160,6 @@ export function SchemaIngestionPage() {
   const [statusFilter, setStatusFilter] = useState('all');
   const [typeFilter, setTypeFilter] = useState('all');
   const [showAddConnection, setShowAddConnection] = useState(false);
-  const [editingTable, setEditingTable] = useState<SchemaTable | null>(null);
-  const [tables, setTables] = useState<SchemaTable[]>(mockTables);
 
   const getStatusIcon = (status: SchemaConnection['status']) => {
     switch (status) {
@@ -209,21 +187,6 @@ export function SchemaIngestionPage() {
     }
   };
 
-  const getClassificationBadge = (classification?: SchemaTable['dataClassification']) => {
-    switch (classification) {
-      case 'public':
-        return <Badge variant="success">Public</Badge>;
-      case 'internal':
-        return <Badge variant="info">Internal</Badge>;
-      case 'confidential':
-        return <Badge variant="warning">Confidential</Badge>;
-      case 'restricted':
-        return <Badge variant="error">Restricted</Badge>;
-      default:
-        return <Badge variant="default">Unclassified</Badge>;
-    }
-  };
-
   const getDatabaseIcon = (type: SchemaConnection['type']) => {
     return <Database className="w-5 h-5" />;
   };
@@ -237,13 +200,6 @@ export function SchemaIngestionPage() {
     });
   };
 
-  const handleUpdateTable = (updatedTable: SchemaTable) => {
-    setTables(prev => prev.map(table => 
-      table.id === updatedTable.id ? updatedTable : table
-    ));
-    setEditingTable(null);
-  };
-
   const filteredConnections = mockConnections.filter(conn => {
     const matchesSearch = conn.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          conn.database.toLowerCase().includes(searchQuery.toLowerCase());
@@ -252,11 +208,10 @@ export function SchemaIngestionPage() {
     return matchesSearch && matchesStatus && matchesType;
   });
 
-  const filteredTables = tables.filter(table => {
+  const filteredTables = mockTables.filter(table => {
     if (selectedConnection && table.connectionId !== selectedConnection.id) return false;
     const matchesSearch = table.tableName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         table.schemaName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         (table.description && table.description.toLowerCase().includes(searchQuery.toLowerCase()));
+                         table.schemaName.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesSearch;
   });
 
@@ -264,10 +219,10 @@ export function SchemaIngestionPage() {
     return {
       totalConnections: mockConnections.length,
       connectedSources: mockConnections.filter(c => c.status === 'connected').length,
-      totalTables: tables.length,
-      ingestedTables: tables.filter(t => t.isIngested).length,
+      totalTables: mockTables.length,
+      ingestedTables: mockTables.filter(t => t.isIngested).length,
       totalColumns: mockConnections.reduce((sum, conn) => sum + conn.columnCount, 0),
-      mappedTerms: tables.reduce((sum, table) => sum + table.mappedTerms, 0)
+      mappedTerms: mockTables.reduce((sum, table) => sum + table.mappedTerms, 0)
     };
   };
 
@@ -515,7 +470,7 @@ export function SchemaIngestionPage() {
               <Card key={table.id} hover>
                 <div className="p-6">
                   <div className="flex items-start justify-between">
-                    <div className="flex items-start space-x-4 flex-1">
+                    <div className="flex items-start space-x-4">
                       <div className="p-2 bg-emerald-100 rounded-lg">
                         <Table className="w-5 h-5 text-emerald-600" />
                       </div>
@@ -531,21 +486,13 @@ export function SchemaIngestionPage() {
                           ) : (
                             <Badge variant="default" size="sm">Not Ingested</Badge>
                           )}
-                          {getClassificationBadge(table.dataClassification)}
                         </div>
                         
                         {table.description && (
                           <p className="text-gray-600 mb-3">{table.description}</p>
                         )}
-
-                        {table.businessPurpose && (
-                          <div className="mb-3">
-                            <span className="text-sm font-medium text-gray-700">Business Purpose:</span>
-                            <p className="text-sm text-gray-600 mt-1">{table.businessPurpose}</p>
-                          </div>
-                        )}
                         
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-3">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
                           <div>
                             <span className="text-sm text-gray-600">Columns:</span>
                             <p className="font-medium text-gray-900">{table.columnCount}</p>
@@ -561,25 +508,10 @@ export function SchemaIngestionPage() {
                             <p className="font-medium text-gray-900">{table.mappedTerms}</p>
                           </div>
                           <div>
-                            <span className="text-sm text-gray-600">Owner:</span>
-                            <p className="font-medium text-gray-900">{table.owner || 'Unassigned'}</p>
-                          </div>
-                          <div>
                             <span className="text-sm text-gray-600">Last Updated:</span>
                             <p className="font-medium text-gray-900">{formatDate(table.lastUpdated)}</p>
                           </div>
                         </div>
-
-                        {table.tags && table.tags.length > 0 && (
-                          <div className="mb-3">
-                            <span className="text-sm text-gray-600 block mb-1">Tags:</span>
-                            <div className="flex flex-wrap gap-1">
-                              {table.tags.map(tag => (
-                                <Badge key={tag} variant="default" size="sm">{tag}</Badge>
-                              ))}
-                            </div>
-                          </div>
-                        )}
                         
                         {table.mappedTerms > 0 && (
                           <div className="mt-3">
@@ -598,14 +530,6 @@ export function SchemaIngestionPage() {
                     </div>
 
                     <div className="flex items-center space-x-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        icon={Edit3}
-                        onClick={() => setEditingTable(table)}
-                      >
-                        Update Schema
-                      </Button>
                       <Button
                         variant="ghost"
                         size="sm"
@@ -727,170 +651,6 @@ export function SchemaIngestionPage() {
                 Test & Save Connection
               </Button>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Update Schema Modal */}
-      {editingTable && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setEditingTable(null)} />
-          <div className="relative bg-white rounded-2xl shadow-2xl p-6 mx-4 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Update Schema: {editingTable.schemaName}.{editingTable.tableName}
-              </h3>
-              <Button variant="ghost" size="sm" icon={X} onClick={() => setEditingTable(null)} />
-            </div>
-            
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const updatedTable: SchemaTable = {
-                ...editingTable,
-                description: formData.get('description') as string,
-                businessPurpose: formData.get('businessPurpose') as string,
-                owner: formData.get('owner') as string,
-                dataClassification: formData.get('dataClassification') as SchemaTable['dataClassification'],
-                tags: (formData.get('tags') as string).split(',').map(tag => tag.trim()).filter(Boolean)
-              };
-              handleUpdateTable(updatedTable);
-            }}>
-              <div className="space-y-6">
-                {/* Basic Information */}
-                <div>
-                  <h4 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
-                    <Info className="w-5 h-5 mr-2" />
-                    Basic Information
-                  </h4>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Schema Name</label>
-                      <input
-                        type="text"
-                        value={editingTable.schemaName}
-                        disabled
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Table Name</label>
-                      <input
-                        type="text"
-                        value={editingTable.tableName}
-                        disabled
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                  <textarea
-                    name="description"
-                    defaultValue={editingTable.description}
-                    placeholder="Describe what this table contains and its purpose..."
-                    rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-
-                {/* Business Purpose */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Business Purpose</label>
-                  <textarea
-                    name="businessPurpose"
-                    defaultValue={editingTable.businessPurpose}
-                    placeholder="Explain how this table is used in business processes..."
-                    rows={2}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-
-                {/* Owner and Classification */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Owner</label>
-                    <input
-                      type="text"
-                      name="owner"
-                      defaultValue={editingTable.owner}
-                      placeholder="Team or person responsible"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Data Classification</label>
-                    <select
-                      name="dataClassification"
-                      defaultValue={editingTable.dataClassification}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
-                      <option value="">Select classification</option>
-                      <option value="public">Public</option>
-                      <option value="internal">Internal</option>
-                      <option value="confidential">Confidential</option>
-                      <option value="restricted">Restricted</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Tags */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Tags</label>
-                  <input
-                    type="text"
-                    name="tags"
-                    defaultValue={editingTable.tags?.join(', ')}
-                    placeholder="customer, master-data, pii (comma separated)"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Separate tags with commas</p>
-                </div>
-
-                {/* Current Statistics */}
-                <div>
-                  <h4 className="text-lg font-medium text-gray-900 mb-4">Current Statistics</h4>
-                  <div className="grid grid-cols-3 gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-gray-900">{editingTable.columnCount}</div>
-                      <div className="text-sm text-gray-600">Columns</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-gray-900">{editingTable.rowCount?.toLocaleString() || 'N/A'}</div>
-                      <div className="text-sm text-gray-600">Rows</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-gray-900">{editingTable.mappedTerms}</div>
-                      <div className="text-sm text-gray-600">Mapped Terms</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Warning */}
-                <div className="flex items-start space-x-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                  <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h5 className="font-medium text-amber-800">Schema Update Notice</h5>
-                    <p className="text-sm text-amber-700 mt-1">
-                      Updating schema information will help improve term mapping accuracy and data lineage tracking. 
-                      This metadata is used for documentation and governance purposes.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex justify-end space-x-3 mt-8 pt-6 border-t border-gray-200">
-                <Button variant="ghost" type="button" onClick={() => setEditingTable(null)}>
-                  Cancel
-                </Button>
-                <Button variant="primary" type="submit" icon={Save}>
-                  Update Schema
-                </Button>
-              </div>
-            </form>
           </div>
         </div>
       )}
