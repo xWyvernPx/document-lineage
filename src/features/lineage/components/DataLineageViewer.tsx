@@ -29,7 +29,8 @@ import {
   Share2,
   ExternalLink,
   Settings,
-  Layers
+  Layers,
+  Edit3
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
