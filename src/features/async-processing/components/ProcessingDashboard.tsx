@@ -40,7 +40,6 @@ interface ProcessingJob {
   error?: string;
   size: number;
   currentStage?: 'upload' | 'classification' | 'enrichment' | 'review' | 'completed';
-  service?: string;
   domain?: string;
   documentType?: string;
 }
@@ -62,7 +61,6 @@ const convertNapasToJobs = (): ProcessingJob[] => {
     size: doc.size,
     currentStage: doc.status === 'completed' ? 'completed' : 
                  doc.status === 'processing' ? 'enrichment' : 'upload',
-    service: doc.service,
     domain: doc.classification.domain,
     documentType: doc.type
   }));
@@ -82,13 +80,13 @@ export function ProcessingDocument({
   const [jobs, setJobs] = useState<ProcessingJob[]>(convertNapasToJobs());
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [serviceFilter, setServiceFilter] = useState('all');
   const [typeFilter, setTypeFilter] = useState('all');
+  const [domainFilter, setDomainFilter] = useState('all');
   const [isRefreshing, setIsRefreshing] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Get unique services and types for filters
-  const services = Array.from(new Set(jobs.map(job => job.service).filter(Boolean)));
+  // Get unique domains and types for filters
+  const domains = Array.from(new Set(jobs.map(job => job.domain).filter(Boolean)));
   const documentTypes = Array.from(new Set(jobs.map(job => job.documentType).filter(Boolean)));
 
   // Simulate real-time updates with proper cleanup
@@ -125,11 +123,11 @@ export function ProcessingDocument({
   const filteredJobs = jobs.filter(job => {
     const matchesSearch = job.documentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          job.submittedBy.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         (job.service && job.service.toLowerCase().includes(searchQuery.toLowerCase()));
+                         (job.domain && job.domain.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesStatus = statusFilter === 'all' || job.status === statusFilter;
-    const matchesService = serviceFilter === 'all' || job.service === serviceFilter;
     const matchesType = typeFilter === 'all' || job.documentType === typeFilter;
-    return matchesSearch && matchesStatus && matchesService && matchesType;
+    const matchesDomain = domainFilter === 'all' || job.domain === domainFilter;
+    return matchesSearch && matchesStatus && matchesType && matchesDomain;
   });
 
   const getStatusIcon = (status: ProcessingJob['status']) => {
@@ -192,20 +190,21 @@ export function ProcessingDocument({
     }
   };
 
-  const getServiceBadge = (service?: string) => {
-    if (!service) return null;
+  const getDocumentTypeBadge = (docType?: string) => {
+    if (!docType) return null;
     
-    const serviceColors: Record<string, string> = {
-      'DPG': 'bg-blue-100 text-blue-800',
-      'Transaction Payment': 'bg-emerald-100 text-emerald-800',
-      'Internal Portal': 'bg-purple-100 text-purple-800',
-      'Core Banking': 'bg-amber-100 text-amber-800',
-      'Napas Gateway': 'bg-red-100 text-red-800'
+    const typeColors: Record<string, string> = {
+      'Technical': 'bg-blue-100 text-blue-800',
+      'BRD': 'bg-emerald-100 text-emerald-800',
+      'Process': 'bg-purple-100 text-purple-800',
+      'SRS': 'bg-amber-100 text-amber-800',
+      'API': 'bg-red-100 text-red-800',
+      'Regulatory': 'bg-gray-100 text-gray-800'
     };
 
     return (
-      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${serviceColors[service] || 'bg-gray-100 text-gray-800'}`}>
-        {service}
+      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${typeColors[docType] || 'bg-gray-100 text-gray-800'}`}>
+        {docType}
       </span>
     );
   };
@@ -261,7 +260,10 @@ export function ProcessingDocument({
       failed: jobs.filter(j => j.status === 'failed').length,
       queued: jobs.filter(j => j.status === 'queued').length,
       totalTerms: jobs.reduce((sum, job) => sum + (job.extractedTerms || 0), 0),
-      serviceStats: stats.serviceBreakdown,
+      domainStats: domains.reduce((acc, domain) => {
+        acc[domain] = jobs.filter(job => job.domain === domain).length;
+        return acc;
+      }, {} as Record<string, number>),
       typeStats: stats.typeBreakdown
     };
   };
@@ -273,9 +275,9 @@ export function ProcessingDocument({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">NAPAS ACH Document Processing</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Document Processing</h1>
           <p className="text-gray-600">
-            Monitor ACH integration document processing and term extraction across all NAPAS services
+            Monitor document processing and term extraction across multiple document types and domains
           </p>
         </div>
 
@@ -307,15 +309,15 @@ export function ProcessingDocument({
           </Card>
         </div>
 
-        {/* Service Breakdown */}
+        {/* Domain Breakdown */}
         <Card className="mb-6">
           <div className="p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">NAPAS Service Distribution</h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {Object.entries(stats.serviceStats).map(([service, count]) => (
-                <div key={service} className="text-center">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Domain Distribution</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {Object.entries(stats.domainStats).map(([domain, count]) => (
+                <div key={domain} className="text-center">
                   <div className="text-xl font-bold text-gray-900">{count}</div>
-                  <div className="text-sm text-gray-600">{service}</div>
+                  <div className="text-sm text-gray-600">{domain}</div>
                 </div>
               ))}
             </div>
@@ -330,7 +332,7 @@ export function ProcessingDocument({
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
-                  placeholder="Search documents, services, or users..."
+                  placeholder="Search documents, domains, or users..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -355,13 +357,13 @@ export function ProcessingDocument({
                 </div>
 
                 <select
-                  value={serviceFilter}
-                  onChange={(e) => setServiceFilter(e.target.value)}
+                  value={domainFilter}
+                  onChange={(e) => setDomainFilter(e.target.value)}
                   className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
                 >
-                  <option value="all">All Services</option>
-                  {services.map(service => (
-                    <option key={service} value={service}>{service}</option>
+                  <option value="all">All Domains</option>
+                  {domains.map(domain => (
+                    <option key={domain} value={domain}>{domain}</option>
                   ))}
                 </select>
 
@@ -397,7 +399,7 @@ export function ProcessingDocument({
               <thead>
                 <tr className="border-b border-gray-200">
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Document</th>
-                  <th className="text-left py-4 px-6 font-medium text-gray-900">Service</th>
+                  <th className="text-left py-4 px-6 font-medium text-gray-900">Type</th>
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Status</th>
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Stage</th>
                   <th className="text-left py-4 px-6 font-medium text-gray-900">Progress</th>
@@ -432,7 +434,7 @@ export function ProcessingDocument({
                     </td>
 
                     <td className="py-4 px-6">
-                      {getServiceBadge(job.service)}
+                      {getDocumentTypeBadge(job.documentType)}
                     </td>
                     
                     <td className="py-4 px-6">
@@ -567,7 +569,7 @@ export function ProcessingDocument({
               <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">No documents found</h3>
               <p className="text-gray-500 mb-4">
-                {searchQuery || statusFilter !== 'all' || serviceFilter !== 'all' || typeFilter !== 'all'
+                {searchQuery || statusFilter !== 'all' || domainFilter !== 'all' || typeFilter !== 'all'
                   ? 'Try adjusting your search criteria or filters.'
                   : 'Upload documents to start processing'
                 }

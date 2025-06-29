@@ -17,7 +17,6 @@ import {
   Calendar,
   CheckCircle,
   Upload,
-  Building,
   Tag
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
@@ -55,7 +54,6 @@ interface ProcessingJob {
   submittedBy: string;
   completedAt: string;
   extractedTerms: number;
-  service?: string;
   domain?: string;
 }
 
@@ -241,21 +239,11 @@ export function ResultViewer({ job, onBack, onPublishComplete, onTermDictionary 
                   <FileText className="w-4 h-4" />
                   <span>{job.type.toUpperCase()}</span>
                 </div>
-                {job.service && (
-                  <>
-                    <div className="flex items-center space-x-1">
-                      <Building className="w-4 h-4" />
-                      <span>{job.service}</span>
-                    </div>
-                  </>
-                )}
                 {job.domain && (
-                  <>
-                    <div className="flex items-center space-x-1">
-                      <Tag className="w-4 h-4" />
-                      <span>{job.domain}</span>
-                    </div>
-                  </>
+                  <div className="flex items-center space-x-1">
+                    <Tag className="w-4 h-4" />
+                    <span>{job.domain}</span>
+                  </div>
                 )}
                 <div className="flex items-center space-x-1">
                   <User className="w-4 h-4" />
