@@ -61,98 +61,192 @@ interface ProcessingJob {
 const mockTerms: ExtractedTerm[] = [
   {
     id: '1',
-    term: 'Business Requirements',
-    definition: 'Documented needs and expectations that a business solution must fulfill to achieve organizational objectives.',
-    category: 'Process',
-    confidence: 0.95,
+    term: 'Message Routing Engine',
+    definition: 'Core component responsible for directing ACH messages between internal services and NAPAS based on transaction type and routing rules. Ensures proper message delivery and transformation between NAPAS and internal banking systems.',
+    category: 'System Component',
+    confidence: 0.96,
     status: 'pending',
-    sourceSection: 'Business Requirements',
-    context: 'Business requirements serve as the foundation for system design and development, ensuring alignment with organizational goals.',
+    sourceSection: 'Section 3.1 – System Architecture',
+    context: 'The Message Routing Engine acts as the central hub for all ACH transaction flows, ensuring proper message delivery and transformation between NAPAS and internal banking systems.',
     isPreferred: true,
     schemaMapping: {
-      schemaName: 'project_management',
-      tableName: 'requirements',
-      columnName: 'business_requirement_text',
-      dataType: 'TEXT',
-      confidence: 0.92,
-      llmReasoning: 'Strong semantic match between "Business Requirements" and the requirements table business_requirement_text column. The context about organizational objectives aligns with project management schema.'
+      schemaName: 'dpg_middleware',
+      tableName: 'message_routing',
+      columnName: 'routing_config',
+      dataType: 'JSON',
+      confidence: 0.94,
+      llmReasoning: 'Strong semantic match between "Message Routing Engine" and the message_routing table routing_config column. The context about directing ACH messages aligns with routing configuration requirements.'
     },
     alternativeMappings: [
       {
-        schemaName: 'documentation',
-        tableName: 'documents',
-        columnName: 'requirement_description',
-        dataType: 'VARCHAR(500)',
+        schemaName: 'payment_orchestration',
+        tableName: 'routing_rules',
+        columnName: 'engine_config',
+        dataType: 'TEXT',
         confidence: 0.78,
-        llmReasoning: 'Alternative mapping to general documentation table. Lower confidence due to less specific column naming.'
+        llmReasoning: 'Alternative mapping to payment orchestration routing rules. Lower confidence due to less specific table structure.'
       }
     ],
-    relatedTerms: ['Functional Requirements', 'System Requirements', 'User Stories'],
-    synonyms: ['Business Needs', 'Organizational Requirements']
+    relatedTerms: ['Message Router', 'Transaction Router', 'ACH Router', 'Payment Router'],
+    synonyms: ['Routing Engine', 'Message Director', 'Transaction Router']
   },
   {
     id: '2',
-    term: 'Risk Assessment',
-    definition: 'Systematic process of evaluating potential risks that could negatively impact business operations or project outcomes.',
-    category: 'Risk Management',
-    confidence: 0.89,
+    term: 'Transaction Correlation ID',
+    definition: 'Unique identifier that tracks a single ACH transaction across all system components and services throughout its lifecycle. Enables end-to-end tracking and reconciliation across DPG, payment services, and core banking.',
+    category: 'Data Element',
+    confidence: 0.93,
     status: 'approved',
-    sourceSection: 'Risk Assessment',
-    context: 'Risk assessment involves identifying, analyzing, and prioritizing risks to develop appropriate mitigation strategies.',
+    sourceSection: 'Section 4.2 – Message Tracking',
+    context: 'Each ACH transaction is assigned a correlation ID at initiation to enable end-to-end tracking and reconciliation across DPG, payment services, and core banking.',
     isPreferred: false,
     schemaMapping: {
-      schemaName: 'risk_management',
-      tableName: 'risk_assessments',
-      columnName: 'assessment_description',
-      dataType: 'TEXT',
-      confidence: 0.96,
-      llmReasoning: 'Excellent match for risk assessment in risk management schema. Context about evaluating risks perfectly aligns with risk_assessments table purpose.',
+      schemaName: 'dpg_middleware',
+      tableName: 'message_routing',
+      columnName: 'correlation_id',
+      dataType: 'VARCHAR(64)',
+      confidence: 0.97,
+      llmReasoning: 'Excellent match for transaction correlation ID in message routing table. The tracking and reconciliation context perfectly aligns with correlation_id field purpose.',
       isApproved: true
     },
-    relatedTerms: ['Risk Mitigation', 'Risk Analysis', 'Risk Matrix'],
-    synonyms: ['Risk Evaluation', 'Risk Analysis']
+    relatedTerms: ['Trace ID', 'Transaction ID', 'Correlation Key', 'ACH Trace Number'],
+    synonyms: ['Correlation Key', 'Transaction Trace', 'ACH Trace ID']
   },
   {
     id: '3',
-    term: 'Implementation Plan',
-    definition: 'Detailed roadmap outlining the steps, timeline, and resources required to execute a project or initiative.',
-    category: 'Project Management',
-    confidence: 0.87,
+    term: 'Clearing Cycle',
+    definition: 'Scheduled time window during which NAPAS processes and settles ACH transactions. Banks must submit transactions within specific clearing cycles to ensure same-day or next-day settlement.',
+    category: 'Operational Process',
+    confidence: 0.95,
     status: 'flagged',
-    sourceSection: 'Implementation Plan',
-    context: 'Implementation plans provide structured approach to project execution, including milestones, dependencies, and resource allocation.',
+    sourceSection: 'Section 6.2 – Processing Schedule',
+    context: 'Standard ACH transactions must be submitted to NAPAS by 2:00 PM local time for same-day processing, while same-day ACH requires 10:30 AM submission.',
     isPreferred: false,
     schemaMapping: {
-      schemaName: 'project_management',
-      tableName: 'project_plans',
-      columnName: 'implementation_details',
-      dataType: 'TEXT',
+      schemaName: 'dpg_middleware',
+      tableName: 'processing_schedules',
+      columnName: 'clearing_cycle_config',
+      dataType: 'JSON',
       confidence: 0.88,
-      llmReasoning: 'Good match for implementation planning in project management context. The roadmap and timeline aspects align well with project planning requirements.'
+      llmReasoning: 'Good match for clearing cycle in processing schedules table. The time window and settlement aspects align well with schedule configuration requirements.'
     },
-    relatedTerms: ['Project Timeline', 'Resource Allocation', 'Milestone Planning'],
-    synonyms: ['Execution Plan', 'Project Roadmap']
+    relatedTerms: ['Settlement Window', 'Processing Cycle', 'ACH Cycle', 'Clearing Window'],
+    synonyms: ['Settlement Cycle', 'Processing Window', 'ACH Settlement']
   },
   {
     id: '4',
-    term: 'Data Governance',
-    definition: 'Framework of policies, procedures, and controls that ensure data quality, security, and compliance across the organization.',
-    category: 'Data Management',
-    confidence: 0.93,
+    term: 'HSM Integration',
+    definition: 'Hardware Security Module integration for cryptographic operations including message signing and encryption for NAPAS communication. All NAPAS messages require HSM-based digital signatures and encryption.',
+    category: 'Security Component',
+    confidence: 0.91,
     status: 'pending',
-    sourceSection: 'Data Strategy',
-    context: 'Data governance establishes accountability and standardizes data management practices to support business decision-making.',
+    sourceSection: 'Section 4.1 – Security Requirements',
+    context: 'All NAPAS messages require HSM-based digital signatures and encryption to ensure message integrity and non-repudiation.',
     isPreferred: true,
     schemaMapping: {
-      schemaName: 'data_management',
-      tableName: 'governance_policies',
-      columnName: 'policy_description',
-      dataType: 'TEXT',
+      schemaName: 'infrastructure',
+      tableName: 'security_config',
+      columnName: 'hsm_config',
+      dataType: 'JSON',
       confidence: 0.94,
-      llmReasoning: 'Strong alignment with data governance policies table. The framework and controls context matches governance policy requirements.'
+      llmReasoning: 'Strong alignment with HSM integration in security configuration table. The cryptographic operations context matches security configuration requirements.'
     },
-    relatedTerms: ['Data Quality', 'Data Stewardship', 'Compliance Framework'],
-    synonyms: ['Data Management Framework', 'Information Governance']
+    relatedTerms: ['Hardware Security', 'Cryptographic Module', 'Message Signing', 'Encryption Module'],
+    synonyms: ['Hardware Security Module', 'Cryptographic Integration', 'Message Encryption']
+  },
+  {
+    id: '5',
+    term: 'Payment Orchestration Engine',
+    definition: 'Central system component that coordinates ACH payment flows across multiple third-party providers and internal banking services. Manages complex payment workflows, routing decisions, and fallback scenarios for ACH transactions.',
+    category: 'System Component',
+    confidence: 0.96,
+    status: 'pending',
+    sourceSection: 'Section 2.1 – Business Overview',
+    context: 'The orchestration engine manages complex payment workflows, routing decisions, and fallback scenarios for ACH transactions processed through NAPAS.',
+    isPreferred: true,
+    schemaMapping: {
+      schemaName: 'payment_orchestration',
+      tableName: 'orchestration_engine',
+      columnName: 'orchestration_config',
+      dataType: 'JSON',
+      confidence: 0.97,
+      llmReasoning: 'Perfect match for payment orchestration engine in orchestration_engine table. The coordination and workflow management context aligns perfectly with orchestration configuration.'
+    },
+    alternativeMappings: [
+      {
+        schemaName: 'dpg_middleware',
+        tableName: 'payment_routing',
+        columnName: 'orchestration_rules',
+        dataType: 'TEXT',
+        confidence: 0.82,
+        llmReasoning: 'Alternative mapping to DPG middleware payment routing. Good match but less specific to orchestration functionality.'
+      }
+    ],
+    relatedTerms: ['Payment Coordinator', 'Transaction Orchestrator', 'Payment Manager', 'ACH Orchestrator'],
+    synonyms: ['Payment Coordinator', 'Transaction Manager', 'ACH Orchestrator']
+  },
+  {
+    id: '6',
+    term: 'Same-Day ACH',
+    definition: 'Expedited ACH processing service that enables same-business-day settlement for qualifying transactions through NAPAS infrastructure. Requires special handling with earlier cutoff times and higher fees.',
+    category: 'Payment Type',
+    confidence: 0.93,
+    status: 'pending',
+    sourceSection: 'Section 3.2 – Payment Types',
+    context: 'Same-day ACH requires special handling with earlier cutoff times and higher fees, processed through dedicated NAPAS same-day settlement windows.',
+    isPreferred: false,
+    schemaMapping: {
+      schemaName: 'payment_orchestration',
+      tableName: 'payment_types',
+      columnName: 'same_day_ach_config',
+      dataType: 'JSON',
+      confidence: 0.95,
+      llmReasoning: 'Excellent match for same-day ACH in payment types table. The expedited processing and special handling context aligns perfectly with payment type configuration.'
+    },
+    relatedTerms: ['Expedited ACH', 'Fast ACH', 'Same-Day Settlement', 'Rapid ACH'],
+    synonyms: ['Expedited ACH', 'Fast Settlement', 'Rapid ACH']
+  },
+  {
+    id: '7',
+    term: 'Provider Certification Process',
+    definition: 'Formal validation process ensuring third-party payment providers meet technical and compliance standards for ACH processing. New providers must complete certification including API testing and security validation.',
+    category: 'Process',
+    confidence: 0.94,
+    status: 'pending',
+    sourceSection: 'Section 3.1 – Provider Onboarding',
+    context: 'New payment providers must complete certification including API testing, security validation, and NAPAS connectivity verification before production use.',
+    isPreferred: true,
+    schemaMapping: {
+      schemaName: 'third_party_integration',
+      tableName: 'provider_management',
+      columnName: 'certification_process',
+      dataType: 'JSON',
+      confidence: 0.96,
+      llmReasoning: 'Strong match for provider certification process in provider management table. The validation and compliance context aligns perfectly with certification requirements.'
+    },
+    relatedTerms: ['Provider Validation', 'Certification Process', 'Provider Testing', 'Integration Certification'],
+    synonyms: ['Provider Validation', 'Certification Workflow', 'Integration Testing']
+  },
+  {
+    id: '8',
+    term: 'Transaction Dashboard',
+    definition: 'Real-time monitoring interface displaying ACH transaction volumes, success rates, and processing status across NAPAS and other payment rails. Business users require comprehensive dashboards to monitor ACH transaction flows.',
+    category: 'User Interface',
+    confidence: 0.92,
+    status: 'pending',
+    sourceSection: 'Section 3.1 – Dashboard Requirements',
+    context: 'Business users require comprehensive dashboards to monitor ACH transaction flows, identify issues, and track performance metrics in real-time.',
+    isPreferred: false,
+    schemaMapping: {
+      schemaName: 'business_portal',
+      tableName: 'dashboard_config',
+      columnName: 'transaction_dashboard',
+      dataType: 'JSON',
+      confidence: 0.94,
+      llmReasoning: 'Excellent match for transaction dashboard in dashboard configuration table. The monitoring and real-time display context aligns perfectly with dashboard configuration.'
+    },
+    relatedTerms: ['Transaction Monitor', 'ACH Dashboard', 'Payment Dashboard', 'Transaction View'],
+    synonyms: ['Transaction Monitor', 'ACH Monitor', 'Payment View']
   }
 ];
 

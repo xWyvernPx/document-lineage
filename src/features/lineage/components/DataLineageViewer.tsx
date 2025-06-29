@@ -17,263 +17,516 @@ import {
   ExternalLink,
   Eye,
   Code,
-  Activity
+  Activity,
+  FileText,
+  Network,
+  Shield,
+  Clock,
+  AlertTriangle,
+  CheckCircle,
+  BookOpen,
+  Brain,
+  Download,
+  Edit3,
+  MoreHorizontal,
+  ArrowRight,
+  ArrowLeft,
+  ArrowUp,
+  ArrowDown
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
 
-interface LineageNode {
+interface NAPASLineageNode {
   id: string;
   name: string;
-  type: 'table' | 'view' | 'column' | 'dashboard' | 'notebook' | 'transformation';
+  type: 'document' | 'term' | 'schema' | 'service' | 'system' | 'api' | 'database' | 'middleware';
   system: string;
   schema?: string;
-  columns?: {
-    name: string;
-    type: string;
-    description?: string;
-  }[];
+  table?: string;
+  column?: string;
   metadata?: {
     description?: string;
     owner?: string;
     lastModified?: string;
     tags?: string[];
+    confidence?: number;
+    status?: 'active' | 'deprecated' | 'pending' | 'review';
+    documentId?: string;
+    sourceSection?: string;
   };
   position: { x: number; y: number };
 }
 
-interface LineageEdge {
+interface NAPASLineageEdge {
   id: string;
   source: string;
   target: string;
-  type: 'join' | 'transformation' | 'reference' | 'aggregation';
+  type: 'extracts-to' | 'maps-to' | 'depends-on' | 'integrates-with' | 'transforms-to' | 'validates-against' | 'contains';
   description?: string;
   transformationLogic?: string;
+  confidence?: number;
 }
 
-interface LineageData {
-  nodes: LineageNode[];
-  edges: LineageEdge[];
+interface NAPASLineageData {
+  nodes: NAPASLineageNode[];
+  edges: NAPASLineageEdge[];
   focusNode: string;
 }
 
-const mockLineageData: LineageData = {
-  focusNode: 'sales_prod.fact_orders',
+// Mock NAPAS ACH lineage data based on the actual data structure
+const mockNAPASLineageData: NAPASLineageData = {
+  focusNode: 'dpg-001',
   nodes: [
+    // Documents
     {
-      id: 'sales_prod.customers',
-      name: 'customers',
-      type: 'table',
-      system: 'Snowflake',
-      schema: 'sales_prod',
-      columns: [
-        { name: 'contact_number', type: 'VARCHAR', description: 'Customer contact number' },
-        { name: 'customer_id', type: 'INT', description: 'Unique customer identifier' },
-        { name: 'first_name', type: 'VARCHAR' },
-        { name: 'last_name', type: 'VARCHAR' },
-        { name: 'email', type: 'VARCHAR' },
-        { name: 'created_at', type: 'TIMESTAMP' }
-      ],
+      id: 'dpg-001',
+      name: 'DPG Middleware Integration Specification v2.1.pdf',
+      type: 'document',
+      system: 'Document Management',
       metadata: {
-        description: 'Customer master data table',
-        owner: 'Data Team',
-        lastModified: '2024-01-15',
-        tags: ['customer', 'master-data']
+        description: 'Technical specification for DPG middleware integration with NAPAS',
+        owner: 'Technical Architecture Team',
+        lastModified: '2024-01-15T09:30:00Z',
+        tags: ['technical', 'integration', 'middleware', 'napas'],
+        confidence: 0.94,
+        status: 'active',
+        documentId: 'dpg-001',
+        sourceSection: 'System Overview'
       },
       position: { x: 100, y: 200 }
     },
     {
-      id: 'sales_prod.orders',
-      name: 'orders',
-      type: 'table',
-      system: 'Snowflake',
-      schema: 'sales_prod',
-      columns: [
-        { name: 'order_id', type: 'INT', description: 'Unique order identifier' },
-        { name: 'customer_id', type: 'INT', description: 'Foreign key to customers' },
-        { name: 'order_date', type: 'DATE' },
-        { name: 'status', type: 'VARCHAR' },
-        { name: 'total_amount', type: 'DECIMAL' }
-      ],
+      id: 'dpg-002',
+      name: 'NAPAS Connectivity Requirements and SLA v1.3.docx',
+      type: 'document',
+      system: 'Document Management',
       metadata: {
-        description: 'Order transaction data',
-        owner: 'Sales Team',
-        lastModified: '2024-01-16',
-        tags: ['orders', 'transactions']
+        description: 'Infrastructure requirements and SLA specifications for NAPAS connectivity',
+        owner: 'Infrastructure Team',
+        lastModified: '2024-01-14T14:20:00Z',
+        tags: ['infrastructure', 'sla', 'connectivity', 'napas'],
+        confidence: 0.92,
+        status: 'active',
+        documentId: 'dpg-002',
+        sourceSection: 'Network Connectivity'
       },
       position: { x: 100, y: 400 }
     },
     {
-      id: 'sales_prod.fact_orders',
-      name: 'fact_orders',
-      type: 'view',
-      system: 'Snowflake',
-      schema: 'sales_prod',
-      columns: [
-        { name: 'FULL_CUSTOMER_NAME', type: 'VARCHAR', description: 'Concatenated customer name' },
-        { name: 'order_id', type: 'INT' },
-        { name: 'price', type: 'DECIMAL' }
-      ],
+      id: 'tps-001',
+      name: 'ACH Payment Orchestration Business Requirements v3.0.pdf',
+      type: 'document',
+      system: 'Document Management',
       metadata: {
-        description: 'Fact table for order analytics',
-        owner: 'Analytics Team',
-        lastModified: '2024-01-16',
-        tags: ['fact', 'analytics', 'orders']
-      },
-      position: { x: 400, y: 300 }
-    },
-    {
-      id: 'sales_prod.order_items',
-      name: 'order_items',
-      type: 'table',
-      system: 'Snowflake',
-      schema: 'sales_prod',
-      columns: [
-        { name: 'order_id', type: 'INT' },
-        { name: 'product_id', type: 'INT' },
-        { name: 'price', type: 'DECIMAL', description: 'Item price' },
-        { name: 'quantity', type: 'INT' }
-      ],
-      metadata: {
-        description: 'Order line items',
-        owner: 'Sales Team',
-        lastModified: '2024-01-15',
-        tags: ['order-items', 'products']
+        description: 'Business requirements for ACH payment orchestration and processing',
+        owner: 'Payment Product Team',
+        lastModified: '2024-01-16T10:15:00Z',
+        tags: ['business', 'payment', 'orchestration', 'ach'],
+        confidence: 0.95,
+        status: 'active',
+        documentId: 'tps-001',
+        sourceSection: 'Business Overview'
       },
       position: { x: 100, y: 600 }
     },
+    
+    // Terms extracted from documents
     {
-      id: 'dashboard.sales_kpi',
-      name: 'Sales KPI Dashboard',
-      type: 'dashboard',
-      system: 'Tableau',
+      id: 'term-msg-routing',
+      name: 'Message Routing Engine',
+      type: 'term',
+      system: 'Term Dictionary',
       metadata: {
-        description: 'Executive sales performance dashboard',
-        owner: 'BI Team',
-        lastModified: '2024-01-16',
-        tags: ['dashboard', 'kpi', 'sales']
+        description: 'Core component responsible for directing ACH messages between internal services and NAPAS',
+        owner: 'Data Governance Team',
+        lastModified: '2024-01-15T15:30:00Z',
+        tags: ['system-component', 'routing', 'ach', 'middleware'],
+        confidence: 0.96,
+        status: 'active',
+        documentId: 'dpg-001',
+        sourceSection: 'System Overview'
+      },
+      position: { x: 400, y: 200 }
+    },
+    {
+      id: 'term-correlation-id',
+      name: 'Transaction Correlation ID',
+      type: 'term',
+      system: 'Term Dictionary',
+      metadata: {
+        description: 'Unique identifier that tracks a single ACH transaction across all system components',
+        owner: 'Data Governance Team',
+        lastModified: '2024-01-15T15:30:00Z',
+        tags: ['data-element', 'tracking', 'correlation', 'ach'],
+        confidence: 0.93,
+        status: 'active',
+        documentId: 'dpg-001',
+        sourceSection: 'Message Routing'
+      },
+      position: { x: 400, y: 350 }
+    },
+    {
+      id: 'term-circuit-breaker',
+      name: 'Circuit Breaker Pattern',
+      type: 'term',
+      system: 'Term Dictionary',
+      metadata: {
+        description: 'Fault tolerance mechanism that prevents cascading failures',
+        owner: 'Data Governance Team',
+        lastModified: '2024-01-15T15:30:00Z',
+        tags: ['design-pattern', 'fault-tolerance', 'resilience'],
+        confidence: 0.89,
+        status: 'active',
+        documentId: 'dpg-001',
+        sourceSection: 'Error Handling'
+      },
+      position: { x: 400, y: 500 }
+    },
+    {
+      id: 'term-dedicated-line',
+      name: 'NAPAS Dedicated Line',
+      type: 'term',
+      system: 'Term Dictionary',
+      metadata: {
+        description: 'Secure, dedicated network connection between bank infrastructure and NAPAS',
+        owner: 'Data Governance Team',
+        lastModified: '2024-01-14T16:20:00Z',
+        tags: ['infrastructure', 'network', 'connectivity', 'napas'],
+        confidence: 0.94,
+        status: 'active',
+        documentId: 'dpg-002',
+        sourceSection: 'Network Connectivity'
+      },
+      position: { x: 400, y: 650 }
+    },
+    
+    // Schema mappings
+    {
+      id: 'schema-dpg-middleware',
+      name: 'dpg_middleware',
+      type: 'schema',
+      system: 'Database',
+      schema: 'dpg_middleware',
+      metadata: {
+        description: 'DPG middleware database schema for NAPAS integration',
+        owner: 'Database Team',
+        lastModified: '2024-01-15T12:00:00Z',
+        tags: ['database', 'schema', 'middleware', 'napas'],
+        confidence: 0.95,
+        status: 'active'
       },
       position: { x: 700, y: 200 }
     },
     {
-      id: 'notebook.fin_lineage',
-      name: 'Fin Data Lineage',
-      type: 'notebook',
-      system: 'Databricks',
+      id: 'schema-infrastructure',
+      name: 'infrastructure',
+      type: 'schema',
+      system: 'Database',
+      schema: 'infrastructure',
       metadata: {
-        description: 'Financial data lineage analysis notebook',
-        owner: 'Data Science Team',
-        lastModified: '2024-01-14',
-        tags: ['notebook', 'analysis', 'finance']
+        description: 'Infrastructure configuration and monitoring schema',
+        owner: 'Infrastructure Team',
+        lastModified: '2024-01-14T18:00:00Z',
+        tags: ['database', 'schema', 'infrastructure', 'monitoring'],
+        confidence: 0.92,
+        status: 'active'
       },
       position: { x: 700, y: 400 }
+    },
+    
+    // Database tables
+    {
+      id: 'table-message-routing',
+      name: 'message_routing',
+      type: 'database',
+      system: 'Database',
+      schema: 'dpg_middleware',
+      table: 'message_routing',
+      metadata: {
+        description: 'Message routing configuration and state management',
+        owner: 'Database Team',
+        lastModified: '2024-01-15T12:00:00Z',
+        tags: ['table', 'routing', 'configuration'],
+        confidence: 0.95,
+        status: 'active'
+      },
+      position: { x: 1000, y: 150 }
+    },
+    {
+      id: 'table-circuit-breaker',
+      name: 'circuit_breaker_state',
+      type: 'database',
+      system: 'Database',
+      schema: 'dpg_middleware',
+      table: 'circuit_breaker_state',
+      metadata: {
+        description: 'Circuit breaker state and configuration management',
+        owner: 'Database Team',
+        lastModified: '2024-01-15T12:00:00Z',
+        tags: ['table', 'circuit-breaker', 'state'],
+        confidence: 0.88,
+        status: 'active'
+      },
+      position: { x: 1000, y: 300 }
+    },
+    {
+      id: 'table-dedicated-line',
+      name: 'dedicated_line_config',
+      type: 'database',
+      system: 'Database',
+      schema: 'infrastructure',
+      table: 'dedicated_line_config',
+      metadata: {
+        description: 'NAPAS dedicated line configuration and monitoring',
+        owner: 'Infrastructure Team',
+        lastModified: '2024-01-14T18:00:00Z',
+        tags: ['table', 'network', 'configuration'],
+        confidence: 0.95,
+        status: 'active'
+      },
+      position: { x: 1000, y: 450 }
+    },
+    
+    // Services
+    {
+      id: 'service-dpg',
+      name: 'DPG Service',
+      type: 'service',
+      system: 'Microservices',
+      metadata: {
+        description: 'Digital Payment Gateway service for NAPAS integration',
+        owner: 'Development Team',
+        lastModified: '2024-01-15T10:00:00Z',
+        tags: ['service', 'payment', 'gateway', 'napas'],
+        confidence: 0.96,
+        status: 'active'
+      },
+      position: { x: 1300, y: 200 }
+    },
+    {
+      id: 'service-payment-orchestration',
+      name: 'Payment Orchestration',
+      type: 'service',
+      system: 'Microservices',
+      metadata: {
+        description: 'ACH payment orchestration and processing service',
+        owner: 'Payment Team',
+        lastModified: '2024-01-16T11:00:00Z',
+        tags: ['service', 'payment', 'orchestration', 'ach'],
+        confidence: 0.94,
+        status: 'active'
+      },
+      position: { x: 1300, y: 400 }
     }
   ],
   edges: [
+    // Document to Term relationships
     {
-      id: 'edge1',
-      source: 'sales_prod.customers',
-      target: 'sales_prod.fact_orders',
-      type: 'join',
-      description: 'JOIN on customer_id',
-      transformationLogic: 'LEFT JOIN customers c ON o.customer_id = c.customer_id'
+      id: 'edge-doc1-term1',
+      source: 'dpg-001',
+      target: 'term-msg-routing',
+      type: 'extracts-to',
+      description: 'Extracted from System Overview section',
+      confidence: 0.96
     },
     {
-      id: 'edge2',
-      source: 'sales_prod.orders',
-      target: 'sales_prod.fact_orders',
-      type: 'join',
-      description: 'JOIN on order_id',
-      transformationLogic: 'INNER JOIN orders o ON f.order_id = o.order_id'
+      id: 'edge-doc1-term2',
+      source: 'dpg-001',
+      target: 'term-correlation-id',
+      type: 'extracts-to',
+      description: 'Extracted from Message Routing section',
+      confidence: 0.93
     },
     {
-      id: 'edge3',
-      source: 'sales_prod.order_items',
-      target: 'sales_prod.fact_orders',
-      type: 'aggregation',
-      description: 'SUM(price) aggregation',
-      transformationLogic: 'SUM(oi.price * oi.quantity) as total_price'
+      id: 'edge-doc1-term3',
+      source: 'dpg-001',
+      target: 'term-circuit-breaker',
+      type: 'extracts-to',
+      description: 'Extracted from Error Handling section',
+      confidence: 0.89
     },
     {
-      id: 'edge4',
-      source: 'sales_prod.fact_orders',
-      target: 'dashboard.sales_kpi',
-      type: 'reference',
-      description: 'Dashboard data source'
+      id: 'edge-doc2-term4',
+      source: 'dpg-002',
+      target: 'term-dedicated-line',
+      type: 'extracts-to',
+      description: 'Extracted from Network Connectivity section',
+      confidence: 0.94
+    },
+    
+    // Term to Schema mappings
+    {
+      id: 'edge-term1-schema1',
+      source: 'term-msg-routing',
+      target: 'schema-dpg-middleware',
+      type: 'maps-to',
+      description: 'Maps to dpg_middleware schema',
+      confidence: 0.94
     },
     {
-      id: 'edge5',
-      source: 'sales_prod.fact_orders',
-      target: 'notebook.fin_lineage',
-      type: 'reference',
-      description: 'Analysis data source'
+      id: 'edge-term3-schema1',
+      source: 'term-circuit-breaker',
+      target: 'schema-dpg-middleware',
+      type: 'maps-to',
+      description: 'Maps to dpg_middleware schema',
+      confidence: 0.88
+    },
+    {
+      id: 'edge-term4-schema2',
+      source: 'term-dedicated-line',
+      target: 'schema-infrastructure',
+      type: 'maps-to',
+      description: 'Maps to infrastructure schema',
+      confidence: 0.95
+    },
+    
+    // Schema to Table relationships
+    {
+      id: 'edge-schema1-table1',
+      source: 'schema-dpg-middleware',
+      target: 'table-message-routing',
+      type: 'contains',
+      description: 'Contains message_routing table',
+      confidence: 0.95
+    },
+    {
+      id: 'edge-schema1-table2',
+      source: 'schema-dpg-middleware',
+      target: 'table-circuit-breaker',
+      type: 'contains',
+      description: 'Contains circuit_breaker_state table',
+      confidence: 0.88
+    },
+    {
+      id: 'edge-schema2-table3',
+      source: 'schema-infrastructure',
+      target: 'table-dedicated-line',
+      type: 'contains',
+      description: 'Contains dedicated_line_config table',
+      confidence: 0.95
+    },
+    
+    // Service dependencies
+    {
+      id: 'edge-table1-service1',
+      source: 'table-message-routing',
+      target: 'service-dpg',
+      type: 'depends-on',
+      description: 'DPG service depends on message routing configuration',
+      confidence: 0.95
+    },
+    {
+      id: 'edge-table2-service1',
+      source: 'table-circuit-breaker',
+      target: 'service-dpg',
+      type: 'depends-on',
+      description: 'DPG service depends on circuit breaker state',
+      confidence: 0.88
+    },
+    {
+      id: 'edge-table3-service2',
+      source: 'table-dedicated-line',
+      target: 'service-payment-orchestration',
+      type: 'depends-on',
+      description: 'Payment orchestration depends on network configuration',
+      confidence: 0.95
     }
   ]
 };
 
 export function DataLineageViewer() {
-  const [lineageData] = useState<LineageData>(mockLineageData);
-  const [selectedNode, setSelectedNode] = useState<LineageNode | null>(
+  const [lineageData] = useState<NAPASLineageData>(mockNAPASLineageData);
+  const [selectedNode, setSelectedNode] = useState<NAPASLineageNode | null>(
     lineageData.nodes.find(n => n.id === lineageData.focusNode) || null
   );
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
-  const [activeTab, setActiveTab] = useState<'data' | 'columns' | 'lineage'>('columns');
+  const [activeTab, setActiveTab] = useState<'overview' | 'lineage' | 'mappings' | 'metadata'>('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    notebooks: true,
-    dashboards: true,
-    transformations: true,
-    accitions: true
+    documents: true,
+    terms: true,
+    schemas: true,
+    services: true
   });
   
   const canvasRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
-  const getNodeIcon = (type: LineageNode['type']) => {
+  const getNodeIcon = (type: NAPASLineageNode['type']) => {
     switch (type) {
-      case 'table':
+      case 'document':
+        return <FileText className="w-4 h-4" />;
+      case 'term':
+        return <BookOpen className="w-4 h-4" />;
+      case 'schema':
         return <Database className="w-4 h-4" />;
-      case 'view':
+      case 'database':
         return <Table className="w-4 h-4" />;
-      case 'dashboard':
-        return <BarChart3 className="w-4 h-4" />;
-      case 'notebook':
-        return <Code className="w-4 h-4" />;
-      case 'transformation':
+      case 'service':
         return <GitBranch className="w-4 h-4" />;
+      case 'system':
+        return <Network className="w-4 h-4" />;
+      case 'api':
+        return <Code className="w-4 h-4" />;
+      case 'middleware':
+        return <Activity className="w-4 h-4" />;
       default:
         return <Database className="w-4 h-4" />;
     }
   };
 
-  const getNodeColor = (type: LineageNode['type'], isSelected: boolean) => {
+  const getNodeColor = (type: NAPASLineageNode['type'], isSelected: boolean) => {
     const baseColors = {
-      table: isSelected ? 'bg-blue-600 border-blue-700' : 'bg-blue-500 border-blue-600',
-      view: isSelected ? 'bg-emerald-600 border-emerald-700' : 'bg-emerald-500 border-emerald-600',
-      dashboard: isSelected ? 'bg-purple-600 border-purple-700' : 'bg-purple-500 border-purple-600',
-      notebook: isSelected ? 'bg-amber-600 border-amber-700' : 'bg-amber-500 border-amber-600',
-      transformation: isSelected ? 'bg-gray-600 border-gray-700' : 'bg-gray-500 border-gray-600',
-      column: isSelected ? 'bg-indigo-600 border-indigo-700' : 'bg-indigo-500 border-indigo-600'
+      document: isSelected ? 'bg-blue-600 border-blue-700' : 'bg-blue-500 border-blue-600',
+      term: isSelected ? 'bg-emerald-600 border-emerald-700' : 'bg-emerald-500 border-emerald-600',
+      schema: isSelected ? 'bg-purple-600 border-purple-700' : 'bg-purple-500 border-purple-600',
+      database: isSelected ? 'bg-indigo-600 border-indigo-700' : 'bg-indigo-500 border-indigo-600',
+      service: isSelected ? 'bg-amber-600 border-amber-700' : 'bg-amber-500 border-amber-600',
+      system: isSelected ? 'bg-gray-600 border-gray-700' : 'bg-gray-500 border-gray-600',
+      api: isSelected ? 'bg-rose-600 border-rose-700' : 'bg-rose-500 border-rose-600',
+      middleware: isSelected ? 'bg-cyan-600 border-cyan-700' : 'bg-cyan-500 border-cyan-600'
     };
     return baseColors[type];
   };
 
-  const getEdgeColor = (type: LineageEdge['type']) => {
+  const getEdgeColor = (type: NAPASLineageEdge['type']) => {
     switch (type) {
-      case 'join':
+      case 'extracts-to':
         return 'stroke-blue-500';
-      case 'transformation':
+      case 'maps-to':
         return 'stroke-emerald-500';
-      case 'reference':
-        return 'stroke-gray-400';
-      case 'aggregation':
+      case 'depends-on':
+        return 'stroke-amber-500';
+      case 'integrates-with':
         return 'stroke-purple-500';
+      case 'transforms-to':
+        return 'stroke-rose-500';
+      case 'validates-against':
+        return 'stroke-cyan-500';
+      case 'contains':
+        return 'stroke-gray-500';
       default:
         return 'stroke-gray-400';
+    }
+  };
+
+  const getStatusIcon = (status?: string) => {
+    switch (status) {
+      case 'active':
+        return <CheckCircle className="w-4 h-4 text-green-500" />;
+      case 'deprecated':
+        return <AlertTriangle className="w-4 h-4 text-yellow-500" />;
+      case 'pending':
+        return <Clock className="w-4 h-4 text-blue-500" />;
+      case 'review':
+        return <Eye className="w-4 h-4 text-gray-500" />;
+      default:
+        return <CheckCircle className="w-4 h-4 text-green-500" />;
     }
   };
 
@@ -315,7 +568,7 @@ export function DataLineageViewer() {
     }));
   };
 
-  const renderNode = (node: LineageNode) => {
+  const renderNode = (node: NAPASLineageNode) => {
     const isSelected = selectedNode?.id === node.id;
     const isFocus = node.id === lineageData.focusNode;
     
@@ -343,25 +596,25 @@ export function DataLineageViewer() {
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-gray-900 text-sm truncate">
-                {node.schema ? `${node.schema}.${node.name}` : node.name}
+                {node.schema && node.table ? `${node.schema}.${node.table}` : node.name}
               </h3>
               <p className="text-xs text-gray-500">{node.system}</p>
             </div>
+            {node.metadata?.status && getStatusIcon(node.metadata.status)}
           </div>
           
-          {node.columns && node.columns.length > 0 && (
-            <div className="space-y-1">
-              {node.columns.slice(0, 2).map(column => (
-                <div key={column.name} className="flex items-center justify-between text-xs">
-                  <span className="font-mono text-gray-700">{column.name}</span>
-                  <span className="text-gray-500 uppercase">{column.type}</span>
-                </div>
-              ))}
-              {node.columns.length > 2 && (
-                <div className="text-xs text-gray-500 text-center py-1">
-                  Show {node.columns.length - 2} more columns
-                </div>
-              )}
+          {node.metadata?.description && (
+            <p className="text-xs text-gray-600 mb-2 line-clamp-2">
+              {node.metadata.description}
+            </p>
+          )}
+          
+          {node.metadata?.confidence && (
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-gray-500">Confidence:</span>
+              <span className="font-medium text-gray-700">
+                {Math.round(node.metadata.confidence * 100)}%
+              </span>
             </div>
           )}
         </div>
@@ -369,14 +622,14 @@ export function DataLineageViewer() {
     );
   };
 
-  const renderEdge = (edge: LineageEdge) => {
+  const renderEdge = (edge: NAPASLineageEdge) => {
     const sourceNode = lineageData.nodes.find(n => n.id === edge.source);
     const targetNode = lineageData.nodes.find(n => n.id === edge.target);
     
     if (!sourceNode || !targetNode) return null;
 
-    const sourceX = (sourceNode.position.x + 96) * zoomLevel + panOffset.x; // 96 = half node width
-    const sourceY = (sourceNode.position.y + 40) * zoomLevel + panOffset.y; // 40 = half node height
+    const sourceX = (sourceNode.position.x + 96) * zoomLevel + panOffset.x;
+    const sourceY = (sourceNode.position.y + 40) * zoomLevel + panOffset.y;
     const targetX = (targetNode.position.x + 96) * zoomLevel + panOffset.x;
     const targetY = (targetNode.position.y + 40) * zoomLevel + panOffset.y;
 
@@ -421,16 +674,32 @@ export function DataLineageViewer() {
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      {/* <div className="bg-white border-b border-gray-200 p-4">
+      <div className="bg-white border-b border-gray-200 p-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-semibold text-gray-900">NAPAS ACH Data Lineage</h1>
+            <p className="text-sm text-gray-600">Document to Schema Mapping and Lineage Tracking</p>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm" icon={ZoomOut} onClick={handleZoomOut} />
+            <span className="text-sm text-gray-600 min-w-12 text-center">
+              {Math.round(zoomLevel * 100)}%
+            </span>
+            <Button variant="ghost" size="sm" icon={ZoomIn} onClick={handleZoomIn} />
+            <Button variant="ghost" size="sm" icon={RotateCcw} onClick={handleResetView} />
+            <Button variant="ghost" size="sm" icon={Maximize2} />
+          </div>
+        </div>
 
         {/* Controls */}
-        {/* <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center justify-between mt-4">
           <div className="flex items-center space-x-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search tables, columns, or dashboards..."
+                placeholder="Search documents, terms, schemas, or services..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-80"
@@ -445,17 +714,7 @@ export function DataLineageViewer() {
               Filters
             </Button>
           </div>
-
-          <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" icon={ZoomOut} onClick={handleZoomOut} />
-            <span className="text-sm text-gray-600 min-w-12 text-center">
-              {Math.round(zoomLevel * 100)}%
-            </span>
-            <Button variant="ghost" size="sm" icon={ZoomIn} onClick={handleZoomIn} />
-            <Button variant="ghost" size="sm" icon={RotateCcw} onClick={handleResetView} />
-            <Button variant="ghost" size="sm" icon={Maximize2} />
-          </div>
-        </div> */}
+        </div>
 
         {/* Filters Panel */}
         {showFilters && (
@@ -463,51 +722,54 @@ export function DataLineageViewer() {
             <div className="grid grid-cols-4 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Data Sources
-                </label>
-                <select className="w-full border border-gray-300 rounded px-3 py-1 text-sm">
-                  <option>All Sources</option>
-                  <option>Snowflake</option>
-                  <option>Tableau</option>
-                  <option>Databricks</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Node Types
                 </label>
                 <select className="w-full border border-gray-300 rounded px-3 py-1 text-sm">
                   <option>All Types</option>
-                  <option>Tables</option>
-                  <option>Views</option>
-                  <option>Dashboards</option>
+                  <option>Documents</option>
+                  <option>Terms</option>
+                  <option>Schemas</option>
+                  <option>Services</option>
                 </select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Lineage Depth
+                  Systems
                 </label>
                 <select className="w-full border border-gray-300 rounded px-3 py-1 text-sm">
-                  <option>Full Path</option>
-                  <option>2 Hops</option>
-                  <option>1 Hop</option>
+                  <option>All Systems</option>
+                  <option>Document Management</option>
+                  <option>Term Dictionary</option>
+                  <option>Database</option>
+                  <option>Microservices</option>
                 </select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Tags
+                  Status
                 </label>
                 <select className="w-full border border-gray-300 rounded px-3 py-1 text-sm">
-                  <option>All Tags</option>
-                  <option>Critical</option>
-                  <option>PII</option>
-                  <option>Finance</option>
+                  <option>All Status</option>
+                  <option>Active</option>
+                  <option>Pending</option>
+                  <option>Deprecated</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Confidence
+                </label>
+                <select className="w-full border border-gray-300 rounded px-3 py-1 text-sm">
+                  <option>All Levels</option>
+                  <option>High (90%+)</option>
+                  <option>Medium (70-89%)</option>
+                  <option>Low (&lt;70%)</option>
                 </select>
               </div>
             </div>
           </div>
         )}
-      {/* </div> */} 
+      </div>
 
       {/* Main Content */}
       <div className="flex-1 flex">
@@ -539,13 +801,21 @@ export function DataLineageViewer() {
               <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between mb-2">
                   <h2 className="text-lg font-semibold text-gray-900">
-                    {selectedNode.schema ? `${selectedNode.schema}.${selectedNode.name}` : selectedNode.name}
+                    {selectedNode.schema && selectedNode.table ? 
+                      `${selectedNode.schema}.${selectedNode.table}` : 
+                      selectedNode.name
+                    }
                   </h2>
                   <Button variant="ghost" size="sm" icon={ExternalLink} />
                 </div>
                 <div className="flex items-center space-x-2">
                   <Badge variant="info">{selectedNode.system}</Badge>
                   <Badge variant="default">{selectedNode.type}</Badge>
+                  {selectedNode.metadata?.status && (
+                    <Badge variant={selectedNode.metadata.status === 'active' ? 'success' : 'warning'}>
+                      {selectedNode.metadata.status}
+                    </Badge>
+                  )}
                 </div>
               </div>
 
@@ -553,9 +823,10 @@ export function DataLineageViewer() {
               <div className="border-b border-gray-200">
                 <nav className="flex space-x-8 px-4">
                   {[
-                    { id: 'data', label: 'Data' },
-                    { id: 'columns', label: 'Columns' },
-                    { id: 'lineage', label: 'Lineage' }
+                    { id: 'overview', label: 'Overview' },
+                    { id: 'lineage', label: 'Lineage' },
+                    { id: 'mappings', label: 'Mappings' },
+                    { id: 'metadata', label: 'Metadata' }
                   ].map(tab => (
                     <button
                       key={tab.id}
@@ -574,7 +845,7 @@ export function DataLineageViewer() {
 
               {/* Tab Content */}
               <div className="flex-1 overflow-y-auto p-4">
-                {activeTab === 'data' && (
+                {activeTab === 'overview' && (
                   <div className="space-y-4">
                     <div>
                       <h3 className="font-medium text-gray-900 mb-2">Description</h3>
@@ -582,6 +853,24 @@ export function DataLineageViewer() {
                         {selectedNode.metadata?.description || 'No description available'}
                       </p>
                     </div>
+                    
+                    {selectedNode.metadata?.confidence && (
+                      <div>
+                        <h3 className="font-medium text-gray-900 mb-2">Confidence Score</h3>
+                        <div className="flex items-center space-x-2">
+                          <div className="flex-1 bg-gray-200 rounded-full h-2">
+                            <div 
+                              className="bg-blue-500 h-2 rounded-full" 
+                              style={{ width: `${selectedNode.metadata.confidence * 100}%` }}
+                            />
+                          </div>
+                          <span className="text-sm text-gray-600">
+                            {Math.round(selectedNode.metadata.confidence * 100)}%
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    
                     <div>
                       <h3 className="font-medium text-gray-900 mb-2">Metadata</h3>
                       <div className="space-y-2 text-sm">
@@ -591,10 +880,28 @@ export function DataLineageViewer() {
                         </div>
                         <div className="flex justify-between">
                           <span className="text-gray-600">Last Modified:</span>
-                          <span className="text-gray-900">{selectedNode.metadata?.lastModified || 'Unknown'}</span>
+                          <span className="text-gray-900">
+                            {selectedNode.metadata?.lastModified ? 
+                              new Date(selectedNode.metadata.lastModified).toLocaleDateString() : 
+                              'Unknown'
+                            }
+                          </span>
                         </div>
+                        {selectedNode.metadata?.documentId && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Document ID:</span>
+                            <span className="text-gray-900">{selectedNode.metadata.documentId}</span>
+                          </div>
+                        )}
+                        {selectedNode.metadata?.sourceSection && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Source Section:</span>
+                            <span className="text-gray-900">{selectedNode.metadata.sourceSection}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
+                    
                     {selectedNode.metadata?.tags && (
                       <div>
                         <h3 className="font-medium text-gray-900 mb-2">Tags</h3>
@@ -605,100 +912,6 @@ export function DataLineageViewer() {
                         </div>
                       </div>
                     )}
-                  </div>
-                )}
-
-                {activeTab === 'columns' && (
-                  <div className="space-y-3">
-                    <h3 className="font-medium text-gray-900">FULL_CUSTOMER_NAME</h3>
-                    <div className="space-y-3 text-sm">
-                      {[
-                        { name: 'contact_number', system: 'Snowflake' },
-                        { name: 'order_id', system: 'Snowflake' },
-                        { name: 'price', system: 'Snowflake' }
-                      ].map(column => (
-                        <div key={column.name} className="flex justify-between items-center">
-                          <span className="text-gray-900">{column.name}</span>
-                          <span className="text-gray-500">{column.system}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Expandable Sections */}
-                    <div className="space-y-2 mt-6">
-                      {[
-                        { key: 'notebooks', label: 'Notebooks', count: 2 },
-                        { key: 'dashboards', label: 'Dashboards', count: 2 },
-                        { key: 'transformations', label: 'Transformations', count: 0 },
-                        { key: 'accitions', label: 'Accitions', count: 1 }
-                      ].map(section => (
-                        <div key={section.key}>
-                          <button
-                            onClick={() => toggleSection(section.key)}
-                            className="flex items-center justify-between w-full py-2 text-left"
-                          >
-                            <span className="font-medium text-gray-900">{section.label}</span>
-                            <div className="flex items-center space-x-2">
-                              <span className="text-sm text-gray-500">{section.count}</span>
-                              {expandedSections[section.key] ? (
-                                <ChevronDown className="w-4 h-4 text-gray-400" />
-                              ) : (
-                                <ChevronRight className="w-4 h-4 text-gray-400" />
-                              )}
-                            </div>
-                          </button>
-                          
-                          {expandedSections[section.key] && section.count > 0 && (
-                            <div className="pl-4 space-y-2">
-                              {section.key === 'notebooks' && (
-                                <>
-                                  <div className="flex items-center justify-between text-sm">
-                                    <div className="flex items-center space-x-2">
-                                      <Code className="w-4 h-4 text-gray-400" />
-                                      <span>Sales KPI Dashboard</span>
-                                    </div>
-                                    <span className="text-gray-500">2</span>
-                                  </div>
-                                  <div className="flex items-center justify-between text-sm">
-                                    <div className="flex items-center space-x-2">
-                                      <Code className="w-4 h-4 text-gray-400" />
-                                      <span>Fin Data Lineage</span>
-                                    </div>
-                                    <span className="text-gray-500">2</span>
-                                  </div>
-                                </>
-                              )}
-                              {section.key === 'dashboards' && (
-                                <>
-                                  <div className="flex items-center justify-between text-sm">
-                                    <div className="flex items-center space-x-2">
-                                      <BarChart3 className="w-4 h-4 text-gray-400" />
-                                      <span>Sales KPI Dashboard</span>
-                                    </div>
-                                    <span className="text-gray-500">2</span>
-                                  </div>
-                                  <div className="flex items-center justify-between text-sm">
-                                    <div className="flex items-center space-x-2">
-                                      <BarChart3 className="w-4 h-4 text-gray-400" />
-                                      <span>Fin Data Lineage</span>
-                                    </div>
-                                    <span className="text-gray-500">2</span>
-                                  </div>
-                                </>
-                              )}
-                              {section.key === 'accitions' && (
-                                <div className="flex items-center justify-between text-sm">
-                                  <div className="flex items-center space-x-2">
-                                    <Activity className="w-4 h-4 text-gray-400" />
-                                    <span>JOIN on order_id</span>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 )}
 
@@ -718,14 +931,18 @@ export function DataLineageViewer() {
                                   <Badge variant="info" size="sm">{edge.type}</Badge>
                                 </div>
                                 <p className="text-xs text-gray-600">{edge.description}</p>
-                                {edge.transformationLogic && (
-                                  <code className="text-xs text-gray-700 bg-gray-100 p-1 rounded mt-1 block">
-                                    {edge.transformationLogic}
-                                  </code>
+                                {edge.confidence && (
+                                  <div className="flex items-center justify-between mt-1">
+                                    <span className="text-xs text-gray-500">Confidence:</span>
+                                    <span className="text-xs font-medium">{Math.round(edge.confidence * 100)}%</span>
+                                  </div>
                                 )}
                               </div>
                             );
                           })}
+                        {lineageData.edges.filter(edge => edge.target === selectedNode.id).length === 0 && (
+                          <p className="text-sm text-gray-500 text-center py-4">No upstream dependencies found</p>
+                        )}
                       </div>
                     </div>
 
@@ -743,9 +960,149 @@ export function DataLineageViewer() {
                                   <Badge variant="success" size="sm">{edge.type}</Badge>
                                 </div>
                                 <p className="text-xs text-gray-600">{edge.description}</p>
+                                {edge.confidence && (
+                                  <div className="flex items-center justify-between mt-1">
+                                    <span className="text-xs text-gray-500">Confidence:</span>
+                                    <span className="text-xs font-medium">{Math.round(edge.confidence * 100)}%</span>
+                                  </div>
+                                )}
                               </div>
                             );
                           })}
+                        {lineageData.edges.filter(edge => edge.source === selectedNode.id).length === 0 && (
+                          <p className="text-sm text-gray-500 text-center py-4">No downstream dependencies found</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'mappings' && (
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="font-medium text-gray-900 mb-3">Schema Mappings</h3>
+                      <div className="space-y-2">
+                        {selectedNode.schema && selectedNode.table ? (
+                          <div className="p-3 bg-purple-50 rounded-lg">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-medium text-sm">{selectedNode.schema}.{selectedNode.table}</span>
+                              <Badge variant="default" size="sm">Current</Badge>
+                            </div>
+                            <p className="text-xs text-gray-600">Active schema mapping</p>
+                            {selectedNode.metadata?.confidence && (
+                              <div className="flex items-center justify-between mt-1">
+                                <span className="text-xs text-gray-500">Confidence:</span>
+                                <span className="text-xs font-medium">{Math.round(selectedNode.metadata.confidence * 100)}%</span>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <p className="text-sm text-gray-500 text-center py-4">No schema mappings available</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="font-medium text-gray-900 mb-3">Related Terms</h3>
+                      <div className="space-y-2">
+                        {lineageData.nodes
+                          .filter(node => 
+                            node.type === 'term' && 
+                            lineageData.edges.some(edge => 
+                              (edge.source === selectedNode.id && edge.target === node.id) ||
+                              (edge.target === selectedNode.id && edge.source === node.id)
+                            )
+                          )
+                          .map(term => (
+                            <div key={term.id} className="p-3 bg-amber-50 rounded-lg">
+                              <div className="flex items-center justify-between mb-1">
+                                <span className="font-medium text-sm">{term.name}</span>
+                                <Badge variant="warning" size="sm">Term</Badge>
+                              </div>
+                              <p className="text-xs text-gray-600">{term.metadata?.description}</p>
+                            </div>
+                          ))}
+                        {lineageData.nodes.filter(node => 
+                          node.type === 'term' && 
+                          lineageData.edges.some(edge => 
+                            (edge.source === selectedNode.id && edge.target === node.id) ||
+                            (edge.target === selectedNode.id && edge.source === node.id)
+                          )
+                        ).length === 0 && (
+                          <p className="text-sm text-gray-500 text-center py-4">No related terms found</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'metadata' && (
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="font-medium text-gray-900 mb-2">System Information</h3>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">System:</span>
+                          <span className="text-gray-900">{selectedNode.system}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Type:</span>
+                          <span className="text-gray-900">{selectedNode.type}</span>
+                        </div>
+                        {selectedNode.schema && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Schema:</span>
+                            <span className="text-gray-900">{selectedNode.schema}</span>
+                          </div>
+                        )}
+                        {selectedNode.table && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Table:</span>
+                            <span className="text-gray-900">{selectedNode.table}</span>
+                          </div>
+                        )}
+                        {selectedNode.column && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Column:</span>
+                            <span className="text-gray-900">{selectedNode.column}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="font-medium text-gray-900 mb-2">Document Information</h3>
+                      <div className="space-y-2 text-sm">
+                        {selectedNode.metadata?.documentId ? (
+                          <>
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Document ID:</span>
+                              <span className="text-gray-900">{selectedNode.metadata.documentId}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Source Section:</span>
+                              <span className="text-gray-900">{selectedNode.metadata.sourceSection}</span>
+                            </div>
+                          </>
+                        ) : (
+                          <p className="text-sm text-gray-500">No document information available</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="font-medium text-gray-900 mb-2">Quality Metrics</h3>
+                      <div className="space-y-2 text-sm">
+                        {selectedNode.metadata?.confidence && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-600">Confidence Score:</span>
+                            <span className="text-gray-900">{Math.round(selectedNode.metadata.confidence * 100)}%</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Status:</span>
+                          <span className="text-gray-900">{selectedNode.metadata?.status || 'Unknown'}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -760,7 +1117,7 @@ export function DataLineageViewer() {
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Select a Node</h3>
                 <p className="text-gray-500 max-w-sm">
-                  Click on any table, view, or dashboard in the lineage graph to view its details and relationships.
+                  Click on any document, term, schema, or service in the lineage graph to view its details and relationships.
                 </p>
               </div>
             </div>

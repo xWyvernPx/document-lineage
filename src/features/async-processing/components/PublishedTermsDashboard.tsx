@@ -50,195 +50,681 @@ interface PublishedTerm {
   updatedBy: string;
 }
 
-const mockPublishedTerms: PublishedTerm[] = [
+// NAPAS ACH Business Terms Data
+const napasPublishedTerms: PublishedTerm[] = [
   {
     id: '1',
-    term: 'Annual Percentage Rate',
-    definition: 'The yearly cost of a loan expressed as a percentage, including interest and fees. This rate includes both the interest rate and additional costs or fees associated with the loan.',
-    category: 'Financial',
-    domain: 'Lending',
-    documentName: 'Credit Policy v3.2.pdf',
-    documentId: 'doc1',
-    sourceSection: 'Interest Rates',
+    term: 'Message Routing Engine',
+    definition: 'Core component responsible for directing ACH messages between internal services and NAPAS based on transaction type and routing rules. Ensures proper message delivery and transformation between NAPAS and internal banking systems.',
+    category: 'System Component',
+    domain: 'Integration Architecture',
+    documentName: 'DPG Middleware Integration Specification v2.1.pdf',
+    documentId: 'dpg-001',
+    sourceSection: 'Section 3.1 – System Architecture',
     publishedAt: '2024-01-16T15:30:00Z',
-    publishedBy: 'Sarah Johnson',
-    confidence: 0.95,
+    publishedBy: 'Technical Architecture Team',
+    confidence: 0.96,
     isPreferred: true,
     status: 'preferred',
     schemaMapping: {
-      schemaName: 'lending',
-      tableName: 'loan_products',
-      columnName: 'annual_percentage_rate',
+      schemaName: 'dpg_middleware',
+      tableName: 'message_routing',
+      columnName: 'routing_config',
     },
-    relatedTerms: ['Interest Rate', 'Loan Cost', 'APR'],
-    tags: ['lending', 'interest', 'preferred'],
+    relatedTerms: ['Message Router', 'Transaction Router', 'ACH Router', 'Payment Router'],
+    tags: ['dpg', 'routing', 'preferred', 'middleware'],
     lastUpdated: '2024-01-16T15:30:00Z',
-    updatedBy: 'Sarah Johnson'
+    updatedBy: 'Technical Architecture Team'
   },
   {
     id: '2',
-    term: 'Credit Score',
-    definition: 'A numerical expression of creditworthiness based on credit history analysis. Ranges typically from 300 to 850, with higher scores indicating better creditworthiness.',
-    category: 'Risk Assessment',
-    domain: 'Risk Management',
-    documentName: 'Credit Policy v3.2.pdf',
-    documentId: 'doc1',
-    sourceSection: 'Underwriting Criteria',
+    term: 'Transaction Correlation ID',
+    definition: 'Unique identifier that tracks a single ACH transaction across all system components and services throughout its lifecycle. Enables end-to-end tracking and reconciliation across DPG, payment services, and core banking.',
+    category: 'Data Element',
+    domain: 'Message Tracking',
+    documentName: 'DPG Middleware Integration Specification v2.1.pdf',
+    documentId: 'dpg-001',
+    sourceSection: 'Section 4.2 – Message Tracking',
     publishedAt: '2024-01-16T15:30:00Z',
-    publishedBy: 'Sarah Johnson',
-    confidence: 0.89,
+    publishedBy: 'Technical Architecture Team',
+    confidence: 0.93,
     isPreferred: false,
     status: 'published',
     schemaMapping: {
-      schemaName: 'customer',
-      tableName: 'credit_profiles',
-      columnName: 'fico_score',
+      schemaName: 'dpg_middleware',
+      tableName: 'message_routing',
+      columnName: 'correlation_id',
     },
-    relatedTerms: ['FICO Score', 'Creditworthiness', 'Risk Assessment'],
-    tags: ['credit', 'risk', 'underwriting'],
+    relatedTerms: ['Trace ID', 'Transaction ID', 'Correlation Key', 'ACH Trace Number'],
+    tags: ['tracking', 'correlation', 'dpg'],
     lastUpdated: '2024-01-16T14:20:00Z',
-    updatedBy: 'Michael Chen'
+    updatedBy: 'Technical Architecture Team'
   },
   {
     id: '3',
-    term: 'Business Requirements',
-    definition: 'Documented needs and expectations that a business solution must fulfill to achieve organizational objectives. These requirements guide system design and development.',
-    category: 'Process',
-    domain: 'Project Management',
-    documentName: 'Business Requirements v1.5.docx',
-    documentId: 'doc2',
-    sourceSection: 'Business Requirements',
-    publishedAt: '2024-01-15T11:20:00Z',
-    publishedBy: 'Michael Chen',
+    term: 'Clearing Cycle',
+    definition: 'Scheduled time window during which NAPAS processes and settles ACH transactions. Banks must submit transactions within specific clearing cycles to ensure same-day or next-day settlement.',
+    category: 'Operational Process',
+    domain: 'Settlement Processing',
+    documentName: 'DPG Middleware Integration Specification v2.1.pdf',
+    documentId: 'dpg-001',
+    sourceSection: 'Section 6.2 – Processing Schedule',
+    publishedAt: '2024-01-16T15:30:00Z',
+    publishedBy: 'Technical Architecture Team',
     confidence: 0.95,
     isPreferred: true,
     status: 'preferred',
     schemaMapping: {
-      schemaName: 'project_management',
-      tableName: 'requirements',
-      columnName: 'business_requirement_text',
+      schemaName: 'dpg_middleware',
+      tableName: 'processing_schedules',
+      columnName: 'clearing_cycle_config',
     },
-    relatedTerms: ['Functional Requirements', 'System Requirements', 'User Stories'],
-    tags: ['business', 'requirements', 'preferred'],
-    lastUpdated: '2024-01-15T11:20:00Z',
-    updatedBy: 'Michael Chen'
+    relatedTerms: ['Settlement Window', 'Processing Cycle', 'ACH Cycle', 'Clearing Window'],
+    tags: ['clearing', 'settlement', 'preferred', 'processing'],
+    lastUpdated: '2024-01-16T15:30:00Z',
+    updatedBy: 'Technical Architecture Team'
   },
   {
     id: '4',
-    term: 'Risk Assessment',
-    definition: 'Systematic process of evaluating potential risks that could negatively impact business operations or project outcomes.',
-    category: 'Risk Management',
-    domain: 'Risk Management',
-    documentName: 'Business Requirements v1.5.docx',
-    documentId: 'doc2',
-    sourceSection: 'Risk Assessment',
+    term: 'NAPAS Dedicated Line',
+    definition: 'Secure, dedicated network connection between bank infrastructure and NAPAS data centers with guaranteed bandwidth and latency. Banks must maintain redundant dedicated lines with minimum 10Mbps bandwidth and sub-100ms latency.',
+    category: 'Infrastructure',
+    domain: 'Network Connectivity',
+    documentName: 'NAPAS Connectivity Requirements and SLA v1.3.docx',
+    documentId: 'dpg-002',
+    sourceSection: 'Section 2.1 – Network Connectivity',
     publishedAt: '2024-01-15T11:20:00Z',
-    publishedBy: 'Michael Chen',
-    confidence: 0.89,
+    publishedBy: 'Infrastructure Team',
+    confidence: 0.94,
     isPreferred: false,
     status: 'published',
-    relatedTerms: ['Risk Mitigation', 'Risk Analysis', 'Risk Matrix'],
-    tags: ['risk', 'assessment', 'process'],
+    schemaMapping: {
+      schemaName: 'infrastructure',
+      tableName: 'network_config',
+      columnName: 'dedicated_line_config',
+    },
+    relatedTerms: ['Dedicated Connection', 'Private Line', 'NAPAS Link', 'Secure Connection'],
+    tags: ['network', 'connectivity', 'infrastructure'],
     lastUpdated: '2024-01-15T10:45:00Z',
-    updatedBy: 'Emily Rodriguez'
+    updatedBy: 'Infrastructure Team'
   },
   {
     id: '5',
-    term: 'Data Governance',
-    definition: 'Framework of policies, procedures, and controls that ensure data quality, security, and compliance across the organization.',
-    category: 'Data Management',
-    domain: 'Technology',
-    documentName: 'Compliance Framework.pdf',
-    documentId: 'doc3',
-    sourceSection: 'Data Strategy',
-    publishedAt: '2024-01-14T09:45:00Z',
-    publishedBy: 'Emily Rodriguez',
-    confidence: 0.93,
+    term: 'HSM Integration',
+    definition: 'Hardware Security Module integration for cryptographic operations including message signing and encryption for NAPAS communication. All NAPAS messages require HSM-based digital signatures and encryption.',
+    category: 'Security Component',
+    domain: 'Security Requirements',
+    documentName: 'NAPAS Connectivity Requirements and SLA v1.3.docx',
+    documentId: 'dpg-002',
+    sourceSection: 'Section 4.1 – Security Requirements',
+    publishedAt: '2024-01-15T11:20:00Z',
+    publishedBy: 'Infrastructure Team',
+    confidence: 0.91,
     isPreferred: true,
     status: 'preferred',
     schemaMapping: {
-      schemaName: 'data_management',
-      tableName: 'governance_policies',
-      columnName: 'policy_description',
+      schemaName: 'infrastructure',
+      tableName: 'security_config',
+      columnName: 'hsm_config',
     },
-    relatedTerms: ['Data Quality', 'Data Stewardship', 'Compliance Framework'],
-    tags: ['data', 'governance', 'preferred'],
-    lastUpdated: '2024-01-14T09:45:00Z',
-    updatedBy: 'Emily Rodriguez'
+    relatedTerms: ['Hardware Security', 'Cryptographic Module', 'Message Signing', 'Encryption Module'],
+    tags: ['security', 'hsm', 'preferred', 'encryption'],
+    lastUpdated: '2024-01-15T11:20:00Z',
+    updatedBy: 'Infrastructure Team'
   },
   {
     id: '6',
-    term: 'Principal Balance',
-    definition: 'The outstanding amount of money owed on a loan, excluding interest. This amount decreases with each payment made toward the loan.',
-    category: 'Financial',
-    domain: 'Lending',
-    documentName: 'Loan Servicing Guide.pdf',
-    documentId: 'doc4',
-    sourceSection: 'Payment Processing',
-    publishedAt: '2024-01-13T16:30:00Z',
-    publishedBy: 'David Kim',
-    confidence: 0.92,
-    isPreferred: false,
-    status: 'published',
+    term: 'Payment Orchestration Engine',
+    definition: 'Central system component that coordinates ACH payment flows across multiple third-party providers and internal banking services. Manages complex payment workflows, routing decisions, and fallback scenarios for ACH transactions.',
+    category: 'System Component',
+    domain: 'Payment Processing',
+    documentName: 'ACH Payment Orchestration Business Requirements v3.0.pdf',
+    documentId: 'tps-001',
+    sourceSection: 'Section 2.1 – Business Overview',
+    publishedAt: '2024-01-14T09:45:00Z',
+    publishedBy: 'Payment Product Team',
+    confidence: 0.96,
+    isPreferred: true,
+    status: 'preferred',
     schemaMapping: {
-      schemaName: 'lending',
-      tableName: 'loan_accounts',
-      columnName: 'current_principal_balance',
+      schemaName: 'payment_orchestration',
+      tableName: 'orchestration_engine',
+      columnName: 'orchestration_config',
     },
-    relatedTerms: ['Outstanding Balance', 'Loan Amount', 'Amortization'],
-    tags: ['lending', 'balance', 'principal'],
-    lastUpdated: '2024-01-13T16:30:00Z',
-    updatedBy: 'David Kim'
+    relatedTerms: ['Payment Coordinator', 'Transaction Orchestrator', 'Payment Manager', 'ACH Orchestrator'],
+    tags: ['payment', 'orchestration', 'preferred', 'processing'],
+    lastUpdated: '2024-01-14T09:45:00Z',
+    updatedBy: 'Payment Product Team'
   },
   {
     id: '7',
-    term: 'Customer Onboarding',
-    definition: 'Process of integrating new customers into the organization\'s systems and services, including identity verification and account setup.',
-    category: 'Process',
-    domain: 'Operations',
-    documentName: 'Customer Onboarding Process.docx',
-    documentId: 'doc5',
-    sourceSection: 'Onboarding Workflow',
-    publishedAt: '2024-01-12T14:15:00Z',
-    publishedBy: 'Lisa Wang',
-    confidence: 0.88,
+    term: 'Same-Day ACH',
+    definition: 'Expedited ACH processing service that enables same-business-day settlement for qualifying transactions through NAPAS infrastructure. Requires special handling with earlier cutoff times and higher fees.',
+    category: 'Payment Type',
+    domain: 'Payment Processing',
+    documentName: 'ACH Payment Orchestration Business Requirements v3.0.pdf',
+    documentId: 'tps-001',
+    sourceSection: 'Section 3.2 – Payment Types',
+    publishedAt: '2024-01-14T09:45:00Z',
+    publishedBy: 'Payment Product Team',
+    confidence: 0.93,
     isPreferred: false,
     status: 'pending',
-    relatedTerms: ['KYC', 'Identity Verification', 'Account Setup'],
-    tags: ['customer', 'onboarding', 'process'],
-    lastUpdated: '2024-01-12T14:15:00Z',
-    updatedBy: 'Lisa Wang'
+    relatedTerms: ['Expedited ACH', 'Fast ACH', 'Same-Day Settlement', 'Rapid ACH'],
+    tags: ['ach', 'same-day', 'expedited', 'settlement'],
+    lastUpdated: '2024-01-14T09:45:00Z',
+    updatedBy: 'Payment Product Team'
   },
   {
     id: '8',
-    term: 'Regulatory Compliance',
-    definition: 'Adherence to laws, regulations, guidelines and specifications relevant to business operations and industry standards.',
-    category: 'Legal',
-    domain: 'Compliance',
-    documentName: 'Compliance Framework.pdf',
-    documentId: 'doc3',
-    sourceSection: 'Regulatory Requirements',
-    publishedAt: '2024-01-11T10:00:00Z',
-    publishedBy: 'Robert Chen',
+    term: 'Provider Certification Process',
+    definition: 'Formal validation process ensuring third-party payment providers meet technical and compliance standards for ACH processing. New providers must complete certification including API testing and security validation.',
+    category: 'Process',
+    domain: 'Third Party Integration',
+    documentName: 'Third Party Payment Provider Integration Guide v2.5.pdf',
+    documentId: 'tps-002',
+    sourceSection: 'Section 3.1 – Provider Onboarding',
+    publishedAt: '2024-01-13T16:30:00Z',
+    publishedBy: 'Integration Team',
     confidence: 0.94,
     isPreferred: true,
     status: 'preferred',
     schemaMapping: {
-      schemaName: 'compliance',
-      tableName: 'regulatory_requirements',
-      columnName: 'compliance_description',
+      schemaName: 'third_party_integration',
+      tableName: 'provider_management',
+      columnName: 'certification_process',
     },
-    relatedTerms: ['Legal Requirements', 'Industry Standards', 'Audit'],
-    tags: ['compliance', 'regulatory', 'preferred'],
-    lastUpdated: '2024-01-11T10:00:00Z',
-    updatedBy: 'Robert Chen'
+    relatedTerms: ['Provider Validation', 'Certification Process', 'Provider Testing', 'Integration Certification'],
+    tags: ['provider', 'certification', 'preferred', 'integration'],
+    lastUpdated: '2024-01-13T16:30:00Z',
+    updatedBy: 'Integration Team'
+  },
+  {
+    id: '9',
+    term: 'Transaction Dashboard',
+    definition: 'Real-time monitoring interface displaying ACH transaction volumes, success rates, and processing status across NAPAS and other payment rails. Business users require comprehensive dashboards to monitor ACH transaction flows.',
+    category: 'User Interface',
+    domain: 'Business Intelligence',
+    documentName: 'ACH Payment Orchestration Business Requirements v3.0.pdf',
+    documentId: 'tps-001',
+    sourceSection: 'Section 3.1 – Dashboard Requirements',
+    publishedAt: '2024-01-13T14:15:00Z',
+    publishedBy: 'Business Intelligence Team',
+    confidence: 0.92,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'business_portal',
+      tableName: 'dashboard_config',
+      columnName: 'transaction_dashboard',
+    },
+    relatedTerms: ['Transaction Monitor', 'ACH Dashboard', 'Payment Dashboard', 'Transaction View'],
+    tags: ['dashboard', 'monitoring', 'business-intelligence'],
+    lastUpdated: '2024-01-13T14:15:00Z',
+    updatedBy: 'Business Intelligence Team'
+  },
+  {
+    id: '10',
+    term: 'ACH File Format',
+    definition: 'Standardized file structure for ACH transactions including header records, batch headers, entry details, and control totals. NAPAS requires specific file formats with mandatory fields and validation rules.',
+    category: 'Data Format',
+    domain: 'Data Standards',
+    documentName: 'NAPAS ACH File Format Specification v2.0.pdf',
+    documentId: 'napas-001',
+    sourceSection: 'Section 2.1 – File Structure',
+    publishedAt: '2024-01-12T10:30:00Z',
+    publishedBy: 'Data Standards Team',
+    confidence: 0.95,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'data_standards',
+      tableName: 'file_formats',
+      columnName: 'ach_format_spec',
+    },
+    relatedTerms: ['File Structure', 'ACH Record', 'Batch Header', 'Entry Detail'],
+    tags: ['file-format', 'data-standards', 'preferred', 'ach'],
+    lastUpdated: '2024-01-12T10:30:00Z',
+    updatedBy: 'Data Standards Team'
+  },
+  {
+    id: '11',
+    term: 'Return Code Processing',
+    definition: 'Automated handling of ACH return codes indicating failed transactions, insufficient funds, or invalid account information. System must process return codes within specified timeframes and update transaction status.',
+    category: 'Operational Process',
+    domain: 'Exception Handling',
+    documentName: 'ACH Exception Handling Procedures v1.8.pdf',
+    documentId: 'ach-001',
+    sourceSection: 'Section 4.2 – Return Processing',
+    publishedAt: '2024-01-12T09:20:00Z',
+    publishedBy: 'Operations Team',
+    confidence: 0.93,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'operations',
+      tableName: 'exception_handling',
+      columnName: 'return_code_config',
+    },
+    relatedTerms: ['Return Code', 'Exception Handling', 'Failed Transaction', 'Reject Processing'],
+    tags: ['returns', 'exceptions', 'operations'],
+    lastUpdated: '2024-01-12T09:20:00Z',
+    updatedBy: 'Operations Team'
+  },
+  {
+    id: '12',
+    term: 'Settlement Reconciliation',
+    definition: 'Daily process of matching NAPAS settlement reports with internal transaction records to ensure accuracy and identify discrepancies. Critical for financial reporting and audit compliance.',
+    category: 'Operational Process',
+    domain: 'Financial Operations',
+    documentName: 'ACH Settlement and Reconciliation Procedures v2.2.pdf',
+    documentId: 'fin-001',
+    sourceSection: 'Section 3.1 – Daily Reconciliation',
+    publishedAt: '2024-01-11T16:45:00Z',
+    publishedBy: 'Financial Operations Team',
+    confidence: 0.94,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'financial_operations',
+      tableName: 'settlement_reconciliation',
+      columnName: 'reconciliation_config',
+    },
+    relatedTerms: ['Settlement Report', 'Transaction Matching', 'Financial Reconciliation', 'Audit Trail'],
+    tags: ['settlement', 'reconciliation', 'preferred', 'financial'],
+    lastUpdated: '2024-01-11T16:45:00Z',
+    updatedBy: 'Financial Operations Team'
+  },
+  {
+    id: '13',
+    term: 'ACH Network Monitoring',
+    definition: 'Real-time monitoring of NAPAS network connectivity, message delivery, and system performance metrics. Includes alerting for network outages, latency issues, and processing delays.',
+    category: 'System Component',
+    domain: 'Infrastructure Monitoring',
+    documentName: 'NAPAS Network Monitoring and Alerting v1.5.pdf',
+    documentId: 'infra-001',
+    sourceSection: 'Section 2.1 – Monitoring Requirements',
+    publishedAt: '2024-01-11T14:30:00Z',
+    publishedBy: 'Infrastructure Team',
+    confidence: 0.91,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'infrastructure',
+      tableName: 'network_monitoring',
+      columnName: 'ach_monitoring_config',
+    },
+    relatedTerms: ['Network Monitoring', 'Performance Metrics', 'System Alerting', 'Connectivity Monitoring'],
+    tags: ['monitoring', 'network', 'infrastructure'],
+    lastUpdated: '2024-01-11T14:30:00Z',
+    updatedBy: 'Infrastructure Team'
+  },
+  {
+    id: '14',
+    term: 'Transaction Fee Calculation',
+    definition: 'Automated calculation of ACH transaction fees based on transaction type, volume, and provider agreements. Includes same-day ACH premiums, volume discounts, and third-party provider fees.',
+    category: 'Business Logic',
+    domain: 'Pricing and Billing',
+    documentName: 'ACH Transaction Pricing Model v2.1.pdf',
+    documentId: 'pricing-001',
+    sourceSection: 'Section 3.2 – Fee Structure',
+    publishedAt: '2024-01-10T11:15:00Z',
+    publishedBy: 'Product Management Team',
+    confidence: 0.92,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'pricing',
+      tableName: 'fee_calculation',
+      columnName: 'ach_fee_rules',
+    },
+    relatedTerms: ['Transaction Fee', 'Pricing Model', 'Volume Discount', 'Provider Fee'],
+    tags: ['pricing', 'fees', 'preferred', 'billing'],
+    lastUpdated: '2024-01-10T11:15:00Z',
+    updatedBy: 'Product Management Team'
+  },
+  {
+    id: '15',
+    term: 'Compliance Reporting',
+    definition: 'Automated generation of regulatory reports for ACH transactions including volume reports, error summaries, and compliance metrics required by banking regulators and NAPAS.',
+    category: 'Process',
+    domain: 'Regulatory Compliance',
+    documentName: 'ACH Regulatory Compliance Framework v1.9.pdf',
+    documentId: 'compliance-001',
+    sourceSection: 'Section 4.1 – Reporting Requirements',
+    publishedAt: '2024-01-10T09:45:00Z',
+    publishedBy: 'Compliance Team',
+    confidence: 0.95,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'compliance',
+      tableName: 'regulatory_reporting',
+      columnName: 'ach_compliance_config',
+    },
+    relatedTerms: ['Regulatory Report', 'Compliance Metrics', 'Volume Report', 'Error Summary'],
+    tags: ['compliance', 'reporting', 'preferred', 'regulatory'],
+    lastUpdated: '2024-01-10T09:45:00Z',
+    updatedBy: 'Compliance Team'
+  },
+  {
+    id: '16',
+    term: 'ACH Message Encryption',
+    definition: 'End-to-end encryption of ACH messages using industry-standard cryptographic algorithms to ensure data confidentiality and integrity during transmission between bank systems and NAPAS.',
+    category: 'Security Component',
+    domain: 'Data Protection',
+    documentName: 'ACH Security and Encryption Standards v2.3.pdf',
+    documentId: 'security-001',
+    sourceSection: 'Section 3.1 – Message Encryption',
+    publishedAt: '2024-01-09T15:20:00Z',
+    publishedBy: 'Security Team',
+    confidence: 0.94,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'security',
+      tableName: 'encryption_config',
+      columnName: 'ach_encryption_rules',
+    },
+    relatedTerms: ['Message Encryption', 'Data Protection', 'Cryptographic Security', 'Secure Transmission'],
+    tags: ['encryption', 'security', 'data-protection'],
+    lastUpdated: '2024-01-09T15:20:00Z',
+    updatedBy: 'Security Team'
+  },
+  {
+    id: '17',
+    term: 'Transaction Volume Limits',
+    definition: 'Configurable limits on ACH transaction volumes and amounts to manage risk exposure and comply with regulatory requirements. Includes daily, monthly, and per-transaction limits.',
+    category: 'Risk Management',
+    domain: 'Risk Controls',
+    documentName: 'ACH Risk Management Framework v1.7.pdf',
+    documentId: 'risk-001',
+    sourceSection: 'Section 2.2 – Volume Controls',
+    publishedAt: '2024-01-09T13:10:00Z',
+    publishedBy: 'Risk Management Team',
+    confidence: 0.93,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'risk_management',
+      tableName: 'volume_limits',
+      columnName: 'ach_limit_config',
+    },
+    relatedTerms: ['Volume Limits', 'Risk Controls', 'Transaction Limits', 'Exposure Management'],
+    tags: ['risk', 'limits', 'preferred', 'controls'],
+    lastUpdated: '2024-01-09T13:10:00Z',
+    updatedBy: 'Risk Management Team'
+  },
+  {
+    id: '18',
+    term: 'ACH Audit Trail',
+    definition: 'Comprehensive logging of all ACH transactions, system events, and user actions for compliance, troubleshooting, and forensic analysis. Includes detailed timestamps, user identification, and system state.',
+    category: 'Data Element',
+    domain: 'Audit and Compliance',
+    documentName: 'ACH Audit and Logging Requirements v1.6.pdf',
+    documentId: 'audit-001',
+    sourceSection: 'Section 3.1 – Audit Trail Requirements',
+    publishedAt: '2024-01-08T16:30:00Z',
+    publishedBy: 'Audit Team',
+    confidence: 0.96,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'audit',
+      tableName: 'audit_trail',
+      columnName: 'ach_audit_log',
+    },
+    relatedTerms: ['Audit Log', 'Transaction Log', 'System Log', 'Compliance Log'],
+    tags: ['audit', 'logging', 'preferred', 'compliance'],
+    lastUpdated: '2024-01-08T16:30:00Z',
+    updatedBy: 'Audit Team'
+  },
+  {
+    id: '19',
+    term: 'ACH Performance Metrics',
+    definition: 'Key performance indicators for ACH processing including throughput, latency, success rates, and error rates. Used for capacity planning, performance optimization, and SLA monitoring.',
+    category: 'Data Element',
+    domain: 'Performance Management',
+    documentName: 'ACH Performance Monitoring and SLA v2.0.pdf',
+    documentId: 'perf-001',
+    sourceSection: 'Section 2.1 – Performance Metrics',
+    publishedAt: '2024-01-08T14:45:00Z',
+    publishedBy: 'Performance Engineering Team',
+    confidence: 0.92,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'performance',
+      tableName: 'metrics_collection',
+      columnName: 'ach_performance_metrics',
+    },
+    relatedTerms: ['Performance Metrics', 'KPI Monitoring', 'Throughput Metrics', 'SLA Monitoring'],
+    tags: ['performance', 'metrics', 'monitoring'],
+    lastUpdated: '2024-01-08T14:45:00Z',
+    updatedBy: 'Performance Engineering Team'
+  },
+  {
+    id: '20',
+    term: 'ACH Disaster Recovery',
+    definition: 'Comprehensive disaster recovery procedures for ACH processing systems including backup systems, failover mechanisms, and recovery time objectives to ensure business continuity.',
+    category: 'Operational Process',
+    domain: 'Business Continuity',
+    documentName: 'ACH Disaster Recovery and Business Continuity v1.4.pdf',
+    documentId: 'dr-001',
+    sourceSection: 'Section 2.1 – Recovery Procedures',
+    publishedAt: '2024-01-08T12:20:00Z',
+    publishedBy: 'Business Continuity Team',
+    confidence: 0.94,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'business_continuity',
+      tableName: 'disaster_recovery',
+      columnName: 'ach_recovery_config',
+    },
+    relatedTerms: ['Disaster Recovery', 'Business Continuity', 'Failover', 'Recovery Procedures'],
+    tags: ['disaster-recovery', 'business-continuity', 'preferred', 'failover'],
+    lastUpdated: '2024-01-08T12:20:00Z',
+    updatedBy: 'Business Continuity Team'
+  },
+  {
+    id: '21',
+    term: 'ACH Message Validation',
+    definition: 'Comprehensive validation of ACH messages against NAPAS format requirements, business rules, and internal validation criteria before processing. Includes field-level validation and cross-field checks.',
+    category: 'System Component',
+    domain: 'Data Quality',
+    documentName: 'ACH Message Validation and Quality Assurance v1.8.pdf',
+    documentId: 'qa-001',
+    sourceSection: 'Section 3.1 – Validation Rules',
+    publishedAt: '2024-01-07T15:30:00Z',
+    publishedBy: 'Quality Assurance Team',
+    confidence: 0.93,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'data_quality',
+      tableName: 'validation_rules',
+      columnName: 'ach_validation_config',
+    },
+    relatedTerms: ['Message Validation', 'Data Quality', 'Field Validation', 'Business Rules'],
+    tags: ['validation', 'data-quality', 'quality-assurance'],
+    lastUpdated: '2024-01-07T15:30:00Z',
+    updatedBy: 'Quality Assurance Team'
+  },
+  {
+    id: '22',
+    term: 'ACH Capacity Planning',
+    definition: 'Strategic planning for ACH processing capacity including peak volume analysis, infrastructure scaling, and resource allocation to meet current and projected transaction volumes.',
+    category: 'Operational Process',
+    domain: 'Capacity Management',
+    documentName: 'ACH Capacity Planning and Scaling Strategy v1.6.pdf',
+    documentId: 'capacity-001',
+    sourceSection: 'Section 2.1 – Capacity Analysis',
+    publishedAt: '2024-01-07T13:15:00Z',
+    publishedBy: 'Capacity Planning Team',
+    confidence: 0.91,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'capacity_management',
+      tableName: 'capacity_planning',
+      columnName: 'ach_capacity_config',
+    },
+    relatedTerms: ['Capacity Planning', 'Peak Volume', 'Infrastructure Scaling', 'Resource Allocation'],
+    tags: ['capacity', 'planning', 'preferred', 'scaling'],
+    lastUpdated: '2024-01-07T13:15:00Z',
+    updatedBy: 'Capacity Planning Team'
+  },
+  {
+    id: '23',
+    term: 'ACH Error Handling',
+    definition: 'Systematic approach to handling ACH processing errors including error classification, retry logic, escalation procedures, and user notification mechanisms.',
+    category: 'Operational Process',
+    domain: 'Exception Handling',
+    documentName: 'ACH Error Handling and Recovery Procedures v1.9.pdf',
+    documentId: 'error-001',
+    sourceSection: 'Section 3.1 – Error Classification',
+    publishedAt: '2024-01-06T16:45:00Z',
+    publishedBy: 'Operations Team',
+    confidence: 0.94,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'operations',
+      tableName: 'error_handling',
+      columnName: 'ach_error_config',
+    },
+    relatedTerms: ['Error Handling', 'Retry Logic', 'Error Classification', 'Escalation Procedures'],
+    tags: ['error-handling', 'exceptions', 'operations'],
+    lastUpdated: '2024-01-06T16:45:00Z',
+    updatedBy: 'Operations Team'
+  },
+  {
+    id: '24',
+    term: 'ACH Data Archival',
+    definition: 'Automated archival of ACH transaction data and audit logs for long-term storage and compliance requirements. Includes data retention policies, archival schedules, and retrieval procedures.',
+    category: 'Operational Process',
+    domain: 'Data Management',
+    documentName: 'ACH Data Retention and Archival Policy v1.7.pdf',
+    documentId: 'data-001',
+    sourceSection: 'Section 2.1 – Archival Requirements',
+    publishedAt: '2024-01-06T14:20:00Z',
+    publishedBy: 'Data Management Team',
+    confidence: 0.92,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'data_management',
+      tableName: 'archival_config',
+      columnName: 'ach_archival_rules',
+    },
+    relatedTerms: ['Data Archival', 'Retention Policy', 'Long-term Storage', 'Data Retrieval'],
+    tags: ['archival', 'data-management', 'preferred', 'retention'],
+    lastUpdated: '2024-01-06T14:20:00Z',
+    updatedBy: 'Data Management Team'
+  },
+  {
+    id: '25',
+    term: 'ACH System Integration',
+    definition: 'Comprehensive integration framework for connecting ACH processing systems with core banking, payment orchestration, and third-party provider systems through standardized APIs and data formats.',
+    category: 'System Component',
+    domain: 'Integration Architecture',
+    documentName: 'ACH System Integration Framework v2.2.pdf',
+    documentId: 'integration-001',
+    sourceSection: 'Section 2.1 – Integration Architecture',
+    publishedAt: '2024-01-06T11:30:00Z',
+    publishedBy: 'Integration Architecture Team',
+    confidence: 0.95,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'integration',
+      tableName: 'system_integration',
+      columnName: 'ach_integration_config',
+    },
+    relatedTerms: ['System Integration', 'API Integration', 'Data Integration', 'Provider Integration'],
+    tags: ['integration', 'architecture', 'preferred', 'apis'],
+    lastUpdated: '2024-01-06T11:30:00Z',
+    updatedBy: 'Integration Architecture Team'
+  },
+  {
+    id: '26',
+    term: 'ACH User Access Control',
+    definition: 'Role-based access control system for ACH processing functions including user authentication, authorization, and audit logging to ensure secure access to sensitive payment operations.',
+    category: 'Security Component',
+    domain: 'Access Management',
+    documentName: 'ACH Security and Access Control v1.8.pdf',
+    documentId: 'access-001',
+    sourceSection: 'Section 3.1 – Access Control',
+    publishedAt: '2024-01-05T15:45:00Z',
+    publishedBy: 'Security Team',
+    confidence: 0.93,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'security',
+      tableName: 'access_control',
+      columnName: 'ach_access_config',
+    },
+    relatedTerms: ['Access Control', 'User Authentication', 'Role-based Access', 'Authorization'],
+    tags: ['access-control', 'security', 'authentication'],
+    lastUpdated: '2024-01-05T15:45:00Z',
+    updatedBy: 'Security Team'
+  },
+  {
+    id: '27',
+    term: 'ACH Business Intelligence',
+    definition: 'Advanced analytics and reporting capabilities for ACH transaction data including trend analysis, performance insights, and business metrics to support strategic decision-making.',
+    category: 'System Component',
+    domain: 'Business Intelligence',
+    documentName: 'ACH Business Intelligence and Analytics v1.9.pdf',
+    documentId: 'bi-001',
+    sourceSection: 'Section 2.1 – Analytics Framework',
+    publishedAt: '2024-01-05T13:20:00Z',
+    publishedBy: 'Business Intelligence Team',
+    confidence: 0.91,
+    isPreferred: true,
+    status: 'preferred',
+    schemaMapping: {
+      schemaName: 'business_intelligence',
+      tableName: 'analytics_config',
+      columnName: 'ach_analytics_rules',
+    },
+    relatedTerms: ['Business Intelligence', 'Analytics', 'Trend Analysis', 'Performance Insights'],
+    tags: ['business-intelligence', 'analytics', 'preferred', 'reporting'],
+    lastUpdated: '2024-01-05T13:20:00Z',
+    updatedBy: 'Business Intelligence Team'
+  },
+  {
+    id: '28',
+    term: 'ACH Change Management',
+    definition: 'Structured process for managing changes to ACH processing systems including change approval, testing, deployment, and rollback procedures to ensure system stability and compliance.',
+    category: 'Process',
+    domain: 'Change Management',
+    documentName: 'ACH Change Management and Release Procedures v1.7.pdf',
+    documentId: 'change-001',
+    sourceSection: 'Section 2.1 – Change Process',
+    publishedAt: '2024-01-05T11:10:00Z',
+    publishedBy: 'Change Management Team',
+    confidence: 0.94,
+    isPreferred: false,
+    status: 'published',
+    schemaMapping: {
+      schemaName: 'change_management',
+      tableName: 'change_process',
+      columnName: 'ach_change_config',
+    },
+    relatedTerms: ['Change Management', 'Release Management', 'Deployment', 'Rollback Procedures'],
+    tags: ['change-management', 'release', 'deployment'],
+    lastUpdated: '2024-01-05T11:10:00Z',
+    updatedBy: 'Change Management Team'
   }
 ];
 
 const ITEMS_PER_PAGE = 6;
 
 export function TermDictionary() {
-  const [terms] = useState<PublishedTerm[]>(mockPublishedTerms);
+  const [terms] = useState<PublishedTerm[]>(napasPublishedTerms);
   const [selectedTerm, setSelectedTerm] = useState<PublishedTerm | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [documentFilter, setDocumentFilter] = useState('all');
@@ -320,7 +806,7 @@ export function TermDictionary() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'term-dictionary.csv';
+    a.download = 'banking-term-dictionary.csv';
     a.click();
     window.URL.revokeObjectURL(url);
   };
@@ -357,7 +843,7 @@ export function TermDictionary() {
                 Data Lineage for "{lineageTerm.term}"
               </h1>
               <p className="text-gray-600 mt-1">
-                Explore data flow and dependencies for this business term
+                Explore data flow and dependencies for this NAPAS ACH business term
               </p>
             </div>
             <Button
@@ -385,9 +871,9 @@ export function TermDictionary() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between px-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Term Dictionary</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Banking Term Dictionary</h1>
             <p className="text-gray-600 mt-1">
-              Browse and manage business terms with their definitions and relationships
+              Browse and manage business terms across multiple banking systems and domains
             </p>
           </div>
           <div className="flex items-center space-x-2">
@@ -408,7 +894,7 @@ export function TermDictionary() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
-              placeholder="Search terms, definitions, or documents..."
+              placeholder="Search banking terms, definitions, or documents across all systems..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
@@ -487,7 +973,7 @@ export function TermDictionary() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-lg font-semibold text-gray-900">
-              {filteredTerms.length} Terms Found
+              {filteredTerms.length} Banking Terms Found
             </h2>
             <p className="text-sm text-gray-600">
               Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredTerms.length)} of {filteredTerms.length} terms
@@ -748,14 +1234,14 @@ export function TermDictionary() {
         {filteredTerms.length === 0 && (
           <div className="text-center py-12">
             <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No Terms Found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No Banking Terms Found</h3>
             <p className="text-gray-500 mb-4">
               {searchQuery || documentFilter !== 'all' || categoryFilter !== 'all' || domainFilter !== 'all' || statusFilter !== 'all'
                 ? 'Try adjusting your search criteria or filters.'
-                : 'No terms have been published to the dictionary yet.'}
+                : 'No banking terms have been published to the dictionary yet.'}
             </p>
             <Button variant="primary">
-              Process Documents
+              Process Banking Documents
             </Button>
           </div>
         )}

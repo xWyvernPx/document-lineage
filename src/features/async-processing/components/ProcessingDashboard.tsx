@@ -24,6 +24,7 @@ import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
 import { ProgressBar } from '../../../components/ProgressBar';
+import { allNapasDocuments, DocumentMetadata } from '../../../data/napas-documents';
 
 interface ProcessingJob {
   id: string;
@@ -41,67 +42,62 @@ interface ProcessingJob {
   currentStage?: 'upload' | 'classification' | 'enrichment' | 'review' | 'completed';
 }
 
-const mockJobs: ProcessingJob[] = [
-  {
-    id: '1',
-    documentName: 'Credit Policy v3.2.pdf',
-    type: 'pdf',
-    status: 'completed',
-    progress: 100,
-    submittedAt: '2024-01-16T10:30:00Z',
-    submittedBy: 'Sarah Johnson',
-    completedAt: '2024-01-16T10:45:00Z',
-    extractedTerms: 47,
-    size: 2457600,
-    currentStage: 'completed',
-  },
-  {
-    id: '2',
-    documentName: 'Business Requirements v1.5.docx',
-    type: 'docx',
-    status: 'processing',
-    progress: 65,
-    submittedAt: '2024-01-16T11:15:00Z',
-    submittedBy: 'Michael Chen',
-    estimatedCompletion: '2024-01-16T11:35:00Z',
-    size: 1048576,
-    currentStage: 'enrichment',
-  },
-  {
-    id: '3',
-    documentName: 'Compliance Framework.pdf',
-    type: 'pdf',
-    status: 'failed',
-    progress: 0,
-    submittedAt: '2024-01-16T09:45:00Z',
-    submittedBy: 'Emily Rodriguez',
-    error: 'Document format not supported',
-    size: 3145728,
-    currentStage: 'upload',
-  },
-  {
-    id: '4',
-    documentName: 'Risk Assessment Model.pdf',
-    type: 'pdf',
-    status: 'processing',
-    progress: 35,
-    submittedAt: '2024-01-16T11:30:00Z',
-    submittedBy: 'David Kim',
-    size: 1876543,
-    currentStage: 'classification',
-  },
-  {
-    id: '5',
-    documentName: 'Customer Onboarding Process.docx',
-    type: 'docx',
-    status: 'paused',
-    progress: 25,
-    submittedAt: '2024-01-16T10:00:00Z',
-    submittedBy: 'Lisa Wang',
-    size: 987654,
-    currentStage: 'classification',
-  },
-];
+// Convert NAPAS documents to ProcessingJob format
+const convertNapasDocumentsToJobs = (documents: DocumentMetadata[]): ProcessingJob[] => {
+  return documents.map((doc, index) => {
+    // Determine status based on document status
+    let status: ProcessingJob['status'] = 'completed';
+    let progress = 100;
+    let currentStage: ProcessingJob['currentStage'] = 'completed';
+    let extractedTerms = doc.extractedTerms?.length || 0;
+    let completedAt = doc.uploadedAt;
+    let estimatedCompletion: string | undefined;
+    let error: string | undefined;
+
+    // Simulate some documents in different states for variety
+    if (index % 7 === 0) {
+      status = 'processing';
+      progress = Math.floor(Math.random() * 80) + 20;
+      currentStage = ['classification', 'enrichment'][Math.floor(Math.random() * 2)] as ProcessingJob['currentStage'];
+      estimatedCompletion = new Date(Date.now() + Math.random() * 3600000).toISOString();
+    } else if (index % 11 === 0) {
+      status = 'failed';
+      progress = 0;
+      currentStage = 'upload';
+      error = 'Document processing failed - retry required';
+    } else if (index % 13 === 0) {
+      status = 'paused';
+      progress = Math.floor(Math.random() * 50) + 10;
+      currentStage = 'classification';
+    } else if (index % 17 === 0) {
+      status = 'queued';
+      progress = 0;
+      currentStage = 'upload';
+    }
+
+    // Determine file type from document name
+    const fileType = doc.name.toLowerCase().includes('.pdf') ? 'pdf' : 
+                    doc.name.toLowerCase().includes('.docx') ? 'docx' : 'pdf';
+
+    return {
+      id: doc.id,
+      documentName: doc.name,
+      type: fileType,
+      status,
+      progress,
+      submittedAt: doc.uploadedAt,
+      submittedBy: doc.uploadedBy,
+      completedAt: status === 'completed' ? completedAt : undefined,
+      estimatedCompletion,
+      extractedTerms: status === 'completed' ? extractedTerms : undefined,
+      error,
+      size: doc.size,
+      currentStage,
+    };
+  });
+};
+
+const napasJobs: ProcessingJob[] = convertNapasDocumentsToJobs(allNapasDocuments);
 
 interface ProcessingDocumentProps {
   onViewResults: (job: ProcessingJob) => void;
@@ -114,11 +110,11 @@ export function ProcessingDocument({
   onViewClassification, 
   onViewEnrichment 
 }: ProcessingDocumentProps) {
-  const [jobs, setJobs] = useState<ProcessingJob[]>(mockJobs);
+  const [jobs, setJobs] = useState<ProcessingJob[]>(napasJobs);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   // Simulate real-time updates with proper cleanup
   useEffect(() => {

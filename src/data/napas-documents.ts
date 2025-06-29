@@ -646,14 +646,459 @@ export const napasDocuments: DocumentMetadata[] = [
   }
 ];
 
+// Additional NAPAS ACH Business Documents
+export const additionalNapasDocuments: DocumentMetadata[] = [
+  // Operational Procedures
+  {
+    id: 'ops-001',
+    name: 'ACH Transaction Processing Operations Manual v2.3.pdf',
+    type: 'Process',
+    service: 'Transaction Payment',
+    size: 3124567,
+    pages: 89,
+    uploadedAt: '2024-01-17T08:30:00Z',
+    uploadedBy: 'Operations Team',
+    status: 'completed',
+    classification: {
+      domain: 'Operational Procedures',
+      sections: [
+        'Daily Processing Schedule',
+        'Cutoff Times',
+        'Exception Handling',
+        'Reconciliation Procedures',
+        'Emergency Procedures',
+        'Staff Training Requirements'
+      ],
+      confidence: 0.91
+    },
+    extractedTerms: [
+      {
+        term: 'Processing Cutoff Time',
+        definition: 'Specific time each business day when ACH transactions must be submitted to NAPAS for same-day processing and settlement',
+        category: 'Operational Rule',
+        confidence: 0.94,
+        sourceSection: 'Cutoff Times',
+        context: 'Standard ACH transactions must be submitted to NAPAS by 2:00 PM local time for same-day processing, while same-day ACH requires 10:30 AM submission.'
+      },
+      {
+        term: 'Exception Processing Window',
+        definition: 'Designated time period for handling returned ACH transactions, corrections, and adjustments through NAPAS',
+        category: 'Operational Process',
+        confidence: 0.89,
+        sourceSection: 'Exception Handling',
+        context: 'Exception processing occurs between 8:00 AM and 4:00 PM daily, allowing banks to handle returned items and submit corrections to NAPAS.'
+      },
+      {
+        term: 'End-of-Day Reconciliation',
+        definition: 'Daily process of matching NAPAS settlement files with internal transaction records to ensure accuracy',
+        category: 'Operational Process',
+        confidence: 0.92,
+        sourceSection: 'Reconciliation Procedures',
+        context: 'Operations staff must complete end-of-day reconciliation by 6:00 PM to identify and resolve any discrepancies before next business day processing.'
+      },
+      {
+        term: 'Emergency Processing Protocol',
+        definition: 'Contingency procedures for handling ACH processing during system outages or NAPAS maintenance windows',
+        category: 'Operational Procedure',
+        confidence: 0.87,
+        sourceSection: 'Emergency Procedures',
+        context: 'Emergency protocols include manual transaction processing, alternative routing through backup systems, and customer communication procedures.'
+      }
+    ],
+    schemaMapping: [
+      {
+        schemaName: 'operations_manual',
+        tableName: 'processing_schedules',
+        columnName: 'cutoff_time',
+        confidence: 0.94
+      },
+      {
+        schemaName: 'operations_manual',
+        tableName: 'exception_processing',
+        columnName: 'processing_window',
+        confidence: 0.89
+      }
+    ]
+  },
+  {
+    id: 'ops-002',
+    name: 'ACH Risk Management and Fraud Prevention Policy v1.9.docx',
+    type: 'Policy',
+    service: 'Transaction Payment',
+    size: 1876543,
+    pages: 45,
+    uploadedAt: '2024-01-16T14:20:00Z',
+    uploadedBy: 'Risk Management Team',
+    status: 'completed',
+    classification: {
+      domain: 'Risk Management',
+      sections: [
+        'Fraud Detection',
+        'Transaction Limits',
+        'Customer Verification',
+        'Monitoring Systems',
+        'Incident Response',
+        'Regulatory Compliance'
+      ],
+      confidence: 0.93
+    },
+    extractedTerms: [
+      {
+        term: 'Real-Time Fraud Scoring',
+        definition: 'Automated system that evaluates ACH transactions for fraud risk using machine learning algorithms and historical patterns',
+        category: 'Risk Management Tool',
+        confidence: 0.95,
+        sourceSection: 'Fraud Detection',
+        context: 'Each ACH transaction is scored in real-time based on factors including amount, frequency, customer history, and transaction patterns before NAPAS submission.'
+      },
+      {
+        term: 'Velocity Limits',
+        definition: 'Transaction frequency and amount restrictions applied to ACH transactions to prevent fraud and comply with regulatory limits',
+        category: 'Risk Control',
+        confidence: 0.91,
+        sourceSection: 'Transaction Limits',
+        context: 'Velocity limits include daily transaction counts, maximum amounts per transaction, and aggregate daily limits based on customer risk profiles.'
+      },
+      {
+        term: 'Account Validation Service',
+        definition: 'Real-time verification service that confirms account ownership and status before processing ACH transactions',
+        category: 'Risk Management Tool',
+        confidence: 0.88,
+        sourceSection: 'Customer Verification',
+        context: 'Account validation occurs before NAPAS submission to ensure the destination account exists and is in good standing.'
+      },
+      {
+        term: 'Suspicious Activity Alert',
+        definition: 'Automated notification system that flags potentially fraudulent ACH transactions for manual review',
+        category: 'Risk Management Process',
+        confidence: 0.90,
+        sourceSection: 'Monitoring Systems',
+        context: 'Alerts are generated for transactions exceeding risk thresholds, unusual patterns, or matches against known fraud indicators.'
+      }
+    ],
+    schemaMapping: [
+      {
+        schemaName: 'risk_management',
+        tableName: 'fraud_scores',
+        columnName: 'risk_score',
+        confidence: 0.95
+      },
+      {
+        schemaName: 'risk_management',
+        tableName: 'velocity_limits',
+        columnName: 'daily_limit',
+        confidence: 0.91
+      }
+    ]
+  },
+  {
+    id: 'ops-003',
+    name: 'Customer ACH Onboarding and Setup Guide v3.1.pdf',
+    type: 'Process',
+    service: 'Internal Portal',
+    size: 2345678,
+    pages: 67,
+    uploadedAt: '2024-01-15T16:45:00Z',
+    uploadedBy: 'Customer Success Team',
+    status: 'completed',
+    classification: {
+      domain: 'Customer Onboarding',
+      sections: [
+        'Onboarding Workflow',
+        'Documentation Requirements',
+        'Testing Procedures',
+        'Go-Live Process',
+        'Training Materials',
+        'Support Procedures'
+      ],
+      confidence: 0.89
+    },
+    extractedTerms: [
+      {
+        term: 'ACH Origination Agreement',
+        definition: 'Legal contract between bank and customer authorizing ACH transaction origination and establishing liability terms',
+        category: 'Legal Document',
+        confidence: 0.94,
+        sourceSection: 'Documentation Requirements',
+        context: 'All customers must sign ACH origination agreements before processing transactions, establishing rights and responsibilities for both parties.'
+      },
+      {
+        term: 'Test Transaction Validation',
+        definition: 'Process of submitting sample ACH transactions to NAPAS test environment to verify customer setup and connectivity',
+        category: 'Testing Process',
+        confidence: 0.91,
+        sourceSection: 'Testing Procedures',
+        context: 'Customers must successfully process test transactions through NAPAS test environment before being approved for production ACH processing.'
+      },
+      {
+        term: 'Customer Risk Assessment',
+        definition: 'Evaluation of customer business type, transaction volumes, and risk factors to determine ACH processing limits and monitoring requirements',
+        category: 'Risk Assessment',
+        confidence: 0.87,
+        sourceSection: 'Onboarding Workflow',
+        context: 'Risk assessment determines appropriate transaction limits, monitoring frequency, and additional verification requirements for each customer.'
+      },
+      {
+        term: 'Go-Live Checklist',
+        definition: 'Comprehensive list of requirements that must be completed before customer can begin production ACH processing',
+        category: 'Process Checklist',
+        confidence: 0.89,
+        sourceSection: 'Go-Live Process',
+        context: 'Go-live checklist includes completed agreements, successful testing, risk assessment approval, and system configuration verification.'
+      }
+    ],
+    schemaMapping: [
+      {
+        schemaName: 'customer_onboarding',
+        tableName: 'origination_agreements',
+        columnName: 'agreement_status',
+        confidence: 0.94
+      },
+      {
+        schemaName: 'customer_onboarding',
+        tableName: 'risk_assessments',
+        columnName: 'risk_level',
+        confidence: 0.87
+      }
+    ]
+  },
+  {
+    id: 'ops-004',
+    name: 'ACH Transaction Types and Processing Rules v2.8.pdf',
+    type: 'Technical',
+    service: 'Transaction Payment',
+    size: 2987654,
+    pages: 73,
+    uploadedAt: '2024-01-14T11:15:00Z',
+    uploadedBy: 'Product Development Team',
+    status: 'completed',
+    classification: {
+      domain: 'Transaction Processing',
+      sections: [
+        'ACH Transaction Types',
+        'Processing Rules',
+        'Settlement Timelines',
+        'Return Codes',
+        'Fee Structures',
+        'Compliance Requirements'
+      ],
+      confidence: 0.96
+    },
+    extractedTerms: [
+      {
+        term: 'PPD (Prearranged Payment and Deposit)',
+        definition: 'ACH transaction type for consumer accounts, including direct deposits, bill payments, and recurring transfers',
+        category: 'Transaction Type',
+        confidence: 0.97,
+        sourceSection: 'ACH Transaction Types',
+        context: 'PPD transactions are used for consumer accounts and require explicit authorization from the account holder for recurring payments.'
+      },
+      {
+        term: 'CCD (Corporate Credit or Debit)',
+        definition: 'ACH transaction type for business accounts, typically used for B2B payments, payroll, and corporate transfers',
+        category: 'Transaction Type',
+        confidence: 0.95,
+        sourceSection: 'ACH Transaction Types',
+        context: 'CCD transactions are designed for business-to-business payments and require different authorization procedures than consumer transactions.'
+      },
+      {
+        term: 'Return Code R01',
+        definition: 'NAPAS return code indicating insufficient funds in the originator account for ACH transaction processing',
+        category: 'Return Code',
+        confidence: 0.93,
+        sourceSection: 'Return Codes',
+        context: 'R01 returns occur when the originating account lacks sufficient funds to complete the ACH transaction and must be handled within 2 business days.'
+      },
+      {
+        term: 'Same-Day ACH Fee',
+        definition: 'Additional processing fee charged by NAPAS for expedited same-day ACH transaction processing and settlement',
+        category: 'Fee Structure',
+        confidence: 0.89,
+        sourceSection: 'Fee Structures',
+        context: 'Same-day ACH transactions incur additional fees of $0.052 per transaction for credits and $0.034 for debits, in addition to standard processing fees.'
+      },
+      {
+        term: 'ACH Network Rules',
+        definition: 'Comprehensive set of rules and regulations governing ACH transaction processing established by NACHA and enforced by NAPAS',
+        category: 'Regulatory Framework',
+        confidence: 0.92,
+        sourceSection: 'Compliance Requirements',
+        context: 'ACH Network Rules define authorization requirements, processing timelines, return procedures, and compliance obligations for all participants.'
+      }
+    ],
+    schemaMapping: [
+      {
+        schemaName: 'transaction_types',
+        tableName: 'ach_codes',
+        columnName: 'transaction_code',
+        confidence: 0.97
+      },
+      {
+        schemaName: 'transaction_types',
+        tableName: 'return_codes',
+        columnName: 'return_code',
+        confidence: 0.93
+      }
+    ]
+  },
+  {
+    id: 'ops-005',
+    name: 'NAPAS Settlement and Reconciliation Procedures v2.4.docx',
+    type: 'Process',
+    service: 'Core Banking',
+    size: 2156789,
+    pages: 58,
+    uploadedAt: '2024-01-13T13:30:00Z',
+    uploadedBy: 'Settlement Operations Team',
+    status: 'completed',
+    classification: {
+      domain: 'Settlement Processing',
+      sections: [
+        'Settlement Timelines',
+        'Reconciliation Process',
+        'Exception Handling',
+        'Reporting Requirements',
+        'Audit Procedures',
+        'System Integration'
+      ],
+      confidence: 0.94
+    },
+    extractedTerms: [
+      {
+        term: 'Settlement File Processing',
+        definition: 'Automated process of receiving and processing NAPAS settlement files to update customer accounts and nostro positions',
+        category: 'Settlement Process',
+        confidence: 0.96,
+        sourceSection: 'Settlement Timelines',
+        context: 'NAPAS settlement files are received at 8:00 AM daily and must be processed within 2 hours to ensure timely account updates and reconciliation.'
+      },
+      {
+        term: 'Nostro Account Balancing',
+        definition: 'Daily process of reconciling bank\'s NAPAS settlement account to ensure accurate cash position and identify discrepancies',
+        category: 'Reconciliation Process',
+        confidence: 0.93,
+        sourceSection: 'Reconciliation Process',
+        context: 'Nostro account balancing compares internal settlement records with NAPAS settlement files to ensure all transactions are properly accounted for.'
+      },
+      {
+        term: 'Settlement Exception Report',
+        definition: 'Daily report identifying ACH transactions that failed to settle or require manual intervention',
+        category: 'Operational Report',
+        confidence: 0.90,
+        sourceSection: 'Exception Handling',
+        context: 'Exception reports are generated daily at 10:00 AM and must be reviewed by settlement operations staff within 4 hours.'
+      },
+      {
+        term: 'Settlement Audit Trail',
+        definition: 'Comprehensive record of all settlement activities including file processing, account updates, and reconciliation results',
+        category: 'Audit Requirement',
+        confidence: 0.88,
+        sourceSection: 'Audit Procedures',
+        context: 'Settlement audit trails must be maintained for 7 years to support regulatory examinations and internal audit requirements.'
+      }
+    ],
+    schemaMapping: [
+      {
+        schemaName: 'settlement_processing',
+        tableName: 'settlement_files',
+        columnName: 'processing_status',
+        confidence: 0.96
+      },
+      {
+        schemaName: 'settlement_processing',
+        tableName: 'nostro_balances',
+        columnName: 'balance_amount',
+        confidence: 0.93
+      }
+    ]
+  },
+  {
+    id: 'ops-006',
+    name: 'ACH System Performance Monitoring and Optimization v2.1.pdf',
+    type: 'Technical',
+    service: 'DPG',
+    size: 1876543,
+    pages: 42,
+    uploadedAt: '2024-01-12T15:45:00Z',
+    uploadedBy: 'Performance Engineering Team',
+    status: 'completed',
+    classification: {
+      domain: 'System Performance',
+      sections: [
+        'Performance Metrics',
+        'Monitoring Tools',
+        'Capacity Planning',
+        'Optimization Strategies',
+        'Alert Thresholds',
+        'Incident Response'
+      ],
+      confidence: 0.91
+    },
+    extractedTerms: [
+      {
+        term: 'Transaction Processing Latency',
+        definition: 'Time measurement from ACH transaction submission to NAPAS response, with target of sub-500ms for 95th percentile',
+        category: 'Performance Metric',
+        confidence: 0.94,
+        sourceSection: 'Performance Metrics',
+        context: 'Processing latency is measured end-to-end from customer submission through DPG routing to NAPAS response and back to customer.'
+      },
+      {
+        term: 'System Throughput Capacity',
+        definition: 'Maximum number of ACH transactions per second that the system can process while maintaining performance standards',
+        category: 'Performance Metric',
+        confidence: 0.92,
+        sourceSection: 'Capacity Planning',
+        context: 'Current system capacity is 1000 TPS with ability to scale to 5000 TPS during peak processing periods.'
+      },
+      {
+        term: 'Performance Alert Threshold',
+        definition: 'Configurable limits that trigger alerts when system performance metrics exceed acceptable ranges',
+        category: 'Monitoring Parameter',
+        confidence: 0.89,
+        sourceSection: 'Alert Thresholds',
+        context: 'Performance alerts are triggered when latency exceeds 1 second, error rates exceed 1%, or throughput drops below 80% of capacity.'
+      },
+      {
+        term: 'Auto-Scaling Configuration',
+        definition: 'Automated system scaling rules that adjust processing capacity based on transaction volume and performance metrics',
+        category: 'Performance Optimization',
+        confidence: 0.87,
+        sourceSection: 'Optimization Strategies',
+        context: 'Auto-scaling rules automatically provision additional processing resources when transaction volumes exceed 80% of current capacity.'
+      }
+    ],
+    schemaMapping: [
+      {
+        schemaName: 'performance_monitoring',
+        tableName: 'latency_metrics',
+        columnName: 'processing_time_ms',
+        confidence: 0.94
+      },
+      {
+        schemaName: 'performance_monitoring',
+        tableName: 'throughput_metrics',
+        columnName: 'transactions_per_second',
+        confidence: 0.92
+      }
+    ]
+  }
+];
+
+// Combine existing and additional documents
+export const allNapasDocuments: DocumentMetadata[] = [
+  ...napasDocuments,
+  ...additionalNapasDocuments
+];
+
 // Helper function to get documents by service
 export const getDocumentsByService = (service: string) => {
-  return napasDocuments.filter(doc => doc.service === service);
+  return allNapasDocuments.filter(doc => doc.service === service);
 };
 
 // Helper function to get all unique terms across documents
 export const getAllTerms = () => {
-  const allTerms = napasDocuments.flatMap(doc => doc.extractedTerms);
+  const allTerms = allNapasDocuments.flatMap(doc => doc.extractedTerms);
   return allTerms.reduce((unique, term) => {
     if (!unique.find(t => t.term === term.term)) {
       unique.push(term);
@@ -664,13 +1109,13 @@ export const getAllTerms = () => {
 
 // Helper function to get documents by type
 export const getDocumentsByType = (type: string) => {
-  return napasDocuments.filter(doc => doc.type === type);
+  return allNapasDocuments.filter(doc => doc.type === type);
 };
 
 // Statistics
 export const getDocumentStats = () => {
   return {
-    totalDocuments: napasDocuments.length,
+    totalDocuments: allNapasDocuments.length,
     totalTerms: getAllTerms().length,
     serviceBreakdown: {
       'DPG': getDocumentsByService('DPG').length,

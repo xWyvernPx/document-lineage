@@ -1,0 +1,632 @@
+[
+  {
+    "document": "DPG Middleware Integration Specification v2.1.pdf",
+    "uploadedBy": "Technical Architecture Team",
+    "terms": [
+      {
+        "term": "Message Routing Engine",
+        "definition": "Core component responsible for directing ACH messages between internal services and NAPAS based on transaction type and routing rules. Ensures proper message delivery and transformation between NAPAS and internal banking systems.",
+        "confidence": 0.96,
+        "sourceSection": "Section 3.1 – System Architecture",
+        "relatedTerms": ["Message Router", "Transaction Router", "ACH Router", "Payment Router"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "message_routing_config",
+          "matchConfidence": 0.94
+        }
+      },
+      {
+        "term": "Transaction Correlation ID",
+        "definition": "Unique identifier that tracks a single ACH transaction across all system components and services throughout its lifecycle. Enables end-to-end tracking and reconciliation across DPG, payment services, and core banking.",
+        "confidence": 0.93,
+        "sourceSection": "Section 4.2 – Message Tracking",
+        "relatedTerms": ["Trace ID", "Transaction ID", "Correlation Key", "ACH Trace Number"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "correlation_id",
+          "matchConfidence": 0.97
+        }
+      },
+      {
+        "term": "Circuit Breaker Pattern",
+        "definition": "Fault tolerance mechanism that prevents cascading failures by temporarily blocking requests to failing downstream services. DPG implements circuit breakers for NAPAS connectivity to maintain system stability during network issues.",
+        "confidence": 0.89,
+        "sourceSection": "Section 5.3 – Error Handling",
+        "relatedTerms": ["Fault Tolerance", "Service Protection", "Failure Isolation", "Resilience Pattern"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "circuit_breaker_state",
+          "matchConfidence": 0.88
+        }
+      },
+      {
+        "term": "Message Transformation Layer",
+        "definition": "Service component that converts internal bank message formats to NAPAS-compliant ISO 20022 XML structures. All outbound ACH messages pass through the transformation layer to ensure compliance with NAPAS message standards.",
+        "confidence": 0.91,
+        "sourceSection": "Section 4.1 – Message Format",
+        "relatedTerms": ["Format Converter", "Message Adapter", "ISO 20022 Transformer", "XML Converter"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "transformation_rules",
+          "matchConfidence": 0.92
+        }
+      },
+      {
+        "term": "Clearing Cycle",
+        "definition": "Scheduled time window during which NAPAS processes and settles ACH transactions. Banks must submit transactions within specific clearing cycles to ensure same-day or next-day settlement.",
+        "confidence": 0.95,
+        "sourceSection": "Section 6.2 – Processing Schedule",
+        "relatedTerms": ["Settlement Window", "Processing Cycle", "ACH Cycle", "Clearing Window"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "clearing_cycle_config",
+          "matchConfidence": 0.96
+        }
+      },
+      {
+        "term": "ISO 8583 Code",
+        "definition": "Standard message format code used in financial transaction processing to identify transaction types and routing information. NAPAS uses ISO 8583 codes for ACH transaction classification and processing.",
+        "confidence": 0.87,
+        "sourceSection": "Section 4.3 – Message Codes",
+        "relatedTerms": ["Transaction Code", "Message Type", "ISO Code", "ACH Code"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "iso8583_code",
+          "matchConfidence": 0.89
+        }
+      },
+      {
+        "term": "ACH Request",
+        "definition": "Outbound message sent from bank systems to NAPAS requesting ACH transaction processing. Contains originator details, beneficiary information, and payment instructions for NAPAS processing.",
+        "confidence": 0.94,
+        "sourceSection": "Section 4.4 – Request Format",
+        "relatedTerms": ["ACH Message", "Payment Request", "Transaction Request", "ACH Submission"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "ach_request_payload",
+          "matchConfidence": 0.93
+        }
+      },
+      {
+        "term": "Response Handler",
+        "definition": "Component that processes NAPAS response messages and updates internal systems with transaction status. Handles both successful confirmations and error responses from NAPAS.",
+        "confidence": 0.90,
+        "sourceSection": "Section 5.1 – Response Processing",
+        "relatedTerms": ["Response Processor", "Status Handler", "Confirmation Handler", "ACK Processor"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "response_handler_config",
+          "matchConfidence": 0.91
+        }
+      },
+      {
+        "term": "Message Queue",
+        "definition": "Asynchronous processing mechanism that stores ACH messages before transmission to NAPAS. Ensures reliable message delivery and provides retry capabilities for failed transmissions.",
+        "confidence": 0.88,
+        "sourceSection": "Section 3.2 – Message Queuing",
+        "relatedTerms": ["Message Buffer", "Transaction Queue", "ACH Queue", "Processing Queue"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "message_queue_config",
+          "matchConfidence": 0.86
+        }
+      },
+      {
+        "term": "Retry Mechanism",
+        "definition": "Automated system that attempts to resend failed ACH transactions to NAPAS with exponential backoff. Implements configurable retry limits and delay intervals to handle temporary network issues.",
+        "confidence": 0.85,
+        "sourceSection": "Section 5.4 – Retry Logic",
+        "relatedTerms": ["Retry Logic", "Resend Mechanism", "Failure Recovery", "Retry Policy"],
+        "schemaMapping": {
+          "schemaName": "dpg_middleware",
+          "field": "retry_config",
+          "matchConfidence": 0.87
+        }
+      }
+    ]
+  },
+  {
+    "document": "NAPAS Connectivity Requirements and SLA v1.3.docx",
+    "uploadedBy": "Infrastructure Team",
+    "terms": [
+      {
+        "term": "NAPAS Dedicated Line",
+        "definition": "Secure, dedicated network connection between bank infrastructure and NAPAS data centers with guaranteed bandwidth and latency. Banks must maintain redundant dedicated lines with minimum 10Mbps bandwidth and sub-100ms latency.",
+        "confidence": 0.94,
+        "sourceSection": "Section 2.1 – Network Connectivity",
+        "relatedTerms": ["Dedicated Connection", "Private Line", "NAPAS Link", "Secure Connection"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "dedicated_line_config",
+          "matchConfidence": 0.95
+        }
+      },
+      {
+        "term": "Message Processing SLA",
+        "definition": "Service level agreement requiring 99.9% uptime and maximum 2-second response time for ACH message processing. DPG middleware must meet strict SLA requirements to ensure timely ACH transaction processing.",
+        "confidence": 0.87,
+        "sourceSection": "Section 3.2 – Performance SLA",
+        "relatedTerms": ["Response Time SLA", "Processing SLA", "Performance Guarantee", "Uptime SLA"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "sla_requirements",
+          "matchConfidence": 0.89
+        }
+      },
+      {
+        "term": "HSM Integration",
+        "definition": "Hardware Security Module integration for cryptographic operations including message signing and encryption for NAPAS communication. All NAPAS messages require HSM-based digital signatures and encryption.",
+        "confidence": 0.91,
+        "sourceSection": "Section 4.1 – Security Requirements",
+        "relatedTerms": ["Hardware Security", "Cryptographic Module", "Message Signing", "Encryption Module"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "hsm_config",
+          "matchConfidence": 0.93
+        }
+      },
+      {
+        "term": "Load Balancer",
+        "definition": "Network component that distributes ACH transaction traffic across multiple NAPAS endpoints to ensure optimal performance and high availability. Implements health checks and failover mechanisms for seamless operation.",
+        "confidence": 0.89,
+        "sourceSection": "Section 2.3 – Load Distribution",
+        "relatedTerms": ["Traffic Distributor", "Load Distributor", "NAPAS Load Balancer", "Traffic Manager"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "load_balancer_config",
+          "matchConfidence": 0.91
+        }
+      },
+      {
+        "term": "Disaster Recovery",
+        "definition": "Comprehensive backup and recovery procedures ensuring NAPAS connectivity and ACH processing capabilities during system failures. Includes redundant systems, backup data centers, and automated failover mechanisms.",
+        "confidence": 0.92,
+        "sourceSection": "Section 5.1 – Disaster Recovery",
+        "relatedTerms": ["Backup Systems", "Failover", "Recovery Procedures", "Redundancy"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "disaster_recovery_config",
+          "matchConfidence": 0.94
+        }
+      },
+      {
+        "term": "Network Monitoring",
+        "definition": "Real-time surveillance system that monitors NAPAS connectivity, latency, and packet loss to ensure optimal performance. Provides alerts and automated responses to network issues affecting ACH processing.",
+        "confidence": 0.88,
+        "sourceSection": "Section 6.1 – Monitoring Requirements",
+        "relatedTerms": ["Connectivity Monitoring", "Network Surveillance", "Performance Monitoring", "Latency Monitoring"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "network_monitoring_config",
+          "matchConfidence": 0.90
+        }
+      },
+      {
+        "term": "Bandwidth Allocation",
+        "definition": "Reserved network capacity specifically allocated for NAPAS ACH transaction processing to ensure consistent performance. Guarantees minimum bandwidth requirements for critical payment processing operations.",
+        "confidence": 0.86,
+        "sourceSection": "Section 2.2 – Bandwidth Requirements",
+        "relatedTerms": ["Network Capacity", "Bandwidth Reservation", "Traffic Allocation", "Network Resources"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "bandwidth_allocation",
+          "matchConfidence": 0.88
+        }
+      },
+      {
+        "term": "Firewall Rules",
+        "definition": "Network security policies that control access to NAPAS endpoints and ensure only authorized ACH transactions are processed. Implements strict IP whitelisting and protocol restrictions for security.",
+        "confidence": 0.93,
+        "sourceSection": "Section 4.2 – Network Security",
+        "relatedTerms": ["Security Policies", "Access Control", "Network Rules", "IP Whitelisting"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "firewall_rules",
+          "matchConfidence": 0.95
+        }
+      },
+      {
+        "term": "Latency Monitoring",
+        "definition": "Continuous measurement of network response times between bank systems and NAPAS to ensure SLA compliance. Tracks round-trip times and alerts when latency exceeds acceptable thresholds.",
+        "confidence": 0.85,
+        "sourceSection": "Section 6.2 – Performance Monitoring",
+        "relatedTerms": ["Response Time Monitoring", "Network Latency", "Performance Tracking", "SLA Monitoring"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "latency_monitoring_config",
+          "matchConfidence": 0.87
+        }
+      },
+      {
+        "term": "Certificate Management",
+        "definition": "Process for managing SSL/TLS certificates used for secure communication with NAPAS. Includes certificate renewal, validation, and automated monitoring to prevent connectivity issues.",
+        "confidence": 0.90,
+        "sourceSection": "Section 4.3 – Certificate Requirements",
+        "relatedTerms": ["SSL Certificate", "TLS Certificate", "Digital Certificate", "Security Certificate"],
+        "schemaMapping": {
+          "schemaName": "infrastructure",
+          "field": "certificate_management",
+          "matchConfidence": 0.92
+        }
+      }
+    ]
+  },
+  {
+    "document": "ACH Payment Orchestration Business Requirements v3.0.pdf",
+    "uploadedBy": "Payment Product Team",
+    "terms": [
+      {
+        "term": "Payment Orchestration Engine",
+        "definition": "Central system component that coordinates ACH payment flows across multiple third-party providers and internal banking services. Manages complex payment workflows, routing decisions, and fallback scenarios for ACH transactions.",
+        "confidence": 0.96,
+        "sourceSection": "Section 2.1 – Business Overview",
+        "relatedTerms": ["Payment Coordinator", "Transaction Orchestrator", "Payment Manager", "ACH Orchestrator"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "orchestration_engine_config",
+          "matchConfidence": 0.97
+        }
+      },
+      {
+        "term": "Same-Day ACH",
+        "definition": "Expedited ACH processing service that enables same-business-day settlement for qualifying transactions through NAPAS infrastructure. Requires special handling with earlier cutoff times and higher fees.",
+        "confidence": 0.93,
+        "sourceSection": "Section 3.2 – Payment Types",
+        "relatedTerms": ["Expedited ACH", "Fast ACH", "Same-Day Settlement", "Rapid ACH"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "same_day_ach_config",
+          "matchConfidence": 0.95
+        }
+      },
+      {
+        "term": "Payment Routing Rules",
+        "definition": "Business logic that determines optimal payment path based on transaction amount, type, destination bank, and cost optimization. Evaluates factors like transaction fees, processing speed, and success rates.",
+        "confidence": 0.89,
+        "sourceSection": "Section 4.1 – Workflow Requirements",
+        "relatedTerms": ["Routing Logic", "Payment Path", "Transaction Routing", "ACH Routing"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "routing_rules",
+          "matchConfidence": 0.91
+        }
+      },
+      {
+        "term": "Transaction Enrichment",
+        "definition": "Process of adding additional data elements to ACH transactions including risk scores, customer context, and regulatory flags. Payment transactions are enriched with customer data before NAPAS submission.",
+        "confidence": 0.88,
+        "sourceSection": "Section 4.2 – Transaction Processing",
+        "relatedTerms": ["Data Enrichment", "Transaction Enhancement", "ACH Enrichment", "Payment Enrichment"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "enrichment_config",
+          "matchConfidence": 0.90
+        }
+      },
+      {
+        "term": "Fallback Provider",
+        "definition": "Alternative payment service provider used when primary NAPAS connectivity is unavailable or when specific transaction types require different processing paths. Ensures continuous payment processing capability.",
+        "confidence": 0.91,
+        "sourceSection": "Section 5.1 – Risk Management",
+        "relatedTerms": ["Backup Provider", "Alternative Provider", "Secondary Provider", "Failover Provider"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "fallback_provider_config",
+          "matchConfidence": 0.93
+        }
+      },
+      {
+        "term": "Payment Velocity Limits",
+        "definition": "Transaction frequency and amount restrictions applied to ACH payments to prevent fraud and comply with regulatory limits. Includes daily transaction counts and maximum amounts per customer.",
+        "confidence": 0.87,
+        "sourceSection": "Section 5.2 – Fraud Prevention",
+        "relatedTerms": ["Transaction Limits", "Velocity Controls", "Payment Limits", "ACH Limits"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "velocity_limits",
+          "matchConfidence": 0.89
+        }
+      },
+      {
+        "term": "Settlement Reconciliation",
+        "definition": "Process of matching NAPAS settlement files with internal payment records to ensure accurate transaction processing and account updates. Identifies discrepancies and initiates corrective actions.",
+        "confidence": 0.94,
+        "sourceSection": "Section 6.1 – Settlement Processing",
+        "relatedTerms": ["Settlement Matching", "Transaction Reconciliation", "ACH Reconciliation", "Payment Reconciliation"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "settlement_reconciliation_config",
+          "matchConfidence": 0.96
+        }
+      },
+      {
+        "term": "Payment Status Tracking",
+        "definition": "Real-time monitoring system that tracks ACH payment status from initiation through NAPAS processing to final settlement. Provides customers with up-to-date payment information and notifications.",
+        "confidence": 0.92,
+        "sourceSection": "Section 6.2 – Status Monitoring",
+        "relatedTerms": ["Transaction Tracking", "Payment Monitoring", "ACH Tracking", "Status Monitoring"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "status_tracking_config",
+          "matchConfidence": 0.94
+        }
+      },
+      {
+        "term": "Batch Processing",
+        "definition": "Method of grouping multiple ACH transactions into batches for efficient processing and transmission to NAPAS. Optimizes network utilization and reduces processing overhead for large transaction volumes.",
+        "confidence": 0.85,
+        "sourceSection": "Section 4.3 – Processing Methods",
+        "relatedTerms": ["Batch ACH", "Transaction Batching", "ACH Batching", "Payment Batching"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "batch_processing_config",
+          "matchConfidence": 0.87
+        }
+      },
+      {
+        "term": "Payment Authorization",
+        "definition": "Process of validating customer permissions and account status before initiating ACH transactions. Ensures proper authorization and prevents unauthorized payment processing.",
+        "confidence": 0.90,
+        "sourceSection": "Section 5.3 – Authorization Requirements",
+        "relatedTerms": ["Transaction Authorization", "ACH Authorization", "Payment Validation", "Authorization Check"],
+        "schemaMapping": {
+          "schemaName": "payment_orchestration",
+          "field": "authorization_config",
+          "matchConfidence": 0.92
+        }
+      }
+    ]
+  },
+  {
+    "document": "Third Party Payment Provider Integration Guide v2.5.pdf",
+    "uploadedBy": "Integration Team",
+    "terms": [
+      {
+        "term": "Provider Certification Process",
+        "definition": "Formal validation process ensuring third-party payment providers meet technical and compliance standards for ACH processing. New providers must complete certification including API testing and security validation.",
+        "confidence": 0.94,
+        "sourceSection": "Section 3.1 – Provider Onboarding",
+        "relatedTerms": ["Provider Validation", "Certification Process", "Provider Testing", "Integration Certification"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "certification_process",
+          "matchConfidence": 0.96
+        }
+      },
+      {
+        "term": "Webhook Notification System",
+        "definition": "Real-time event notification mechanism that informs payment orchestration of transaction status changes from third-party providers. Providers send webhook notifications for payment status updates.",
+        "confidence": 0.87,
+        "sourceSection": "Section 4.2 – API Specifications",
+        "relatedTerms": ["Event Notifications", "Status Webhooks", "Real-time Notifications", "Callback System"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "webhook_config",
+          "matchConfidence": 0.89
+        }
+      },
+      {
+        "term": "API Rate Limiting",
+        "definition": "Provider-imposed restrictions on the number of API requests per time period to ensure system stability and fair usage. Banks must implement rate limiting compliance to maintain provider relationships.",
+        "confidence": 0.91,
+        "sourceSection": "Section 4.3 – Rate Limiting",
+        "relatedTerms": ["Request Limiting", "API Throttling", "Rate Controls", "Request Restrictions"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "rate_limiting_config",
+          "matchConfidence": 0.93
+        }
+      },
+      {
+        "term": "Provider Reconciliation",
+        "definition": "Process of matching third-party provider transaction records with internal payment systems to ensure accurate accounting and identify discrepancies. Performed daily to maintain data integrity.",
+        "confidence": 0.88,
+        "sourceSection": "Section 5.1 – Reconciliation Process",
+        "relatedTerms": ["Provider Matching", "Transaction Reconciliation", "Provider Settlement", "Data Reconciliation"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "reconciliation_config",
+          "matchConfidence": 0.90
+        }
+      },
+      {
+        "term": "Multi-Provider Routing",
+        "definition": "Intelligent routing system that selects optimal third-party provider based on transaction characteristics, cost, and performance metrics. Ensures best execution for ACH transactions across multiple providers.",
+        "confidence": 0.92,
+        "sourceSection": "Section 4.4 – Provider Selection",
+        "relatedTerms": ["Provider Routing", "Smart Routing", "Optimal Routing", "Provider Selection"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "multi_provider_routing",
+          "matchConfidence": 0.94
+        }
+      },
+      {
+        "term": "Provider Health Monitoring",
+        "definition": "Continuous monitoring of third-party provider system status, response times, and error rates to ensure reliable payment processing. Triggers alerts and automatic failover when providers experience issues.",
+        "confidence": 0.89,
+        "sourceSection": "Section 6.1 – Monitoring Requirements",
+        "relatedTerms": ["Provider Monitoring", "Health Checks", "Provider Status", "System Monitoring"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "health_monitoring_config",
+          "matchConfidence": 0.91
+        }
+      },
+      {
+        "term": "API Authentication",
+        "definition": "Security mechanism for authenticating API requests to third-party payment providers using API keys, OAuth tokens, or digital certificates. Ensures secure communication and prevents unauthorized access.",
+        "confidence": 0.93,
+        "sourceSection": "Section 4.1 – Authentication",
+        "relatedTerms": ["API Security", "Provider Authentication", "Secure API", "API Keys"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "authentication_config",
+          "matchConfidence": 0.95
+        }
+      },
+      {
+        "term": "Provider SLA Monitoring",
+        "definition": "Tracking of third-party provider performance against service level agreements including response times, uptime, and error rates. Ensures providers meet contractual obligations for payment processing.",
+        "confidence": 0.86,
+        "sourceSection": "Section 6.2 – SLA Compliance",
+        "relatedTerms": ["SLA Tracking", "Provider Performance", "SLA Monitoring", "Performance Tracking"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "sla_monitoring_config",
+          "matchConfidence": 0.88
+        }
+      },
+      {
+        "term": "Error Handling Protocol",
+        "definition": "Standardized procedures for handling API errors, timeouts, and failures from third-party providers. Includes retry logic, fallback mechanisms, and customer notification processes.",
+        "confidence": 0.90,
+        "sourceSection": "Section 5.2 – Error Handling",
+        "relatedTerms": ["Error Management", "Failure Handling", "Error Recovery", "Provider Error Handling"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "error_handling_config",
+          "matchConfidence": 0.92
+        }
+      },
+      {
+        "term": "Provider Data Mapping",
+        "definition": "Configuration that maps internal payment data formats to third-party provider API requirements. Ensures compatibility between bank systems and provider interfaces for seamless integration.",
+        "confidence": 0.85,
+        "sourceSection": "Section 4.5 – Data Formats",
+        "relatedTerms": ["Data Transformation", "Format Mapping", "Provider Mapping", "API Mapping"],
+        "schemaMapping": {
+          "schemaName": "third_party_integration",
+          "field": "data_mapping_config",
+          "matchConfidence": 0.87
+        }
+      }
+    ]
+  },
+  {
+    "document": "Business User Portal Requirements v1.8.docx",
+    "uploadedBy": "Business Operations Team",
+    "terms": [
+      {
+        "term": "Transaction Dashboard",
+        "definition": "Real-time monitoring interface displaying ACH transaction volumes, success rates, and processing status across NAPAS and other payment rails. Business users require comprehensive dashboards to monitor ACH transaction flows.",
+        "confidence": 0.92,
+        "sourceSection": "Section 3.1 – Dashboard Requirements",
+        "relatedTerms": ["Transaction Monitor", "ACH Dashboard", "Payment Dashboard", "Transaction View"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "dashboard_config",
+          "matchConfidence": 0.94
+        }
+      },
+      {
+        "term": "Exception Management Workflow",
+        "definition": "Business process for handling failed or rejected ACH transactions including investigation, resolution, and customer communication. Portal provides tools for business users to research transaction failures.",
+        "confidence": 0.89,
+        "sourceSection": "Section 4.2 – Transaction Monitoring",
+        "relatedTerms": ["Exception Handling", "Error Management", "Transaction Resolution", "ACH Exceptions"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "exception_workflow_config",
+          "matchConfidence": 0.91
+        }
+      },
+      {
+        "term": "Regulatory Reporting Module",
+        "definition": "Portal component that generates compliance reports for ACH transaction volumes, suspicious activity, and regulatory submissions. Business users generate various regulatory reports including BSA/AML reporting.",
+        "confidence": 0.86,
+        "sourceSection": "Section 5.1 – Reporting Features",
+        "relatedTerms": ["Compliance Reporting", "Regulatory Reports", "BSA Reporting", "AML Reporting"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "regulatory_reporting_config",
+          "matchConfidence": 0.88
+        }
+      },
+      {
+        "term": "User Role Management",
+        "definition": "System for defining and managing user permissions and access levels within the business portal. Ensures appropriate access controls for different business functions and compliance requirements.",
+        "confidence": 0.93,
+        "sourceSection": "Section 2.1 – User Roles",
+        "relatedTerms": ["Access Control", "User Permissions", "Role Management", "Portal Access"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "user_role_config",
+          "matchConfidence": 0.95
+        }
+      },
+      {
+        "term": "Bulk Transaction Upload",
+        "definition": "Portal functionality allowing business users to upload multiple ACH transactions via CSV or Excel files for batch processing. Business departments can upload large volumes of ACH transactions with validation.",
+        "confidence": 0.88,
+        "sourceSection": "Section 3.2 – Portal Navigation",
+        "relatedTerms": ["Batch Upload", "File Upload", "Transaction Import", "Bulk Processing"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "bulk_upload_config",
+          "matchConfidence": 0.90
+        }
+      },
+      {
+        "term": "Transaction Lifecycle View",
+        "definition": "Portal feature that displays complete ACH transaction journey from initiation through NAPAS processing to final settlement. Users can track individual ACH transactions through each processing stage.",
+        "confidence": 0.91,
+        "sourceSection": "Section 4.1 – Status Monitoring",
+        "relatedTerms": ["Transaction Tracking", "Lifecycle Monitoring", "ACH Journey", "Transaction Flow"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "lifecycle_view_config",
+          "matchConfidence": 0.93
+        }
+      },
+      {
+        "term": "Alert Management System",
+        "definition": "Configurable notification system that alerts business users to important events such as transaction failures, SLA breaches, and system issues. Supports email, SMS, and in-app notifications.",
+        "confidence": 0.87,
+        "sourceSection": "Section 4.3 – Alert System",
+        "relatedTerms": ["Notification System", "Alert System", "Business Alerts", "Event Notifications"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "alert_management_config",
+          "matchConfidence": 0.89
+        }
+      },
+      {
+        "term": "Report Generation",
+        "definition": "Portal capability for creating custom reports on ACH transaction volumes, processing times, error rates, and other key performance indicators. Supports scheduled report delivery and export formats.",
+        "confidence": 0.90,
+        "sourceSection": "Section 5.2 – Custom Reports",
+        "relatedTerms": ["Custom Reports", "Report Builder", "ACH Reports", "Performance Reports"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "report_generation_config",
+          "matchConfidence": 0.92
+        }
+      },
+      {
+        "term": "Audit Trail",
+        "definition": "Comprehensive logging system that records all user actions, system changes, and transaction modifications within the business portal. Supports compliance requirements and security investigations.",
+        "confidence": 0.94,
+        "sourceSection": "Section 6.1 – Audit Requirements",
+        "relatedTerms": ["Activity Log", "Audit Log", "User Activity", "System Log"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "audit_trail_config",
+          "matchConfidence": 0.96
+        }
+      },
+      {
+        "term": "Data Export Functionality",
+        "definition": "Portal feature allowing business users to export transaction data, reports, and analytics in various formats including CSV, Excel, and PDF. Supports scheduled exports and automated delivery.",
+        "confidence": 0.85,
+        "sourceSection": "Section 5.3 – Data Export",
+        "relatedTerms": ["Data Export", "Report Export", "Transaction Export", "File Export"],
+        "schemaMapping": {
+          "schemaName": "business_portal",
+          "field": "export_config",
+          "matchConfidence": 0.87
+        }
+      }
+    ]
+  }
+] 

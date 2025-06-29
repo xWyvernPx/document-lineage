@@ -9,6 +9,7 @@ import { DocumentLibrary } from './features/documents/components/DocumentLibrary
 import { DocumentUpload } from './features/documents/components/DocumentUpload';
 import { TermDictionary } from './features/terms/components/TermDictionary';
 import { DataLineageViewer } from './features/lineage/components/DataLineageViewer';
+import { NAPASLineageViewer } from './features/lineage/components/NAPASLineageViewer';
 import { SchemaIngestionPage } from './features/schema/components/SchemaIngestionPage';
 import { AsyncProcessingApp } from './features/async-processing';
 import { useAlert } from './hooks/useAlert';
@@ -80,6 +81,8 @@ function App() {
         );
       case 'lineage':
         return <DataLineageViewer />;
+      case 'napas-lineage':
+        return <NAPASLineageViewer />;
       case 'schema-ingestion':
         return <SchemaIngestionPage />;
       case 'search':
