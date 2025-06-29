@@ -871,7 +871,7 @@ export function TermDictionary() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between px-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Banking Term Dictionary</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Term Dictionary</h1>
             <p className="text-gray-600 mt-1">
               Browse and manage business terms across multiple banking systems and domains
             </p>
@@ -973,7 +973,7 @@ export function TermDictionary() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-lg font-semibold text-gray-900">
-              {filteredTerms.length} Banking Terms Found
+              {filteredTerms.length} Terms Found
             </h2>
             <p className="text-sm text-gray-600">
               Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredTerms.length)} of {filteredTerms.length} terms
@@ -1234,7 +1234,7 @@ export function TermDictionary() {
         {filteredTerms.length === 0 && (
           <div className="text-center py-12">
             <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No Banking Terms Found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No Terms Found</h3>
             <p className="text-gray-500 mb-4">
               {searchQuery || documentFilter !== 'all' || categoryFilter !== 'all' || domainFilter !== 'all' || statusFilter !== 'all'
                 ? 'Try adjusting your search criteria or filters.'

@@ -144,10 +144,76 @@ const mockConnections: SchemaConnection[] = [
     columnCount: 892,
     createdBy: 'Emily Rodriguez',
     createdAt: '2024-01-08T11:15:00Z'
+  },
+  {
+    id: '4',
+    name: 'Financial Transactions',
+    type: 'oracle',
+    host: 'fin-db.company.com',
+    database: 'FINANCE_PROD',
+    status: 'connected',
+    lastSync: '2024-01-16T11:15:00Z',
+    tableCount: 134,
+    columnCount: 1023,
+    createdBy: 'David Kim',
+    createdAt: '2024-01-05T08:30:00Z'
+  },
+  {
+    id: '5',
+    name: 'Marketing Analytics',
+    type: 'redshift',
+    host: 'marketing-cluster.company.com',
+    database: 'MARKETING_DW',
+    status: 'connected',
+    lastSync: '2024-01-16T08:20:00Z',
+    tableCount: 78,
+    columnCount: 445,
+    createdBy: 'Lisa Wang',
+    createdAt: '2024-01-09T13:45:00Z'
+  },
+  {
+    id: '6',
+    name: 'Inventory Management',
+    type: 'mysql',
+    host: 'inventory-db.company.com',
+    database: 'inventory_system',
+    status: 'disconnected',
+    lastSync: '2024-01-14T22:10:00Z',
+    tableCount: 45,
+    columnCount: 234,
+    createdBy: 'Robert Martinez',
+    createdAt: '2024-01-11T16:20:00Z'
+  },
+  {
+    id: '7',
+    name: 'HR Management System',
+    type: 'postgresql',
+    host: 'hr-db.company.com',
+    database: 'hr_management',
+    status: 'connected',
+    lastSync: '2024-01-16T07:30:00Z',
+    tableCount: 67,
+    columnCount: 389,
+    createdBy: 'Jennifer Lee',
+    createdAt: '2024-01-07T10:15:00Z'
+  },
+  {
+    id: '8',
+    name: 'E-commerce Platform',
+    type: 'mysql',
+    host: 'ecommerce-db.company.com',
+    database: 'ecommerce_prod',
+    status: 'syncing',
+    lastSync: '2024-01-16T12:45:00Z',
+    tableCount: 112,
+    columnCount: 678,
+    createdBy: 'Alex Thompson',
+    createdAt: '2024-01-13T09:30:00Z'
   }
 ];
 
 const mockTables: SchemaTable[] = [
+  // Production Data Warehouse Tables
   {
     id: '1',
     connectionId: '1',
@@ -201,10 +267,304 @@ const mockTables: SchemaTable[] = [
     isIngested: false,
     mappedTerms: 0,
     owner: 'analytics_team'
+  },
+  {
+    id: '4',
+    connectionId: '1',
+    schemaName: 'finance',
+    tableName: 'transactions',
+    tableType: 'table',
+    columnCount: 18,
+    rowCount: 892345,
+    description: 'Financial transaction records with payment processing details',
+    lastUpdated: '2024-01-16T10:45:00Z',
+    isIngested: true,
+    mappedTerms: 14,
+    owner: 'finance_team',
+    primaryKeys: ['transaction_id'],
+    foreignKeys: [
+      { column: 'customer_id', referencedTable: 'customers', referencedColumn: 'customer_id' },
+      { column: 'account_id', referencedTable: 'accounts', referencedColumn: 'account_id' }
+    ],
+    indexes: [
+      { name: 'idx_transaction_date', columns: ['transaction_date'], isUnique: false },
+      { name: 'idx_transaction_amount', columns: ['amount'], isUnique: false }
+    ]
+  },
+  {
+    id: '5',
+    connectionId: '1',
+    schemaName: 'inventory',
+    tableName: 'products',
+    tableType: 'table',
+    columnCount: 14,
+    rowCount: 12345,
+    description: 'Product catalog with inventory and pricing information',
+    lastUpdated: '2024-01-16T09:30:00Z',
+    isIngested: true,
+    mappedTerms: 10,
+    owner: 'inventory_team',
+    primaryKeys: ['product_id'],
+    foreignKeys: [
+      { column: 'category_id', referencedTable: 'categories', referencedColumn: 'category_id' },
+      { column: 'supplier_id', referencedTable: 'suppliers', referencedColumn: 'supplier_id' }
+    ]
+  },
+  // Customer Database Tables
+  {
+    id: '6',
+    connectionId: '2',
+    schemaName: 'public',
+    tableName: 'user_profiles',
+    tableType: 'table',
+    columnCount: 16,
+    rowCount: 125000,
+    description: 'User profile information with preferences and settings',
+    lastUpdated: '2024-01-16T09:45:00Z',
+    isIngested: true,
+    mappedTerms: 12,
+    owner: 'customer_support',
+    primaryKeys: ['user_id'],
+    foreignKeys: [
+      { column: 'subscription_id', referencedTable: 'subscriptions', referencedColumn: 'id' }
+    ]
+  },
+  {
+    id: '7',
+    connectionId: '2',
+    schemaName: 'public',
+    tableName: 'subscriptions',
+    tableType: 'table',
+    columnCount: 9,
+    rowCount: 45678,
+    description: 'Customer subscription plans and billing information',
+    lastUpdated: '2024-01-16T08:15:00Z',
+    isIngested: true,
+    mappedTerms: 7,
+    owner: 'billing_team',
+    primaryKeys: ['id'],
+    foreignKeys: [
+      { column: 'plan_id', referencedTable: 'plans', referencedColumn: 'id' }
+    ]
+  },
+  // Analytics Platform Tables
+  {
+    id: '8',
+    connectionId: '3',
+    schemaName: 'analytics',
+    tableName: 'page_views',
+    tableType: 'table',
+    columnCount: 12,
+    rowCount: 5678901,
+    description: 'Website page view tracking and analytics data',
+    lastUpdated: '2024-01-16T07:30:00Z',
+    isIngested: true,
+    mappedTerms: 9,
+    owner: 'analytics_team',
+    primaryKeys: ['view_id'],
+    foreignKeys: [
+      { column: 'user_id', referencedTable: 'users', referencedColumn: 'user_id' },
+      { column: 'page_id', referencedTable: 'pages', referencedColumn: 'page_id' }
+    ]
+  },
+  {
+    id: '9',
+    connectionId: '3',
+    schemaName: 'analytics',
+    tableName: 'conversion_events',
+    tableType: 'table',
+    columnCount: 11,
+    rowCount: 234567,
+    description: 'Conversion tracking events and funnel analysis data',
+    lastUpdated: '2024-01-16T06:45:00Z',
+    isIngested: true,
+    mappedTerms: 8,
+    owner: 'marketing_team',
+    primaryKeys: ['event_id'],
+    foreignKeys: [
+      { column: 'user_id', referencedTable: 'users', referencedColumn: 'user_id' },
+      { column: 'campaign_id', referencedTable: 'campaigns', referencedColumn: 'campaign_id' }
+    ]
+  },
+  // Financial Transactions Tables
+  {
+    id: '10',
+    connectionId: '4',
+    schemaName: 'FINANCE',
+    tableName: 'PAYMENT_TRANSACTIONS',
+    tableType: 'table',
+    columnCount: 20,
+    rowCount: 3456789,
+    description: 'Payment processing transactions with full audit trail',
+    lastUpdated: '2024-01-16T11:15:00Z',
+    isIngested: true,
+    mappedTerms: 16,
+    owner: 'FINANCE_ADMIN',
+    primaryKeys: ['TRANSACTION_ID'],
+    foreignKeys: [
+      { column: 'ACCOUNT_ID', referencedTable: 'ACCOUNTS', referencedColumn: 'ACCOUNT_ID' },
+      { column: 'MERCHANT_ID', referencedTable: 'MERCHANTS', referencedColumn: 'MERCHANT_ID' }
+    ],
+    indexes: [
+      { name: 'IDX_TRANSACTION_DATE', columns: ['TRANSACTION_DATE'], isUnique: false },
+      { name: 'IDX_TRANSACTION_STATUS', columns: ['STATUS'], isUnique: false }
+    ]
+  },
+  {
+    id: '11',
+    connectionId: '4',
+    schemaName: 'FINANCE',
+    tableName: 'ACCOUNTS',
+    tableType: 'table',
+    columnCount: 15,
+    rowCount: 123456,
+    description: 'Customer account information and balance details',
+    lastUpdated: '2024-01-16T10:30:00Z',
+    isIngested: true,
+    mappedTerms: 12,
+    owner: 'FINANCE_ADMIN',
+    primaryKeys: ['ACCOUNT_ID'],
+    foreignKeys: [
+      { column: 'CUSTOMER_ID', referencedTable: 'CUSTOMERS', referencedColumn: 'CUSTOMER_ID' }
+    ]
+  },
+  // Marketing Analytics Tables
+  {
+    id: '12',
+    connectionId: '5',
+    schemaName: 'marketing',
+    tableName: 'campaign_performance',
+    tableType: 'table',
+    columnCount: 13,
+    rowCount: 45678,
+    description: 'Marketing campaign performance metrics and KPIs',
+    lastUpdated: '2024-01-16T08:20:00Z',
+    isIngested: true,
+    mappedTerms: 10,
+    owner: 'marketing_analytics',
+    primaryKeys: ['campaign_id', 'date'],
+    foreignKeys: [
+      { column: 'campaign_id', referencedTable: 'campaigns', referencedColumn: 'campaign_id' }
+    ]
+  },
+  {
+    id: '13',
+    connectionId: '5',
+    schemaName: 'marketing',
+    tableName: 'customer_segments',
+    tableType: 'view',
+    columnCount: 8,
+    description: 'Customer segmentation analysis view',
+    lastUpdated: '2024-01-16T07:15:00Z',
+    isIngested: false,
+    mappedTerms: 0,
+    owner: 'marketing_analytics'
+  },
+  // Inventory Management Tables
+  {
+    id: '14',
+    connectionId: '6',
+    schemaName: 'inventory',
+    tableName: 'stock_levels',
+    tableType: 'table',
+    columnCount: 11,
+    rowCount: 23456,
+    description: 'Current stock levels and inventory tracking',
+    lastUpdated: '2024-01-14T22:10:00Z',
+    isIngested: true,
+    mappedTerms: 8,
+    owner: 'inventory_admin',
+    primaryKeys: ['product_id', 'warehouse_id'],
+    foreignKeys: [
+      { column: 'product_id', referencedTable: 'products', referencedColumn: 'product_id' },
+      { column: 'warehouse_id', referencedTable: 'warehouses', referencedColumn: 'warehouse_id' }
+    ]
+  },
+  // HR Management Tables
+  {
+    id: '15',
+    connectionId: '7',
+    schemaName: 'hr',
+    tableName: 'employees',
+    tableType: 'table',
+    columnCount: 18,
+    rowCount: 2345,
+    description: 'Employee master data with personal and employment information',
+    lastUpdated: '2024-01-16T07:30:00Z',
+    isIngested: true,
+    mappedTerms: 14,
+    owner: 'hr_admin',
+    primaryKeys: ['employee_id'],
+    foreignKeys: [
+      { column: 'department_id', referencedTable: 'departments', referencedColumn: 'department_id' },
+      { column: 'manager_id', referencedTable: 'employees', referencedColumn: 'employee_id' }
+    ],
+    indexes: [
+      { name: 'idx_employee_email', columns: ['email'], isUnique: true },
+      { name: 'idx_employee_name', columns: ['first_name', 'last_name'], isUnique: false }
+    ]
+  },
+  {
+    id: '16',
+    connectionId: '7',
+    schemaName: 'hr',
+    tableName: 'payroll',
+    tableType: 'table',
+    columnCount: 12,
+    rowCount: 2345,
+    description: 'Payroll processing and salary information',
+    lastUpdated: '2024-01-16T06:45:00Z',
+    isIngested: true,
+    mappedTerms: 9,
+    owner: 'payroll_admin',
+    primaryKeys: ['payroll_id'],
+    foreignKeys: [
+      { column: 'employee_id', referencedTable: 'employees', referencedColumn: 'employee_id' }
+    ]
+  },
+  // E-commerce Tables
+  {
+    id: '17',
+    connectionId: '8',
+    schemaName: 'ecommerce',
+    tableName: 'orders',
+    tableType: 'table',
+    columnCount: 16,
+    rowCount: 123456,
+    description: 'E-commerce order processing and fulfillment data',
+    lastUpdated: '2024-01-16T12:45:00Z',
+    isIngested: true,
+    mappedTerms: 13,
+    owner: 'ecommerce_admin',
+    primaryKeys: ['order_id'],
+    foreignKeys: [
+      { column: 'customer_id', referencedTable: 'customers', referencedColumn: 'customer_id' },
+      { column: 'shipping_address_id', referencedTable: 'addresses', referencedColumn: 'address_id' }
+    ]
+  },
+  {
+    id: '18',
+    connectionId: '8',
+    schemaName: 'ecommerce',
+    tableName: 'order_items',
+    tableType: 'table',
+    columnCount: 10,
+    rowCount: 456789,
+    description: 'Individual items within e-commerce orders',
+    lastUpdated: '2024-01-16T12:30:00Z',
+    isIngested: true,
+    mappedTerms: 7,
+    owner: 'ecommerce_admin',
+    primaryKeys: ['order_item_id'],
+    foreignKeys: [
+      { column: 'order_id', referencedTable: 'orders', referencedColumn: 'order_id' },
+      { column: 'product_id', referencedTable: 'products', referencedColumn: 'product_id' }
+    ]
   }
 ];
 
 const mockColumns: SchemaColumn[] = [
+  // Customer table columns
   {
     id: '1',
     tableId: '1',
@@ -386,6 +746,549 @@ const mockColumns: SchemaColumn[] = [
       uniqueness: 12.3,
       validity: 99.1
     }
+  },
+  // Orders table columns
+  {
+    id: '9',
+    tableId: '2',
+    columnName: 'order_id',
+    dataType: 'BIGINT',
+    isNullable: false,
+    isPrimaryKey: true,
+    isForeignKey: false,
+    isUnique: true,
+    hasIndex: true,
+    description: 'Unique identifier for each order',
+    mappedTerm: {
+      termId: 'term_7',
+      termName: 'Order Identifier',
+      confidence: 0.96,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 100,
+      validity: 100
+    }
+  },
+  {
+    id: '10',
+    tableId: '2',
+    columnName: 'customer_id',
+    dataType: 'INTEGER',
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: true,
+    isUnique: false,
+    hasIndex: true,
+    description: 'Reference to customer who placed the order',
+    mappedTerm: {
+      termId: 'term_1',
+      termName: 'Customer Identifier',
+      confidence: 0.95,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 99.8,
+      uniqueness: 45.6,
+      validity: 99.9
+    }
+  },
+  {
+    id: '11',
+    tableId: '2',
+    columnName: 'order_date',
+    dataType: 'TIMESTAMP',
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    description: 'Date and time when order was placed',
+    mappedTerm: {
+      termId: 'term_8',
+      termName: 'Order Date',
+      confidence: 0.94,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 23.4,
+      validity: 99.8
+    }
+  },
+  {
+    id: '12',
+    tableId: '2',
+    columnName: 'total_amount',
+    dataType: 'DECIMAL',
+    precision: 10,
+    scale: 2,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: false,
+    description: 'Total order amount including tax and shipping',
+    mappedTerm: {
+      termId: 'term_9',
+      termName: 'Order Total',
+      confidence: 0.93,
+      isVerified: true
+    },
+    businessRules: ['Must be greater than 0', 'Includes tax and shipping'],
+    dataQuality: {
+      completeness: 99.9,
+      uniqueness: 92.3,
+      validity: 99.2
+    }
+  },
+  {
+    id: '13',
+    tableId: '2',
+    columnName: 'status',
+    dataType: 'VARCHAR',
+    maxLength: 20,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    defaultValue: "'pending'",
+    description: 'Current status of the order',
+    mappedTerm: {
+      termId: 'term_10',
+      termName: 'Order Status',
+      confidence: 0.91,
+      isVerified: true
+    },
+    businessRules: ['Must be one of: pending, confirmed, shipped, delivered, cancelled'],
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 5.2,
+      validity: 99.2
+    }
+  },
+  // Financial Transactions columns
+  {
+    id: '14',
+    tableId: '10',
+    columnName: 'TRANSACTION_ID',
+    dataType: 'NUMBER',
+    precision: 15,
+    scale: 0,
+    isNullable: false,
+    isPrimaryKey: true,
+    isForeignKey: false,
+    isUnique: true,
+    hasIndex: true,
+    description: 'Unique transaction identifier',
+    mappedTerm: {
+      termId: 'term_11',
+      termName: 'Transaction Identifier',
+      confidence: 0.97,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 100,
+      validity: 100
+    }
+  },
+  {
+    id: '15',
+    tableId: '10',
+    columnName: 'ACCOUNT_ID',
+    dataType: 'NUMBER',
+    precision: 12,
+    scale: 0,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: true,
+    isUnique: false,
+    hasIndex: true,
+    description: 'Reference to customer account',
+    mappedTerm: {
+      termId: 'term_12',
+      termName: 'Account Identifier',
+      confidence: 0.95,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 99.9,
+      uniqueness: 34.2,
+      validity: 99.8
+    }
+  },
+  {
+    id: '16',
+    tableId: '10',
+    columnName: 'TRANSACTION_AMOUNT',
+    dataType: 'NUMBER',
+    precision: 12,
+    scale: 2,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: false,
+    description: 'Transaction amount in currency',
+    mappedTerm: {
+      termId: 'term_13',
+      termName: 'Transaction Amount',
+      confidence: 0.94,
+      isVerified: true
+    },
+    businessRules: ['Must be greater than 0', 'Maximum 999999999.99'],
+    dataQuality: {
+      completeness: 99.8,
+      uniqueness: 95.6,
+      validity: 99.3
+    }
+  },
+  {
+    id: '17',
+    tableId: '10',
+    columnName: 'TRANSACTION_DATE',
+    dataType: 'DATE',
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    description: 'Date when transaction occurred',
+    mappedTerm: {
+      termId: 'term_14',
+      termName: 'Transaction Date',
+      confidence: 0.96,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 67.8,
+      validity: 99.9
+    }
+  },
+  {
+    id: '18',
+    tableId: '10',
+    columnName: 'STATUS',
+    dataType: 'VARCHAR2',
+    maxLength: 15,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    defaultValue: "'PENDING'",
+    description: 'Transaction processing status',
+    mappedTerm: {
+      termId: 'term_15',
+      termName: 'Transaction Status',
+      confidence: 0.92,
+      isVerified: true
+    },
+    businessRules: ['Must be one of: PENDING, APPROVED, DECLINED, CANCELLED'],
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 4.1,
+      validity: 99.1
+    }
+  },
+  // Employee table columns
+  {
+    id: '19',
+    tableId: '15',
+    columnName: 'employee_id',
+    dataType: 'INTEGER',
+    isNullable: false,
+    isPrimaryKey: true,
+    isForeignKey: false,
+    isUnique: true,
+    hasIndex: true,
+    description: 'Unique employee identifier',
+    mappedTerm: {
+      termId: 'term_16',
+      termName: 'Employee Identifier',
+      confidence: 0.96,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 100,
+      validity: 100
+    }
+  },
+  {
+    id: '20',
+    tableId: '15',
+    columnName: 'first_name',
+    dataType: 'VARCHAR',
+    maxLength: 50,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    description: 'Employee first name',
+    mappedTerm: {
+      termId: 'term_2',
+      termName: 'First Name',
+      confidence: 0.93,
+      isVerified: true
+    },
+    businessRules: ['Must contain only alphabetic characters', 'Maximum 50 characters'],
+    dataQuality: {
+      completeness: 99.5,
+      uniqueness: 42.1,
+      validity: 98.3
+    }
+  },
+  {
+    id: '21',
+    tableId: '15',
+    columnName: 'last_name',
+    dataType: 'VARCHAR',
+    maxLength: 50,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    description: 'Employee last name',
+    mappedTerm: {
+      termId: 'term_3',
+      termName: 'Last Name',
+      confidence: 0.92,
+      isVerified: true
+    },
+    businessRules: ['Must contain only alphabetic characters', 'Maximum 50 characters'],
+    dataQuality: {
+      completeness: 99.8,
+      uniqueness: 18.7,
+      validity: 97.9
+    }
+  },
+  {
+    id: '22',
+    tableId: '15',
+    columnName: 'email',
+    dataType: 'VARCHAR',
+    maxLength: 255,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: true,
+    hasIndex: true,
+    description: 'Employee email address',
+    mappedTerm: {
+      termId: 'term_4',
+      termName: 'Email Address',
+      confidence: 0.97,
+      isVerified: true
+    },
+    businessRules: ['Must be valid email format', 'Must be unique across all employees'],
+    dataQuality: {
+      completeness: 98.2,
+      uniqueness: 100,
+      validity: 95.8
+    }
+  },
+  {
+    id: '23',
+    tableId: '15',
+    columnName: 'hire_date',
+    dataType: 'DATE',
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    description: 'Date when employee was hired',
+    mappedTerm: {
+      termId: 'term_17',
+      termName: 'Hire Date',
+      confidence: 0.94,
+      isVerified: true
+    },
+    businessRules: ['Must be a valid date', 'Cannot be in the future'],
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 12.4,
+      validity: 99.7
+    }
+  },
+  {
+    id: '24',
+    tableId: '15',
+    columnName: 'salary',
+    dataType: 'DECIMAL',
+    precision: 10,
+    scale: 2,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: false,
+    description: 'Employee annual salary',
+    mappedTerm: {
+      termId: 'term_18',
+      termName: 'Annual Salary',
+      confidence: 0.89,
+      isVerified: false
+    },
+    businessRules: ['Must be greater than 0', 'Maximum 999999.99'],
+    dataQuality: {
+      completeness: 95.6,
+      uniqueness: 78.9,
+      validity: 98.4
+    }
+  },
+  // E-commerce order columns
+  {
+    id: '25',
+    tableId: '17',
+    columnName: 'order_id',
+    dataType: 'BIGINT',
+    isNullable: false,
+    isPrimaryKey: true,
+    isForeignKey: false,
+    isUnique: true,
+    hasIndex: true,
+    description: 'Unique e-commerce order identifier',
+    mappedTerm: {
+      termId: 'term_19',
+      termName: 'E-commerce Order ID',
+      confidence: 0.95,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 100,
+      validity: 100
+    }
+  },
+  {
+    id: '26',
+    tableId: '17',
+    columnName: 'customer_id',
+    dataType: 'INTEGER',
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: true,
+    isUnique: false,
+    hasIndex: true,
+    description: 'Reference to customer who placed the order',
+    mappedTerm: {
+      termId: 'term_1',
+      termName: 'Customer Identifier',
+      confidence: 0.94,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 99.7,
+      uniqueness: 43.2,
+      validity: 99.8
+    }
+  },
+  {
+    id: '27',
+    tableId: '17',
+    columnName: 'order_total',
+    dataType: 'DECIMAL',
+    precision: 10,
+    scale: 2,
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: false,
+    description: 'Total order amount including tax and shipping',
+    mappedTerm: {
+      termId: 'term_20',
+      termName: 'Order Total',
+      confidence: 0.91,
+      isVerified: true
+    },
+    businessRules: ['Must be greater than 0', 'Includes tax and shipping'],
+    dataQuality: {
+      completeness: 99.9,
+      uniqueness: 92.3,
+      validity: 99.2
+    }
+  },
+  {
+    id: '28',
+    tableId: '17',
+    columnName: 'shipping_address',
+    dataType: 'TEXT',
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: false,
+    description: 'Shipping address for the order',
+    mappedTerm: {
+      termId: 'term_21',
+      termName: 'Shipping Address',
+      confidence: 0.88,
+      isVerified: false
+    },
+    businessRules: ['Must contain valid address format'],
+    dataQuality: {
+      completeness: 98.4,
+      uniqueness: 67.8,
+      validity: 94.6
+    }
+  },
+  {
+    id: '29',
+    tableId: '17',
+    columnName: 'order_status',
+    dataType: 'ENUM',
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    defaultValue: "'pending'",
+    description: 'Current status of the e-commerce order',
+    mappedTerm: {
+      termId: 'term_22',
+      termName: 'E-commerce Order Status',
+      confidence: 0.93,
+      isVerified: true
+    },
+    businessRules: ['Must be one of: pending, processing, shipped, delivered, cancelled, refunded'],
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 6.7,
+      validity: 99.4
+    }
+  },
+  {
+    id: '30',
+    tableId: '17',
+    columnName: 'created_at',
+    dataType: 'TIMESTAMP',
+    isNullable: false,
+    isPrimaryKey: false,
+    isForeignKey: false,
+    isUnique: false,
+    hasIndex: true,
+    defaultValue: 'CURRENT_TIMESTAMP',
+    description: 'Timestamp when order was created',
+    mappedTerm: {
+      termId: 'term_23',
+      termName: 'Order Creation Timestamp',
+      confidence: 0.96,
+      isVerified: true
+    },
+    dataQuality: {
+      completeness: 100,
+      uniqueness: 99.9,
+      validity: 100
+    }
   }
 ];
 
@@ -493,12 +1396,12 @@ export function SchemaIngestionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
+      <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Schema Ingestion</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Schema Ingestion</h1>
             <p className="text-gray-600 mt-1">
               Connect and ingest database schemas for term mapping and lineage tracking
             </p>
@@ -516,7 +1419,7 @@ export function SchemaIngestionPage() {
       </div>
 
       {/* Stats Overview */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4">
+      <div className="max-w-7xl mx-auto mb-6 mt-6">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900">{stats.totalConnections}</div>
@@ -546,7 +1449,7 @@ export function SchemaIngestionPage() {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto border-b border-gray-200">
         <div className="px-6">
           <nav className="flex space-x-8">
             {[
@@ -742,7 +1645,7 @@ export function SchemaIngestionPage() {
                   {selectedConnection && (
                     <h2 className="text-lg font-semibold text-gray-900">
                       {selectedTable && viewMode === 'schema' 
-                        ? `Schema: ${selectedTable.schemaName}.${selectedTable.tableName}`
+                        ? `Schema: ${selectedTable.schemaName.toLowerCase()}.${selectedTable.tableName.toLowerCase()}`
                         : `Tables in ${selectedConnection.name}`
                       }
                     </h2>
@@ -775,7 +1678,7 @@ export function SchemaIngestionPage() {
                         </div>
                         <div>
                           <h3 className="text-xl font-semibold text-gray-900 mb-1">
-                            {selectedTable.schemaName}.{selectedTable.tableName}
+                            {selectedTable.schemaName.toLowerCase()}.{selectedTable.tableName.toLowerCase()}
                           </h3>
                           <p className="text-gray-600 mb-3">{selectedTable.description}</p>
                           <div className="flex items-center space-x-4">
@@ -920,7 +1823,7 @@ export function SchemaIngestionPage() {
                                 <div className="flex items-center space-x-2">
                                   {getDataTypeIcon(column.dataType)}
                                   <div>
-                                    <div className="font-medium text-gray-900">{column.columnName}</div>
+                                    <div className="font-medium text-gray-900">{column.columnName.toLowerCase()}</div>
                                     {column.description && (
                                       <div className="text-sm text-gray-500">{column.description}</div>
                                     )}
@@ -1043,7 +1946,7 @@ export function SchemaIngestionPage() {
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-2">
                             <h3 className="text-lg font-semibold text-gray-900">
-                              {table.schemaName}.{table.tableName}
+                              {table.schemaName.toLowerCase()}.{table.tableName.toLowerCase()}
                             </h3>
                             <Badge variant="default" size="sm">{table.tableType}</Badge>
                             {table.isIngested ? (
@@ -1148,7 +2051,7 @@ export function SchemaIngestionPage() {
                   Back to Tables
                 </Button>
                 <h2 className="text-lg font-semibold text-gray-900 mt-2">
-                  Columns in {selectedTable.schemaName}.{selectedTable.tableName}
+                  Columns in {selectedTable.schemaName.toLowerCase()}.{selectedTable.tableName.toLowerCase()}
                 </h2>
               </div>
             )}
@@ -1160,7 +2063,7 @@ export function SchemaIngestionPage() {
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Column Mapping</h3>
                   <p className="text-gray-500 mb-4">
                     {selectedTable 
-                      ? `Column mapping for ${selectedTable.tableName} will be displayed here`
+                      ? `Column mapping for ${selectedTable.tableName.toLowerCase()} will be displayed here`
                       : 'Select a table to view column mappings'
                     }
                   </p>
