@@ -16,12 +16,15 @@ import {
   User,
   Calendar,
   CheckCircle,
-  Upload
+  Upload,
+  Building,
+  Tag
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
 import { ProgressBar } from '../../../components/ProgressBar';
+import { napasDocuments } from '../../../data/napas-documents';
 
 interface ExtractedTerm {
   id: string;
@@ -37,6 +40,7 @@ interface ExtractedTerm {
     schemaName: string;
     tableName: string;
     columnName: string;
+    dataType: string;
     confidence: number;
   };
   relatedTerms: string[];
@@ -51,58 +55,35 @@ interface ProcessingJob {
   submittedBy: string;
   completedAt: string;
   extractedTerms: number;
+  service?: string;
+  domain?: string;
 }
 
-const mockTerms: ExtractedTerm[] = [
-  {
-    id: '1',
-    term: 'Annual Percentage Rate',
-    definition: 'The yearly cost of a loan expressed as a percentage, including interest and fees.',
-    category: 'Financial',
-    confidence: 0.95,
-    status: 'pending',
-    sourceSection: 'Interest Rates',
-    context: 'The APR must be clearly disclosed to borrowers and calculated according to regulatory requirements.',
+// Convert NAPAS document data to extracted terms
+const getTermsForDocument = (jobId: string): ExtractedTerm[] => {
+  const napasDoc = napasDocuments.find(doc => doc.id === jobId);
+  if (!napasDoc) return [];
+
+  return napasDoc.extractedTerms.map((term, index) => ({
+    id: `${jobId}-term-${index}`,
+    term: term.term,
+    definition: term.definition,
+    category: term.category,
+    confidence: term.confidence,
+    status: 'pending' as const,
+    sourceSection: term.sourceSection,
+    context: term.context,
     isEdited: false,
-    schemaMapping: {
-      schemaName: 'lending',
-      tableName: 'loan_products',
-      columnName: 'annual_percentage_rate',
-      confidence: 0.92,
-    },
-    relatedTerms: ['Interest Rate', 'Loan Cost', 'APR'],
-  },
-  {
-    id: '2',
-    term: 'Credit Score',
-    definition: 'A numerical expression of creditworthiness based on credit history analysis.',
-    category: 'Risk Assessment',
-    confidence: 0.89,
-    status: 'pending',
-    sourceSection: 'Underwriting Criteria',
-    context: 'Minimum credit score requirements vary by loan product and risk tolerance.',
-    isEdited: false,
-    schemaMapping: {
-      schemaName: 'customer',
-      tableName: 'credit_profiles',
-      columnName: 'fico_score',
-      confidence: 0.88,
-    },
-    relatedTerms: ['FICO Score', 'Creditworthiness', 'Risk Assessment'],
-  },
-  {
-    id: '3',
-    term: 'Principal Balance',
-    definition: 'The outstanding amount of money owed on a loan, excluding interest.',
-    category: 'Financial',
-    confidence: 0.87,
-    status: 'pending',
-    sourceSection: 'Loan Servicing',
-    context: 'Principal balance decreases with each payment according to the amortization schedule.',
-    isEdited: false,
-    relatedTerms: ['Outstanding Balance', 'Loan Amount', 'Amortization'],
-  },
-];
+    schemaMapping: napasDoc.schemaMapping?.[0] ? {
+      schemaName: napasDoc.schemaMapping[0].schemaName,
+      tableName: napasDoc.schemaMapping[0].tableName,
+      columnName: napasDoc.schemaMapping[0].columnName,
+      dataType: 'VARCHAR(255)',
+      confidence: napasDoc.schemaMapping[0].confidence
+    } : undefined,
+    relatedTerms: []
+  }));
+};
 
 interface ResultViewerProps {
   job: ProcessingJob;
@@ -112,8 +93,8 @@ interface ResultViewerProps {
 }
 
 export function ResultViewer({ job, onBack, onPublishComplete, onTermDictionary }: ResultViewerProps) {
-  const [terms, setTerms] = useState<ExtractedTerm[]>(mockTerms);
-  const [selectedTerm, setSelectedTerm] = useState<ExtractedTerm | null>(terms[0]);
+  const [terms, setTerms] = useState<ExtractedTerm[]>(() => getTermsForDocument(job.id));
+  const [selectedTerm, setSelectedTerm] = useState<ExtractedTerm | null>(terms[0] || null);
   const [editingTerm, setEditingTerm] = useState<string | null>(null);
   const [editedDefinition, setEditedDefinition] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -121,6 +102,9 @@ export function ResultViewer({ job, onBack, onPublishComplete, onTermDictionary 
   const [isPublishing, setIsPublishing] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Get document metadata
+  const documentMetadata = napasDocuments.find(doc => doc.id === job.id);
 
   // Cleanup timeout when component unmounts
   useEffect(() => {
@@ -257,6 +241,22 @@ export function ResultViewer({ job, onBack, onPublishComplete, onTermDictionary 
                   <FileText className="w-4 h-4" />
                   <span>{job.type.toUpperCase()}</span>
                 </div>
+                {job.service && (
+                  <>
+                    <div className="flex items-center space-x-1">
+                      <Building className="w-4 h-4" />
+                      <span>{job.service}</span>
+                    </div>
+                  </>
+                )}
+                {job.domain && (
+                  <>
+                    <div className="flex items-center space-x-1">
+                      <Tag className="w-4 h-4" />
+                      <span>{job.domain}</span>
+                    </div>
+                  </>
+                )}
                 <div className="flex items-center space-x-1">
                   <User className="w-4 h-4" />
                   <span>{job.submittedBy}</span>
@@ -303,6 +303,26 @@ export function ResultViewer({ job, onBack, onPublishComplete, onTermDictionary 
           </div>
         </div>
       </div>
+
+      {/* Document Classification Info */}
+      {documentMetadata && (
+        <div className="bg-blue-50 border-b border-blue-200 px-6 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Badge variant="info">{documentMetadata.type}</Badge>
+              <span className="text-sm text-blue-700">
+                Domain: {documentMetadata.classification.domain}
+              </span>
+              <span className="text-sm text-blue-700">
+                Confidence: {Math.round(documentMetadata.classification.confidence * 100)}%
+              </span>
+            </div>
+            <div className="text-sm text-blue-600">
+              {documentMetadata.classification.sections.length} sections identified
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Stats Bar */}
       <div className="bg-white border-b border-gray-200 px-6 py-4">
@@ -507,22 +527,24 @@ export function ResultViewer({ job, onBack, onPublishComplete, onTermDictionary 
                 )}
 
                 {/* Related Terms */}
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-3 flex items-center">
-                    <GitBranch className="w-5 h-5 mr-2" />
-                    Related Terms
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedTerm.relatedTerms.map(relatedTerm => (
-                      <button
-                        key={relatedTerm}
-                        className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors"
-                      >
-                        {relatedTerm}
-                      </button>
-                    ))}
+                {selectedTerm.relatedTerms.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-3 flex items-center">
+                      <GitBranch className="w-5 h-5 mr-2" />
+                      Related Terms
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedTerm.relatedTerms.map(relatedTerm => (
+                        <button
+                          key={relatedTerm}
+                          className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors"
+                        >
+                          {relatedTerm}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               {/* Action Panel */}
