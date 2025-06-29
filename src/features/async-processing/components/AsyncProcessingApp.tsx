@@ -5,6 +5,7 @@ import { ClassificationStage } from './ClassificationStage';
 import { EnrichmentStage } from './EnrichmentStage';
 import { ResultViewer } from './ResultViewer';
 import { TermDictionary } from './PublishedTermsDashboard';
+import { SchemaIngestionPage } from '../../schema/components/SchemaIngestionPage';
 import { NotificationSystem } from './NotificationSystem';
 
 interface ProcessingJob {
@@ -22,7 +23,7 @@ interface ProcessingJob {
   size: number;
 }
 
-type AppView = 'upload' | 'document' | 'classification' | 'enrichment' | 'results' | 'term-dictionary';
+type AppView = 'upload' | 'document' | 'classification' | 'enrichment' | 'results' | 'term-dictionary' | 'schema-ingestion';
 
 export function AsyncProcessingApp() {
   const [currentView, setCurrentView] = useState<AppView>('upload');
@@ -105,6 +106,8 @@ export function AsyncProcessingApp() {
         ) : null;
       case 'term-dictionary':
         return <TermDictionary />;
+      case 'schema-ingestion':
+        return <SchemaIngestionPage />;
       default:
         return <DocumentUploadPage onUploadComplete={handleUploadComplete} />;
     }
@@ -121,7 +124,7 @@ export function AsyncProcessingApp() {
                 <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">DP</span>
                 </div>
-                <span className="text-xl font-semibold text-gray-900">Document Lineage</span>
+                <span className="text-xl font-semibold text-gray-900">Document Processor</span>
               </div>
               
               <div className="flex items-center space-x-6">
@@ -144,6 +147,16 @@ export function AsyncProcessingApp() {
                   }`}
                 >
                   Document Processing
+                </button>
+                <button
+                  onClick={() => setCurrentView('schema-ingestion')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    currentView === 'schema-ingestion'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  }`}
+                >
+                  Schema Ingestion
                 </button>
                 <button
                   onClick={() => setCurrentView('term-dictionary')}
