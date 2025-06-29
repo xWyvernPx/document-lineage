@@ -6,6 +6,7 @@ import { EnrichmentStage } from './EnrichmentStage';
 import { ResultViewer } from './ResultViewer';
 import { TermDictionary } from './PublishedTermsDashboard';
 import { SchemaIngestionPage } from '../../schema/components/SchemaIngestionPage';
+import { ACHNapasDataGenerator } from '../../data-generator/components/ACHNapasDataGenerator';
 import { NotificationSystem } from './NotificationSystem';
 
 interface ProcessingJob {
@@ -23,7 +24,7 @@ interface ProcessingJob {
   size: number;
 }
 
-type AppView = 'upload' | 'document' | 'classification' | 'enrichment' | 'results' | 'term-dictionary' | 'schema-ingestion';
+type AppView = 'upload' | 'document' | 'classification' | 'enrichment' | 'results' | 'term-dictionary' | 'schema-ingestion' | 'data-generator';
 
 export function AsyncProcessingApp() {
   const [currentView, setCurrentView] = useState<AppView>('upload');
@@ -108,6 +109,8 @@ export function AsyncProcessingApp() {
         return <TermDictionary />;
       case 'schema-ingestion':
         return <SchemaIngestionPage />;
+      case 'data-generator':
+        return <ACHNapasDataGenerator />;
       default:
         return <DocumentUploadPage onUploadComplete={handleUploadComplete} />;
     }
@@ -167,6 +170,16 @@ export function AsyncProcessingApp() {
                   }`}
                 >
                   Term Dictionary
+                </button>
+                <button
+                  onClick={() => setCurrentView('data-generator')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    currentView === 'data-generator'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  }`}
+                >
+                  Data Generator
                 </button>
               </div>
             </div>
