@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { 
   Search, 
   Filter, 
@@ -6,14 +6,6 @@ import {
   ZoomOut, 
   RotateCcw, 
   Maximize2, 
-  Download, 
-  Share2, 
-  Settings, 
-  Grid3X3, 
-  Move, 
-  Eye, 
-  EyeOff, 
-  Layers, 
   FileText,
   BookOpen,
   Database,
@@ -23,87 +15,49 @@ import {
   ChevronDown,
   ChevronRight,
   ExternalLink,
+  Eye,
   Edit3,
-  Calendar,
-  User,
   Tag,
   TrendingUp,
   Activity,
   Shield,
-  Clock,
   CheckCircle,
   AlertTriangle,
   Info,
   Star,
-  Heart,
   Lightbulb,
-  Brain,
   Zap,
-  Target,
-  BarChart3,
-  PieChart,
-  LineChart,
-  Bookmark,
-  Flag,
-  Archive,
-  Trash2,
-  Copy,
-  Link,
-  RefreshCw,
-  Save,
-  Upload,
   X,
-  Plus,
-  Minus,
-  MoreHorizontal,
   ArrowRight,
-  ArrowLeft,
-  ArrowUp,
-  ArrowDown,
-  MousePointer,
-  Hand,
-  Crosshair
+  Grid3X3
 } from 'lucide-react';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
 
-// Enhanced data structures for comprehensive lineage
+// Simplified data structures for lineage
 interface LineageNode {
   id: string;
   name: string;
-  type: 'document' | 'term' | 'schema' | 'table' | 'service' | 'api' | 'system';
+  type: 'document' | 'term' | 'schema' | 'table' | 'service';
   category: string;
   position: { x: number; y: number };
   metadata: {
     description: string;
     owner: string;
-    steward?: string;
     createdAt: string;
     modifiedAt: string;
-    version: string;
-    sourceSystem?: string;
-    documentId?: string;
-    sourceSection?: string;
     businessUnit: string;
     tags: string[];
-    status: 'active' | 'deprecated' | 'pending' | 'archived';
+    status: 'active' | 'deprecated' | 'pending';
     confidence: number;
     usageCount: number;
     businessValue: 'critical' | 'high' | 'medium' | 'low';
-    dataQuality: number;
-    lastValidated?: string;
-    validatedBy?: string;
-    notes?: string;
-    relatedAssets?: string[];
-    dependencies?: string[];
-    consumers?: string[];
   };
   visual: {
     color: string;
     shape: 'rectangle' | 'circle' | 'hexagon' | 'diamond';
     size: number;
-    icon: string;
   };
 }
 
@@ -111,166 +65,49 @@ interface LineageEdge {
   id: string;
   source: string;
   target: string;
-  type: 'extracts-from' | 'maps-to' | 'depends-on' | 'contains' | 'derives-from' | 'flows-to' | 'references';
+  type: 'extracts-from' | 'maps-to' | 'depends-on' | 'contains';
   label: string;
   metadata: {
     confidence: number;
-    strength: 'strong' | 'medium' | 'weak';
     createdAt: string;
-    validatedAt?: string;
-    transformationLogic?: string;
-    businessRules?: string[];
-    notes?: string;
   };
   visual: {
     color: string;
-    style: 'solid' | 'dashed' | 'dotted';
+    style: 'solid' | 'dashed';
     width: number;
   };
 }
 
-interface FilterState {
-  search: string;
-  nodeTypes: string[];
-  confidenceRange: [number, number];
-  statusFilters: string[];
-  businessUnits: string[];
-  dateRange: {
-    start: string;
-    end: string;
-  };
-  businessValue: string[];
-  tags: string[];
-}
-
-interface ViewState {
-  zoom: number;
-  pan: { x: number; y: number };
-  selectedNode: string | null;
-  hoveredNode: string | null;
-  highlightedNodes: string[];
-  highlightedEdges: string[];
-  showGrid: boolean;
-  showLabels: boolean;
-  showMinimap: boolean;
-  layoutMode: 'force' | 'hierarchical' | 'circular' | 'manual';
-  fullscreen: boolean;
-}
-
-// Comprehensive mock data for demonstration
+// Simplified mock data
 const mockLineageData = {
   nodes: [
-    // Documents
+    // Document
     {
       id: 'doc-dpg-spec',
-      name: 'DPG Middleware Integration Specification v2.1',
+      name: 'DPG Middleware Specification',
       type: 'document' as const,
       category: 'Technical Specification',
       position: { x: 100, y: 200 },
       metadata: {
-        description: 'Comprehensive technical specification for integrating DPG middleware with NAPAS ACH processing infrastructure, including message routing, error handling, and security protocols.',
+        description: 'Technical specification for DPG middleware integration with NAPAS',
         owner: 'Technical Architecture Team',
-        steward: 'Sarah Johnson',
         createdAt: '2024-01-10T09:00:00Z',
         modifiedAt: '2024-01-15T09:30:00Z',
-        version: '2.1.0',
-        sourceSystem: 'Confluence',
-        documentId: 'TECH-SPEC-001',
         businessUnit: 'Technology',
-        tags: ['technical', 'integration', 'middleware', 'napas', 'ach', 'production'],
+        tags: ['technical', 'middleware', 'napas'],
         status: 'active' as const,
         confidence: 94,
         usageCount: 47,
-        businessValue: 'critical' as const,
-        dataQuality: 96,
-        lastValidated: '2024-01-15T10:00:00Z',
-        validatedBy: 'Architecture Review Board',
-        notes: 'Core integration document for NAPAS connectivity',
-        relatedAssets: ['API-SPEC-001', 'SECURITY-DOC-003'],
-        dependencies: ['NAPAS-API-v3.2'],
-        consumers: ['DPG Service', 'Payment Orchestration']
+        businessValue: 'critical' as const
       },
       visual: {
         color: '#3B82F6',
         shape: 'rectangle' as const,
-        size: 120,
-        icon: 'FileText'
+        size: 120
       }
     },
-    {
-      id: 'doc-payment-brd',
-      name: 'ACH Payment Orchestration Business Requirements v3.0',
-      type: 'document' as const,
-      category: 'Business Requirements',
-      position: { x: 100, y: 400 },
-      metadata: {
-        description: 'Business requirements for orchestrating ACH payments across multiple third-party providers and internal banking services with intelligent routing and fallback capabilities.',
-        owner: 'Payment Product Team',
-        steward: 'Michael Chen',
-        createdAt: '2024-01-12T14:00:00Z',
-        modifiedAt: '2024-01-16T10:15:00Z',
-        version: '3.0.0',
-        sourceSystem: 'SharePoint',
-        documentId: 'BRD-PAY-001',
-        businessUnit: 'Payments',
-        tags: ['business', 'requirements', 'payment', 'orchestration', 'ach'],
-        status: 'active' as const,
-        confidence: 95,
-        usageCount: 89,
-        businessValue: 'critical' as const,
-        dataQuality: 98,
-        lastValidated: '2024-01-16T11:00:00Z',
-        validatedBy: 'Product Management',
-        notes: 'Primary business requirements for payment orchestration',
-        relatedAssets: ['TECH-SPEC-002', 'API-SPEC-003'],
-        dependencies: ['Third-Party Provider APIs'],
-        consumers: ['Payment Team', 'Engineering Team']
-      },
-      visual: {
-        color: '#3B82F6',
-        shape: 'rectangle' as const,
-        size: 120,
-        icon: 'FileText'
-      }
-    },
-    {
-      id: 'doc-portal-guide',
-      name: 'Business User Portal Requirements v1.8',
-      type: 'document' as const,
-      category: 'User Interface Specification',
-      position: { x: 100, y: 600 },
-      metadata: {
-        description: 'User interface requirements and workflows for business users monitoring ACH transactions, including dashboard layouts, reporting capabilities, and user management.',
-        owner: 'Business Operations Team',
-        steward: 'Emily Rodriguez',
-        createdAt: '2024-01-08T11:00:00Z',
-        modifiedAt: '2024-01-15T11:30:00Z',
-        version: '1.8.0',
-        sourceSystem: 'Confluence',
-        documentId: 'UI-SPEC-001',
-        businessUnit: 'Operations',
-        tags: ['ui', 'portal', 'business', 'monitoring', 'ach', 'dashboard'],
-        status: 'active' as const,
-        confidence: 88,
-        usageCount: 34,
-        businessValue: 'high' as const,
-        dataQuality: 91,
-        lastValidated: '2024-01-15T12:00:00Z',
-        validatedBy: 'UX Team',
-        notes: 'Portal requirements for business user interfaces',
-        relatedAssets: ['DESIGN-SYSTEM-001'],
-        dependencies: ['Business Portal API'],
-        consumers: ['UI/UX Team', 'Frontend Developers']
-      },
-      visual: {
-        color: '#3B82F6',
-        shape: 'rectangle' as const,
-        size: 120,
-        icon: 'FileText'
-      }
-    },
-
-    // Business Terms
+    
+    // Business Term
     {
       id: 'term-msg-routing',
       name: 'Message Routing Engine',
@@ -278,112 +115,25 @@ const mockLineageData = {
       category: 'System Component',
       position: { x: 450, y: 200 },
       metadata: {
-        description: 'Core component responsible for directing ACH messages between internal services and NAPAS based on transaction type, routing rules, and business logic. Ensures proper message delivery and transformation.',
+        description: 'Core component responsible for directing ACH messages between services and NAPAS',
         owner: 'Data Governance Team',
-        steward: 'Jennifer Walsh',
         createdAt: '2024-01-15T14:00:00Z',
         modifiedAt: '2024-01-15T15:30:00Z',
-        version: '1.2.0',
-        sourceSystem: 'Business Glossary',
-        documentId: 'doc-dpg-spec',
-        sourceSection: 'System Overview',
         businessUnit: 'Technology',
-        tags: ['system-component', 'routing', 'ach', 'middleware', 'preferred', 'core'],
+        tags: ['routing', 'ach', 'middleware', 'preferred'],
         status: 'active' as const,
         confidence: 96,
         usageCount: 156,
-        businessValue: 'critical' as const,
-        dataQuality: 97,
-        lastValidated: '2024-01-15T16:00:00Z',
-        validatedBy: 'Technical SME',
-        notes: 'Critical component for ACH message processing',
-        relatedAssets: ['Message Router', 'Transaction Router', 'ACH Router'],
-        dependencies: ['NAPAS API', 'Internal Message Bus'],
-        consumers: ['DPG Service', 'Monitoring Systems']
+        businessValue: 'critical' as const
       },
       visual: {
         color: '#10B981',
         shape: 'circle' as const,
-        size: 80,
-        icon: 'BookOpen'
+        size: 80
       }
     },
-    {
-      id: 'term-payment-orchestration',
-      name: 'Payment Orchestration Engine',
-      type: 'term' as const,
-      category: 'System Component',
-      position: { x: 450, y: 400 },
-      metadata: {
-        description: 'Central system component that coordinates ACH payment flows across multiple third-party providers and internal banking services. Manages complex payment workflows, routing decisions, and fallback scenarios.',
-        owner: 'Data Governance Team',
-        steward: 'Jennifer Walsh',
-        createdAt: '2024-01-16T10:00:00Z',
-        modifiedAt: '2024-01-16T11:20:00Z',
-        version: '1.0.0',
-        sourceSystem: 'Business Glossary',
-        documentId: 'doc-payment-brd',
-        sourceSection: 'Business Overview',
-        businessUnit: 'Payments',
-        tags: ['system-component', 'payment', 'orchestration', 'ach', 'preferred'],
-        status: 'active' as const,
-        confidence: 96,
-        usageCount: 203,
-        businessValue: 'critical' as const,
-        dataQuality: 98,
-        lastValidated: '2024-01-16T12:00:00Z',
-        validatedBy: 'Payment SME',
-        notes: 'Core orchestration engine for payment processing',
-        relatedAssets: ['Payment Coordinator', 'Transaction Orchestrator'],
-        dependencies: ['Third-Party APIs', 'Core Banking'],
-        consumers: ['Payment Service', 'Analytics Platform']
-      },
-      visual: {
-        color: '#10B981',
-        shape: 'circle' as const,
-        size: 80,
-        icon: 'BookOpen'
-      }
-    },
-    {
-      id: 'term-transaction-dashboard',
-      name: 'Transaction Dashboard',
-      type: 'term' as const,
-      category: 'User Interface Component',
-      position: { x: 450, y: 600 },
-      metadata: {
-        description: 'Real-time monitoring interface displaying ACH transaction volumes, success rates, and processing status across NAPAS and other payment rails. Provides comprehensive visibility into payment operations.',
-        owner: 'Data Governance Team',
-        steward: 'Jennifer Walsh',
-        createdAt: '2024-01-15T13:00:00Z',
-        modifiedAt: '2024-01-15T14:45:00Z',
-        version: '1.1.0',
-        sourceSystem: 'Business Glossary',
-        documentId: 'doc-portal-guide',
-        sourceSection: 'Dashboard Requirements',
-        businessUnit: 'Operations',
-        tags: ['ui-component', 'monitoring', 'dashboard', 'ach', 'real-time'],
-        status: 'active' as const,
-        confidence: 92,
-        usageCount: 78,
-        businessValue: 'high' as const,
-        dataQuality: 94,
-        lastValidated: '2024-01-15T15:00:00Z',
-        validatedBy: 'Business SME',
-        notes: 'Primary dashboard for transaction monitoring',
-        relatedAssets: ['Transaction Monitor', 'ACH Dashboard'],
-        dependencies: ['Transaction API', 'Real-time Data Stream'],
-        consumers: ['Business Portal', 'Operations Team']
-      },
-      visual: {
-        color: '#10B981',
-        shape: 'circle' as const,
-        size: 80,
-        icon: 'BookOpen'
-      }
-    },
-
-    // Database Schemas
+    
+    // Database Schema
     {
       id: 'schema-dpg-middleware',
       name: 'dpg_middleware',
@@ -391,213 +141,51 @@ const mockLineageData = {
       category: 'Database Schema',
       position: { x: 800, y: 200 },
       metadata: {
-        description: 'Database schema containing DPG middleware configuration, routing rules, message processing state, and monitoring data for NAPAS integration.',
+        description: 'Database schema for DPG middleware configuration and routing',
         owner: 'Database Team',
-        steward: 'Robert Kim',
         createdAt: '2024-01-10T08:00:00Z',
         modifiedAt: '2024-01-15T12:00:00Z',
-        version: '2.1.0',
-        sourceSystem: 'PostgreSQL Production',
         businessUnit: 'Technology',
-        tags: ['database', 'schema', 'middleware', 'napas', 'production', 'core'],
+        tags: ['database', 'schema', 'middleware'],
         status: 'active' as const,
         confidence: 95,
         usageCount: 89,
-        businessValue: 'critical' as const,
-        dataQuality: 97,
-        lastValidated: '2024-01-15T13:00:00Z',
-        validatedBy: 'Database Administrator',
-        notes: 'Core schema for DPG middleware operations',
-        relatedAssets: ['dpg_config', 'dpg_monitoring'],
-        dependencies: ['PostgreSQL 14.x'],
-        consumers: ['DPG Service', 'Monitoring Service']
+        businessValue: 'critical' as const
       },
       visual: {
         color: '#8B5CF6',
         shape: 'hexagon' as const,
-        size: 100,
-        icon: 'Database'
+        size: 100
       }
     },
-    {
-      id: 'schema-payment-orchestration',
-      name: 'payment_orchestration',
-      type: 'schema' as const,
-      category: 'Database Schema',
-      position: { x: 800, y: 400 },
-      metadata: {
-        description: 'Schema for payment orchestration engine including routing rules, provider configurations, transaction workflows, and performance metrics.',
-        owner: 'Database Team',
-        steward: 'Robert Kim',
-        createdAt: '2024-01-12T09:00:00Z',
-        modifiedAt: '2024-01-16T13:30:00Z',
-        version: '1.5.0',
-        sourceSystem: 'PostgreSQL Production',
-        businessUnit: 'Payments',
-        tags: ['database', 'schema', 'payment', 'orchestration', 'production'],
-        status: 'active' as const,
-        confidence: 97,
-        usageCount: 134,
-        businessValue: 'critical' as const,
-        dataQuality: 98,
-        lastValidated: '2024-01-16T14:00:00Z',
-        validatedBy: 'Database Administrator',
-        notes: 'Primary schema for payment orchestration',
-        relatedAssets: ['payment_config', 'payment_metrics'],
-        dependencies: ['PostgreSQL 14.x'],
-        consumers: ['Payment Service', 'Analytics Service']
-      },
-      visual: {
-        color: '#8B5CF6',
-        shape: 'hexagon' as const,
-        size: 100,
-        icon: 'Database'
-      }
-    },
-    {
-      id: 'schema-business-portal',
-      name: 'business_portal',
-      type: 'schema' as const,
-      category: 'Database Schema',
-      position: { x: 800, y: 600 },
-      metadata: {
-        description: 'Schema supporting business user portal functionality including dashboards, reports, user management, and configuration settings.',
-        owner: 'Database Team',
-        steward: 'Robert Kim',
-        createdAt: '2024-01-08T10:00:00Z',
-        modifiedAt: '2024-01-15T16:20:00Z',
-        version: '1.3.0',
-        sourceSystem: 'PostgreSQL Production',
-        businessUnit: 'Operations',
-        tags: ['database', 'schema', 'portal', 'ui', 'business', 'reporting'],
-        status: 'active' as const,
-        confidence: 89,
-        usageCount: 67,
-        businessValue: 'high' as const,
-        dataQuality: 92,
-        lastValidated: '2024-01-15T17:00:00Z',
-        validatedBy: 'Database Administrator',
-        notes: 'Schema for business portal operations',
-        relatedAssets: ['portal_config', 'portal_analytics'],
-        dependencies: ['PostgreSQL 14.x'],
-        consumers: ['Portal Service', 'Reporting Service']
-      },
-      visual: {
-        color: '#8B5CF6',
-        shape: 'hexagon' as const,
-        size: 100,
-        icon: 'Database'
-      }
-    },
-
-    // Database Tables
+    
+    // Database Table
     {
       id: 'table-message-routing',
       name: 'message_routing',
       type: 'table' as const,
       category: 'Database Table',
-      position: { x: 1150, y: 150 },
+      position: { x: 1150, y: 200 },
       metadata: {
-        description: 'Configuration table for ACH message routing rules, including NAPAS endpoint mappings, transformation logic, and routing priorities.',
+        description: 'Configuration table for ACH message routing rules',
         owner: 'Database Team',
-        steward: 'Robert Kim',
         createdAt: '2024-01-10T08:30:00Z',
         modifiedAt: '2024-01-15T12:00:00Z',
-        version: '2.1.0',
-        sourceSystem: 'PostgreSQL Production',
         businessUnit: 'Technology',
-        tags: ['table', 'routing', 'configuration', 'ach', 'napas', 'core'],
+        tags: ['table', 'routing', 'configuration'],
         status: 'active' as const,
         confidence: 95,
         usageCount: 245,
-        businessValue: 'critical' as const,
-        dataQuality: 96,
-        lastValidated: '2024-01-15T13:00:00Z',
-        validatedBy: 'Database Administrator',
-        notes: 'Core routing configuration table',
-        relatedAssets: ['routing_rules', 'endpoint_config'],
-        dependencies: ['dpg_middleware schema'],
-        consumers: ['DPG Service', 'Monitoring Dashboard']
+        businessValue: 'critical' as const
       },
       visual: {
         color: '#6366F1',
         shape: 'rectangle' as const,
-        size: 90,
-        icon: 'Table'
+        size: 90
       }
     },
-    {
-      id: 'table-payment-routes',
-      name: 'payment_routes',
-      type: 'table' as const,
-      category: 'Database Table',
-      position: { x: 1150, y: 350 },
-      metadata: {
-        description: 'Payment routing configuration including provider selection logic, fallback rules, cost optimization parameters, and performance metrics.',
-        owner: 'Database Team',
-        steward: 'Robert Kim',
-        createdAt: '2024-01-12T09:30:00Z',
-        modifiedAt: '2024-01-16T14:15:00Z',
-        version: '1.5.0',
-        sourceSystem: 'PostgreSQL Production',
-        businessUnit: 'Payments',
-        tags: ['table', 'payment', 'routing', 'providers', 'optimization'],
-        status: 'active' as const,
-        confidence: 97,
-        usageCount: 189,
-        businessValue: 'critical' as const,
-        dataQuality: 98,
-        lastValidated: '2024-01-16T15:00:00Z',
-        validatedBy: 'Database Administrator',
-        notes: 'Primary payment routing table',
-        relatedAssets: ['provider_config', 'routing_metrics'],
-        dependencies: ['payment_orchestration schema'],
-        consumers: ['Payment Service', 'Analytics Platform']
-      },
-      visual: {
-        color: '#6366F1',
-        shape: 'rectangle' as const,
-        size: 90,
-        icon: 'Table'
-      }
-    },
-    {
-      id: 'table-dashboard-config',
-      name: 'dashboard_config',
-      type: 'table' as const,
-      category: 'Database Table',
-      position: { x: 1150, y: 550 },
-      metadata: {
-        description: 'Configuration for business user dashboards including widget layouts, data sources, refresh intervals, and user preferences.',
-        owner: 'Database Team',
-        steward: 'Robert Kim',
-        createdAt: '2024-01-08T11:00:00Z',
-        modifiedAt: '2024-01-15T17:30:00Z',
-        version: '1.3.0',
-        sourceSystem: 'PostgreSQL Production',
-        businessUnit: 'Operations',
-        tags: ['table', 'dashboard', 'configuration', 'ui', 'business'],
-        status: 'active' as const,
-        confidence: 91,
-        usageCount: 78,
-        businessValue: 'high' as const,
-        dataQuality: 93,
-        lastValidated: '2024-01-15T18:00:00Z',
-        validatedBy: 'Database Administrator',
-        notes: 'Dashboard configuration table',
-        relatedAssets: ['widget_config', 'user_preferences'],
-        dependencies: ['business_portal schema'],
-        consumers: ['Portal Service', 'UI Components']
-      },
-      visual: {
-        color: '#6366F1',
-        shape: 'rectangle' as const,
-        size: 90,
-        icon: 'Table'
-      }
-    },
-
-    // Services
+    
+    // Service
     {
       id: 'service-dpg',
       name: 'DPG Service',
@@ -605,120 +193,36 @@ const mockLineageData = {
       category: 'Microservice',
       position: { x: 1500, y: 200 },
       metadata: {
-        description: 'Digital Payment Gateway service providing secure, reliable communication with NAPAS ACH infrastructure. Handles message routing, transformation, and error recovery.',
+        description: 'Digital Payment Gateway service for NAPAS ACH integration',
         owner: 'Development Team',
-        steward: 'Alex Thompson',
         createdAt: '2024-01-05T08:00:00Z',
         modifiedAt: '2024-01-15T10:00:00Z',
-        version: '2.1.3',
-        sourceSystem: 'Kubernetes Production',
         businessUnit: 'Technology',
-        tags: ['service', 'payment', 'gateway', 'napas', 'production', 'critical'],
+        tags: ['service', 'payment', 'gateway', 'napas'],
         status: 'active' as const,
         confidence: 96,
         usageCount: 1247,
-        businessValue: 'critical' as const,
-        dataQuality: 97,
-        lastValidated: '2024-01-15T11:00:00Z',
-        validatedBy: 'DevOps Team',
-        notes: 'Core service for NAPAS connectivity',
-        relatedAssets: ['DPG API', 'Message Router'],
-        dependencies: ['message_routing table', 'NAPAS API'],
-        consumers: ['Payment Orchestration', 'Monitoring Systems']
+        businessValue: 'critical' as const
       },
       visual: {
         color: '#F59E0B',
         shape: 'diamond' as const,
-        size: 110,
-        icon: 'GitBranch'
-      }
-    },
-    {
-      id: 'service-payment-orchestration',
-      name: 'Payment Orchestration Service',
-      type: 'service' as const,
-      category: 'Microservice',
-      position: { x: 1500, y: 400 },
-      metadata: {
-        description: 'Orchestrates ACH payment processing across multiple providers with intelligent routing, fallback capabilities, and real-time monitoring.',
-        owner: 'Development Team',
-        steward: 'Alex Thompson',
-        createdAt: '2024-01-08T09:00:00Z',
-        modifiedAt: '2024-01-16T11:45:00Z',
-        version: '1.8.2',
-        sourceSystem: 'Kubernetes Production',
-        businessUnit: 'Payments',
-        tags: ['service', 'payment', 'orchestration', 'ach', 'production'],
-        status: 'active' as const,
-        confidence: 98,
-        usageCount: 2156,
-        businessValue: 'critical' as const,
-        dataQuality: 99,
-        lastValidated: '2024-01-16T12:00:00Z',
-        validatedBy: 'DevOps Team',
-        notes: 'Primary payment orchestration service',
-        relatedAssets: ['Payment API', 'Provider Integrations'],
-        dependencies: ['payment_routes table', 'Third-Party APIs'],
-        consumers: ['Business Portal', 'Analytics Platform']
-      },
-      visual: {
-        color: '#F59E0B',
-        shape: 'diamond' as const,
-        size: 110,
-        icon: 'GitBranch'
-      }
-    },
-    {
-      id: 'service-business-portal',
-      name: 'Business Portal Service',
-      type: 'service' as const,
-      category: 'Microservice',
-      position: { x: 1500, y: 600 },
-      metadata: {
-        description: 'Web service powering business user interfaces for ACH transaction monitoring, reporting, and management. Provides real-time dashboards and analytics.',
-        owner: 'Development Team',
-        steward: 'Alex Thompson',
-        createdAt: '2024-01-06T10:00:00Z',
-        modifiedAt: '2024-01-15T15:20:00Z',
-        version: '1.5.1',
-        sourceSystem: 'Kubernetes Production',
-        businessUnit: 'Operations',
-        tags: ['service', 'portal', 'ui', 'business', 'monitoring', 'dashboard'],
-        status: 'active' as const,
-        confidence: 92,
-        usageCount: 567,
-        businessValue: 'high' as const,
-        dataQuality: 94,
-        lastValidated: '2024-01-15T16:00:00Z',
-        validatedBy: 'DevOps Team',
-        notes: 'Business portal backend service',
-        relatedAssets: ['Portal API', 'Dashboard Components'],
-        dependencies: ['dashboard_config table', 'Analytics API'],
-        consumers: ['Business Users', 'Operations Team']
-      },
-      visual: {
-        color: '#F59E0B',
-        shape: 'diamond' as const,
-        size: 110,
-        icon: 'GitBranch'
+        size: 110
       }
     }
   ] as LineageNode[],
 
   edges: [
-    // Document to Term relationships
+    // Document to Term
     {
       id: 'edge-doc1-term1',
       source: 'doc-dpg-spec',
       target: 'term-msg-routing',
       type: 'extracts-from' as const,
-      label: 'Extracted from System Overview',
+      label: 'Extracted from',
       metadata: {
         confidence: 96,
-        strength: 'strong' as const,
-        createdAt: '2024-01-15T14:30:00Z',
-        validatedAt: '2024-01-15T15:00:00Z',
-        notes: 'High-confidence extraction from technical specification'
+        createdAt: '2024-01-15T14:30:00Z'
       },
       visual: {
         color: '#3B82F6',
@@ -726,59 +230,17 @@ const mockLineageData = {
         width: 2
       }
     },
-    {
-      id: 'edge-doc2-term2',
-      source: 'doc-payment-brd',
-      target: 'term-payment-orchestration',
-      type: 'extracts-from' as const,
-      label: 'Extracted from Business Overview',
-      metadata: {
-        confidence: 96,
-        strength: 'strong' as const,
-        createdAt: '2024-01-16T10:30:00Z',
-        validatedAt: '2024-01-16T11:00:00Z',
-        notes: 'Core business concept extraction'
-      },
-      visual: {
-        color: '#3B82F6',
-        style: 'solid' as const,
-        width: 2
-      }
-    },
-    {
-      id: 'edge-doc3-term3',
-      source: 'doc-portal-guide',
-      target: 'term-transaction-dashboard',
-      type: 'extracts-from' as const,
-      label: 'Extracted from Dashboard Requirements',
-      metadata: {
-        confidence: 92,
-        strength: 'strong' as const,
-        createdAt: '2024-01-15T13:30:00Z',
-        validatedAt: '2024-01-15T14:00:00Z',
-        notes: 'UI component specification extraction'
-      },
-      visual: {
-        color: '#3B82F6',
-        style: 'solid' as const,
-        width: 2
-      }
-    },
-
-    // Term to Schema mappings
+    
+    // Term to Schema
     {
       id: 'edge-term1-schema1',
       source: 'term-msg-routing',
       target: 'schema-dpg-middleware',
       type: 'maps-to' as const,
-      label: 'Implemented in dpg_middleware schema',
+      label: 'Maps to',
       metadata: {
         confidence: 94,
-        strength: 'strong' as const,
-        createdAt: '2024-01-15T15:00:00Z',
-        validatedAt: '2024-01-15T15:30:00Z',
-        transformationLogic: 'Business concept mapped to database schema design',
-        notes: 'Direct implementation mapping'
+        createdAt: '2024-01-15T15:00:00Z'
       },
       visual: {
         color: '#10B981',
@@ -786,60 +248,17 @@ const mockLineageData = {
         width: 2
       }
     },
-    {
-      id: 'edge-term2-schema2',
-      source: 'term-payment-orchestration',
-      target: 'schema-payment-orchestration',
-      type: 'maps-to' as const,
-      label: 'Implemented in payment_orchestration schema',
-      metadata: {
-        confidence: 97,
-        strength: 'strong' as const,
-        createdAt: '2024-01-16T11:00:00Z',
-        validatedAt: '2024-01-16T11:30:00Z',
-        transformationLogic: 'Payment orchestration logic stored in dedicated schema',
-        notes: 'Primary implementation schema'
-      },
-      visual: {
-        color: '#10B981',
-        style: 'solid' as const,
-        width: 2
-      }
-    },
-    {
-      id: 'edge-term3-schema3',
-      source: 'term-transaction-dashboard',
-      target: 'schema-business-portal',
-      type: 'maps-to' as const,
-      label: 'Implemented in business_portal schema',
-      metadata: {
-        confidence: 91,
-        strength: 'strong' as const,
-        createdAt: '2024-01-15T14:00:00Z',
-        validatedAt: '2024-01-15T14:30:00Z',
-        transformationLogic: 'Dashboard configuration stored in portal schema',
-        notes: 'UI component implementation'
-      },
-      visual: {
-        color: '#10B981',
-        style: 'solid' as const,
-        width: 2
-      }
-    },
-
-    // Schema to Table relationships
+    
+    // Schema to Table
     {
       id: 'edge-schema1-table1',
       source: 'schema-dpg-middleware',
       target: 'table-message-routing',
       type: 'contains' as const,
-      label: 'Contains message_routing table',
+      label: 'Contains',
       metadata: {
         confidence: 95,
-        strength: 'strong' as const,
-        createdAt: '2024-01-10T09:00:00Z',
-        validatedAt: '2024-01-15T12:30:00Z',
-        notes: 'Core table within schema'
+        createdAt: '2024-01-10T09:00:00Z'
       },
       visual: {
         color: '#8B5CF6',
@@ -847,99 +266,17 @@ const mockLineageData = {
         width: 2
       }
     },
-    {
-      id: 'edge-schema2-table2',
-      source: 'schema-payment-orchestration',
-      target: 'table-payment-routes',
-      type: 'contains' as const,
-      label: 'Contains payment_routes table',
-      metadata: {
-        confidence: 97,
-        strength: 'strong' as const,
-        createdAt: '2024-01-12T10:00:00Z',
-        validatedAt: '2024-01-16T14:30:00Z',
-        notes: 'Primary routing table'
-      },
-      visual: {
-        color: '#8B5CF6',
-        style: 'solid' as const,
-        width: 2
-      }
-    },
-    {
-      id: 'edge-schema3-table3',
-      source: 'schema-business-portal',
-      target: 'table-dashboard-config',
-      type: 'contains' as const,
-      label: 'Contains dashboard_config table',
-      metadata: {
-        confidence: 91,
-        strength: 'strong' as const,
-        createdAt: '2024-01-08T11:30:00Z',
-        validatedAt: '2024-01-15T17:30:00Z',
-        notes: 'Dashboard configuration table'
-      },
-      visual: {
-        color: '#8B5CF6',
-        style: 'solid' as const,
-        width: 2
-      }
-    },
-
-    // Table to Service dependencies
+    
+    // Table to Service
     {
       id: 'edge-table1-service1',
       source: 'table-message-routing',
       target: 'service-dpg',
       type: 'depends-on' as const,
-      label: 'DPG service reads routing configuration',
+      label: 'Used by',
       metadata: {
         confidence: 96,
-        strength: 'strong' as const,
-        createdAt: '2024-01-15T10:30:00Z',
-        validatedAt: '2024-01-15T11:00:00Z',
-        transformationLogic: 'Service loads routing rules from database table',
-        notes: 'Critical dependency for service operation'
-      },
-      visual: {
-        color: '#F59E0B',
-        style: 'solid' as const,
-        width: 2
-      }
-    },
-    {
-      id: 'edge-table2-service2',
-      source: 'table-payment-routes',
-      target: 'service-payment-orchestration',
-      type: 'depends-on' as const,
-      label: 'Payment service uses routing rules',
-      metadata: {
-        confidence: 98,
-        strength: 'strong' as const,
-        createdAt: '2024-01-16T12:00:00Z',
-        validatedAt: '2024-01-16T12:30:00Z',
-        transformationLogic: 'Service executes payment routing based on table configuration',
-        notes: 'Primary dependency for payment processing'
-      },
-      visual: {
-        color: '#F59E0B',
-        style: 'solid' as const,
-        width: 2
-      }
-    },
-    {
-      id: 'edge-table3-service3',
-      source: 'table-dashboard-config',
-      target: 'service-business-portal',
-      type: 'depends-on' as const,
-      label: 'Portal service loads dashboard configurations',
-      metadata: {
-        confidence: 92,
-        strength: 'strong' as const,
-        createdAt: '2024-01-15T16:00:00Z',
-        validatedAt: '2024-01-15T16:30:00Z',
-        transformationLogic: 'Service renders dashboards based on configuration data',
-        notes: 'Configuration dependency for UI rendering'
+        createdAt: '2024-01-15T10:30:00Z'
       },
       visual: {
         color: '#F59E0B',
@@ -955,52 +292,33 @@ export function NAPASLineageViewer() {
   const containerRef = useRef<HTMLDivElement>(null);
   
   // State management
-  const [viewState, setViewState] = useState<ViewState>({
-    zoom: 1,
-    pan: { x: 0, y: 0 },
-    selectedNode: null,
-    hoveredNode: null,
-    highlightedNodes: [],
-    highlightedEdges: [],
-    showGrid: true,
-    showLabels: true,
-    showMinimap: false,
-    layoutMode: 'manual',
-    fullscreen: false
-  });
-
-  const [filterState, setFilterState] = useState<FilterState>({
-    search: '',
-    nodeTypes: ['document', 'term', 'schema', 'table', 'service'],
-    confidenceRange: [0, 100],
-    statusFilters: ['active', 'deprecated', 'pending'],
-    businessUnits: ['Technology', 'Payments', 'Operations'],
-    dateRange: { start: '', end: '' },
-    businessValue: ['critical', 'high', 'medium', 'low'],
-    tags: []
-  });
-
-  const [showFilters, setShowFilters] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [highlightedNodes, setHighlightedNodes] = useState<string[]>([]);
+  const [highlightedEdges, setHighlightedEdges] = useState<string[]>([]);
+  const [showGrid, setShowGrid] = useState(true);
+  const [showLabels, setShowLabels] = useState(true);
   const [showLegend, setShowLegend] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [nodeTypeFilters, setNodeTypeFilters] = useState<string[]>([
+    'document', 'term', 'schema', 'table', 'service'
+  ]);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   // Filter nodes and edges based on current filters
   const filteredNodes = mockLineageData.nodes.filter(node => {
-    const matchesSearch = !filterState.search || 
-      node.name.toLowerCase().includes(filterState.search.toLowerCase()) ||
-      node.metadata.description.toLowerCase().includes(filterState.search.toLowerCase()) ||
-      node.metadata.tags.some(tag => tag.toLowerCase().includes(filterState.search.toLowerCase()));
+    const matchesSearch = !searchQuery || 
+      node.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      node.metadata.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      node.metadata.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     
-    const matchesType = filterState.nodeTypes.includes(node.type);
-    const matchesConfidence = node.metadata.confidence >= filterState.confidenceRange[0] && 
-                             node.metadata.confidence <= filterState.confidenceRange[1];
-    const matchesStatus = filterState.statusFilters.includes(node.metadata.status);
-    const matchesBusinessUnit = filterState.businessUnits.includes(node.metadata.businessUnit);
-    const matchesBusinessValue = filterState.businessValue.includes(node.metadata.businessValue);
+    const matchesType = nodeTypeFilters.includes(node.type);
     
-    return matchesSearch && matchesType && matchesConfidence && matchesStatus && 
-           matchesBusinessUnit && matchesBusinessValue;
+    return matchesSearch && matchesType;
   });
 
   const filteredEdges = mockLineageData.edges.filter(edge => {
@@ -1011,62 +329,48 @@ export function NAPASLineageViewer() {
 
   // Event handlers
   const handleNodeClick = useCallback((nodeId: string) => {
-    setViewState(prev => ({
-      ...prev,
-      selectedNode: nodeId,
-      highlightedNodes: getConnectedNodes(nodeId),
-      highlightedEdges: getConnectedEdges(nodeId)
-    }));
-  }, []);
-
-  const handleNodeHover = useCallback((nodeId: string | null) => {
-    setViewState(prev => ({
-      ...prev,
-      hoveredNode: nodeId
-    }));
-  }, []);
-
-  const getConnectedNodes = (nodeId: string): string[] => {
-    const connected = new Set<string>();
+    setSelectedNode(nodeId);
+    
+    // Find connected nodes and edges
+    const connectedNodes: string[] = [];
+    const connectedEdges: string[] = [];
+    
     filteredEdges.forEach(edge => {
-      if (edge.source === nodeId) connected.add(edge.target);
-      if (edge.target === nodeId) connected.add(edge.source);
+      if (edge.source === nodeId || edge.target === nodeId) {
+        connectedEdges.push(edge.id);
+        if (edge.source === nodeId) connectedNodes.push(edge.target);
+        if (edge.target === nodeId) connectedNodes.push(edge.source);
+      }
     });
-    return Array.from(connected);
-  };
-
-  const getConnectedEdges = (nodeId: string): string[] => {
-    return filteredEdges
-      .filter(edge => edge.source === nodeId || edge.target === nodeId)
-      .map(edge => edge.id);
-  };
+    
+    setHighlightedNodes(connectedNodes);
+    setHighlightedEdges(connectedEdges);
+  }, [filteredEdges]);
 
   const handleZoomIn = () => {
-    setViewState(prev => ({ ...prev, zoom: Math.min(prev.zoom * 1.2, 2) }));
+    setZoom(prev => Math.min(prev * 1.2, 2));
   };
 
   const handleZoomOut = () => {
-    setViewState(prev => ({ ...prev, zoom: Math.max(prev.zoom / 1.2, 0.25) }));
+    setZoom(prev => Math.max(prev / 1.2, 0.25));
   };
 
   const handleResetView = () => {
-    setViewState(prev => ({ ...prev, zoom: 1, pan: { x: 0, y: 0 } }));
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
-    setDragStart({ x: e.clientX - viewState.pan.x, y: e.clientY - viewState.pan.y });
+    setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging) {
-      setViewState(prev => ({
-        ...prev,
-        pan: {
-          x: e.clientX - dragStart.x,
-          y: e.clientY - dragStart.y
-        }
-      }));
+      setPan({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
     }
   };
 
@@ -1075,20 +379,20 @@ export function NAPASLineageViewer() {
   };
 
   // Get selected node data
-  const selectedNode = viewState.selectedNode ? 
-    filteredNodes.find(node => node.id === viewState.selectedNode) : null;
+  const selectedNodeData = selectedNode ? 
+    filteredNodes.find(node => node.id === selectedNode) : null;
 
   // Render node
   const renderNode = (node: LineageNode) => {
-    const isSelected = viewState.selectedNode === node.id;
-    const isHighlighted = viewState.highlightedNodes.includes(node.id);
-    const isHovered = viewState.hoveredNode === node.id;
+    const isSelected = selectedNode === node.id;
+    const isHighlighted = highlightedNodes.includes(node.id);
+    const isHovered = hoveredNode === node.id;
     
-    const scale = viewState.zoom;
-    const x = node.position.x * scale + viewState.pan.x;
-    const y = node.position.y * scale + viewState.pan.y;
+    const scale = zoom;
+    const x = node.position.x * scale + pan.x;
+    const y = node.position.y * scale + pan.y;
     
-    const opacity = isSelected || isHighlighted || !viewState.selectedNode ? 1 : 0.3;
+    const opacity = isSelected || isHighlighted || !selectedNode ? 1 : 0.3;
     
     return (
       <g
@@ -1096,8 +400,8 @@ export function NAPASLineageViewer() {
         transform={`translate(${x}, ${y})`}
         style={{ cursor: 'pointer', opacity }}
         onClick={() => handleNodeClick(node.id)}
-        onMouseEnter={() => handleNodeHover(node.id)}
-        onMouseLeave={() => handleNodeHover(null)}
+        onMouseEnter={() => setHoveredNode(node.id)}
+        onMouseLeave={() => setHoveredNode(null)}
       >
         {/* Node shape */}
         {node.visual.shape === 'rectangle' && (
@@ -1159,7 +463,7 @@ export function NAPASLineageViewer() {
         </text>
         
         {/* Node label */}
-        {viewState.showLabels && (
+        {showLabels && (
           <text
             textAnchor="middle"
             dy={node.visual.size / 2 + 20}
@@ -1204,14 +508,14 @@ export function NAPASLineageViewer() {
     
     if (!sourceNode || !targetNode) return null;
     
-    const scale = viewState.zoom;
-    const sourceX = sourceNode.position.x * scale + viewState.pan.x;
-    const sourceY = sourceNode.position.y * scale + viewState.pan.y;
-    const targetX = targetNode.position.x * scale + viewState.pan.x;
-    const targetY = targetNode.position.y * scale + viewState.pan.y;
+    const scale = zoom;
+    const sourceX = sourceNode.position.x * scale + pan.x;
+    const sourceY = sourceNode.position.y * scale + pan.y;
+    const targetX = targetNode.position.x * scale + pan.x;
+    const targetY = targetNode.position.y * scale + pan.y;
     
-    const isHighlighted = viewState.highlightedEdges.includes(edge.id);
-    const opacity = isHighlighted || !viewState.selectedNode ? 1 : 0.2;
+    const isHighlighted = highlightedEdges.includes(edge.id);
+    const opacity = isHighlighted || !selectedNode ? 1 : 0.2;
     
     // Calculate control points for curved edge
     const midX = (sourceX + targetX) / 2;
@@ -1226,14 +530,13 @@ export function NAPASLineageViewer() {
           fill="none"
           stroke={edge.visual.color}
           strokeWidth={edge.visual.width}
-          strokeDasharray={edge.visual.style === 'dashed' ? '5,5' : 
-                          edge.visual.style === 'dotted' ? '2,2' : 'none'}
+          strokeDasharray={edge.visual.style === 'dashed' ? '5,5' : 'none'}
           markerEnd="url(#arrowhead)"
           className="transition-all duration-200"
         />
         
         {/* Edge label */}
-        {viewState.showLabels && (
+        {showLabels && (
           <text
             x={midX}
             y={controlY - 10}
@@ -1286,8 +589,7 @@ export function NAPASLineageViewer() {
     switch (status) {
       case 'active': return CheckCircle;
       case 'deprecated': return AlertTriangle;
-      case 'pending': return Clock;
-      case 'archived': return Archive;
+      case 'pending': return Info;
       default: return Info;
     }
   };
@@ -1297,14 +599,13 @@ export function NAPASLineageViewer() {
       case 'critical': return Star;
       case 'high': return TrendingUp;
       case 'medium': return Activity;
-      case 'low': return BarChart3;
+      case 'low': return Info;
       default: return Info;
     }
   };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
@@ -1313,7 +614,7 @@ export function NAPASLineageViewer() {
   };
 
   return (
-    <div className={`h-screen bg-gray-50 flex flex-col ${viewState.fullscreen ? 'fixed inset-0 z-50' : ''}`}>
+    <div className="h-screen bg-gray-50 flex flex-col">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4 flex-shrink-0">
         <div className="flex items-center justify-between">
@@ -1324,7 +625,7 @@ export function NAPASLineageViewer() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">NAPAS ACH Data Lineage</h1>
-                <p className="text-sm text-gray-600">Interactive visualization of data relationships</p>
+                <p className="text-sm text-gray-600">Trace data flow from documents to services</p>
               </div>
             </div>
           </div>
@@ -1334,49 +635,32 @@ export function NAPASLineageViewer() {
             <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-1">
               <Button variant="ghost" size="sm" icon={ZoomOut} onClick={handleZoomOut} />
               <span className="text-sm text-gray-600 min-w-12 text-center">
-                {Math.round(viewState.zoom * 100)}%
+                {Math.round(zoom * 100)}%
               </span>
               <Button variant="ghost" size="sm" icon={ZoomIn} onClick={handleZoomIn} />
               <Button variant="ghost" size="sm" icon={RotateCcw} onClick={handleResetView} />
             </div>
             
             {/* View Controls */}
-            <div className="flex items-center space-x-1">
-              <Button 
-                variant={viewState.showGrid ? 'primary' : 'ghost'} 
-                size="sm" 
-                icon={Grid3X3}
-                onClick={() => setViewState(prev => ({ ...prev, showGrid: !prev.showGrid }))}
-              />
-              <Button 
-                variant={viewState.showLabels ? 'primary' : 'ghost'} 
-                size="sm" 
-                icon={viewState.showLabels ? Eye : EyeOff}
-                onClick={() => setViewState(prev => ({ ...prev, showLabels: !prev.showLabels }))}
-              />
-              <Button 
-                variant={showLegend ? 'primary' : 'ghost'} 
-                size="sm" 
-                icon={Layers}
-                onClick={() => setShowLegend(!showLegend)}
-              />
-            </div>
-            
-            {/* Action Controls */}
-            <div className="flex items-center space-x-1">
-              <Button variant="ghost" size="sm" icon={Download}>
-                Export
-              </Button>
-              <Button variant="ghost" size="sm" icon={Share2}>
-                Share
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                icon={Maximize2}
-                onClick={() => setViewState(prev => ({ ...prev, fullscreen: !prev.fullscreen }))}
-              />
-            </div>
+            <Button 
+              variant={showGrid ? 'primary' : 'ghost'} 
+              size="sm" 
+              icon={Grid3X3}
+              onClick={() => setShowGrid(!showGrid)}
+            />
+            <Button 
+              variant={showLabels ? 'primary' : 'ghost'} 
+              size="sm" 
+              icon={Eye}
+              onClick={() => setShowLabels(!showLabels)}
+            />
+            <Button 
+              variant={showLegend ? 'primary' : 'ghost'} 
+              size="sm" 
+              icon={Info}
+              onClick={() => setShowLegend(!showLegend)}
+            />
+            <Button variant="ghost" size="sm" icon={Maximize2} />
           </div>
         </div>
 
@@ -1387,8 +671,8 @@ export function NAPASLineageViewer() {
             <input
               type="text"
               placeholder="Search nodes, descriptions, or tags..."
-              value={filterState.search}
-              onChange={(e) => setFilterState(prev => ({ ...prev, search: e.target.value }))}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -1407,111 +691,29 @@ export function NAPASLineageViewer() {
           </div>
         </div>
 
-        {/* Advanced Filters Panel */}
+        {/* Simple Filters Panel */}
         {showFilters && (
           <div className="mt-4 p-4 bg-gray-50 rounded-lg border">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {/* Node Types */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Node Types</label>
-                <div className="space-y-1">
-                  {['document', 'term', 'schema', 'table', 'service'].map(type => (
-                    <label key={type} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={filterState.nodeTypes.includes(type)}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setFilterState(prev => ({ ...prev, nodeTypes: [...prev.nodeTypes, type] }));
-                          } else {
-                            setFilterState(prev => ({ ...prev, nodeTypes: prev.nodeTypes.filter(t => t !== type) }));
-                          }
-                        }}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2"
-                      />
-                      <span className="text-sm text-gray-700 capitalize">{type}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Confidence Range */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Confidence: {filterState.confidenceRange[0]}% - {filterState.confidenceRange[1]}%
-                </label>
-                <div className="space-y-2">
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={filterState.confidenceRange[0]}
-                    onChange={(e) => setFilterState(prev => ({ 
-                      ...prev, 
-                      confidenceRange: [parseInt(e.target.value), prev.confidenceRange[1]] 
-                    }))}
-                    className="w-full"
-                  />
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={filterState.confidenceRange[1]}
-                    onChange={(e) => setFilterState(prev => ({ 
-                      ...prev, 
-                      confidenceRange: [prev.confidenceRange[0], parseInt(e.target.value)] 
-                    }))}
-                    className="w-full"
-                  />
-                </div>
-              </div>
-
-              {/* Status Filters */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                <div className="space-y-1">
-                  {['active', 'deprecated', 'pending', 'archived'].map(status => (
-                    <label key={status} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={filterState.statusFilters.includes(status)}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setFilterState(prev => ({ ...prev, statusFilters: [...prev.statusFilters, status] }));
-                          } else {
-                            setFilterState(prev => ({ ...prev, statusFilters: prev.statusFilters.filter(s => s !== status) }));
-                          }
-                        }}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2"
-                      />
-                      <span className="text-sm text-gray-700 capitalize">{status}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Business Value */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Business Value</label>
-                <div className="space-y-1">
-                  {['critical', 'high', 'medium', 'low'].map(value => (
-                    <label key={value} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={filterState.businessValue.includes(value)}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setFilterState(prev => ({ ...prev, businessValue: [...prev.businessValue, value] }));
-                          } else {
-                            setFilterState(prev => ({ ...prev, businessValue: prev.businessValue.filter(v => v !== value) }));
-                          }
-                        }}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 mr-2"
-                      />
-                      <span className="text-sm text-gray-700 capitalize">{value}</span>
-                    </label>
-                  ))}
-                </div>
+            <div className="space-y-2">
+              <h3 className="text-sm font-medium text-gray-700">Node Types</h3>
+              <div className="flex flex-wrap gap-2">
+                {['document', 'term', 'schema', 'table', 'service'].map(type => (
+                  <label key={type} className="flex items-center space-x-2 bg-white px-3 py-1 rounded-lg border">
+                    <input
+                      type="checkbox"
+                      checked={nodeTypeFilters.includes(type)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setNodeTypeFilters(prev => [...prev, type]);
+                        } else {
+                          setNodeTypeFilters(prev => prev.filter(t => t !== type));
+                        }
+                      }}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-700 capitalize">{type}</span>
+                  </label>
+                ))}
               </div>
             </div>
           </div>
@@ -1533,7 +735,7 @@ export function NAPASLineageViewer() {
             <svg
               ref={svgRef}
               className="w-full h-full"
-              style={{ background: viewState.showGrid ? 'radial-gradient(circle, #e5e7eb 1px, transparent 1px)' : 'transparent' }}
+              style={{ background: showGrid ? 'radial-gradient(circle, #e5e7eb 1px, transparent 1px)' : 'transparent', backgroundSize: '20px 20px' }}
             >
               {/* Definitions */}
               <defs>
@@ -1583,77 +785,38 @@ export function NAPASLineageViewer() {
                   <span className="text-sm text-gray-700">Services</span>
                 </div>
               </div>
-              
-              <div className="mt-4 pt-3 border-t border-gray-200">
-                <h4 className="font-medium text-gray-900 mb-2">Confidence</h4>
-                <div className="space-y-1">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
-                    <span className="text-xs text-gray-600">90%+ High</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                    <span className="text-xs text-gray-600">80-89% Good</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                    <span className="text-xs text-gray-600">70-79% Medium</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <span className="text-xs text-gray-600">&lt;70% Low</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Minimap */}
-          {viewState.showMinimap && (
-            <div className="absolute bottom-4 right-4 w-48 h-32 bg-white rounded-lg shadow-lg border border-gray-200 p-2">
-              <div className="text-xs text-gray-600 mb-1">Overview</div>
-              <div className="w-full h-full bg-gray-100 rounded relative">
-                {/* Minimap content would go here */}
-              </div>
             </div>
           )}
         </div>
 
         {/* Right Sidebar */}
         <div className="w-96 bg-white border-l border-gray-200 flex flex-col">
-          {selectedNode ? (
+          {selectedNodeData ? (
             <>
               {/* Node Header */}
               <div className="p-6 border-b border-gray-200">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-start space-x-3">
-                    <div className={`p-2 rounded-lg`} style={{ backgroundColor: selectedNode.visual.color }}>
-                      {React.createElement(getNodeIcon(selectedNode.type), { 
+                    <div className={`p-2 rounded-lg`} style={{ backgroundColor: selectedNodeData.visual.color }}>
+                      {React.createElement(getNodeIcon(selectedNodeData.type), { 
                         className: "w-5 h-5 text-white" 
                       })}
                     </div>
                     <div className="flex-1">
                       <h2 className="text-lg font-bold text-gray-900 mb-1">
-                        {selectedNode.name}
+                        {selectedNodeData.name}
                       </h2>
                       <div className="flex items-center space-x-2">
-                        <Badge variant="info" size="sm">{selectedNode.type}</Badge>
-                        <Badge variant="default" size="sm">{selectedNode.category}</Badge>
-                        {React.createElement(getStatusIcon(selectedNode.metadata.status), { 
-                          className: `w-4 h-4 ${
-                            selectedNode.metadata.status === 'active' ? 'text-emerald-500' :
-                            selectedNode.metadata.status === 'deprecated' ? 'text-amber-500' :
-                            selectedNode.metadata.status === 'pending' ? 'text-blue-500' : 'text-gray-500'
-                          }` 
-                        })}
+                        <Badge variant="info" size="sm">{selectedNodeData.type}</Badge>
+                        <Badge variant="default" size="sm">{selectedNodeData.category}</Badge>
                       </div>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm" icon={X} onClick={() => setViewState(prev => ({ ...prev, selectedNode: null }))} />
+                  <Button variant="ghost" size="sm" icon={X} onClick={() => setSelectedNode(null)} />
                 </div>
                 
                 <p className="text-gray-600 leading-relaxed">
-                  {selectedNode.metadata.description}
+                  {selectedNodeData.metadata.description}
                 </p>
               </div>
 
@@ -1668,22 +831,17 @@ export function NAPASLineageViewer() {
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-600">Confidence Level</span>
-                      <span className="font-semibold text-gray-900">{selectedNode.metadata.confidence}%</span>
+                      <span className="font-semibold text-gray-900">{selectedNodeData.metadata.confidence}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div 
                         className={`h-2 rounded-full transition-all duration-300 ${
-                          selectedNode.metadata.confidence >= 90 ? 'bg-emerald-500' :
-                          selectedNode.metadata.confidence >= 80 ? 'bg-blue-500' :
-                          selectedNode.metadata.confidence >= 70 ? 'bg-amber-500' : 'bg-red-500'
+                          selectedNodeData.metadata.confidence >= 90 ? 'bg-emerald-500' :
+                          selectedNodeData.metadata.confidence >= 80 ? 'bg-blue-500' :
+                          selectedNodeData.metadata.confidence >= 70 ? 'bg-amber-500' : 'bg-red-500'
                         }`}
-                        style={{ width: `${selectedNode.metadata.confidence}%` }}
+                        style={{ width: `${selectedNodeData.metadata.confidence}%` }}
                       />
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      {selectedNode.metadata.confidence >= 90 ? 'High confidence' :
-                       selectedNode.metadata.confidence >= 80 ? 'Good confidence' :
-                       selectedNode.metadata.confidence >= 70 ? 'Medium confidence' : 'Low confidence'}
                     </div>
                   </div>
                 </div>
@@ -1698,56 +856,25 @@ export function NAPASLineageViewer() {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <span className="text-sm text-gray-600">Owner</span>
-                        <p className="font-medium text-gray-900">{selectedNode.metadata.owner}</p>
+                        <p className="font-medium text-gray-900">{selectedNodeData.metadata.owner}</p>
                       </div>
-                      {selectedNode.metadata.steward && (
-                        <div>
-                          <span className="text-sm text-gray-600">Steward</span>
-                          <p className="font-medium text-gray-900">{selectedNode.metadata.steward}</p>
-                        </div>
-                      )}
                       <div>
                         <span className="text-sm text-gray-600">Business Unit</span>
-                        <p className="font-medium text-gray-900">{selectedNode.metadata.businessUnit}</p>
-                      </div>
-                      <div>
-                        <span className="text-sm text-gray-600">Version</span>
-                        <p className="font-medium text-gray-900">{selectedNode.metadata.version}</p>
+                        <p className="font-medium text-gray-900">{selectedNodeData.metadata.businessUnit}</p>
                       </div>
                       <div>
                         <span className="text-sm text-gray-600">Created</span>
-                        <p className="font-medium text-gray-900">{formatDate(selectedNode.metadata.createdAt)}</p>
+                        <p className="font-medium text-gray-900">{formatDate(selectedNodeData.metadata.createdAt)}</p>
                       </div>
                       <div>
                         <span className="text-sm text-gray-600">Modified</span>
-                        <p className="font-medium text-gray-900">{formatDate(selectedNode.metadata.modifiedAt)}</p>
+                        <p className="font-medium text-gray-900">{formatDate(selectedNodeData.metadata.modifiedAt)}</p>
                       </div>
                     </div>
-                    
-                    {selectedNode.metadata.sourceSystem && (
-                      <div>
-                        <span className="text-sm text-gray-600">Source System</span>
-                        <p className="font-medium text-gray-900">{selectedNode.metadata.sourceSystem}</p>
-                      </div>
-                    )}
-                    
-                    {selectedNode.metadata.documentId && (
-                      <div>
-                        <span className="text-sm text-gray-600">Document ID</span>
-                        <p className="font-medium text-gray-900">{selectedNode.metadata.documentId}</p>
-                      </div>
-                    )}
-                    
-                    {selectedNode.metadata.sourceSection && (
-                      <div>
-                        <span className="text-sm text-gray-600">Source Section</span>
-                        <p className="font-medium text-gray-900">{selectedNode.metadata.sourceSection}</p>
-                      </div>
-                    )}
                   </div>
                 </div>
 
-                {/* Business Value & Quality */}
+                {/* Business Value & Usage */}
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
                     <TrendingUp className="w-4 h-4 mr-2" />
@@ -1756,39 +883,19 @@ export function NAPASLineageViewer() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-3 bg-gray-50 rounded-lg">
                       <div className="flex items-center justify-center mb-1">
-                        {React.createElement(getBusinessValueIcon(selectedNode.metadata.businessValue), { 
+                        {React.createElement(getBusinessValueIcon(selectedNodeData.metadata.businessValue), { 
                           className: "w-5 h-5 text-blue-600" 
                         })}
                       </div>
                       <div className="text-sm text-gray-600">Business Value</div>
-                      <div className="font-semibold text-gray-900 capitalize">{selectedNode.metadata.businessValue}</div>
-                    </div>
-                    <div className="text-center p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center justify-center mb-1">
-                        <Zap className="w-5 h-5 text-purple-600" />
-                      </div>
-                      <div className="text-sm text-gray-600">Data Quality</div>
-                      <div className="font-semibold text-gray-900">{selectedNode.metadata.dataQuality}%</div>
+                      <div className="font-semibold text-gray-900 capitalize">{selectedNodeData.metadata.businessValue}</div>
                     </div>
                     <div className="text-center p-3 bg-gray-50 rounded-lg">
                       <div className="flex items-center justify-center mb-1">
                         <Activity className="w-5 h-5 text-green-600" />
                       </div>
                       <div className="text-sm text-gray-600">Usage Count</div>
-                      <div className="font-semibold text-gray-900">{selectedNode.metadata.usageCount}</div>
-                    </div>
-                    <div className="text-center p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center justify-center mb-1">
-                        {React.createElement(getStatusIcon(selectedNode.metadata.status), { 
-                          className: `w-5 h-5 ${
-                            selectedNode.metadata.status === 'active' ? 'text-emerald-600' :
-                            selectedNode.metadata.status === 'deprecated' ? 'text-amber-600' :
-                            selectedNode.metadata.status === 'pending' ? 'text-blue-600' : 'text-gray-600'
-                          }` 
-                        })}
-                      </div>
-                      <div className="text-sm text-gray-600">Status</div>
-                      <div className="font-semibold text-gray-900 capitalize">{selectedNode.metadata.status}</div>
+                      <div className="font-semibold text-gray-900">{selectedNodeData.metadata.usageCount}</div>
                     </div>
                   </div>
                 </div>
@@ -1800,15 +907,13 @@ export function NAPASLineageViewer() {
                     Tags
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {selectedNode.metadata.tags.map(tag => (
+                    {selectedNodeData.metadata.tags.map(tag => (
                       <Badge 
                         key={tag} 
-                        variant={tag === 'preferred' ? 'warning' : 
-                                tag === 'production' ? 'success' :
-                                tag === 'core' ? 'info' : 'default'} 
+                        variant={tag === 'preferred' ? 'warning' : 'default'} 
                         size="sm"
                         className="cursor-pointer hover:scale-105 transition-transform"
-                        onClick={() => setFilterState(prev => ({ ...prev, search: tag }))}
+                        onClick={() => setSearchQuery(tag)}
                       >
                         {tag}
                       </Badge>
@@ -1825,11 +930,10 @@ export function NAPASLineageViewer() {
                   <div className="space-y-3">
                     {/* Incoming connections */}
                     <div>
-                      <h4 className="text-sm font-medium text-gray-700 mb-2">Incoming ({filteredEdges.filter(e => e.target === selectedNode.id).length})</h4>
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">Incoming</h4>
                       <div className="space-y-2">
                         {filteredEdges
-                          .filter(edge => edge.target === selectedNode.id)
-                          .slice(0, 3)
+                          .filter(edge => edge.target === selectedNodeData.id)
                           .map(edge => {
                             const sourceNode = filteredNodes.find(n => n.id === edge.source);
                             return sourceNode ? (
@@ -1847,21 +951,18 @@ export function NAPASLineageViewer() {
                               </div>
                             ) : null;
                           })}
-                        {filteredEdges.filter(e => e.target === selectedNode.id).length > 3 && (
-                          <Button variant="ghost" size="sm" className="w-full text-sm">
-                            Show {filteredEdges.filter(e => e.target === selectedNode.id).length - 3} more
-                          </Button>
+                        {filteredEdges.filter(e => e.target === selectedNodeData.id).length === 0 && (
+                          <p className="text-sm text-gray-500 text-center py-2">No incoming connections</p>
                         )}
                       </div>
                     </div>
 
                     {/* Outgoing connections */}
                     <div>
-                      <h4 className="text-sm font-medium text-gray-700 mb-2">Outgoing ({filteredEdges.filter(e => e.source === selectedNode.id).length})</h4>
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">Outgoing</h4>
                       <div className="space-y-2">
                         {filteredEdges
-                          .filter(edge => edge.source === selectedNode.id)
-                          .slice(0, 3)
+                          .filter(edge => edge.source === selectedNodeData.id)
                           .map(edge => {
                             const targetNode = filteredNodes.find(n => n.id === edge.target);
                             return targetNode ? (
@@ -1879,28 +980,13 @@ export function NAPASLineageViewer() {
                               </div>
                             ) : null;
                           })}
-                        {filteredEdges.filter(e => e.source === selectedNode.id).length > 3 && (
-                          <Button variant="ghost" size="sm" className="w-full text-sm">
-                            Show {filteredEdges.filter(e => e.source === selectedNode.id).length - 3} more
-                          </Button>
+                        {filteredEdges.filter(e => e.source === selectedNodeData.id).length === 0 && (
+                          <p className="text-sm text-gray-500 text-center py-2">No outgoing connections</p>
                         )}
                       </div>
                     </div>
                   </div>
                 </div>
-
-                {/* Additional Information */}
-                {selectedNode.metadata.notes && (
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 flex items-center">
-                      <MessageSquare className="w-4 h-4 mr-2" />
-                      Notes
-                    </h3>
-                    <p className="text-gray-600 bg-gray-50 p-3 rounded-lg">
-                      {selectedNode.metadata.notes}
-                    </p>
-                  </div>
-                )}
               </div>
 
               {/* Action Panel */}
@@ -1930,17 +1016,55 @@ export function NAPASLineageViewer() {
                 <p className="text-gray-600 max-w-xs leading-relaxed">
                   Click on any node to view detailed information and explore relationships between documents, terms, and database objects.
                 </p>
-                <div className="mt-6 space-y-2">
+                <div className="mt-6">
                   <Button variant="primary" size="sm" className="w-full">
                     Select a Starting Point
-                  </Button>
-                  <Button variant="ghost" size="sm" className="w-full">
-                    View Tutorial
                   </Button>
                 </div>
               </div>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Flow View Example */}
+      <div className="bg-white border-t border-gray-200 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Data Flow Overview</h3>
+        <div className="flex items-center justify-center space-x-8">
+          <div className="text-center">
+            <div className="p-3 bg-blue-100 rounded-lg inline-block mb-2">
+              <FileText className="w-6 h-6 text-blue-600" />
+            </div>
+            <div className="text-sm font-medium">Documents</div>
+          </div>
+          <ArrowRight className="w-5 h-5 text-gray-400" />
+          <div className="text-center">
+            <div className="p-3 bg-emerald-100 rounded-lg inline-block mb-2">
+              <BookOpen className="w-6 h-6 text-emerald-600" />
+            </div>
+            <div className="text-sm font-medium">Business Terms</div>
+          </div>
+          <ArrowRight className="w-5 h-5 text-gray-400" />
+          <div className="text-center">
+            <div className="p-3 bg-purple-100 rounded-lg inline-block mb-2">
+              <Database className="w-6 h-6 text-purple-600" />
+            </div>
+            <div className="text-sm font-medium">Database Schemas</div>
+          </div>
+          <ArrowRight className="w-5 h-5 text-gray-400" />
+          <div className="text-center">
+            <div className="p-3 bg-indigo-100 rounded-lg inline-block mb-2">
+              <Table className="w-6 h-6 text-indigo-600" />
+            </div>
+            <div className="text-sm font-medium">Database Tables</div>
+          </div>
+          <ArrowRight className="w-5 h-5 text-gray-400" />
+          <div className="text-center">
+            <div className="p-3 bg-amber-100 rounded-lg inline-block mb-2">
+              <GitBranch className="w-6 h-6 text-amber-600" />
+            </div>
+            <div className="text-sm font-medium">Services</div>
+          </div>
         </div>
       </div>
     </div>
