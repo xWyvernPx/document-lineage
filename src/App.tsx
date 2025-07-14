@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Layout } from './components/Layout';
 import { ExtractionWorkflow } from './features/extraction/components/ExtractionWorkflow';
 import { ClassificationWorkflow } from './features/classification/components/ClassificationWorkflow';
@@ -10,9 +10,11 @@ import { DocumentUpload } from './features/documents/components/DocumentUpload';
 import { TermDictionary } from './features/terms/components/TermDictionary';
 import { DataLineageViewer } from './features/lineage/components/DataLineageViewer';
 import { NAPASLineageViewer } from './features/lineage/components/NAPASLineageViewer';
-import { SchemaIngestionPage } from './features/schema/components/SchemaIngestionPage';
 import { AsyncProcessingApp } from './features/async-processing';
 import { useAlert } from './hooks/useAlert';
+import { SchemaIngestionPageMigrated } from './features/schema/components/SchemaIngestionPageMigrated';
+import { ApiTestingPage } from './features/api-testing/ApiTestingPage';
+import { AxiosTestComponent } from './components/AxiosTestComponent';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('async-processing');
@@ -84,7 +86,9 @@ function App() {
       case 'napas-lineage':
         return <NAPASLineageViewer />;
       case 'schema-ingestion':
-        return <SchemaIngestionPage />;
+        return <SchemaIngestionPageMigrated />;
+      case 'api-testing':
+        return <ApiTestingPage />;
       case 'search':
         return (
           <div className="text-center py-12">

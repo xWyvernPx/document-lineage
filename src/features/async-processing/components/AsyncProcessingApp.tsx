@@ -7,6 +7,8 @@ import { ResultViewer } from './ResultViewer';
 import { TermDictionary } from './PublishedTermsDashboard';
 import { SchemaIngestionPage } from '../../schema/components/SchemaIngestionPage';
 import { NotificationSystem } from './NotificationSystem';
+import { SchemaIngestionPageMigrated } from '../../schema/components/SchemaIngestionPageMigrated';
+import { AxiosTestComponent } from '../../../components/AxiosTestComponent';
 
 interface ProcessingJob {
   id: string;
@@ -107,7 +109,7 @@ export function AsyncProcessingApp() {
       case 'term-dictionary':
         return <TermDictionary />;
       case 'schema-ingestion':
-        return <SchemaIngestionPage />;
+        return <SchemaIngestionPageMigrated />;
       default:
         return <DocumentUploadPage onUploadComplete={handleUploadComplete} />;
     }

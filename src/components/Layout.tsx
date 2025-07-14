@@ -54,6 +54,13 @@ const navigation = [
     icon: Database,
     description: 'Import database schemas and metadata',
     pages: ['schema-ingestion']
+  },
+  {
+    id: 'api-testing',
+    name: 'API Testing',
+    icon: Zap,
+    description: 'Test real AWS API integration',
+    pages: ['api-testing']
   }
 ];
 
@@ -90,6 +97,9 @@ export function Layout({ children, currentPage, onNavigate }: LayoutProps) {
     }
     if (currentSection.id === 'schema') {
       return 'Schema Ingestion';
+    }
+    if (currentSection.id === 'api-testing') {
+      return 'API Testing Dashboard';
     }
     return currentSection.name;
   };
