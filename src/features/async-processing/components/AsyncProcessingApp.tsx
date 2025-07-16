@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DocumentUploadPage } from './DocumentUploadPage';
 import { ProcessingDocument } from './ProcessingDashboard';
 import { ClassificationStage } from './ClassificationStage';
@@ -7,23 +7,16 @@ import { ResultViewer } from './ResultViewer';
 import { TermDictionary } from './PublishedTermsDashboard';
 import { SchemaIngestionPage } from '../../schema/components/SchemaIngestionPage';
 import { NotificationSystem } from './NotificationSystem';
-
-interface ProcessingJob {
-  id: string;
-  documentName: string;
-  type: 'pdf' | 'docx' | 'image';
-  status: 'queued' | 'processing' | 'completed' | 'failed' | 'paused' | 'published';
-  progress: number;
-  submittedAt: string;
-  submittedBy: string;
-  completedAt?: string;
-  estimatedCompletion?: string;
-  extractedTerms?: number;
-  error?: string;
-  size: number;
-}
+import { AuthProvider } from '../../../auth/AuthContext';
+import { ProtectedRoute } from '../../../auth/ProtectedRoute';
+import { UserProfile } from '../../../auth/UserProfile';
+import { configureAmplify } from '../../../auth/cognito-config';
+import { ProcessingJob } from '../types/ProcessingJob';
 
 type AppView = 'upload' | 'document' | 'classification' | 'enrichment' | 'results' | 'term-dictionary' | 'schema-ingestion';
+
+// Initialize Amplify configuration
+configureAmplify();
 
 export function AsyncProcessingApp() {
   const [currentView, setCurrentView] = useState<AppView>('upload');
@@ -114,78 +107,77 @@ export function AsyncProcessingApp() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Navigation */}
-      <nav className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between mx-auto h-16">
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">DP</span>
+    <AuthProvider>
+      <ProtectedRoute>
+        <div className="min-h-screen bg-gray-50">
+          {/* Top Navigation */}
+          <nav className="bg-white border-b border-gray-200">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="flex items-center justify-between mx-auto h-16">
+                <div className="flex items-center space-x-8">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                      <span className="text-white font-bold text-sm">DP</span>
+                    </div>
+                    <span className="text-xl font-semibold text-gray-900">DocLens</span>
+                  </div>
+                  
+                  <div className="flex items-center space-x-6">
+                    <button
+                      onClick={() => setCurrentView('upload')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        currentView === 'upload'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                    >
+                      Upload
+                    </button>
+                    <button
+                      onClick={() => setCurrentView('document')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        currentView === 'document'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                    >
+                      Document Processing
+                    </button>
+                    <button
+                      onClick={() => setCurrentView('schema-ingestion')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        currentView === 'schema-ingestion'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                    >
+                      Schema Ingestion
+                    </button>
+                    <button
+                      onClick={() => setCurrentView('term-dictionary')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        currentView === 'term-dictionary'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                    >
+                      Term Dictionary
+                    </button>
+                  </div>
                 </div>
-                <span className="text-xl font-semibold text-gray-900">DocLens</span>
-              </div>
-              
-              <div className="flex items-center space-x-6">
-                <button
-                  onClick={() => setCurrentView('upload')}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    currentView === 'upload'
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
-                >
-                  Upload
-                </button>
-                <button
-                  onClick={() => setCurrentView('document')}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    currentView === 'document'
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
-                >
-                  Document Processing
-                </button>
-                <button
-                  onClick={() => setCurrentView('schema-ingestion')}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    currentView === 'schema-ingestion'
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
-                >
-                  Schema Ingestion
-                </button>
-                <button
-                  onClick={() => setCurrentView('term-dictionary')}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    currentView === 'term-dictionary'
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
-                >
-                  Term Dictionary
-                </button>
+                
+                <div className="flex items-center space-x-4">
+                  <NotificationSystem />
+                  <UserProfile />
+                </div>
               </div>
             </div>
-            
-            <div className="flex items-center space-x-4">
-              <NotificationSystem />
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                  <span className="text-gray-600 font-medium text-sm">U</span>
-                </div>
-                <span className="text-sm font-medium text-gray-700">User</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+          </nav>
 
-      {/* Main Content */}
-      {renderContent()}
-    </div>
+          {/* Main Content */}
+          {renderContent()}
+        </div>
+      </ProtectedRoute>
+    </AuthProvider>
   );
 }

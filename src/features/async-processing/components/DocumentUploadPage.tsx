@@ -6,12 +6,17 @@ import { Button } from '../../../components/Button';
 import { Badge } from '../../../components/Badge';
 import { ProgressBar } from '../../../components/ProgressBar';
 
+// API endpoint for presigned URL
+const API_ENDPOINT = 'https://dru6kanhq2.execute-api.ap-southeast-1.amazonaws.com/dev/presigned-url';
+
 interface UploadFile {
   id: string;
   file: File;
   progress: number;
   status: 'pending' | 'uploading' | 'completed' | 'error';
   error?: string;
+  key?: string;
+  bucket?: string;
 }
 
 interface DocumentUploadPageProps {
@@ -36,37 +41,79 @@ export function DocumentUploadPage({ onUploadComplete }: DocumentUploadPageProps
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'application/pdf': ['.pdf'],
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
-      'image/*': ['.png', '.jpg', '.jpeg', '.tiff'],
+      'application/pdf': ['.pdf']
     },
     maxSize: 50 * 1024 * 1024, // 50MB
     multiple: true,
   });
 
-  const uploadFile = async (uploadFile: UploadFile) => {
+  const processFileUpload = async (fileToUpload: UploadFile) => {
     setUploadFiles(prev =>
-      prev.map(f => f.id === uploadFile.id ? { ...f, status: 'uploading' } : f)
+      prev.map(f => f.id === fileToUpload.id ? { ...f, status: 'uploading' } : f)
     );
 
     try {
-      // Simulate upload progress
-      for (let progress = 0; progress <= 100; progress += 10) {
-        await new Promise(resolve => setTimeout(resolve, 150));
-        setUploadFiles(prev =>
-          prev.map(f => f.id === uploadFile.id ? { ...f, progress } : f)
-        );
-      }
-
-      setUploadFiles(prev =>
-        prev.map(f => f.id === uploadFile.id ? { ...f, status: 'completed', progress: 100 } : f)
+      // Step 1: Get a presigned URL
+      const presignedUrlResponse = await fetch(
+        `${API_ENDPOINT}?filename=${encodeURIComponent(fileToUpload.file.name)}&contentType=${encodeURIComponent(fileToUpload.file.type)}`
       );
+      
+      if (!presignedUrlResponse.ok) {
+        throw new Error(`Failed to get presigned URL: ${presignedUrlResponse.statusText}`);
+      }
+      
+      const presignedData = await presignedUrlResponse.json();
+      const { uploadUrl, key, bucket } = presignedData;
+
+      // Step 2: Upload file directly to S3 using XMLHttpRequest for progress tracking
+      await new Promise<void>((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', uploadUrl);
+        xhr.setRequestHeader('Content-Type', fileToUpload.file.type);
+        
+        // Track progress
+        xhr.upload.onprogress = (event) => {
+          if (event.lengthComputable) {
+            const progress = Math.round((event.loaded / event.total) * 100);
+            setUploadFiles(prev =>
+              prev.map(f => f.id === fileToUpload.id ? { ...f, progress } : f)
+            );
+          }
+        };
+        
+        // Handle completion
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            setUploadFiles(prev =>
+              prev.map(f => f.id === fileToUpload.id ? { 
+                ...f, 
+                status: 'completed', 
+                progress: 100,
+                key,
+                bucket
+              } : f)
+            );
+            resolve();
+          } else {
+            reject(new Error(`Upload failed: ${xhr.status} ${xhr.statusText}`));
+          }
+        };
+        
+        // Handle errors
+        xhr.onerror = () => {
+          reject(new Error('Network error occurred during upload'));
+        };
+        
+        // Send the file
+        xhr.send(fileToUpload.file);
+      });
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Upload failed';
       setUploadFiles(prev =>
-        prev.map(f => f.id === uploadFile.id ? { 
+        prev.map(f => f.id === fileToUpload.id ? { 
           ...f, 
           status: 'error', 
-          error: 'Upload failed' 
+          error: errorMessage
         } : f)
       );
     }
@@ -81,14 +128,17 @@ export function DocumentUploadPage({ onUploadComplete }: DocumentUploadPageProps
     const pendingFiles = uploadFiles.filter(f => f.status === 'pending');
     
     // Upload files in parallel
-    await Promise.all(pendingFiles.map(uploadFile));
+    await Promise.all(pendingFiles.map(processFileUpload));
     
     setIsUploading(false);
     
     // Redirect to dashboard after all uploads complete
-    setTimeout(() => {
-      onUploadComplete(uploadFiles);
-    }, 1000);
+    const allCompleted = uploadFiles.every(f => f.status === 'completed');
+    if (allCompleted) {
+      setTimeout(() => {
+        onUploadComplete(uploadFiles);
+      }, 1000);
+    }
   };
 
   const getFileIcon = (file: File) => {
@@ -229,7 +279,7 @@ export function DocumentUploadPage({ onUploadComplete }: DocumentUploadPageProps
                       {uploadFile.status === 'pending' && (
                         <Button
                           size="sm"
-                          onClick={() => uploadFile(uploadFile)}
+                          onClick={() => processFileUpload(uploadFile)}
                         >
                           Upload
                         </Button>
@@ -238,7 +288,7 @@ export function DocumentUploadPage({ onUploadComplete }: DocumentUploadPageProps
                         <Button
                           size="sm"
                           variant="secondary"
-                          onClick={() => uploadFile(uploadFile)}
+                          onClick={() => processFileUpload(uploadFile)}
                         >
                           Retry
                         </Button>
