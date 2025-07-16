@@ -22,6 +22,7 @@ import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
 import { ProgressBar } from '../../../components/ProgressBar';
+import { ProcessingJob } from '../types/ProcessingJob';
 
 interface ExtractedTerm {
   id: string;
@@ -40,17 +41,6 @@ interface ExtractedTerm {
     confidence: number;
   };
   relatedTerms: string[];
-}
-
-interface ProcessingJob {
-  id: string;
-  documentName: string;
-  type: 'pdf' | 'docx' | 'image';
-  status: 'completed' | 'published';
-  submittedAt: string;
-  submittedBy: string;
-  completedAt: string;
-  extractedTerms: number;
 }
 
 const mockTerms: ExtractedTerm[] = [
@@ -395,7 +385,7 @@ export function ResultViewer({ job, onBack, onPublishComplete, onTermDictionary 
                 </div>
                 <div className="flex items-center space-x-1">
                   <Calendar className="w-4 h-4" />
-                  <span>Completed {new Date(job.completedAt).toLocaleDateString()}</span>
+                  <span>Completed {job.completedAt ? new Date(job.completedAt).toLocaleDateString() : 'N/A'}</span>
                 </div>
                 {allPublished && (
                   <Badge variant="success">Published</Badge>
