@@ -100,7 +100,7 @@ export function AsyncProcessingApp() {
       case 'term-dictionary':
         return <TermDictionary />;
       case 'schema-ingestion':
-        return <SchemaIngestionPage />;
+        return <SchemaIngestionPageMigrated />;
       default:
         return <DocumentUploadPage onUploadComplete={handleUploadComplete} />;
     }

@@ -39,10 +39,11 @@ import { ProgressBar } from '../../../components/ProgressBar';
 interface SchemaConnection {
   id: string;
   name: string;
+  description?: string;
   type: 'postgresql' | 'mysql' | 'snowflake' | 'bigquery' | 'redshift' | 'oracle';
   host: string;
   database: string;
-  status: 'connected' | 'disconnected' | 'syncing' | 'error';
+  status: 'Init' | 'syncing' | 'Synced' | 'sync failed';
   lastSync: string;
   tableCount: number;
   columnCount: number;
@@ -112,7 +113,7 @@ const mockConnections: SchemaConnection[] = [
     type: 'snowflake',
     host: 'company.snowflakecomputing.com',
     database: 'PROD_DW',
-    status: 'connected',
+    status: 'Synced',
     lastSync: '2024-01-16T10:30:00Z',
     tableCount: 247,
     columnCount: 1856,
@@ -138,7 +139,7 @@ const mockConnections: SchemaConnection[] = [
     type: 'bigquery',
     host: 'bigquery.googleapis.com',
     database: 'analytics-prod',
-    status: 'error',
+    status: 'sync failed',
     lastSync: '2024-01-15T16:20:00Z',
     tableCount: 156,
     columnCount: 892,
@@ -151,7 +152,7 @@ const mockConnections: SchemaConnection[] = [
     type: 'oracle',
     host: 'fin-db.company.com',
     database: 'FINANCE_PROD',
-    status: 'connected',
+    status: 'Synced',
     lastSync: '2024-01-16T11:15:00Z',
     tableCount: 134,
     columnCount: 1023,
@@ -164,7 +165,7 @@ const mockConnections: SchemaConnection[] = [
     type: 'redshift',
     host: 'marketing-cluster.company.com',
     database: 'MARKETING_DW',
-    status: 'connected',
+    status: 'Synced',
     lastSync: '2024-01-16T08:20:00Z',
     tableCount: 78,
     columnCount: 445,
@@ -177,7 +178,7 @@ const mockConnections: SchemaConnection[] = [
     type: 'mysql',
     host: 'inventory-db.company.com',
     database: 'inventory_system',
-    status: 'disconnected',
+    status: 'Init',
     lastSync: '2024-01-14T22:10:00Z',
     tableCount: 45,
     columnCount: 234,
@@ -190,7 +191,7 @@ const mockConnections: SchemaConnection[] = [
     type: 'postgresql',
     host: 'hr-db.company.com',
     database: 'hr_management',
-    status: 'connected',
+    status: 'Synced',
     lastSync: '2024-01-16T07:30:00Z',
     tableCount: 67,
     columnCount: 389,
@@ -1304,12 +1305,13 @@ export function SchemaIngestionPage() {
 
   const getStatusIcon = (status: SchemaConnection['status']) => {
     switch (status) {
-      case 'connected':
+      case 'Synced':
         return <CheckCircle className="w-4 h-4 text-emerald-500" />;
       case 'syncing':
         return <RefreshCw className="w-4 h-4 text-blue-500 animate-spin" />;
-      case 'error':
+      case 'sync failed':
         return <AlertTriangle className="w-4 h-4 text-red-500" />;
+      case 'Init':
       default:
         return <Clock className="w-4 h-4 text-gray-400" />;
     }
@@ -1317,14 +1319,15 @@ export function SchemaIngestionPage() {
 
   const getStatusBadge = (status: SchemaConnection['status']) => {
     switch (status) {
-      case 'connected':
-        return <Badge variant="success">Connected</Badge>;
+      case 'Synced':
+        return <Badge variant="success">Synced</Badge>;
       case 'syncing':
         return <Badge variant="info">Syncing</Badge>;
-      case 'error':
-        return <Badge variant="error">Error</Badge>;
+      case 'sync failed':
+        return <Badge variant="error">Sync Failed</Badge>;
+      case 'Init':
       default:
-        return <Badge variant="default">Disconnected</Badge>;
+        return <Badge variant="default">Init</Badge>;
     }
   };
 
@@ -1501,10 +1504,10 @@ export function SchemaIngestionPage() {
                         className="pl-3 pr-8 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
                       >
                         <option value="all">All Status</option>
-                        <option value="connected">Connected</option>
+                        <option value="Init">Init</option>
                         <option value="syncing">Syncing</option>
-                        <option value="error">Error</option>
-                        <option value="disconnected">Disconnected</option>
+                        <option value="Synced">Synced</option>
+                        <option value="sync failed">Sync Failed</option>
                       </select>
                       <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                     </div>
