@@ -335,5 +335,144 @@ export class LineageService {
   }
 }
 
+export const mockLineageReactFlowData: ReactFlowResponse = {
+  nodes: [
+    {
+      id: "tbl_account",
+      type: "tableNode",
+      data: {
+        label: "account", 
+        nodeType: "table",
+        columns: [
+          { name: "id", type: "bigint", classification: "IDENTIFIER" },
+          { name: "full_name", type: "string", classification: "DESCRIPTIVE" },
+          { name: "email", type: "string", classification: "PII" },
+          { name: "role", type: "string", classification: "DESCRIPTIVE" },
+          { name: "created_date", type: "timestamp", classification: "AUDIT_TIMESTAMP" },
+          { name: "last_modified_date", type: "timestamp", classification: "AUDIT_TIMESTAMP" },
+          { name: "enabled", type: "boolean", classification: "STATUS_FLAG" }
+        ],
+        metadata: { 
+          businessOwner: "xWyvernPx", 
+          description: "Main production database for customer data",
+          system: "postgresql",
+          databaseType: "postgresql",
+          tableType: "EXTERNAL_TABLE"
+        }
+      },
+      position: { x: 0, y: 0 }
+    },
+    {
+      id: "tbl_payment",
+      type: "tableNode", 
+      data: {
+        label: "payment",
+        nodeType: "table",
+        columns: [
+          { name: "id", type: "bigint", classification: "IDENTIFIER" },
+          { name: "user_id", type: "bigint", classification: "IDENTIFIER" },
+          { name: "transaction_id", type: "string", classification: "IDENTIFIER" },
+          { name: "amount", type: "decimal", classification: "DESCRIPTIVE" },
+          { name: "currency", type: "string", classification: "DESCRIPTIVE" },
+          { name: "payment_method", type: "string", classification: "DESCRIPTIVE" },
+          { name: "status", type: "string", classification: "STATUS_FLAG" },
+          { name: "created_at", type: "timestamp", classification: "AUDIT_TIMESTAMP" }
+        ],
+        metadata: { 
+          businessOwner: "Finance Team", 
+          description: "Payment transactions table",
+          system: "mysql",
+          databaseType: "mysql",
+          tableType: "EXTERNAL_TABLE"
+        }
+      },
+      position: { x: 400, y: 0 }
+    },
+    {
+      id: "view_customer_summary",
+      type: "tableNode",
+      data: {
+        label: "customer_summary",
+        nodeType: "view",
+        columns: [
+          { name: "customer_id", type: "bigint", classification: "IDENTIFIER" },
+          { name: "customer_name", type: "string", classification: "DESCRIPTIVE" },
+          { name: "total_payments", type: "decimal", classification: "DESCRIPTIVE" },
+          { name: "payment_count", type: "bigint", classification: "DESCRIPTIVE" },
+          { name: "last_payment_date", type: "timestamp", classification: "AUDIT_TIMESTAMP" }
+        ],
+        metadata: { 
+          businessOwner: "Analytics Team", 
+          description: "Aggregated customer payment summary view",
+          system: "snowflake",
+          databaseType: "snowflake",
+          tableType: "VIEW"
+        }
+      },
+      position: { x: 200, y: 200 }
+    },
+    {
+      id: "tbl_customer_events",
+      type: "tableNode",
+      data: {
+        label: "customer_events",
+        nodeType: "table",
+        columns: [
+          { name: "event_id", type: "string", classification: "IDENTIFIER" },
+          { name: "customer_id", type: "bigint", classification: "IDENTIFIER" },
+          { name: "event_type", type: "string", classification: "DESCRIPTIVE" },
+          { name: "event_timestamp", type: "timestamp", classification: "AUDIT_TIMESTAMP" },
+          { name: "event_data", type: "string", classification: "DESCRIPTIVE" }
+        ],
+        metadata: {
+          businessOwner: "Product Team",
+          description: "Customer interaction events and analytics",
+          system: "bigquery",
+          databaseType: "bigquery",
+          tableType: "EXTERNAL_TABLE"
+        }
+      },
+      position: { x: -200, y: 100 }
+    }
+  ],
+  edges: [
+    {
+      id: "tbl_payment-user_id-tbl_account-id",
+      source: "tbl_payment",
+      target: "tbl_account", 
+      type: "smoothstep",
+      label: "user_id → id"
+    },
+    {
+      id: "view_customer_summary-customer_id-tbl_account-id",
+      source: "view_customer_summary",
+      target: "tbl_account",
+      type: "smoothstep", 
+      label: "customer_id → id"
+    },
+    {
+      id: "view_customer_summary-payment-tbl_payment",
+      source: "view_customer_summary",
+      target: "tbl_payment",
+      type: "smoothstep",
+      label: "aggregates payments"
+    },
+    {
+      id: "tbl_customer_events-customer_id-tbl_account-id",
+      source: "tbl_customer_events",
+      target: "tbl_account",
+      type: "smoothstep",
+      label: "customer_id → id"
+    },
+    {
+      id: "view_customer_summary-events-tbl_customer_events",
+      source: "view_customer_summary",
+      target: "tbl_customer_events",
+      type: "smoothstep",
+      label: "includes event data"
+    }
+  ]
+};
+
 // Export singleton instance
 export const lineageService = new LineageService();

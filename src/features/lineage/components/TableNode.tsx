@@ -1,143 +1,267 @@
 import React from 'react';
-import { Handle, Position, NodeProps, Node } from '@xyflow/react';
-import { Database, Table, Eye, MoreHorizontal } from 'lucide-react';
+import { Handle, Position } from '@xyflow/react';
+import { 
+  Table, 
+  Eye, 
+  Database, 
+  Cloud, 
+  Server, 
+  HardDrive, 
+  Layers,
+  Calendar,
+  Hash,
+  Type,
+  Key,
+  Info,
+  Shield
+} from 'lucide-react';
+import { Badge } from '../../../components/Badge';
 
-// Data structure for our custom table node
-export interface TableNodeData {
+interface TableNodeData {
   label: string;
   nodeType: 'table' | 'view' | 'dashboard' | 'notebook';
-  schema?: string;
-  database?: string;
   columns?: Array<{
     name: string;
     type: string;
-    description?: string;
-    isPrimaryKey?: boolean;
-    isForeignKey?: boolean;
+    classification?: string;
   }>;
-  metadata?: Record<string, any>;
+  metadata?: {
+    businessOwner?: string;
+    description?: string;
+    system?: string;
+    tableType?: string;
+    databaseType?: string;
+  };
 }
 
-// Type for our custom table node
-export type TableNode = Node<TableNodeData>;
+interface TableNodeProps {
+  data: TableNodeData;
+  selected?: boolean;
+}
 
-// Custom Table Node Component
-export function TableNodeComponent({ data, selected }: NodeProps<TableNodeData>) {
-  const getNodeIcon = (nodeType: string) => {
-    switch (nodeType) {
-      case 'table':
-        return <Table className="w-4 h-4 text-blue-600" />;
-      case 'view':
-        return <Eye className="w-4 h-4 text-emerald-600" />;
-      case 'dashboard':
-        return <Database className="w-4 h-4 text-purple-600" />;
-      case 'notebook':
-        return <Database className="w-4 h-4 text-amber-600" />;
-      default:
-        return <Database className="w-4 h-4 text-gray-600" />;
+// Database icon and color mapping
+const getDatabaseIconConfig = (databaseType?: string) => {
+  const configs = {
+    postgresql: {
+      icon: Database,
+      bgColor: 'bg-blue-100',
+      iconColor: 'text-blue-600',
+      borderColor: 'border-blue-200',
+      label: 'PostgreSQL'
+    },
+    mysql: {
+      icon: Database,
+      bgColor: 'bg-orange-100',
+      iconColor: 'text-orange-600',
+      borderColor: 'border-orange-200',
+      label: 'MySQL'
+    },
+    snowflake: {
+      icon: Cloud,
+      bgColor: 'bg-cyan-100',
+      iconColor: 'text-cyan-600',
+      borderColor: 'border-cyan-200',
+      label: 'Snowflake'
+    },
+    bigquery: {
+      icon: Layers,
+      bgColor: 'bg-yellow-100',
+      iconColor: 'text-yellow-600',
+      borderColor: 'border-yellow-200',
+      label: 'BigQuery'
+    },
+    redshift: {
+      icon: Server,
+      bgColor: 'bg-red-100',
+      iconColor: 'text-red-600',
+      borderColor: 'border-red-200',
+      label: 'Redshift'
+    },
+    oracle: {
+      icon: HardDrive,
+      bgColor: 'bg-purple-100',
+      iconColor: 'text-purple-600',
+      borderColor: 'border-purple-200',
+      label: 'Oracle'
     }
   };
-
-  const getNodeColor = (nodeType: string) => {
-    switch (nodeType) {
-      case 'table':
-        return 'border-blue-500 bg-blue-50';
-      case 'view':
-        return 'border-emerald-500 bg-emerald-50';
-      case 'dashboard':
-        return 'border-purple-500 bg-purple-50';
-      case 'notebook':
-        return 'border-amber-500 bg-amber-50';
-      default:
-        return 'border-gray-500 bg-gray-50';
-    }
+  
+  const defaultType = databaseType?.toLowerCase() as keyof typeof configs;
+  return configs[defaultType] || {
+    icon: Database,
+    bgColor: 'bg-gray-100',
+    iconColor: 'text-gray-600',
+    borderColor: 'border-gray-200',
+    label: 'Database'
   };
+};
 
-  const columnCount = data.columns?.length || 0;
-  const displayColumns = data.columns?.slice(0, 5) || []; // Show max 5 columns
-  const hasMoreColumns = columnCount > 5;
+// Get node type icon and colors
+const getNodeTypeConfig = (nodeType: string) => {
+  switch (nodeType) {
+    case 'table':
+      return {
+        icon: Table,
+        bgColor: 'bg-blue-50',
+        iconColor: 'text-blue-600',
+        borderColor: 'border-blue-200'
+      };
+    case 'view':
+      return {
+        icon: Eye,
+        bgColor: 'bg-emerald-50',
+        iconColor: 'text-emerald-600',
+        borderColor: 'border-emerald-200'
+      };
+    default:
+      return {
+        icon: Database,
+        bgColor: 'bg-gray-50',
+        iconColor: 'text-gray-600',
+        borderColor: 'border-gray-200'
+      };
+  }
+};
+
+// Get data type icon
+const getDataTypeIcon = (dataType: string) => {
+  if (dataType.includes('int') || dataType.includes('decimal') || dataType.includes('numeric') || dataType.includes('bigint')) {
+    return <Hash className="w-3 h-3 text-blue-500" />;
+  }
+  if (dataType.includes('string') || dataType.includes('varchar') || dataType.includes('text') || dataType.includes('char')) {
+    return <Type className="w-3 h-3 text-green-500" />;
+  }
+  if (dataType.includes('date') || dataType.includes('time') || dataType.includes('timestamp')) {
+    return <Calendar className="w-3 h-3 text-purple-500" />;
+  }
+  if (dataType.includes('boolean')) {
+    return <Shield className="w-3 h-3 text-amber-500" />;
+  }
+  return <Info className="w-3 h-3 text-gray-500" />;
+};
+
+// Get classification badge variant
+const getClassificationBadgeVariant = (classification: string) => {
+  switch (classification) {
+    case 'PII': return 'error';
+    case 'IDENTIFIER': return 'warning'; 
+    case 'AUDIT_TIMESTAMP':
+    case 'AUDIT_USER': return 'info';
+    case 'STATUS_FLAG': return 'success';
+    default: return 'default';
+  }
+};
+
+export function TableNodeComponent({ data, selected }: TableNodeProps) {
+  const nodeTypeConfig = getNodeTypeConfig(data.nodeType);
+  const dbConfig = getDatabaseIconConfig(data.metadata?.system?.toLowerCase());
+  const NodeTypeIcon = nodeTypeConfig.icon;
+  const DatabaseIcon = dbConfig.icon;
+
+  // Show max 5 columns in the node
+  const visibleColumns = data.columns?.slice(0, 5) || [];
+  const hasMoreColumns = (data.columns?.length || 0) > 5;
 
   return (
-    <div
+    <div 
       className={`
-        min-w-48 max-w-80 bg-white rounded-lg border-2 shadow-lg
-        ${selected ? 'ring-2 ring-blue-400' : ''}
-        ${getNodeColor(data.nodeType)}
+        bg-white border-2 rounded-lg shadow-lg min-w-[280px] max-w-[320px]
+        ${selected ? 'border-blue-500 shadow-blue-200' : nodeTypeConfig.borderColor}
         hover:shadow-xl transition-all duration-200
       `}
     >
-      {/* Node header */}
-      <div className="p-3 border-b border-gray-200">
+      <Handle
+        type="target"
+        position={Position.Left}
+        className="w-3 h-3 bg-gray-400 border-2 border-white"
+      />
+      
+      {/* Header */}
+      <div className={`${nodeTypeConfig.bgColor} ${nodeTypeConfig.borderColor} border-b px-4 py-3 rounded-t-lg`}>
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 min-w-0">
-            {getNodeIcon(data.nodeType)}
-            <div className="min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm truncate">
-                {data.label}
-              </h3>
-              {data.schema && (
-                <p className="text-xs text-gray-500 truncate">
-                  {data.database ? `${data.database}.${data.schema}` : data.schema}
-                </p>
-              )}
-            </div>
+          <div className="flex items-center space-x-2">
+            <NodeTypeIcon className={`w-4 h-4 ${nodeTypeConfig.iconColor}`} />
+            <h3 className="font-semibold text-gray-900 text-sm truncate">
+              {data.label}
+            </h3>
           </div>
-          <button className="p-1 hover:bg-gray-100 rounded">
-            <MoreHorizontal className="w-4 h-4 text-gray-400" />
-          </button>
+          <div className="flex items-center space-x-1">
+            {data.metadata?.system && (
+              <div 
+                className={`p-1 rounded ${dbConfig.bgColor}`}
+                title={dbConfig.label}
+              >
+                <DatabaseIcon className={`w-3 h-3 ${dbConfig.iconColor}`} />
+              </div>
+            )}
+            <Badge variant="default" size="sm">
+              {data.nodeType}
+            </Badge>
+          </div>
         </div>
+        
+        {/* System Information */}
+        {data.metadata?.system && (
+          <div className="mt-2 text-xs text-gray-600">
+            <span className="font-medium">{dbConfig.label}</span>
+            {data.metadata.businessOwner && (
+              <span className="ml-2">• {data.metadata.businessOwner}</span>
+            )}
+          </div>
+        )}
       </div>
 
-      {/* Columns list */}
-      {displayColumns.length > 0 && (
-        <div className="p-2">
-          <div className="space-y-1">
-            {displayColumns.map((column, index) => (
-              <div
-                key={`${column.name}-${index}`}
-                className="flex items-center justify-between text-xs"
-              >
-                <div className="flex items-center space-x-1 min-w-0">
-                  <div className="flex items-center space-x-1">
-                    {column.isPrimaryKey && (
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full" title="Primary Key" />
-                    )}
-                    {column.isForeignKey && (
-                      <div className="w-2 h-2 bg-blue-400 rounded-full" title="Foreign Key" />
-                    )}
-                  </div>
-                  <span className="font-medium text-gray-700 truncate">
+      {/* Columns */}
+      {visibleColumns.length > 0 && (
+        <div className="px-4 py-3">
+          <div className="space-y-1.5">
+            {visibleColumns.map((column, index) => (
+              <div key={index} className="flex items-center justify-between text-xs">
+                <div className="flex items-center space-x-2 flex-1 min-w-0">
+                  {getDataTypeIcon(column.type)}
+                  <span className="font-mono text-gray-900 truncate">
                     {column.name}
                   </span>
+                  <span className="text-gray-500 text-[10px]">
+                    {column.type}
+                  </span>
                 </div>
-                <span className="text-gray-500 text-xs ml-2 flex-shrink-0">
-                  {column.type}
-                </span>
+                {column.classification && (
+                  <Badge 
+                    variant={getClassificationBadgeVariant(column.classification)} 
+                    size="sm"
+                  >
+                    {column.classification.substring(0, 3)}
+                  </Badge>
+                )}
               </div>
             ))}
+            
             {hasMoreColumns && (
-              <div className="text-xs text-gray-500 italic">
-                +{columnCount - 5} more columns
+              <div className="text-xs text-gray-500 text-center pt-1 border-t border-gray-100">
+                +{(data.columns?.length || 0) - 5} more columns
               </div>
             )}
           </div>
         </div>
       )}
 
-      {/* Connection handles */}
-      <Handle
-        type="target"
-        position={Position.Left}
-        className="w-3 h-3 !bg-gray-400 !border-2 !border-white"
-      />
+      {/* Footer with metadata */}
+      {data.metadata?.description && (
+        <div className="px-4 py-2 bg-gray-50 border-t border-gray-100 rounded-b-lg">
+          <p className="text-xs text-gray-600 truncate" title={data.metadata.description}>
+            {data.metadata.description}
+          </p>
+        </div>
+      )}
+
       <Handle
         type="source"
         position={Position.Right}
-        className="w-3 h-3 !bg-gray-400 !border-2 !border-white"
+        className="w-3 h-3 bg-gray-400 border-2 border-white"
       />
     </div>
   );
 }
 
-// Default export for React Flow nodeTypes
 export default TableNodeComponent;

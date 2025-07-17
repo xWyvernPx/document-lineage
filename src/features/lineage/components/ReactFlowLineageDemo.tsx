@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
-import { ReactFlowLineage } from './ReactFlowLineage';
+import { ReactFlowLineage, ReactFlowNode, ReactFlowEdge } from './ReactFlowLineage';
+import { SchemaTableSelector } from './SchemaTableSelector';
 import { useLineageReactFlow } from '../../../hooks/useLineage';
+import { mockLineageReactFlowData } from '../../../services/lineageService';
 import { Button } from '../../../components/Button';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
-import { Database, Table, Eye, Settings, RefreshCw } from 'lucide-react';
+import { Database, Table, Eye, Settings, RefreshCw, ArrowLeft } from 'lucide-react';
+import type { SchemaConnection, LatestSchemaTable } from '../../../lib/types';
 
 interface ReactFlowLineageDemoProps {
   className?: string;
 }
 
+// Column type for better type safety
+interface ColumnType {
+  name: string;
+  type: string;
+  classification?: string;
+}
+
 export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoProps) {
   const [selectedEntity, setSelectedEntity] = useState("tbl_account");
-  const [selectedNode, setSelectedNode] = useState<any>(null);
+  const [selectedNode, setSelectedNode] = useState<ReactFlowNode | null>(null);
+  const [useMockData, setUseMockData] = useState(true); // Toggle for using mock data
+  const [showTableSelector, setShowTableSelector] = useState(false);
+  const [selectedTable, setSelectedTable] = useState<LatestSchemaTable | null>(null);
+  const [selectedConnection, setSelectedConnection] = useState<SchemaConnection | null>(null);
   
   const { 
     data: lineageData, 
@@ -21,21 +35,30 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
     refetch
   } = useLineageReactFlow(selectedEntity, {
     direction: 'both',
-    depth: 2
+    depth: 2,
+    enabled: !useMockData  // Only fetch real data when not using mock
   });
 
-  const entities = [
-    { id: "tbl_account", name: "Account Table", type: "table" },
-    { id: "tbl_payment", name: "Payment Table", type: "table" },
-    { id: "view_customer_summary", name: "Customer Summary", type: "view" },
-  ];
+  // Use mock data when enabled, otherwise use real data
+  const displayData = useMockData ? mockLineageReactFlowData : lineageData;
 
-  const handleNodeClick = (node: any) => {
+  const handleTableSelect = (table: LatestSchemaTable, connection: SchemaConnection) => {
+    setSelectedTable(table);
+    setSelectedConnection(connection);
+    setSelectedEntity(`${table.schemaName}.${table.tableName}`);
+    setShowTableSelector(false);
+  };
+
+  const handleBackFromSelector = () => {
+    setShowTableSelector(false);
+  };
+
+  const handleNodeClick = (node: ReactFlowNode) => {
     console.log('Node clicked:', node);
     setSelectedNode(node);
   };
 
-  const handleEdgeClick = (edge: any) => {
+  const handleEdgeClick = (edge: ReactFlowEdge) => {
     console.log('Edge clicked:', edge);
   };
 
@@ -44,6 +67,17 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
       case 'table': return <Table className="w-4 h-4 text-blue-600" />;
       case 'view': return <Eye className="w-4 h-4 text-emerald-600" />;
       default: return <Database className="w-4 h-4 text-gray-600" />;
+    }
+  };
+
+  const getClassificationBadgeVariant = (classification: string) => {
+    switch (classification) {
+      case 'PII': return 'error';
+      case 'IDENTIFIER': return 'warning'; 
+      case 'AUDIT_TIMESTAMP':
+      case 'AUDIT_USER': return 'info';
+      case 'STATUS_FLAG': return 'success';
+      default: return 'default';
     }
   };
 
@@ -57,11 +91,18 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
         </div>
         <div className="flex items-center space-x-3">
           <Button
+            variant={useMockData ? "primary" : "ghost"}
+            size="sm"
+            onClick={() => setUseMockData(!useMockData)}
+          >
+            {useMockData ? "Mock Data" : "Live Data"}
+          </Button>
+          <Button
             variant="ghost"
             size="sm"
             icon={RefreshCw}
             onClick={() => refetch()}
-            disabled={isLoading}
+            disabled={isLoading || useMockData}
           >
             Refresh
           </Button>
@@ -75,40 +116,62 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
         </div>
       </div>
 
-      {/* Entity Selector */}
-      <Card className="p-4">
-        <div className="flex items-center space-x-4">
-          <span className="text-sm font-medium text-gray-700">Select Entity:</span>
-          <div className="flex space-x-2">
-            {entities.map(entity => (
-              <Button
-                key={entity.id}
-                variant={selectedEntity === entity.id ? "primary" : "ghost"}
-                size="sm"
-                onClick={() => setSelectedEntity(entity.id)}
-                className="flex items-center space-x-2"
-              >
-                {getNodeIcon(entity.type)}
-                <span>{entity.name}</span>
+      {/* Table Selector */}
+      {showTableSelector ? (
+        <Card>
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">Select Table for Lineage</h3>
+              <Button variant="ghost" size="sm" icon={ArrowLeft} onClick={handleBackFromSelector}>
+                Back to Demo
               </Button>
-            ))}
+            </div>
+            <SchemaTableSelector onTableSelect={handleTableSelect} />
           </div>
-        </div>
-      </Card>
+        </Card>
+      ) : (
+        <Card className="p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <span className="text-sm font-medium text-gray-700">Selected Table:</span>
+              {selectedTable && selectedConnection ? (
+                <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 px-3 py-2 bg-blue-50 rounded-lg">
+                    <Table className="w-4 h-4 text-blue-600" />
+                    <span className="font-medium text-blue-900">
+                      {selectedTable.schemaName}.{selectedTable.tableName}
+                    </span>
+                    <Badge variant="info" size="sm">{selectedConnection.name}</Badge>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-gray-500 text-sm">No table selected</div>
+              )}
+            </div>
+            <Button 
+              variant="primary" 
+              size="sm" 
+              onClick={() => setShowTableSelector(true)}
+            >
+              {selectedTable ? 'Change Table' : 'Select Table'}
+            </Button>
+          </div>
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Main Lineage View */}
         <div className="lg:col-span-3">
           <Card className="p-0 overflow-hidden">
             <div className="h-[600px] bg-gray-50">
-              {isLoading ? (
+              {!useMockData && isLoading ? (
                 <div className="flex items-center justify-center h-full">
                   <div className="flex items-center space-x-3">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                     <span className="text-gray-600">Loading lineage data...</span>
                   </div>
                 </div>
-              ) : error ? (
+              ) : !useMockData && error ? (
                 <div className="flex items-center justify-center h-full">
                   <div className="text-center space-y-4">
                     <div className="text-red-600 text-lg">Error loading lineage</div>
@@ -118,7 +181,7 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
                     </Button>
                   </div>
                 </div>
-              ) : !lineageData || lineageData.nodes.length === 0 ? (
+              ) : !displayData || displayData.nodes.length === 0 ? (
                 <div className="flex items-center justify-center h-full">
                   <div className="text-center space-y-4">
                     <div className="text-gray-500 text-lg">No lineage data available</div>
@@ -127,8 +190,8 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
                 </div>
               ) : (
                 <ReactFlowLineage
-                  nodes={lineageData.nodes}
-                  edges={lineageData.edges}
+                  nodes={displayData.nodes as ReactFlowNode[]}
+                  edges={displayData.edges as ReactFlowEdge[]}
                   onNodeClick={handleNodeClick}
                   onEdgeClick={handleEdgeClick}
                   className="w-full h-full"
@@ -149,7 +212,7 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
                     {getNodeIcon(selectedNode.data?.nodeType || 'table')}
                     <span className="font-medium">{selectedNode.data?.label}</span>
                   </div>
-                  <Badge variant="secondary" className="text-xs">
+                  <Badge variant="default" size="sm">
                     {selectedNode.data?.nodeType || 'table'}
                   </Badge>
                 </div>
@@ -158,12 +221,15 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
                   <div>
                     <h4 className="text-sm font-medium text-gray-700 mb-2">Columns</h4>
                     <div className="space-y-1 max-h-40 overflow-y-auto">
-                      {selectedNode.data.columns.map((column: any, index: number) => (
+                      {selectedNode.data.columns.map((column: ColumnType, index: number) => (
                         <div key={index} className="text-xs bg-gray-50 rounded px-2 py-1">
                           <span className="font-mono text-gray-900">{column.name}</span>
                           <span className="text-gray-500 ml-2">: {column.type}</span>
                           {column.classification && (
-                            <Badge variant="outline" className="ml-2 text-xs">
+                            <Badge 
+                              variant={getClassificationBadgeVariant(column.classification)} 
+                              size="sm"
+                            >
                               {column.classification}
                             </Badge>
                           )}
@@ -203,15 +269,27 @@ export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoPro
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Total Nodes:</span>
-                <span className="font-medium">{lineageData?.nodes.length || 0}</span>
+                <span className="font-medium">{displayData?.nodes.length || 0}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Total Edges:</span>
-                <span className="font-medium">{lineageData?.edges.length || 0}</span>
+                <span className="font-medium">{displayData?.edges.length || 0}</span>
               </div>
+              {selectedTable && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Columns:</span>
+                  <span className="font-medium">{selectedTable.totalColumns}</span>
+                </div>
+              )}
+              {selectedConnection && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Connection:</span>
+                  <span className="font-medium text-xs">{selectedConnection.name}</span>
+                </div>
+              )}
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Selected Entity:</span>
-                <span className="font-medium text-xs">{selectedEntity}</span>
+                <span className="text-gray-600">Data Source:</span>
+                <span className="font-medium text-xs">{useMockData ? 'Mock' : 'Live'}</span>
               </div>
             </div>
           </Card>

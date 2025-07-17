@@ -12,7 +12,6 @@ import {
   Hash,
   Type,
   Info,
-  Key,
   ExternalLink,
   Download
 } from 'lucide-react';
@@ -72,13 +71,13 @@ export function ConnectionSchemaView({ connection, onBack }: ConnectionSchemaVie
 
   // Get data type icon
   const getDataTypeIcon = (dataType: string) => {
-    if (dataType.includes('INT') || dataType.includes('DECIMAL') || dataType.includes('NUMERIC')) {
+    if (dataType.includes('int') || dataType.includes('decimal') || dataType.includes('numeric') || dataType.includes('bigint')) {
       return <Hash className="w-4 h-4 text-blue-500" />;
     }
-    if (dataType.includes('VARCHAR') || dataType.includes('TEXT') || dataType.includes('CHAR')) {
+    if (dataType.includes('string') || dataType.includes('varchar') || dataType.includes('text') || dataType.includes('char')) {
       return <Type className="w-4 h-4 text-green-500" />;
     }
-    if (dataType.includes('DATE') || dataType.includes('TIME')) {
+    if (dataType.includes('date') || dataType.includes('time') || dataType.includes('timestamp')) {
       return <Calendar className="w-4 h-4 text-purple-500" />;
     }
     return <Info className="w-4 h-4 text-gray-500" />;
@@ -191,9 +190,8 @@ export function ConnectionSchemaView({ connection, onBack }: ConnectionSchemaVie
                       <tr className="border-b border-gray-200">
                         <th className="text-left py-3 px-4 font-medium text-gray-900">Column</th>
                         <th className="text-left py-3 px-4 font-medium text-gray-900">Data Type</th>
-                        <th className="text-left py-3 px-4 font-medium text-gray-900">Constraints</th>
-                        <th className="text-left py-3 px-4 font-medium text-gray-900">Default</th>
-                        <th className="text-left py-3 px-4 font-medium text-gray-900">Description</th>
+                        <th className="text-left py-3 px-4 font-medium text-gray-900">Classification</th>
+                        <th className="text-left py-3 px-4 font-medium text-gray-900">Comment</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -201,45 +199,40 @@ export function ConnectionSchemaView({ connection, onBack }: ConnectionSchemaVie
                         <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
                           <td className="py-4 px-4">
                             <div className="flex items-center space-x-2">
-                              {getDataTypeIcon(column.dataType)}
+                              {getDataTypeIcon(column.type)}
                               <div>
-                                <div className="font-medium text-gray-900">{column.columnName}</div>
-                                <div className="text-sm text-gray-500">Position {column.columnPosition}</div>
+                                <div className="font-medium text-gray-900">{column.name}</div>
+                                <div className="text-sm text-gray-500">Position {index + 1}</div>
                               </div>
                             </div>
                           </td>
                           
                           <td className="py-4 px-4">
                             <div className="font-mono text-sm text-gray-900">
-                              {column.dataType}
-                              {column.maxLength && `(${column.maxLength})`}
-                              {column.precision && column.scale && `(${column.precision},${column.scale})`}
+                              {column.type}
                             </div>
                           </td>
                           
                           <td className="py-4 px-4">
-                            <div className="flex flex-wrap gap-1">
-                              {column.isPrimaryKey && <Badge variant="warning" size="sm">PK</Badge>}
-                              {column.isForeignKey && <Badge variant="info" size="sm">FK</Badge>}
-                              {!column.isNullable && <Badge variant="default" size="sm">NOT NULL</Badge>}
-                            </div>
+                            <Badge 
+                              variant={
+                                column.classification === 'PII' ? 'error' :
+                                column.classification === 'IDENTIFIER' ? 'warning' :
+                                column.classification === 'AUDIT_TIMESTAMP' || column.classification === 'AUDIT_USER' ? 'info' :
+                                column.classification === 'STATUS_FLAG' ? 'success' :
+                                'default'
+                              } 
+                              size="sm"
+                            >
+                              {column.classification.replace(/_/g, ' ')}
+                            </Badge>
                           </td>
                           
                           <td className="py-4 px-4">
-                            {column.defaultValue ? (
-                              <code className="text-xs bg-gray-100 px-2 py-1 rounded">
-                                {column.defaultValue}
-                              </code>
+                            {column.comment ? (
+                              <span className="text-sm text-gray-600">{column.comment}</span>
                             ) : (
-                              <span className="text-gray-400">None</span>
-                            )}
-                          </td>
-                          
-                          <td className="py-4 px-4">
-                            {column.description ? (
-                              <span className="text-sm text-gray-600">{column.description}</span>
-                            ) : (
-                              <span className="text-gray-400">No description</span>
+                              <span className="text-gray-400">No comment</span>
                             )}
                           </td>
                         </tr>

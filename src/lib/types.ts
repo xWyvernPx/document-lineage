@@ -331,21 +331,10 @@ export interface LatestSchemaTable {
 }
 
 export interface LatestSchemaColumn {
-  columnName: string;
-  dataType: string;
-  isNullable: boolean;
-  isPrimaryKey: boolean;
-  isForeignKey: boolean;
-  defaultValue?: string;
-  columnPosition: number;
-  precision?: number;
-  scale?: number;
-  maxLength?: number;
-  description?: string;
-  classification?: {
-    type: string;
-    confidence: number;
-  };
+  name: string;
+  type: string;
+  comment: string;
+  classification: string;
 }
 
 // Request and Filter types

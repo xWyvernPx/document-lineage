@@ -16,6 +16,7 @@ import {
   SchemaIngestionPageMigrated,
   ApiTestingPage
 } from '../pages';
+import { ReactFlowLineageDemo } from '../features/lineage';
 
 export function AppRouter() {
   return (
@@ -42,8 +43,8 @@ export function AppRouter() {
       <Route path="/search" element={<SearchPage />} />
       
       {/* Lineage & Data Flow */}
-      <Route path="/lineage" element={<DataLineageViewer />} />
-      <Route path="/reactflow-lineage" element={<ReactFlowLineagePage />} />
+      <Route path="/lineage" element={<ReactFlowLineageDemo />} />
+      <Route path="/reactflow-lineage" element={<ReactFlowLineageDemo />} />
       <Route path="/napas-lineage" element={<NAPASLineageViewer />} />
       
       {/* Schema & Configuration */}

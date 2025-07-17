@@ -127,7 +127,7 @@ export const routes: RouteConfig[] = [
     name: 'Data Lineage',
     icon: Network,
     description: 'View data relationships and lineage',
-    component: 'DataLineageViewer',
+    component: 'ReactFlowLineageDemo',
     section: 'lineage'
   },
   {

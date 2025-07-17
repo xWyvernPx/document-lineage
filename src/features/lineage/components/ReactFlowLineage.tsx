@@ -23,6 +23,11 @@ export interface ReactFlowNode extends Node {
   data: {
     label: string;
     nodeType: 'table' | 'view' | 'dashboard' | 'notebook';
+    columns?: Array<{
+      name: string;
+      type: string;
+      classification?: string;
+    }>;
     metadata?: any;
   };
 }
