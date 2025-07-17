@@ -12,6 +12,7 @@ import { ProtectedRoute } from '../../../auth/ProtectedRoute';
 import { UserProfile } from '../../../auth/UserProfile';
 import { configureAmplify } from '../../../auth/cognito-config';
 import { ProcessingJob } from '../types/ProcessingJob';
+import { SchemaIngestionPageMigrated } from '../../schema/components/SchemaIngestionPageMigrated';
 
 type AppView = 'upload' | 'document' | 'classification' | 'enrichment' | 'results' | 'term-dictionary' | 'schema-ingestion';
 

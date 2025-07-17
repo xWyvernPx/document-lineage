@@ -35,6 +35,15 @@ export const queryKeys = {
     detail: (id: string) => [...queryKeys.documents.details(), id] as const,
     processing: () => [...queryKeys.documents.all, 'processing'] as const,
   },
+
+  // Jobs-related queries
+  jobs: {
+    all: ['jobs'] as const,
+    lists: () => [...queryKeys.jobs.all, 'list'] as const,
+    list: (filters?: string) => [...queryKeys.jobs.lists(), { filters }] as const,
+    details: () => [...queryKeys.jobs.all, 'detail'] as const,
+    detail: (id: string) => [...queryKeys.jobs.details(), id] as const,
+  },
   
   // Terms-related queries
   terms: {
@@ -58,6 +67,10 @@ export const queryKeys = {
     all: ['lineage'] as const,
     graph: (entityId: string) => [...queryKeys.lineage.all, 'graph', entityId] as const,
     details: (entityId: string) => [...queryKeys.lineage.all, 'details', entityId] as const,
+    detail: (entityId: string, options?: any) => [...queryKeys.lineage.all, 'detail', entityId, options] as const,
+    multiple: (entityIds: string[], options?: any) => [...queryKeys.lineage.all, 'multiple', entityIds, options] as const,
+    raw: (entityId: string, options?: any) => [...queryKeys.lineage.all, 'raw', entityId, options] as const,
+    reactflow: (entityId: string, options?: any) => [...queryKeys.lineage.all, 'reactflow', entityId, options] as const,
   },
   
   // Schema-related queries

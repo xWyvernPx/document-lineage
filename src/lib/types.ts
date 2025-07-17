@@ -33,6 +33,47 @@ export interface DocumentUploadRequest {
   };
 }
 
+// Real API Job Response Types (from AWS API)
+export interface ApiJobResponse {
+  textractJobId: string;
+  originalName?: string;
+  documentId: string;
+  updatedAt: string;
+  status: 'PROCESSING' | 'CLASSIFIED' | 'FAILED' | 'QUEUED' | 'COMPLETED';
+  timestamp: string;
+  createdAt: string;
+  jobId: string;
+  bucket: string;
+  key: string;
+  completedAt?: string;
+  textractFeatures?: string[];
+}
+
+export interface JobsApiResponse {
+  items: ApiJobResponse[];
+}
+
+// Converted processing job for UI (mapped from API response)
+export interface ProcessingJob {
+  id: string;
+  documentName: string;
+  type: 'pdf' | 'docx' | 'image';
+  status: 'queued' | 'processing' | 'completed' | 'failed' | 'paused';
+  progress: number;
+  submittedAt: string;
+  submittedBy: string;
+  completedAt?: string;
+  estimatedCompletion?: string;
+  extractedTerms?: number;
+  error?: string;
+  size: number;
+  currentStage?: 'upload' | 'classification' | 'enrichment' | 'review' | 'completed';
+  textractJobId?: string;
+  documentId?: string;
+  bucket?: string;
+  key?: string;
+}
+
 export interface DocumentProcessingJob {
   id: string;
   documentId: string;
@@ -307,10 +348,203 @@ export interface LatestSchemaColumn {
   };
 }
 
-export interface SchemaSearchFilters {
-  connectionId?: string;
-  tableName?: string;
-  schemaName?: string;
+// Request and Filter types
+export interface PaginatedRequest {
+  page?: number;
+  limit?: number;
+}
+
+export interface DocumentFilters {
+  status?: string;
+  type?: string;
+  uploadedBy?: string;
+  dateRange?: {
+    start: string;
+    end: string;
+  };
+}
+
+export interface TermFilters {
+  status?: string;
+  category?: string;
+  sourceDocument?: string;
+  dateRange?: {
+    start: string;
+    end: string;
+  };
+}
+
+// Lineage types - React Flow compatible
+export interface LineageNode {
+  id: string;
+  type?: string; // React Flow node type
+  position: { x: number; y: number };
+  data: {
+    label: string;
+    nodeType: 'document' | 'term' | 'schema' | 'connection' | 'table' | 'view' | 'dashboard' | 'notebook';
+    metadata?: Record<string, any>;
+    columns?: Array<{
+      name: string;
+      type: string;
+      description?: string;
+    }>;
+  };
+  // React Flow specific properties
+  draggable?: boolean;
+  selectable?: boolean;
+  deletable?: boolean;
+}
+
+export interface LineageEdge {
+  id: string;
+  source: string;
+  target: string;
+  type?: string; // React Flow edge type
+  label?: string;
+  data?: {
+    relationship: string;
+    properties?: Record<string, any>;
+  };
+  // React Flow specific properties  
+  animated?: boolean;
+  deletable?: boolean;
+  style?: Record<string, any>;
+  markerEnd?: string;
+}
+
+export interface LineageGraph {
+  nodes: LineageNode[];
+  edges: LineageEdge[];
+  metadata?: {
+    depth: number;
+    direction: 'upstream' | 'downstream' | 'both';
+    rootEntity: string;
+  };
+}
+
+// Server response types for new lineage API contract
+export interface LineageNodeData {
+  id: string;
+  name: string;
+  type: 'table' | 'view' | 'dashboard' | 'notebook' | 'document' | 'term';
+  schema?: string;
+  database?: string;
+  columns?: Array<{
+    name: string;
+    type: string;
+    description?: string;
+    isPrimaryKey?: boolean;
+    isForeignKey?: boolean;
+  }>;
+  metadata?: Record<string, any>;
+  position?: { x: number; y: number };
+}
+
+export interface LineageEdgeData {
+  id: string;
+  sourceNodeId: string;
+  targetNodeId: string;
+  relationshipType: 'join' | 'transformation' | 'reference' | 'dependency';
+  sourceColumns?: string[];
+  targetColumns?: string[];
+  transformationLogic?: string;
+  metadata?: Record<string, any>;
+}
+
+// New server contract types for RMI0002
+export interface LineageServerNode {
+  id: string;
+  node_type: string; // 'table', 'column', 'business_term', etc.
+  node_name: string; // e.g. 'account', 'payment'
+  qualified_name: string; // e.g. 'neondb.public.account'
+  metadata: Record<string, any>; // everything else (businessMetadata, etc.)
+  jobId: string;
+  system: string;
+}
+
+export interface LineageServerRelationship {
+  relationship_id: string;
+  source_node_id: string; // FK to lineage_nodes
+  target_node_id: string; // FK to lineage_nodes
+  relationship_type: string; // e.g. 'foreign_key', 'business_reference'
+  business_rule?: Record<string, any>;
+  source_meta?: Record<string, any>; // column information of source
+  target_meta?: Record<string, any>; // column information of target
+  confidence?: number; // confidence, if using AI
+  is_verified?: boolean;
+  jobId: string;
+}
+
+export interface LineageServerResponse {
+  nodes: LineageServerNode[];
+  edges: LineageServerRelationship[];
+}
+
+// React Flow compatible types for the new contract
+export interface ReactFlowNodeData {
+  label: string;
+  nodeType?: 'table' | 'view' | 'dashboard' | 'notebook';
+  columns?: Array<{
+    name: string;
+    type: string;
+    classification?: string;
+  }>;
+  metadata?: Record<string, any>;
+}
+
+export interface ReactFlowNodeType {
+  id: string;
+  type: string;
+  data: ReactFlowNodeData;
+  position: { x: number; y: number };
+}
+
+export interface ReactFlowEdgeType {
+  id: string;
+  source: string;
+  target: string;
+  type?: string;
+  label?: string;
+}
+
+export interface ReactFlowResponse {
+  nodes: ReactFlowNodeType[];
+  edges: ReactFlowEdgeType[];
+}
+
+export interface LineageResponse {
+  nodes: LineageNodeData[];
+  relationships: LineageEdgeData[];
+  metadata: {
+    queryDepth: number;
+    direction: 'upstream' | 'downstream' | 'both';
+    rootEntityId: string;
+    totalNodes: number;
+    totalRelationships: number;
+    timestamp: string;
+  };
+}
+
+// Additional lineage types for React Flow integration
+export interface TableNodeData {
+  id: string;
+  name: string;
+  type: 'table' | 'view' | 'procedure' | 'function';
+  schema?: string;
+  database?: string;
+  columns?: Array<{
+    name: string;
+    type: string;
+    primaryKey?: boolean;
+    nullable?: boolean;
+  }>;
+  description?: string;
+  metadata?: Record<string, any>;
+}
+
+export interface LineageOptions {
+  direction?: 'upstream' | 'downstream' | 'both';
+  depth?: number;
   includeColumns?: boolean;
-  includeHistorical?: boolean;
+  excludeSystemTables?: boolean;
 }

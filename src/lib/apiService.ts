@@ -7,12 +7,13 @@ import {
   ExtractedTerm,
   TermEnrichmentRequest,
   DocumentClassification,
-  LineageGraph,
   SchemaConnection,
   SchemaTable,
+  JobsApiResponse,
   DocumentFilters,
   TermFilters,
-  PaginatedRequest
+  PaginatedRequest,
+  LineageGraph
 } from './types';
 import { mockApiService } from './mockApi';
 
@@ -82,6 +83,42 @@ export class ApiService {
     
     const response = await apiClient.get('/processing/jobs');
     return response.data;
+  }
+
+  // Real API Jobs endpoint
+  async getJobs(): Promise<JobsApiResponse> {
+    if (isMockMode()) {
+      // Return mock data in the same format as real API
+      const mockJobs = await mockApiService.getProcessingJobs();
+      return {
+        items: mockJobs.data.map(job => ({
+          textractJobId: job.id,
+          documentId: job.documentId,
+          updatedAt: job.submittedAt,
+          status: job.status.toUpperCase() as 'PROCESSING' | 'CLASSIFIED' | 'FAILED' | 'QUEUED' | 'COMPLETED',
+          timestamp: job.submittedAt,
+          createdAt: job.submittedAt,
+          jobId: job.id,
+          bucket: 'mock-bucket',
+          key: `uploads/${job.documentName}`,
+          completedAt: job.completedAt,
+          originalName: `uploads/${job.documentName}`,
+        }))
+      };
+    }
+    
+    // Use the specific jobs API endpoint (different from the main API)
+    const response = await fetch('https://dlast203z6.execute-api.ap-southeast-1.amazonaws.com/dev/jobs', {
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return response.json();
   }
 
   async getProcessingJob(id: string): Promise<ApiResponse<DocumentProcessingJob>> {
