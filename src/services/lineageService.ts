@@ -13,7 +13,7 @@ import {
 
 // Create separate axios instance for lineage API
 const lineageApiClient = axios.create({
-  baseURL: 'http://52.77.38.199/',
+  baseURL: 'http://3.1.127.253/',
   timeout: 15000,
   headers: {
     'Accept': 'application/json',
@@ -82,7 +82,7 @@ export class LineageService {
     }
 
     // Use the new lineage API endpoint
-    const response = await lineageApiClient.get(`/processor/lineage/${entityId}`);
+    const response = await lineageApiClient.get(`/processor/lineage/${entityId.split(".")}`);
     return response.data;
   }
 
