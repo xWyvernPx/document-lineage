@@ -1,4 +1,5 @@
 import { apiClient, isMockMode } from '../lib/apiClient';
+import axios from 'axios';
 import { 
   ApiResponse, 
   LineageResponse, 
@@ -7,11 +8,18 @@ import {
   LineageNode,
   LineageEdge,
   LineageGraph,
-  LineageServerResponse,
-  ReactFlowResponse,
-  ReactFlowNodeType,
-  ReactFlowEdgeType
+  ReactFlowResponse
 } from '../lib/types';
+
+// Create separate axios instance for lineage API
+const lineageApiClient = axios.create({
+  baseURL: 'http://52.77.38.199/',
+  timeout: 15000,
+  headers: {
+    'Accept': 'application/json',
+  },
+  withCredentials: false,
+});
 
 /**
  * Lineage service for managing data lineage API calls
@@ -73,14 +81,8 @@ export class LineageService {
       return this.getMockReactFlowLineage(entityId, options);
     }
 
-    const params = {
-      entityId,
-      direction: options.direction || 'both',
-      depth: options.depth || 3,
-      format: 'reactflow' // Request React Flow format
-    };
-
-    const response = await apiClient.get('/lineage/reactflow', { params });
+    // Use the new lineage API endpoint
+    const response = await lineageApiClient.get(`/processor/lineage/${entityId}`);
     return response.data;
   }
 
@@ -241,8 +243,8 @@ export class LineageService {
 
   // Mock data for React Flow format
   private async getMockReactFlowLineage(
-    entityId: string,
-    options: any
+    _entityId: string,
+    _options: any
   ): Promise<ReactFlowResponse> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -250,83 +252,80 @@ export class LineageService {
     const mockResponse: ReactFlowResponse = {
       nodes: [
         {
-          id: "tbl_account",
+          id: "tbl_material_inventory_at_location",
           type: "table",
           data: {
-            label: "account",
-            nodeType: "table",
+            label: "Material Inventory at Location",
             columns: [
-              { name: "id", type: "bigint", classification: "IDENTIFIER" },
-              { name: "full_name", type: "string", classification: "DESCRIPTIVE" },
-              { name: "email", type: "string", classification: "SENSITIVE" },
-              { name: "created_at", type: "timestamp", classification: "METADATA" }
+              { name: "ufinc", type: "string", classification: "DESCRIPTIVE" },
+              { name: "inventory_volume", type: "number", classification: "DESCRIPTIVE" },
+              { name: "affiliate_plant_number", type: "string", classification: "DESCRIPTIVE" },
+              { name: "is_below_zero", type: "boolean", classification: "DESCRIPTIVE" },
+              { name: "goods_receipt_processing_time_in_days", type: "number", classification: "DESCRIPTIVE" },
+              { name: "material_number", type: "string", classification: "DESCRIPTIVE" },
+              { name: "country_name", type: "string", classification: "DESCRIPTIVE" },
+              { name: "is_below_target", type: "boolean", classification: "DESCRIPTIVE" },
+              { name: "country_code", type: "string", classification: "DESCRIPTIVE" },
+              { name: "bucket_date", type: "date", classification: "DESCRIPTIVE" },
+              { name: "target_inventory_volume", type: "number", classification: "DESCRIPTIVE" },
+              { name: "plant_number", type: "string", classification: "DESCRIPTIVE" },
+              { name: "sold_to_number", type: "string", classification: "DESCRIPTIVE" },
+              { name: "customer_po_numbers", type: "string", classification: "DESCRIPTIVE" },
+              { name: "week_number", type: "number", classification: "DESCRIPTIVE" },
+              { name: "horizon", type: "string", classification: "DESCRIPTIVE" }
             ],
-            metadata: { 
-              businessOwner: "xWyvernPx", 
-              description: "Main production database for customer data",
-              schema: "public",
-              database: "main_db"
+            metadata: {
+              businessOwner: "Unknown",
+              description: "The entity created based on the ECAS (OMP) data"
             }
           },
           position: { x: 0, y: 0 }
         },
         {
-          id: "tbl_payment",
+          id: "tbl_sales_order",
           type: "table",
           data: {
-            label: "payment",
-            nodeType: "table",
+            label: "Sales Order",
             columns: [
-              { name: "user_id", type: "int", classification: "IDENTIFIER" },
-              { name: "transaction_id", type: "string", classification: "IDENTIFIER" },
-              { name: "amount", type: "decimal", classification: "SENSITIVE" },
-              { name: "created_at", type: "timestamp", classification: "METADATA" }
-            ],
-            metadata: { 
-              businessOwner: "xWyvernPx", 
-              description: "Payment transaction records",
-              schema: "public", 
-              database: "main_db"
-            }
-          },
-          position: { x: 400, y: 0 }
-        },
-        {
-          id: "tbl_order",
-          type: "table", 
-          data: {
-            label: "order",
-            nodeType: "table",
-            columns: [
-              { name: "id", type: "bigint", classification: "IDENTIFIER" },
-              { name: "user_id", type: "int", classification: "IDENTIFIER" },
-              { name: "status", type: "string", classification: "DESCRIPTIVE" },
-              { name: "total", type: "decimal", classification: "SENSITIVE" }
+              { name: "est_available", type: "date", classification: "DESCRIPTIVE" },
+              { name: "record_deleted", type: "boolean", classification: "DESCRIPTIVE" },
+              { name: "material_type", type: "string", classification: "DESCRIPTIVE" },
+              { name: "sold_to_number", type: "string", classification: "DESCRIPTIVE" },
+              { name: "active_stage", type: "string", classification: "DESCRIPTIVE" },
+              { name: "ufinc", type: "string", classification: "DESCRIPTIVE" },
+              { name: "ship_to_country_code", type: "string", classification: "DESCRIPTIVE" },
+              { name: "below_zero_impact_date", type: "date", classification: "DESCRIPTIVE" },
+              { name: "sales_organization", type: "number", classification: "DESCRIPTIVE" },
+              { name: "gr_recipe_processing_time_in_days", type: "number", classification: "DESCRIPTIVE" },
+              { name: "affiliate_plant_number", type: "string", classification: "DESCRIPTIVE" },
+              { name: "shipping_point", type: "number", classification: "DESCRIPTIVE" },
+              { name: "product_family_code", type: "number", classification: "DESCRIPTIVE" },
+              { name: "reason_for_rejection", type: "string", classification: "DESCRIPTIVE" },
+              { name: "material_number", type: "string", classification: "DESCRIPTIVE" },
+              { name: "below_target_impact_date", type: "date", classification: "DESCRIPTIVE" }
             ],
             metadata: {
-              businessOwner: "xWyvernPx",
-              description: "Customer order information",
-              schema: "public",
-              database: "main_db"
+              businessOwner: "Unknown",
+              description: "No description available"
             }
           },
-          position: { x: 200, y: 200 }
+          position: { x: 800, y: 0 }
         }
       ],
       edges: [
         {
-          id: "tbl_payment-user_id-tbl_account-id",
-          source: "tbl_payment",
-          target: "tbl_account", 
+          id: "tbl_sales_order-sold_to_number-tbl_material_inventory_at_location-sold_to_number",
+          source: "tbl_sales_order",
+          target: "tbl_material_inventory_at_location",
           type: "smoothstep",
-          label: "user_id → id"
+          label: "sold_to_number → sold_to_number"
         },
         {
-          id: "tbl_order-user_id-tbl_account-id",
-          source: "tbl_order",
-          target: "tbl_account",
-          type: "smoothstep", 
-          label: "user_id → id"
+          id: "tbl_material_inventory_at_location-ufinc-tbl_sales_order-ufinc",
+          source: "tbl_material_inventory_at_location",
+          target: "tbl_sales_order",
+          type: "smoothstep",
+          label: "ufinc → ufinc"
         }
       ]
     };
@@ -338,138 +337,82 @@ export class LineageService {
 export const mockLineageReactFlowData: ReactFlowResponse = {
   nodes: [
     {
-      id: "tbl_account",
+      id: "tbl_material_inventory_at_location",
       type: "tableNode",
       data: {
-        label: "account", 
+        label: "Material Inventory at Location",
         nodeType: "table",
         columns: [
-          { name: "id", type: "bigint", classification: "IDENTIFIER" },
-          { name: "full_name", type: "string", classification: "DESCRIPTIVE" },
-          { name: "email", type: "string", classification: "PII" },
-          { name: "role", type: "string", classification: "DESCRIPTIVE" },
-          { name: "created_date", type: "timestamp", classification: "AUDIT_TIMESTAMP" },
-          { name: "last_modified_date", type: "timestamp", classification: "AUDIT_TIMESTAMP" },
-          { name: "enabled", type: "boolean", classification: "STATUS_FLAG" }
+          { name: "ufinc", type: "string", classification: "DESCRIPTIVE" },
+          { name: "inventory_volume", type: "number", classification: "DESCRIPTIVE" },
+          { name: "affiliate_plant_number", type: "string", classification: "DESCRIPTIVE" },
+          { name: "is_below_zero", type: "boolean", classification: "DESCRIPTIVE" },
+          { name: "goods_receipt_processing_time_in_days", type: "number", classification: "DESCRIPTIVE" },
+          { name: "material_number", type: "string", classification: "DESCRIPTIVE" },
+          { name: "country_name", type: "string", classification: "DESCRIPTIVE" },
+          { name: "is_below_target", type: "boolean", classification: "DESCRIPTIVE" },
+          { name: "country_code", type: "string", classification: "DESCRIPTIVE" },
+          { name: "bucket_date", type: "date", classification: "DESCRIPTIVE" },
+          { name: "target_inventory_volume", type: "number", classification: "DESCRIPTIVE" },
+          { name: "plant_number", type: "string", classification: "DESCRIPTIVE" },
+          { name: "sold_to_number", type: "string", classification: "DESCRIPTIVE" },
+          { name: "customer_po_numbers", type: "string", classification: "DESCRIPTIVE" },
+          { name: "week_number", type: "number", classification: "DESCRIPTIVE" },
+          { name: "horizon", type: "string", classification: "DESCRIPTIVE" }
         ],
-        metadata: { 
-          businessOwner: "xWyvernPx", 
-          description: "Main production database for customer data",
-          system: "postgresql",
-          databaseType: "postgresql",
-          tableType: "EXTERNAL_TABLE"
+        metadata: {
+          businessOwner: "Unknown",
+          description: "The entity created based on the ECAS (OMP) data"
         }
       },
       position: { x: 0, y: 0 }
     },
     {
-      id: "tbl_payment",
-      type: "tableNode", 
-      data: {
-        label: "payment",
-        nodeType: "table",
-        columns: [
-          { name: "id", type: "bigint", classification: "IDENTIFIER" },
-          { name: "user_id", type: "bigint", classification: "IDENTIFIER" },
-          { name: "transaction_id", type: "string", classification: "IDENTIFIER" },
-          { name: "amount", type: "decimal", classification: "DESCRIPTIVE" },
-          { name: "currency", type: "string", classification: "DESCRIPTIVE" },
-          { name: "payment_method", type: "string", classification: "DESCRIPTIVE" },
-          { name: "status", type: "string", classification: "STATUS_FLAG" },
-          { name: "created_at", type: "timestamp", classification: "AUDIT_TIMESTAMP" }
-        ],
-        metadata: { 
-          businessOwner: "Finance Team", 
-          description: "Payment transactions table",
-          system: "mysql",
-          databaseType: "mysql",
-          tableType: "EXTERNAL_TABLE"
-        }
-      },
-      position: { x: 400, y: 0 }
-    },
-    {
-      id: "view_customer_summary",
+      id: "tbl_sales_order",
       type: "tableNode",
       data: {
-        label: "customer_summary",
-        nodeType: "view",
-        columns: [
-          { name: "customer_id", type: "bigint", classification: "IDENTIFIER" },
-          { name: "customer_name", type: "string", classification: "DESCRIPTIVE" },
-          { name: "total_payments", type: "decimal", classification: "DESCRIPTIVE" },
-          { name: "payment_count", type: "bigint", classification: "DESCRIPTIVE" },
-          { name: "last_payment_date", type: "timestamp", classification: "AUDIT_TIMESTAMP" }
-        ],
-        metadata: { 
-          businessOwner: "Analytics Team", 
-          description: "Aggregated customer payment summary view",
-          system: "snowflake",
-          databaseType: "snowflake",
-          tableType: "VIEW"
-        }
-      },
-      position: { x: 200, y: 200 }
-    },
-    {
-      id: "tbl_customer_events",
-      type: "tableNode",
-      data: {
-        label: "customer_events",
+        label: "Sales Order",
         nodeType: "table",
         columns: [
-          { name: "event_id", type: "string", classification: "IDENTIFIER" },
-          { name: "customer_id", type: "bigint", classification: "IDENTIFIER" },
-          { name: "event_type", type: "string", classification: "DESCRIPTIVE" },
-          { name: "event_timestamp", type: "timestamp", classification: "AUDIT_TIMESTAMP" },
-          { name: "event_data", type: "string", classification: "DESCRIPTIVE" }
+          { name: "est_available", type: "date", classification: "DESCRIPTIVE" },
+          { name: "record_deleted", type: "boolean", classification: "DESCRIPTIVE" },
+          { name: "material_type", type: "string", classification: "DESCRIPTIVE" },
+          { name: "sold_to_number", type: "string", classification: "DESCRIPTIVE" },
+          { name: "active_stage", type: "string", classification: "DESCRIPTIVE" },
+          { name: "ufinc", type: "string", classification: "DESCRIPTIVE" },
+          { name: "ship_to_country_code", type: "string", classification: "DESCRIPTIVE" },
+          { name: "below_zero_impact_date", type: "date", classification: "DESCRIPTIVE" },
+          { name: "sales_organization", type: "number", classification: "DESCRIPTIVE" },
+          { name: "gr_recipe_processing_time_in_days", type: "number", classification: "DESCRIPTIVE" },
+          { name: "affiliate_plant_number", type: "string", classification: "DESCRIPTIVE" },
+          { name: "shipping_point", type: "number", classification: "DESCRIPTIVE" },
+          { name: "product_family_code", type: "number", classification: "DESCRIPTIVE" },
+          { name: "reason_for_rejection", type: "string", classification: "DESCRIPTIVE" },
+          { name: "material_number", type: "string", classification: "DESCRIPTIVE" },
+          { name: "below_target_impact_date", type: "date", classification: "DESCRIPTIVE" }
         ],
         metadata: {
-          businessOwner: "Product Team",
-          description: "Customer interaction events and analytics",
-          system: "bigquery",
-          databaseType: "bigquery",
-          tableType: "EXTERNAL_TABLE"
+          businessOwner: "Unknown",
+          description: "No description available"
         }
       },
-      position: { x: -200, y: 100 }
+      position: { x: 800, y: 0 }
     }
   ],
   edges: [
     {
-      id: "tbl_payment-user_id-tbl_account-id",
-      source: "tbl_payment",
-      target: "tbl_account", 
+      id: "tbl_sales_order-sold_to_number-tbl_material_inventory_at_location-sold_to_number",
+      source: "tbl_sales_order",
+      target: "tbl_material_inventory_at_location",
       type: "smoothstep",
-      label: "user_id → id"
+      label: "sold_to_number → sold_to_number"
     },
     {
-      id: "view_customer_summary-customer_id-tbl_account-id",
-      source: "view_customer_summary",
-      target: "tbl_account",
-      type: "smoothstep", 
-      label: "customer_id → id"
-    },
-    {
-      id: "view_customer_summary-payment-tbl_payment",
-      source: "view_customer_summary",
-      target: "tbl_payment",
+      id: "tbl_material_inventory_at_location-ufinc-tbl_sales_order-ufinc",
+      source: "tbl_material_inventory_at_location",
+      target: "tbl_sales_order",
       type: "smoothstep",
-      label: "aggregates payments"
-    },
-    {
-      id: "tbl_customer_events-customer_id-tbl_account-id",
-      source: "tbl_customer_events",
-      target: "tbl_account",
-      type: "smoothstep",
-      label: "customer_id → id"
-    },
-    {
-      id: "view_customer_summary-events-tbl_customer_events",
-      source: "view_customer_summary",
-      target: "tbl_customer_events",
-      type: "smoothstep",
-      label: "includes event data"
+      label: "ufinc → ufinc"
     }
   ]
 };

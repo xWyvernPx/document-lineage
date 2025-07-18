@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import {
   AsyncProcessingApp,
   ExtractionWorkflow,
@@ -17,8 +17,52 @@ import {
   ApiTestingPage
 } from '../pages';
 import { ReactFlowLineageDemo } from '../features/lineage';
+import { ClassificationStage, DocumentUploadPage, EnrichmentStage, ProcessingDocument } from '../features/async-processing';
+import { useState } from 'react';
+import { ProcessingJob } from '../lib/types';
 
 export function AppRouter() {
+   const [selectedJob, setSelectedJob] = useState<ProcessingJob | null>(null);
+  const nav = useNavigate();
+    const handleViewResults = (job: ProcessingJob) => {
+      setSelectedJob(job);
+      nav('/results');
+    };
+  
+    const handleViewClassification = (job: ProcessingJob) => {
+      setSelectedJob(job);
+      console.log('Selected Job:', job);
+      nav('/classification');
+    };
+  
+    const handleViewEnrichment = (job: ProcessingJob) => {
+      setSelectedJob(job);
+      nav('/enrichment');
+    };
+    const handleUploadComplete = () => {
+    // setCurrentView('document');
+    nav('/documents');
+  };
+ 
+    const handleBackToDocument = () => {
+      setSelectedJob(null);
+      nav('/documents');
+    };
+  
+    const handleClassificationToEnrichment = () => {
+      nav('/enrichment');
+    };
+  
+    const handleEnrichmentToResults = () => {
+      nav('/results');
+    };
+  
+    const handlePublishComplete = (job: ProcessingJob) => {
+      // Update job status and redirect to document view
+      setSelectedJob(null);
+      nav('documents');
+    };
+  
   return (
     <Routes>
       {/* Default route - redirect to documents */}
@@ -28,15 +72,31 @@ export function AppRouter() {
       <Route path="/async-processing" element={<AsyncProcessingApp />} />
       
       {/* Document Pipeline */}
-      <Route path="/extraction" element={<ExtractionWorkflow />} />
-      <Route path="/classification" element={<ClassificationWorkflow />} />
-      <Route path="/enrichment" element={<EnrichmentWorkflow />} />
+      <Route path="/extraction" element={<DocumentUploadPage onUploadComplete={handleUploadComplete} />} />
+      <Route path="/classification" element={selectedJob ? (
+                <ClassificationStage 
+                  job={selectedJob} 
+                  onBack={handleBackToDocument}
+                  onNext={handleClassificationToEnrichment}
+                />
+              ) : null} />
+      <Route path="/enrichment" element={selectedJob ? (
+                <EnrichmentStage 
+                  job={selectedJob} 
+                  onBack={() => nav('classification')}
+                  onNext={handleEnrichmentToResults}
+                />
+              ) : null} />
       <Route path="/review" element={<PublishingWorkflow />} />
       <Route path="/consumption" element={<ConsumptionWorkflow />} />
       
       {/* Document Management */}
-      <Route path="/documents" element={<DocumentsPage />} />
-      <Route path="/upload" element={<UploadPage />} />
+      <Route path="/documents" element={<ProcessingDocument 
+                  onViewResults={handleViewResults}
+                  onViewClassification={handleViewClassification}
+                  onViewEnrichment={handleViewEnrichment}
+                />} />
+      <Route path="/upload" element={<DocumentUploadPage onUploadComplete={handleUploadComplete} />} />
       
       {/* Terms & Dictionary */}
       <Route path="/terms" element={<TermsPage />} />

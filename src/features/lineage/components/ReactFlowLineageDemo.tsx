@@ -21,7 +21,7 @@ interface ColumnType {
 }
 
 export function ReactFlowLineageDemo({ className = '' }: ReactFlowLineageDemoProps) {
-  const [selectedEntity, setSelectedEntity] = useState("tbl_account");
+  const [selectedEntity, setSelectedEntity] = useState("tbl_material_inventory_at_location");
   const [selectedNode, setSelectedNode] = useState<ReactFlowNode | null>(null);
   const [useMockData, setUseMockData] = useState(true); // Toggle for using mock data
   const [showTableSelector, setShowTableSelector] = useState(false);

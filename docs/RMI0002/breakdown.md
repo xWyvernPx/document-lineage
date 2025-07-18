@@ -17,7 +17,8 @@ Migrate| T-009 | Replace LineageGraphView | Update parent components | EP-03 | 1
 | T-010 | Update lineageService.ts | Modify API calls for new schema | EP-04 | 1h | T-005 | Dev | ✅ |
 | T-011 | Create data transformers | Server data to React Flow format | EP-04 | 1.5h | T-010 | Dev | ✅ |
 | T-012 | Update React Query hooks | Integrate with new service layer | EP-04 | 0.5h | T-011 | Dev | ✅ |
-| T-013 | Create comprehensive demo | ReactFlowLineageDemo with full features | EP-04 | 1h | T-012 | Dev | ✅ | from custom D3/SVG to React Flow with draggable nodes and updated server contracts
+| T-013 | Create comprehensive demo | ReactFlowLineageDemo with full features | EP-04 | 1h | T-012 | Dev | ✅ |
+| T-014 | Integrate new lineage endpoint | Update service to use /processor/lineage/:tableName | EP-04 | 1h | T-013 | Dev | ✅ | from custom D3/SVG to React Flow with draggable nodes and updated server contracts
 
 ---
 
