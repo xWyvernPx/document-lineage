@@ -3,11 +3,11 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 // Environment configuration for API URLs
 const API_CONFIG = {
   development: {
-    baseURL: 'https://xwhdjaer9f.execute-api.ap-southeast-1.amazonaws.com/dev/', // AWS API Gateway
+    baseURL: 'https://1jvb6db4pa.execute-api.ap-southeast-1.amazonaws.com/dev/', // AWS API Gateway
     timeout: 15000,
   },
   production: {
-    baseURL: 'https://xwhdjaer9f.execute-api.ap-southeast-1.amazonaws.com/dev/', // AWS API Gateway
+    baseURL: 'https://1jvb6db4pa.execute-api.ap-southeast-1.amazonaws.com/dev/', // AWS API Gateway
     timeout: 20000,
   },
   mock: {
