@@ -108,7 +108,7 @@ export class ApiService {
     }
     
     // Use the specific jobs API endpoint (different from the main API)
-    const response = await fetch('https://dlast203z6.execute-api.ap-southeast-1.amazonaws.com/dev/jobs', {
+    const response = await fetch('https://2n7dmtcnp5.execute-api.ap-southeast-1.amazonaws.com/dev/jobs', {
       headers: {
         'Accept': 'application/json',
       },

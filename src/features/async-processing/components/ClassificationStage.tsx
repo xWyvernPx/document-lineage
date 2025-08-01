@@ -172,7 +172,7 @@ export function ClassificationStage({ job, onBack, onNext }: ClassificationStage
         setIsLoading(true);
         setError(null);
         
-        const response = await fetch(`https://dlast203z6.execute-api.ap-southeast-1.amazonaws.com/dev/documents/${job.id}/classification`);
+        const response = await fetch(`https://2n7dmtcnp5.execute-api.ap-southeast-1.amazonaws.com/dev/documents/${job.id}/classification`);
         
         if (!response.ok) {
           throw new Error(`API request failed with status ${response.status}`);
@@ -218,7 +218,7 @@ export function ClassificationStage({ job, onBack, onNext }: ClassificationStage
       setIsLoading(true);
       
       // Call API to update classification
-      const response = await fetch(`https://dlast203z6.execute-api.ap-southeast-1.amazonaws.com/dev/documents/${job.id}/classification`, {
+      const response = await fetch(`https://2n7dmtcnp5.execute-api.ap-southeast-1.amazonaws.com/dev/documents/${job.id}/classification`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

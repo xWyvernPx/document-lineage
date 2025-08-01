@@ -7,7 +7,7 @@ import { Badge } from '../../../components/Badge';
 import { ProgressBar } from '../../../components/ProgressBar';
 
 // API endpoint for presigned URL
-const API_ENDPOINT = 'https://dlast203z6.execute-api.ap-southeast-1.amazonaws.com/dev/presigned-url';
+const API_ENDPOINT = 'https://2n7dmtcnp5.execute-api.ap-southeast-1.amazonaws.com/dev/presigned-url';
 
 interface UploadFile {
   id: string;
