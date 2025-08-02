@@ -1,0 +1,6477 @@
+[
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-storage_location_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "storage_location_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.storage_location_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-billing_block_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "billing_block_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "data_source",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.billing_block_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-route",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "route",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.route",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-business_partner",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "business_partner",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.business_partner",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-kaiseraugst_responsible_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "kaiseraugst_responsible_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "countrynetwork",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "kaiseraugst_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.kaiseraugst_responsible_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-storage_location",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "storage_location",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.storage_location",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-__EFMigrationsHistory",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "__EFMigrationsHistory",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 5,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "groupid",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "migrationtime",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "migrationid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "productversion",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "version",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 3,
+      "NUMERIC": 1,
+      "AUDIT_TIMESTAMP": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.__EFMigrationsHistory",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-csm_country_spoc_product_makeup_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "csm_country_spoc_product_makeup_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "csm_country_spoc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup_country_map",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.csm_country_spoc_product_makeup_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-announcement_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "announcement_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "header",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "text",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.announcement_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-country_information",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "country_information",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.country_information",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-reason_for_rejection_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "reason_for_rejection_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "data_source",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.reason_for_rejection_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-externalcmos",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "externalcmos",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.externalcmos",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-clm_responsible_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "clm_responsible_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.clm_responsible_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-product_makeup_country_map",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "product_makeup_country_map",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.product_makeup_country_map",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-overall_goods_movement_status_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "overall_goods_movement_status_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.overall_goods_movement_status_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-announcement",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "announcement",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.announcement",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-accelerate_shipment_contacts_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "accelerate_shipment_contacts_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "area_of_responsibility",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "email",
+        "comment": "",
+        "type": "string",
+        "classification": "PII"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "PII": 1,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.accelerate_shipment_contacts_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-mannheim_product_makeup_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "mannheim_product_makeup_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.mannheim_product_makeup_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-mannheim_responsible_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "mannheim_responsible_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "countrynetwork",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mannheim_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.mannheim_responsible_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-mannheim_responsible_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "mannheim_responsible_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.mannheim_responsible_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-clm_responsible_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "clm_responsible_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "countrynetwork",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "clm_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.clm_responsible_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-product_makeup_country_map_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "product_makeup_country_map_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 10,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "product_makeup_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 7,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.product_makeup_country_map_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-plant",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "plant",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.plant",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-internalassets_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "internalassets_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 13,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "international_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 10,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.internalassets_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-responsibles_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "responsibles_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 14,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "role",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_external",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "surname",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "email",
+        "comment": "",
+        "type": "string",
+        "classification": "PII"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 1,
+      "PII": 1,
+      "IDENTIFIER": 3,
+      "DESCRIPTIVE": 9
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.responsibles_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-accelerate_inb_email_recipient_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "accelerate_inb_email_recipient_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "recipient_email",
+        "comment": "",
+        "type": "string",
+        "classification": "PII"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "accelerate_inb_shipment_configuration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 7,
+      "PII": 1,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.accelerate_inb_email_recipient_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-csm_country_spoc_responsible_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "csm_country_spoc_responsible_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "csm_country_spoc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "countrynetwork",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.csm_country_spoc_responsible_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-purchasing_group_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "purchasing_group_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.purchasing_group_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-plant_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "plant_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "plant_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.plant_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-shipping_point_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "shipping_point_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 13,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "storage_location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "data_source",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 10,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.shipping_point_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-order_reason",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "order_reason",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.order_reason",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-order_stage_limit_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "order_stage_limit_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "limit",
+        "comment": "",
+        "type": "decimal(10,2)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 7,
+      "PUBLIC": 1,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.order_stage_limit_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-change_request_system",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "change_request_system",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.change_request_system",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-customer_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "customer_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "country",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "customer_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.customer_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-sales_organization_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "sales_organization_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "data_source",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.sales_organization_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-billing_block",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "billing_block",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.billing_block",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-responsibles",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "responsibles",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.responsibles",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-smart_identifier_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "smart_identifier_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "smart_identifier_code",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "smart_identifier_description",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_push_material_identifier",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 1,
+      "FOREIGN_KEY": 2,
+      "IDENTIFIER": 3,
+      "DESCRIPTIVE": 6
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.smart_identifier_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-calendar_event",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "calendar_event",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.calendar_event",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-shipping_point",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "shipping_point",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.shipping_point",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-business_partner_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "business_partner_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "packaging_site",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_change_request_creation_allowed",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "business_partner_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 1,
+      "DESCRIPTIVE": 7,
+      "IDENTIFIER": 4
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.business_partner_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-mannheim_product_makeup_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "mannheim_product_makeup_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "product_makeup_country_map",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mannheim_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.mannheim_product_makeup_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-accelerate_inb_company_email_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "accelerate_inb_company_email_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "company_email",
+        "comment": "",
+        "type": "string",
+        "classification": "PII"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "accelerate_inb_shipment_configuration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 7,
+      "PII": 1,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.accelerate_inb_company_email_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-supply_chain_material",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "supply_chain_material",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.supply_chain_material",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-externalcmos_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "externalcmos_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 14,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "product_family",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "product_family_number",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_number",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "PUBLIC": 2,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.externalcmos_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-site_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "site_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 15,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "cmo",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "city",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "business_partner_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "site_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "site_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 12,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.site_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-countrynetwork",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "countrynetwork",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.countrynetwork",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-reason_for_rejection",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "reason_for_rejection",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.reason_for_rejection",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-instruction",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "instruction",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.instruction",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-delivery_block",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "delivery_block",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.delivery_block",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-country_sold_to",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "country_sold_to",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.country_sold_to",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-kaiseraugst_responsible_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "kaiseraugst_responsible_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.kaiseraugst_responsible_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-calendar_event_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "calendar_event_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 13,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "country",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "calendar_event_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "calendar_event_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "AUDIT_TIMESTAMP": 1,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.calendar_event_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-order_stage_limit",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "order_stage_limit",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.order_stage_limit",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-smart_identifier",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "smart_identifier",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.smart_identifier",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-accelerate_inb_shipment_configuration_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "accelerate_inb_shipment_configuration_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 13,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "vendor_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "notification_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "notification_lead_work_days",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "company_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "PUBLIC": 1,
+      "IDENTIFIER": 3,
+      "DESCRIPTIVE": 8,
+      "AUDIT_TIMESTAMP": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.accelerate_inb_shipment_configuration_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-overall_goods_movement_status",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "overall_goods_movement_status",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.overall_goods_movement_status",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-local_rc_responsible_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "local_rc_responsible_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "countrynetwork",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "local_rc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.local_rc_responsible_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-sales_organization",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "sales_organization",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.sales_organization",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-delivery_block_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "delivery_block_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "data_source",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.delivery_block_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-csm_country_spoc_responsible_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "csm_country_spoc_responsible_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.csm_country_spoc_responsible_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-csm_asset_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "csm_asset_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "csm_asset",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "internalassets",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.csm_asset_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-local_rc_responsible_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "local_rc_responsible_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.local_rc_responsible_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-material_ufinc_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "material_ufinc_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 14,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "plant_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "goods_receipt_processing_in_days",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "ufinc",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "frozen_horizon_weeks",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 7,
+      "PUBLIC": 2,
+      "IDENTIFIER": 5
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.material_ufinc_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-instruction_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "instruction_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "instruction_link",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "action_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.instruction_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-kaiseraugst_product_makeup_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "kaiseraugst_product_makeup_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.kaiseraugst_product_makeup_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-country_information_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "country_information_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "country_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "region",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.country_information_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-accelerate_inb_email_recipient_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "accelerate_inb_email_recipient_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.accelerate_inb_email_recipient_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-change_request_system_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "change_request_system_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "target_system",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "system_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.change_request_system_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-accelerate_inb_shipment_configuration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "accelerate_inb_shipment_configuration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.accelerate_inb_shipment_configuration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-customer",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "customer",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.customer",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-overall_processing_status_of_document_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "overall_processing_status_of_document_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.overall_processing_status_of_document_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-csm_external_asset_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "csm_external_asset_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "csm_external_asset",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "externalcmos",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.csm_external_asset_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-country_sold_to_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "country_sold_to_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 15,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "customer_system",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_rpa_acitvated_for_apo",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "sold_to_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_change_request_creation_allowed",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_org",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 2,
+      "DESCRIPTIVE": 10,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.country_sold_to_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-kaiseraugst_product_makeup_contained_entity_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "kaiseraugst_product_makeup_contained_entity_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "product_makeup_country_map",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "kaiseraugst_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.kaiseraugst_product_makeup_contained_entity_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-overall_processing_status_of_document",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "overall_processing_status_of_document",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.overall_processing_status_of_document",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-material_ufinc",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "material_ufinc",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.material_ufinc",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-route_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "route_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 14,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "route_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "transport_time",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mode_of_transport",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planning_time",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "route_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "PUBLIC": 2,
+      "IDENTIFIER": 4
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.route_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-internalassets",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "internalassets",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.internalassets",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-csm_external_asset_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "csm_external_asset_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.csm_external_asset_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-accelerate_inb_company_email_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "accelerate_inb_company_email_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.accelerate_inb_company_email_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-csm_country_spoc_product_makeup_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "csm_country_spoc_product_makeup_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.csm_country_spoc_product_makeup_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-csm_asset_contained_entity",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "csm_asset_contained_entity",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.csm_asset_contained_entity",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-purchasing_group",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "purchasing_group",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.purchasing_group",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-order_reason_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "order_reason_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "data_source",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 9,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.order_reason_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-countrynetwork_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "countrynetwork_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 15,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "country",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_organization_number",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "country_abbreviation",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "business_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 11,
+      "PUBLIC": 1,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.countrynetwork_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-site",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "site",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.site",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-accelerate_shipment_contacts",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "accelerate_shipment_contacts",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 2,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "auto_number",
+        "comment": "",
+        "type": "bigint",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.accelerate_shipment_contacts",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  },
+  {
+    "systemId": "2269af5a-e41b-42d0-bfe9-74b5435fd1e5-masterdata_scm-public-supply_chain_material_registration",
+    "version": "1.0",
+    "databaseName": "masterdata_scm",
+    "schemaName": "public",
+    "tableName": "supply_chain_material_registration",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 24,
+    "extractionTimestamp": "2025-08-02T02:44:16.089Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entry_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "changeset_id",
+        "comment": "",
+        "type": "int",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "smart_identifier_code",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "product_family_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_class",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mrp_group",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "registration_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_short_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "registration",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "row_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "manufacturing_site_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 20,
+      "FOREIGN_KEY": 1,
+      "IDENTIFIER": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Masterdata for SCM",
+      "system": "Masterdata SCM"
+    },
+    "storageInfo": {
+      "location": "masterdata_scm.public.supply_chain_material_registration",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/2269af5a-e41b-42d0-bfe9-74b5435fd1e5/2025/08/02/da0b951e-0dce-437d-8cc9-8471cab47093/refined-schema.json"
+  }
+]

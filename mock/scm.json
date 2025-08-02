@@ -1,0 +1,5216 @@
+[
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-EntityValueMasterDataLookup",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "EntityValueMasterDataLookup",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 4,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "entityvalueid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "pointintime",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "lookupcontexttype",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      }
+    ],
+    "columnClassifications": {
+      "NUMERIC": 1,
+      "IDENTIFIER": 1,
+      "DESCRIPTIVE": 1,
+      "AUDIT_TIMESTAMP": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.EntityValueMasterDataLookup",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_goods_movement",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_goods_movement",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "receiving_plant",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_posting_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "goods_movement_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "batch_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_order_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "material_document_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_document_item_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_movement_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 8,
+      "AUDIT_TIMESTAMP": 2,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_goods_movement",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_purchase_order_item",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_purchase_order_item",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 87,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "comment_count",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "storage_location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planned_arrival_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "vendor_city",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_requisition_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "requested_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "batches_in",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planned_arrival_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "is_prioritized",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "statistical_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "additional_notes",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_short_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_receipt_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "actual_pick_up_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "transportation_planning_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "purchasing_group_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_order_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_name_one",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "number_of_packages",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "international_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "packing_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_arrival_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "goods_receipt_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sales_order_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_accelerated",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_receipt_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packing_status_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "purchasing_group",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "inbound_delivery_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "actual_goods_receipt_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "storage_location_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "confirmed_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "smart_identifier_code",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "incoterms_location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "requested_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "confirmation_create_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "delivery_create_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "order_unit",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "requested_material_availablility_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "purchase_requisition_item_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "total_weight",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "remaining_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "total_weight_unit",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "receiving_point_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planned_pick_up_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "batches",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "inbound_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "goods_receipt_status_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "transportation_group_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planned_pick_up_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "purchase_order_deletion_indicator",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "confirmed_delivery_date_changed",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "prioritized_reason",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_postal_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_numbers",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_issued_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "receiving_point_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_arrival_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "csm_asset",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_order_create_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "transportation_group",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "latest_delivery_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "product_family_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "incoterms_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_receipt_processing_time",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "purchase_order_item_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "order_acknowledgement_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "smart_identifier_description",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "actual_pick_up_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_item_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "delivery_create_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_name_two",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "confirmed_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      }
+    ],
+    "columnClassifications": {
+      "FOREIGN_KEY": 2,
+      "NUMERIC": 4,
+      "DESCRIPTIVE": 49,
+      "STATUS_FLAG": 3,
+      "PUBLIC": 7,
+      "IDENTIFIER": 1,
+      "AUDIT_TIMESTAMP": 21
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_purchase_order_item",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_backlog_event",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_backlog_event",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 59,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "comment_count",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_organization",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "event_report_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "impact_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ufinc",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "responsible_contact_person",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "event_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "root_cause_category",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mitigation_plan_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_so_rejected",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "clm_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "event_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "email_notification_sent",
+        "comment": "",
+        "type": "boolean",
+        "classification": "PII"
+      },
+      {
+        "name": "impacted_country",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "omp_segmentation",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "email_reminders",
+        "comment": "",
+        "type": "string",
+        "classification": "PII"
+      },
+      {
+        "name": "resolution_likelihood",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mitigation_category",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "glm_mannheim_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "initial_projected_event_end_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "entered_on_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "final_projected_event_end_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "updated_on_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "created_by",
+        "comment": "",
+        "type": "string",
+        "classification": "AUDIT_USER"
+      },
+      {
+        "name": "sales_order_item_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "glm_kaiseraugst_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "event_rejected_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "region",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "event_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "is_cancelled",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "closed_on_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "ship_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "initial_projected_event_start_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "rc_clm_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "final_projected_event_start_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "action_received",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "impacted_country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "projected_event_duration",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mannheim_sales_order_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mannheim_sales_order_item",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_asset_external",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "local_rc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_order_item",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "root_cause",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csm_asset",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipping_point",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csm_country_spoc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "impacted_country_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "AUDIT_USER": 1,
+      "PII": 2,
+      "NUMERIC": 2,
+      "DESCRIPTIVE": 40,
+      "STATUS_FLAG": 3,
+      "IDENTIFIER": 3,
+      "AUDIT_TIMESTAMP": 8
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_backlog_event",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-UniqueConstraintColumn",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "UniqueConstraintColumn",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 3,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "columnexpression",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "uniqueconstraintid",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 2,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.UniqueConstraintColumn",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_comment",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_comment",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 11,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "comment_text",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "parent_entity_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "created_by_role",
+        "comment": "",
+        "type": "string",
+        "classification": "AUDIT_USER"
+      },
+      {
+        "name": "created",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "file_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "file_reference",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "copy_from",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "created_by",
+        "comment": "",
+        "type": "string",
+        "classification": "AUDIT_USER"
+      },
+      {
+        "name": "parent_entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      }
+    ],
+    "columnClassifications": {
+      "AUDIT_USER": 2,
+      "IDENTIFIER": 2,
+      "DESCRIPTIVE": 5,
+      "AUDIT_TIMESTAMP": 2
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_comment",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_process_order_change_request",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_process_order_change_request",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 49,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "original_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "change_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "product_family_short_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "new_end_of_packaging_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "last_updated_on",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "international_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "is_counter_proposal_made",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "reason_for_closing",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "email_reminders",
+        "comment": "",
+        "type": "string",
+        "classification": "PII"
+      },
+      {
+        "name": "approval_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actions_enriched",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "should_send_email_notification_in_enrichment",
+        "comment": "",
+        "type": "boolean",
+        "classification": "PII"
+      },
+      {
+        "name": "created_by",
+        "comment": "",
+        "type": "string",
+        "classification": "AUDIT_USER"
+      },
+      {
+        "name": "process_order_link",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "alternative_approver_role",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_plain",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "new_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "target_plant",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "smart_identifier_code",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "product_family_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "action_received",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "created_at",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "new_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "legitimization",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "reason_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "request_approved_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "next_approver_role",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "last_action_enriched",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delete_order",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csm_asset",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "original_end_of_packaging_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "original_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "alternative_approver_all",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "process_order_change_request_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "approval_stage",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "smart_identifier_description",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "reason_for_rejection",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "comment",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "next_approver_all",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "process_order",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "AUDIT_USER": 1,
+      "PII": 2,
+      "FOREIGN_KEY": 2,
+      "NUMERIC": 3,
+      "DESCRIPTIVE": 28,
+      "STATUS_FLAG": 3,
+      "PUBLIC": 2,
+      "IDENTIFIER": 1,
+      "AUDIT_TIMESTAMP": 7
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_process_order_change_request",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_shipping_event",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_shipping_event",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 12,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "timestamp_created",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "timestamp_closed",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "generated",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "timestamp_shipped",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "shipment_reference",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "timestamp_delivered",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "timestamp_departed",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "shipment_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "excursion_severity",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 4,
+      "AUDIT_TIMESTAMP": 7,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_shipping_event",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_process_order",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_process_order",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 105,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "comment_count",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stock_in_transfer",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "process_order_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "stock_transfer_order_item_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "additional_notes",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_short_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "gr_processing_time",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "returns_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "basic_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "is_change_request_created",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "coa_qa_verdict_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "data_source",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_release_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "scheduled_release_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "is_cancelled",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "smart_identifier_code",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "product_family_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "requested_material_availablility_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "batch_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "unrestricted_use_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "blocked_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "comitted_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "batch_is_first_produced_batch",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "remaining_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "commitment_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "inspection_lot_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "inspection_finish_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "batch_manufacturing_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sold_to_numbers",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "receiving_point_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csm_asset",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "process_order_update_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stock_in_quality_inspection",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "planned_order_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "product_family_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "smart_identifier_description",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "tric_list",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "plant_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "storage_location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_account_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "batch_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "inspection_lot_unit",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "restricted_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "planned_finish_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "batch_remaining_shelf_life",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "is_prioritized",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "planned_opening_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "record_deleted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "delivery_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "international_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "process_order_create_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sales_order_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "release_period",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "inspection_lot_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "vendor_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "basic_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "mrp_controller",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stock_transfer_order_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivered_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "process_order_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mrp_controller_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "process_order_create_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_first_produced_batch",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "production_scheduling_profile_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "batch_expiry_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "actual_goods_receipt_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "planned_start_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "storage_location_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "process_order_change_request_approval_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "inspection_start_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "scheduled_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "delivery_create_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "order_unit",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "committed_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "alpin_change_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "prioritized_reason",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_availability_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "process_order_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "plant_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planned_order_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "valuated_unrestricted_use_stock",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "actual_lot_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "latest_date_affiliate_release",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "process_order_update_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "requested_material_availability_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "planned_order_record_deleted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "process_order_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "production_scheduling_profile",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_item_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "linking_process_order_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "scheduled_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "inspection_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "receiving_point",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "FOREIGN_KEY": 2,
+      "NUMERIC": 3,
+      "DESCRIPTIVE": 49,
+      "STATUS_FLAG": 7,
+      "PUBLIC": 17,
+      "IDENTIFIER": 1,
+      "AUDIT_TIMESTAMP": 26
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_process_order",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_file_upload",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_file_upload",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 8,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "parent_identifier",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "soft_deleted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "file_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "file_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "document_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "timestamp",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 1,
+      "FOREIGN_KEY": 1,
+      "IDENTIFIER": 2,
+      "DESCRIPTIVE": 2,
+      "AUDIT_TIMESTAMP": 2
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_file_upload",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_sales_order_item",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_sales_order_item",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 220,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "comment_count",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_in_final_stage",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "requested_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "stage_pending_invoicing_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_inventory",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_name_one",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "impact_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_packaging_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planned_arrival_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "stage_goods_receipt_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_pick_up_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "shipping_point_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_generated_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "clm_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_shipped_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "kaiseraugst_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_name_two",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "event_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_name_two",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_pending_delivery_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_receipt_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "picking_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "mannheim_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "data_source",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "excursion_severity",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "pending_actions",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "route",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipping_condition_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "skycell_booking_requested",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "delivery_block",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_goods_available_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "event_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "requested_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "product_family_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "reason_for_rejection_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "billing_block_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_deleted_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "planned_pick_up_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "packaging_site",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_postal_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_transportation_planning_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_issue_status_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csm_asset",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "change_request_approval_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "transportation_group",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipping_point_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipping_point",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "required_consolidated_truck",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_reference",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_packing_list",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_order_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "deleted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "goods_available_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "route_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "timeline",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_group_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "billing_status_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "first_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "previous_active_stage",
+        "comment": "",
+        "type": "string",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "stage_pick_pack_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mrp_group",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_excursion_severity",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_timestamp_closed",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "delivery_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_order_confirmed_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packing_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_order_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_accelerated",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "stage_transit_customer_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "below_target_impact_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "delivery_block_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "picking_status_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "picking_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "additional_documents",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "order_unit",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "transport_time",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "sales_order_item_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_number_two",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "inventory",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_organization_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_priority_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_city",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "invoice_item_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "vendor_postal_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_availability_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_arrival_finish_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "goods_issue_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_create_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "overall_processing_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "plant_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "waiting_stage",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "manufacturing_site",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "below_zero_impact_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "delivery_priority",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_external",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "cfc_coa_link",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_organization",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "active_stage_group",
+        "comment": "",
+        "type": "string",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "batches_in",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "affiliate_plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_delivered_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "ufinc",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_pending_goods_issue_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_postal_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "additional_booking_sheet_action_executed",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "cfc_coa_urls",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "additional_notes",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_short_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "customer_po_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipping_condition_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_departure_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "shipment_closed_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "invoice_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_timestamp_departed",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "shipment_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_arrival_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "wm_activities_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "envirotainer_booking_requested",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "sold_to_city",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_arrived_at_incoterms_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packing_status_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "freight_orders",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planning_time",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "gr_recipe_processing_time_in_days",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "ship_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_timestamp_delivered",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "smart_identifier_code",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "incoterms_location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_goods_issue_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "requested_material_availablility_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "seafreight_container_booking_requested",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "stage_q_a_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_at_risk",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "remaining_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "mode_of_transport",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "batches",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planned_pick_up_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "stage_purchase_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_order_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_pending_confirmation_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "billing_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "pick_confirmation_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "due_less_than_one_month",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "local_rc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "alert_timestamp",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sales_order_reason",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_requisition_create_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "incoterms_arrival_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "latest_delivery_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "stage_delivered_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "billing_block",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csm_country_spoc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "subcontracting_po_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "smart_identifier_description",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "delivery_group",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_order_reason_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_create_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "storage_location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "planned_arrival_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "vendor_city",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "stage_transit_shipping_point_with_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_requisition_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_document_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_prioritized",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "record_deleted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "transportation_planning_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "vendor_name_one",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "number_of_packages",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "linking_permission_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "create_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "product_makeup",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "cfc_coa",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "prebooking_request",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_arrival_at_affiliate_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "process_orders",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "storage_location_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "confirmed_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "planned_goods_issue_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "delivery_create_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "prioritization_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "pick_confirmation_status_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipment_timestamp_created",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "total_weight",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "total_weight_unit",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "deliver_group_collective_packing_list",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "transportation_group_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "loading_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "prioritized_reason",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csafe_rap_booking_requested",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "manufacturing_site_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sold_to_name_one",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "active_stage",
+        "comment": "",
+        "type": "string",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "shipment_generated",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "shipment_timestamp_shipped",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "requested_material_availability_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "incoterms_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "freight_order_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actual_pick_up_start_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "reason_for_rejection",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "auto_close_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "delivery_item_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "invoice",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "vendor_name_two",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "confirmed_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      }
+    ],
+    "columnClassifications": {
+      "FOREIGN_KEY": 2,
+      "NUMERIC": 7,
+      "DESCRIPTIVE": 143,
+      "STATUS_FLAG": 18,
+      "PUBLIC": 4,
+      "IDENTIFIER": 1,
+      "AUDIT_TIMESTAMP": 45
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_sales_order_item",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_prebooking_fourth_pl_request",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_prebooking_fourth_pl_request",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 36,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "latest_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "comment_count",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "rap_temp_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "booking_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "final_destination",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "created_at",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sales_order_numbers",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "rap_economy_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "trans_condition",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "rkn_temp_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "csafe_rap_economy_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "rkn_economy_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "origin_iata_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_order_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "pre_carriage_op",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "dest_iata_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "pre_booking_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "skycell_large_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "large_high_cube_reefer_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "danger_goods_in_container",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "shipping_point",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delivery_numbers",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipping_location",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "other_shipping_point",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "created_by",
+        "comment": "",
+        "type": "string",
+        "classification": "AUDIT_USER"
+      },
+      {
+        "name": "skycell_small_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "additional_information",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "loading_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "is_plain",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "danger_goods_desc",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "large_reefer_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "pre_booking_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "small_reefer_quantity",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 3,
+      "AUDIT_USER": 1,
+      "NUMERIC": 11,
+      "IDENTIFIER": 1,
+      "DESCRIPTIVE": 15,
+      "AUDIT_TIMESTAMP": 5
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_prebooking_fourth_pl_request",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_flight_leg",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_flight_leg",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 3,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "season",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      }
+    ],
+    "columnClassifications": {
+      "DESCRIPTIVE": 1,
+      "AUDIT_TIMESTAMP": 1,
+      "IDENTIFIER": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_flight_leg",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_change_request",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_change_request",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 99,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "sales_organization",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "predicted_impact_sub_po",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "change_request_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "product_family_short_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "customer_po_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "should_send_rpa_request",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "clm_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "last_updated_on",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "kaiseraugst_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "reason_for_closing",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sub_po_target_system",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "last_updated",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "purchase_order_item_links",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "mannheim_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "actions_enriched",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "rpa_inbound",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "next_approvers",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "alternative_approver_role",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "created_on",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "new_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "psso_target_system",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "smart_identifier_code",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "product_family_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "created_at",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sales_order_item_link",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "request_approved_by",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "pendingdelivery_new",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "packaging_site",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "next_approver_role",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_original",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "last_action_enriched",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "delete_order",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "local_rc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csm_asset",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "predicted_impact_process_orders",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "original_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "so_target_system",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_sales_order_item_link",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "shipping_point",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "approval_stage",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "packaging_site_process_order_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "csm_country_spoc_responsible",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "has_so_existing_customer_po",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "subcontracting_po_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "smart_identifier_description",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "sent_rpa_request_count",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "process_order_links",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_supply_impacted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "original_delivery_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sold_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "ship_to_country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "change_number",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "international_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_counter_proposal_made",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "subcontracting_po_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_order_ref",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "has_man_so_reached_pick_pack",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "product_makeup",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "approver_all",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "email_reminders",
+        "comment": "",
+        "type": "string",
+        "classification": "PII"
+      },
+      {
+        "name": "approval_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_new",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "should_send_email_notification_in_enrichment",
+        "comment": "",
+        "type": "boolean",
+        "classification": "PII"
+      },
+      {
+        "name": "created_by",
+        "comment": "",
+        "type": "string",
+        "classification": "AUDIT_USER"
+      },
+      {
+        "name": "customer_target_system",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "process_order_link",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "action_received",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "new_quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "legitimization",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "pendingdelivery_original",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "reason_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "approver_role",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "process_order_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_order_item",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "customer_po_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "manufacturing_site_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "alternative_approver_all",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "manufacturing_site",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_sales_order_item_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_external",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "next_resend_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sales_order_item_status",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "optional_approver_role",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "reason_for_rejection",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "comment",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "next_approver_all",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "optional_approver_all",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_sales_order_item",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "AUDIT_USER": 1,
+      "FOREIGN_KEY": 2,
+      "PII": 2,
+      "NUMERIC": 4,
+      "DESCRIPTIVE": 68,
+      "STATUS_FLAG": 7,
+      "PUBLIC": 2,
+      "IDENTIFIER": 1,
+      "AUDIT_TIMESTAMP": 12
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_change_request",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_sales_process_order_link",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_sales_process_order_link",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 6,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "deleted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sales_order_item_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "process_order_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 1,
+      "PUBLIC": 1,
+      "IDENTIFIER": 3,
+      "AUDIT_TIMESTAMP": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_sales_process_order_link",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_material_inventory_at_location",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_material_inventory_at_location",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 28,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "smart_identifier_code",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "product_family_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "frozen_horizon_by_weeks",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "sold_to_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "goods_receipt_processing_time_in_days",
+        "comment": "",
+        "type": "int",
+        "classification": "NUMERIC"
+      },
+      {
+        "name": "ufinc",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_type",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_family_short_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "packaging_site_sales_order_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "country_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "data_fetched_at",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "inventory_projections",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "plant_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "international_name_number",
+        "comment": "",
+        "type": "int",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "material_description",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "product_makeup",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "customer_po_numbers",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "sales_order_items",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_active",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "product_family_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "country_code",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "smart_identifier_description",
+        "comment": "",
+        "type": "string",
+        "classification": "FOREIGN_KEY"
+      },
+      {
+        "name": "material_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "detailed_stock_on_hands",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "plant_name",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 1,
+      "FOREIGN_KEY": 2,
+      "NUMERIC": 2,
+      "IDENTIFIER": 1,
+      "DESCRIPTIVE": 20,
+      "AUDIT_TIMESTAMP": 2
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_material_inventory_at_location",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_user_status",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_user_status",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 8,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "end_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "status_message",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "is_active",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "is_deleted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "user_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "start_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 2,
+      "IDENTIFIER": 2,
+      "DESCRIPTIVE": 1,
+      "AUDIT_TIMESTAMP": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_user_status",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_sales_purchase_order_item_link",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_sales_purchase_order_item_link",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 6,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "quantity",
+        "comment": "",
+        "type": "decimal(38,0)",
+        "classification": "PUBLIC"
+      },
+      {
+        "name": "deleted",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "purchase_order_item_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "sales_order_item_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 1,
+      "PUBLIC": 1,
+      "IDENTIFIER": 3,
+      "AUDIT_TIMESTAMP": 1
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_sales_purchase_order_item_link",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  },
+  {
+    "systemId": "17c894cf-c695-4a32-bf03-41e3164a76ff-control_tower-public-entity_purchase_order_acceleration_request",
+    "version": "1.0",
+    "databaseName": "control_tower",
+    "schemaName": "public",
+    "tableName": "entity_purchase_order_acceleration_request",
+    "tableType": "EXTERNAL_TABLE",
+    "description": "",
+    "totalColumns": 9,
+    "extractionTimestamp": "2025-08-02T02:39:18.915Z",
+    "latest": true,
+    "columns": [
+      {
+        "name": "is_sent",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "cmo",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "purchase_orders",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "earliest_pick_up_date",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "vendor_number",
+        "comment": "",
+        "type": "string",
+        "classification": "DESCRIPTIVE"
+      },
+      {
+        "name": "entity_id",
+        "comment": "",
+        "type": "string",
+        "classification": "IDENTIFIER"
+      },
+      {
+        "name": "last_modified",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      },
+      {
+        "name": "is_scheduled",
+        "comment": "",
+        "type": "boolean",
+        "classification": "STATUS_FLAG"
+      },
+      {
+        "name": "notification_time",
+        "comment": "",
+        "type": "timestamp",
+        "classification": "AUDIT_TIMESTAMP"
+      }
+    ],
+    "columnClassifications": {
+      "STATUS_FLAG": 2,
+      "IDENTIFIER": 1,
+      "DESCRIPTIVE": 3,
+      "AUDIT_TIMESTAMP": 3
+    },
+    "partitionKeys": [],
+    "businessMetadata": {
+      "businessOwner": "xWyvernPx",
+      "description": "Schema for Supply Chain Control Tower: Order Management, Inventory,...",
+      "system": "Supply Chain Control Tower"
+    },
+    "storageInfo": {
+      "location": "control_tower.public.entity_purchase_order_acceleration_request",
+      "compressed": false
+    },
+    "rawSchemaLocation": "s3://schema-ingestion-raw/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/raw-schema.json",
+    "refinedSchemaLocation": "s3://schema-ingestion-refined/schemas/17c894cf-c695-4a32-bf03-41e3164a76ff/2025/08/02/d61a35a6-27e6-40f6-9993-f7fa0911d6e9/refined-schema.json"
+  }
+]
